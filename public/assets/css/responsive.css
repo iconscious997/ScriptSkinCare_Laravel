@@ -70,7 +70,7 @@
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
     body {
-        overflow: inherit;
+        overflow-x: hidden;
     }
     .btn {
         font-size: 10px;
@@ -83,7 +83,7 @@
     }
     .footer {
         padding: 15px !important;
-        height: 15vh !important;
+        position: relative !important;
     }
 
     ul.menu {
@@ -115,7 +115,8 @@
 
 @media only screen and (min-width: 280px) and (max-width: 479px) {
     body {
-        overflow: inherit;
+        overflow-x: hidden;
+        overflow-y: scroll;
     }
     .btn {
         font-size: 10px;
@@ -179,11 +180,26 @@
     .spbtn2 {
         width: 45% !important;;
     }
-    /*.m-l-15{
-        margin-left: 0 !important;
-        }*/
-        .spcust {
-            padding: 0px !important;
-        }
-        
+    .spcust {
+        padding: 0px !important;
     }
+    .footer {
+        padding: 15px !important;
+        position: relative !important;
+    }
+    .content-fix {
+        overflow-y: hidden;
+    }
+    .filter-section
+    {
+        padding: 5px;
+    }
+    .gobtn{
+        padding: 9px 12px;
+        width: 20%;
+    }
+    .filter-section li a {
+
+        margin-bottom: 10px;
+    }
+}

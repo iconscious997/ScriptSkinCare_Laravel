@@ -328,6 +328,9 @@ p {
 .l-1{
     line-height: 1;
 }
+.bordernone{
+    border:none !important;
+}
 .col-5 {
   width: 5%;
 }
@@ -1289,8 +1292,73 @@ li.services a::after {
 }
 
 .export .dropdown-menu{
-   min-width: 100%;
-   border-radius: 0;
-   margin: 0 5px;
-   position: relative;
+ min-width: 100%;
+ border-radius: 0;
+ margin: 0 5px;
+ position: relative;
 }
+.gobtn{
+    padding: 7.5px 12px;
+    width: 20%;
+}
+.filter-section
+{
+    padding: 10px;
+    background: #F9F4EF;
+    display: grid;
+}
+.filter-section ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.filter-section li {
+    float: left;
+}
+
+.filter-section li a {
+   display: block;
+   color: #333;
+   text-align: center;
+   padding: 5px 10px;
+   text-decoration: none;
+   font-size: 12px;
+   margin-top: 10px;
+}
+
+.filter-section .active {
+    border-bottom: 1px solid #333;
+    font-weight: 600;
+}
+
+.graphInfo{
+    border: 2px solid #5d5a5a;
+    padding: 5px 15px 0px;
+}
+.graphBorder{
+    border: 2px solid #5d5a5a;
+    padding: 5px 15px 0px;
+}
+.graphbd .list-group-item {
+    border: 2px solid #5d5a5a;
+    line-height: 1.5;
+}
+.graphbd .list-group-item b {
+    font-size: 16px;
+    display: block;
+}
+.graphbd .list-group-item span {
+    font-size: 13px;
+}
+.graphbd .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.graphbd .list-group-item:last-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.a{
+    border-right: 3px solid #F0E4D9;}

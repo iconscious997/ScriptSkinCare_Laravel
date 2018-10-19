@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use Validator;
 use DB;
+use Excel;
 use App\Customer;
 
 class CustomerController extends Controller
@@ -26,9 +27,42 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
         $data = Customer::all();
+
+        if($request->export == 'yes')
+        {
+            $export = $data->map(function($value)
+            {
+                if($value->status==0)
+                {
+                    $status =  'Active';
+                }
+                else if($value->status==1)
+                {
+                    $status =  'Deactive' ;
+                }
+
+                return [
+                    // 'Register Date'   =>  $value->date("d-m-Y", strtotime($value->created_date)),
+                    'Name'            =>   $value->first_name,
+                    'Email'           =>   isset($value->email) ? $value->email    : '',
+                    'Age'             =>   isset($value->dob) ? $value->dob : '',
+                    'Gender'          =>   isset($value->gender) ? $value->gender    : '',
+                    'Status'          =>   $status,
+                ];
+            })->toArray();
+            Excel::create('Customerlist', function($excel) use ($export) {
+                $excel->sheet('Sheet1', function($sheet) use ($export) {
+                    $sheet->fromArray($export);
+                });
+            })->download('xls');
+
+            return redirect()->back();
+        }
+
         return view('admin.customers',compact('data'));
     }
 
@@ -44,12 +78,12 @@ class CustomerController extends Controller
     }
 
     public function customeractivedeactive($id,$status){
-        
+
         DB::table('client_details')
         ->where("client_details.id", '=',  $id)
         ->update(['client_details.status'=> $status]);
 
-         return redirect('/customers');
+        return redirect('/customers');
     }
 
     
@@ -142,5 +176,5 @@ class CustomerController extends Controller
     }
 
 
-     
+
 }

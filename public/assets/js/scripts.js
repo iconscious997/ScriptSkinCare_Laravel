@@ -62,4 +62,30 @@ $(function () {
         }
         init();
     });
+
+
+    //Date range common script for all daterange
+
+    $('.date-range').daterangepicker({
+        locale: {
+            format: 'DD MMM YYYY'
+        },
+        autoUpdateInput: false,
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-success',
+        cancelClass: 'btn-danger',
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 15 Days': [moment().subtract(14, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    }).on('apply.daterangepicker', function(ev, picker) {
+        $(this).val(picker.startDate.format('DD MMM YYYY') + ' - ' + picker.endDate.format('DD MMM YYYY'));
+    }).on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+    });
 });
