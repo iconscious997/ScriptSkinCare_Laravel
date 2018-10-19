@@ -123,18 +123,20 @@
                     <hr>
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15">
-                            <a href="{{ route('supplierstep1') }}" class="prev" id="prevBtn"><i class="ti-arrow-left"></i> &nbsp;PREVIOUS</a>
+                            <a href="{{ route('supplierstep3') }}" class="prev" id="prevBtn"><i class="ti-arrow-left"></i> &nbsp;PREVIOUS</a>
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <ul class="pagination pagination-split">
                                 <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
                                 <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">4</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15 text-right">
-                           <a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">NEXT &nbsp;<i class="ti-arrow-right"></i></a>
+                           <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
+                            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                           </a>
 
                        </div>
                    </div>

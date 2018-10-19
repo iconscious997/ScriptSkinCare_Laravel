@@ -95,6 +95,8 @@ class SupplierController extends Controller
                 'created_by'                    => \Auth::user()->id,
                 'modified_by'                   => \Auth::user()->id,
             ]);
+
+            setflashmsg('Record Inserted Successfully','1');
         }
         /*
         if ($validatedData->fails())
@@ -149,6 +151,11 @@ class SupplierController extends Controller
 
     public function supplierstep2($id='')
     {
+
+        if( !Session::has('first') ) {
+
+             return redirect('/supplierstep1');
+        }
         // Session::put('second', 1);
         $roles = Role::where('user_type', 1)->where('status', 0)->get();
     
@@ -271,6 +278,7 @@ class SupplierController extends Controller
                 'modified_by'   => \Auth::user()->id,
             ]);
             // dd($request);
+            setflashmsg('Record Updated Successfully','1');
         } else {
 
 
@@ -298,7 +306,7 @@ class SupplierController extends Controller
             
                    
                             # code...
-                    setflashmsg('Please Select Different User and User Role 1','2');
+                    setflashmsg('Please Select Different User and User Role','2');
                     return redirect('/supplierstep2');
 
                 }else if($request->user_role==3){
@@ -384,6 +392,8 @@ class SupplierController extends Controller
             Session::put('second', $supplier->id);
 
             });
+
+            setflashmsg('Record Inserted Successfully','1');
         }
 
 
@@ -422,6 +432,11 @@ class SupplierController extends Controller
 
     public function supplierstep3($id = NULL)
     {   
+
+         if(!Session::has('second') ) {
+
+             return redirect('/supplierstep2');
+        }
 
         // $supplier = Supplier::where('id', Session::get('parent_id'))->get();
          $supplier = Supplier::join('role_user','supplier_details.user_id','=','role_user.user_id')
@@ -552,6 +567,7 @@ class SupplierController extends Controller
 
               
 
+            Session::put('brand_id', $request->id);
 
             setflashmsg('Record Updated Successfully','1');
             return redirect('/supplierstep4'); 
@@ -584,6 +600,7 @@ class SupplierController extends Controller
             // now add data to supplier_details table
             $brands = Brand::create([
                 'brand_name'               => $request->brand_name,
+                'brand_company_id'         => Session::get('first'),
                 'brand_logo'               => $imageName,
                 'approved_by'              => $request->approved_by,
                 'status'                   => 0,
@@ -606,11 +623,12 @@ class SupplierController extends Controller
                 }
                 // success
                 Session::put('brand_id', $brands->id);
-
+                setflashmsg('Record Inserted Successfully','1');
                 return redirect('/supplierstep4'); 
             } else {
                 setflashmsg('Some error occured. Please try again','0');
                 return redirect('/supplierstep3');
+                
             }
 
         }
@@ -620,7 +638,10 @@ class SupplierController extends Controller
     public function supplierstep4()
     {
 
+         if( !Session::has('brand_id') ) {
 
+             return redirect('/supplierstep3');
+        }
         $company = Company::find(Session::get('first'));
         $all_supplier_data = Supplier::where('company_id', Session::get('first'))->get();
 
@@ -714,8 +735,202 @@ class SupplierController extends Controller
         return view( 'admin.supplier-list',compact('data','all_brand_name'));
     }
 
+    public function finishSupplier($value='')
+    {
+
+        
+        session()->forget('first');
+        session()->forget('parent_id');
+        session()->forget('supplier_parent_id');
+        session()->forget('brand_id');
+        session()->forget('second');
+        setflashmsg('Record Inserted Successfully','1');
+        return redirect('/supplier-list');
+    }
     public function supplierList2()
     {
         return view( 'admin.supplier-list2');
     }
+
+    public function supplieruserlist($value='')
+    {
+     
+        $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id')
+            ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email')->get();
+// dd($data);
+            $i=0;
+
+            $all_brand_name=array();
+            $user_parent_name=array();
+         foreach ($data as $value) {
+                
+                $temp_data=array();
+            if($value->user_parent_id!=0){
+
+
+                $user_parent=Supplier::find($value->user_parent_id);
+
+               $temp_data=$user_parent->first_name." ".$user_parent->last_name;
+
+            }else{
+
+                $temp_data="-";
+            }
+
+ array_push($user_parent_name, $temp_data);
+                
+                if ($value->brand_ids!=null) {
+                    $i++;
+                    # code...
+                    $add_brand_tmp=array();
+                    $tmp_remove = explode(',', $value->brand_ids);
+
+                 foreach ($tmp_remove as $sub) {
+    
+                         
+                        if (isset($sub) && !empty($sub)) {
+                            # code...
+                            $brands_data = Brand::find( $sub); 
+                          
+
+                          array_push($add_brand_tmp, $brands_data->brand_name);
+
+                        }
+
+                         
+                        
+                            // if( $sub!=$brands->id) {
+                                // array_push($add_brand_tmp, $sub);
+
+                               
+                            // }
+
+                        // echo $sub;
+                    }
+                    $temp_data=implode(",", $add_brand_tmp);
+             // echo $value->brand_ids;
+             
+             
+                }else{
+
+                    $temp_data="-";
+                }
+             
+
+             array_push($all_brand_name, $temp_data);
+              
+
+         }
+         // dd($user_parent_name);
+         // echo $i;
+          // die();
+        return view( 'admin.supplier-data-list',compact('data','all_brand_name','user_parent_name'));   
+    }
+
+
+    public function supplieredit($id='')
+    {
+        
+
+        $roles = Role::where('user_type', 1)->where('status', 0)->get();
+        $supplier = Supplier::find($id);
+
+         $supplier_admin = Supplier::join('role_user','supplier_details.user_id','=','role_user.user_id')
+             ->join('roles','role_user.role_id','=','roles.id')
+                ->where('supplier_details.company_id', $supplier->company_id)
+                ->where('roles.name', "supplier_admin")
+                ->select('supplier_details.id','supplier_details.first_name','supplier_details.last_name')->get()->toArray();
+
+        $user_selected_role = RoleUser::where('user_id', $supplier->user_id)->first();
+        $user = User::find($supplier->user_id);
+        
+        return view('admin.supplier-data-edit', compact('supplier','roles','user_selected_role', 'user','supplier_admin'));
+       
+
+    }
+
+
+    public function supplierusereditstore(Request $request)
+    {
+        # code...
+
+        // check for validation
+            $validatedData = $request->validate([
+                'first_name'                => 'required',
+                'last_name'                 => 'required',
+                'business_tel_number'       => 'required|numeric',
+                'business_address_line_1'   => 'required',
+                'user_role'                 => 'required',
+                // 'business_address_line_2'             => 'required|email',
+                'mobile_number'             => 'required|numeric',
+            ],[
+                'business_address_line_1.required' => 'Business Address is Required'
+            ]);
+
+
+             if(isset($request->user_parent_id)){
+
+                    
+                    if ($request->user_role==3 && $request->user_selected_role==3) {
+                
+                       
+                                # code...
+                      setflashmsg('Please Select Different User and User Role ','2');
+                        return redirect('/supplieruseredit/'.$request->id);
+
+                    }else if($request->user_role==3){
+
+                    setflashmsg('Please Select Different User and User Role ','2');
+                    return redirect('/supplieruseredit/'.$request->id);
+
+                    }else{
+
+                        $user_parent_id=$request->user_parent_id;
+
+                    }
+
+                }else{
+
+                    $user_parent_id=0;
+
+                }
+
+        
+            $supplier = Supplier::find($request->id);
+            $supplier->user_parent_id            = $user_parent_id;
+            $supplier->first_name                = $request->first_name;
+            $supplier->last_name                 = $request->last_name;
+            $supplier->supplier_name             = "";
+            $supplier->business_tel_number       = $request->business_tel_number;
+            $supplier->business_address_line_1   = $request->business_address_line_1;
+            $supplier->business_address_line_2   = $request->business_address_line_2;
+            $supplier->city                      = '';
+            $supplier->state                     = '';
+            $supplier->country                   = '';
+            $supplier->mobile_number             = $request->mobile_number;
+            $supplier->modified_by               = \Auth::user()->id;
+            $supplier->save();
+            // now update user role
+            $user_role = RoleUser::where('user_id', $supplier->user_id)->first();
+            DB::statement("DELETE FROM role_user WHERE role_id = '$user_role->role_id' AND user_id = '$supplier->user_id'");
+            // RoleUser::where('user_id', $supplier->user_id)->first()->delete();
+            RoleUser::create([
+                'role_id'       => $request->user_role,
+                'user_id'       => $supplier->user_id,
+                'status'        => 0,
+                'created_date'  => date('Y-m-d H:i:s'),
+                'created_by'    => \Auth::user()->id,
+                'modified_by'   => \Auth::user()->id,
+            ]);
+            // dd($request);
+            setflashmsg('Record Updated Successfully','1'); 
+
+            return redirect('/supplieruserlist');
+    }
+
+
+
 }

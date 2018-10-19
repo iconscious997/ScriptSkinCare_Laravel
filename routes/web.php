@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	Route::get('/supplierstep4', 'SupplierController@supplierstep4')->name('supplierstep4');
 	Route::post('/supplierstep4store', 'SupplierController@supplierstep4store')->name('supplierstep4store');
 
+	Route::get('/finishSupplier', 'SupplierController@finishSupplier')->name('finishSupplier');
+
 
 	Route::get('/supplier-list', 'SupplierController@supplierList')->name('supplier-list');
 	Route::get('/supplier-list2', 'SupplierController@supplierList2')->name('supplier-list2');
@@ -79,5 +81,58 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	// supplier user permission
 	Route::get('/supplierpermission', 'PermissionController@supplierpermission')->name('supplierpermission');
 	Route::post('/supplierpermissionstore', 'PermissionController@supplierpermissionstore')->name('supplierpermissionstore');
+
+	// brand manage
+	Route::get('/supplier-brandedit/{id}', [
+		'uses' 	=> 'BrandController@brandedit',
+		'as'	=> 'brandedit'
+	]);
+
+	Route::get('/supplier-brand-list', [
+		'uses' 	=> 'BrandController@index',
+		'as'	=> 'brand-list'
+	]);
+
+    Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
+
+	// Company manage
+	Route::get('/supplier-companyedit/{id}', [
+		'uses' 	=> 'CompanyController@companyedit',
+		'as'	=> 'companyedit'
+	]);
+
+	Route::get('/supplier-company-list', [
+		'uses' 	=> 'CompanyController@index',
+		'as'	=> 'company-list'
+	]);
+	
+	Route::post('/companystore', 'CompanyController@companystore')->name('companystore');
+
+	// Company manage
+	Route::get('/supplier-companyedit/{id}', [
+		'uses' 	=> 'CompanyController@companyedit',
+		'as'	=> 'companyedit'
+	]);
+
+	Route::get('/supplier-company-list', [
+		'uses' 	=> 'CompanyController@index',
+		'as'	=> 'company-list'
+	]);
+	
+	Route::post('/companystore', 'CompanyController@companystore')->name('companystore');
+
+	// supplier manage user permissions
+	Route::get('/supplieruseredit/{id}', [
+		'uses' 	=> 'SupplierController@supplieredit',
+		'as'	=> 'supplier-data-edit'
+	]);
+
+	Route::get('/supplieruserlist', [
+		'uses' 	=> 'SupplierController@supplieruserlist',
+		'as'	=> 'supplier-data-list'
+	]);
+	
+	Route::post('/supplierusereditstore', 'SupplierController@supplierusereditstore')->name('supplierusereditstore');
+
 
 });

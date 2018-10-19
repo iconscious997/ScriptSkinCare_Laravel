@@ -66,19 +66,19 @@
                         <ul class="sub-menu {{ request()->is('supplier*') ? 'open' : '' }}">
                            
                             @can('supplier_list')
-                            <li><a href="{{ route('supplier') }}" class="{{ request()->is('supplier') ? 'active' : '' }}">Supplier List</a></li>
+                            <li><a href="{{ route('supplier') }}" class="{{ request()->is('supplier-list') ? 'active' : '' }}">Supplier List</a></li>
                             @endcan
                             @can('setup_new_supplier')
                             <li><a href="{{ route('supplierstep1') }}" class="{{ request()->is('supplierstep*') ? 'active' : '' }}">Set-Up New Supplier</a></li>
                             @endcan
                             @can('manage_edit_supplier')
-                            <li><a href="#">Manage / Edit A Supplier</a></li>
+                            <li><a href="{{ route('company-list')}}" class="{{request()->is('supplier-company*') ?'active':'' }}" >Manage / Edit A Supplier</a></li>
                             @endcan
                             @can('manage_user_permission')
-                            <li><a href="{{ route('supplierpermission') }}" class="{{ request()->is('supplierpermission') ? 'active' : '' }}">Manage User Permissions</a></li>
+                            <li><a href="{{ route('supplier-data-list') }}" class="{{ request()->is('supplieruser*') ? 'active' : '' }}">Manage User Permissions</a></li>   
                             @endcan
                             @can('manage_brand')
-                            <li><a href="#">Manage Brands</a></li>
+                            <li><a href="{{ route('brand-list')}}" class="{{ request()->is('supplier-brand*') ? 'active' : '' }}">Manage Brands</a></li>
                             @endcan
                             @can('manage_role_permission')
                             <li><a href="{{ route('supplierpermission') }}" class="{{ request()->is('supplierpermission') ? 'active' : '' }}">Manage Role Permissions</a></li>
