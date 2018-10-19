@@ -48,28 +48,28 @@
 		</div>
 
 	</div>
-<div class="content-fix ">
-	<div class="table-responsive mb-30">
-		<table class="table display" id="customers">
-			<thead class="thead-dark">
-				<tr>
-					<th>Registered Business Name</th>
-					<th>Trading Name</th>
-					<th>Address</th>
-					<th>Phone Number</th>
-					<th>Website</th>
-					<th>Brands</th>
-					<th>Users</th>
-					<th>User Role</th>
-					<th>User Email</th>
-					<th>Password Reset</th>
-					<th>Actions</th>
-					<th>&nbsp;</th>
-				</tr>
-				<tbody>
-					
-					@php $i=0 @endphp
-					@foreach($data as $item)
+	<div class="content-fix ">
+		<div class="table-responsive mb-30">
+			<table class="table display" id="customers">
+				<thead class="thead-dark">
+					<tr>
+						<th>Registered Business Name</th>
+						<th>Trading Name</th>
+						<th>Address</th>
+						<th>Phone Number</th>
+						<th>Website</th>
+						<th>Brands</th>
+						<th>Users</th>
+						<th>User Role</th>
+						<th>User Email</th>
+						<th>Password Reset</th>
+						<th>Actions</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tbody>
+						
+						@php $i=0 @endphp
+						@foreach($data as $item)
 
 						<tr>
 							<td>{{$item->business_name}}</td>
@@ -93,7 +93,7 @@
 						</tr>
 						
 						@php $i++ @endphp
-					    @endforeach    
+						@endforeach    
 
 
 
@@ -176,14 +176,7 @@
 			$(document).ready(function() {
 				$('#customers').DataTable();
 			});
-			$(".excel").click(function () {
-				$('#customers').tableExport({
-					type: 'excel',
-					escape: 'false',
-					tableName: 'ResolutionReport'
 
-				});
-				});
-			</script>
-			@endsection
+		</script>
+		@endsection
 

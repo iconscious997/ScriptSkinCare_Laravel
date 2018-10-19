@@ -133,6 +133,18 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	]);
 	
 	Route::post('/supplierusereditstore', 'SupplierController@supplierusereditstore')->name('supplierusereditstore');
+	// Online
+
+	Route::group(['prefix' => 'online'], function () {
+		Route::get('/', 'OnlineController@orders')->name('orders');
+		Route::get('/customer', 'OnlineController@customer')->name('customer');
+		Route::get('/coupons', 'OnlineController@coupons')->name('coupons');
+		Route::get('/reports', 'OnlineController@reports')->name('reports');
+	});
+
+	Route::group(['prefix' => 'sales'], function () {
+		Route::get('/', 'SalesController@sales')->name('sales');
+	});
 
 
 });

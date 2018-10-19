@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_mytoken" content="{{csrf_token()}}" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/icon" sizes="16x16" href="{{ ('public/assets/images/favicon.ico') }}">
     <title>{{ config('app.name') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
@@ -73,7 +73,7 @@
         </ul>
         <ul class="nav navmenu-nav navmenu-nav-new canvi-navigation"">
             <li>
-                <a href="#" id="btn-0" data-toggle="collapse" data-target="#submenu_0" aria-expanded="false" class="" >
+                <a href="{{ route('home') }}"  >
                     <div class="col-xs-12">
                         Home
                     </div>
@@ -89,7 +89,7 @@
                     <li><a href="{{ route('supplier') }}" class="">Supplier List</a></li>
                     <li><a href="{{ route('supplierstep1') }}" class="">Set-Up New Supplier</a></li>
                     <li><a href="#">Manage / Edit A Supplier</a></li>
-                    <li><a href="#">Manage User Permissions</a></li>
+                    <li><a href="{{ route('supplierpermission') }}">Manage User Permissions</a></li>
                     <li><a href="#">Manage Brands</a></li>
                     <li><a href="#">Manage Role Permissions</a></li>
                 </ul>
@@ -111,43 +111,37 @@
                     </div>
                 </a>
                 <ul class="nav collapse" id="submenu_2" role="menu" aria-labelledby="btn-2">
-                    <li><a href="javascript:void(0);">Orders</a> </li>
-                    <li><a href="javascript:void(0);">Customers</a> </li>
-                    <li><a href="javascript:void(0);">Coupons</a> </li>
-                    <li><a href="javascript:void(0);">Reports</a> </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" id="btn-3" data-toggle="collapse" data-target="#submenu_3" aria-expanded="false" class="" >
-                    <div class="col-xs-12">
-                        Customers
-                    </div>
-                </a>
-                <ul class="nav collapse" id="submenu_3" role="menu" aria-labelledby="btn-3">
-                    <li><a href="{{ route('customers') }}" class="">Search & View</a></li>
-                    <li><a href="{{ route('customeradd') }}" class="">Create New Customer Profile</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#" id="btn-4" data-toggle="collapse" data-target="#submenu_4" aria-expanded="false" class="" >
-                    <div class="col-xs-12">
-                        Sales
-                    </div>
-                </a>
-                <ul class="nav collapse" id="submenu_4" role="menu" aria-labelledby="btn-4">
-                    <li><a href="#">Sub-item 1</a></li>
-                    <li><a href="#">Sub-item 2</a></li>
-                    <li><a href="#">Sub-item 3</a></li>
-                    <li><a href="#">Sub-item 4</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#"  >
-                    <div class="col-xs-12">
-                        Admin
-                    </div>
-                </a>
-            </li>
-        </ul>
+                   <li><a href="{{ route('orders') }}">Orders</a> </li>
+                   <li><a href="{{ route('customer') }}">Customers</a> </li>
+                   <li><a href="{{ route('coupons') }}" >Coupons</a> </li>
+                   <li><a href="{{ route('reports') }}">Reports</a> </li>
+               </ul>
+           </li>
+           <li>
+            <a href="#" id="btn-3" data-toggle="collapse" data-target="#submenu_3" aria-expanded="false" class="" >
+                <div class="col-xs-12">
+                    Customers
+                </div>
+            </a>
+            <ul class="nav collapse" id="submenu_3" role="menu" aria-labelledby="btn-3">
+                <li><a href="{{ route('customers') }}" class="">Search & View</a></li>
+                <li><a href="{{ route('customeradd') }}" class="">Create New Customer Profile</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{{ route('sales') }}" >
+                <div class="col-xs-12">
+                    Sales
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#"  >
+                <div class="col-xs-12">
+                    Admin
+                </div>
+            </a>
+        </li>
+    </ul>
 
-    </div>
+</div>

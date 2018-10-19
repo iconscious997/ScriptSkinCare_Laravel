@@ -52,18 +52,6 @@
 			allowClear: true
 		});
 
-		/***********Content scroll with auto scroll with calc height***************/
-		var window_height = $(window).height(),
-		content_height = window_height - 300;
-
-		$('.content-fix').height(content_height);
-
-		$( window ).resize(function() {
-			var window_height = $(window).height(),
-			content_height = window_height - 300;
-			$('.content-fix').height(content_height);
-		});
-
 		$("#menu-close").click(function(e) {
 			e.preventDefault();
 			$("#sidebar-wrapper").toggleClass("active");
@@ -73,14 +61,25 @@
 			e.preventDefault();
 			$("#sidebar-wrapper").toggleClass("active");
 		});
-
-
-
 	});
-
-
-	
 </script>
-</body>
 
+@if((new Jenssegers\Agent\Agent)->isDesktop())
+<script type="text/javascript">
+	
+	/*****Content scroll with auto scroll with calc height***************/
+	var window_height = $(window).height(),
+	content_height = window_height - 300;
+
+	$('.content-fix').height(content_height);
+
+	$( window ).resize(function() {
+		var window_height = $(window).height(),
+		content_height = window_height - 300;
+		$('.content-fix').height(content_height);
+	});
+</script>
+@endif
+
+</body>
 </html>

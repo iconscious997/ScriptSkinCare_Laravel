@@ -28,7 +28,8 @@
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <!--<li><a href="#">Export PDF</a></li>-->
-                        <li><a href="javascript:void(0)"  onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a></li>
+                        {{--    <li><a href="javascript:void(0)"  onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a></li> --}}
+                        <li><a href="{{ route('customers', ['export' => 'yes' ]) }}" >Export Excel</a></li>
                     </ul>
                 </div>
             </div>
