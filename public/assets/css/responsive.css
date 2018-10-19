@@ -1,0 +1,189 @@
+/**************Responsive Style*****************/
+@media only screen and (min-width: 1300px) and (max-width: 1800px) {
+    .table-responsive{
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1169px) {
+    ul.menu li {
+        padding: 0px 10px !important;
+    }
+    .header-top-right ul li {
+        position: relative !important;
+        margin: -3px !important;
+    }
+    .btn{
+        font-size: 10px !important;
+    }
+    .table-responsive{
+        overflow-x: hidden;
+    }
+}
+
+@media only screen and (min-width: 768px) (max-width: 1024px) {
+
+}
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    .btn {
+        font-size: 10px;
+    }
+    ul.menu li {
+        padding: 0 5px !important;
+    }
+    ul.menu li a {
+        font-size: 10px !important;
+    }
+    .next {
+        margin-left: -10px;
+    }
+    .prev {
+        margin-left: 30px;
+    }
+    .header-top-right ul li {
+        position: relative !important;
+        margin: -3px !important;
+    }
+
+}
+@media screen and (max-width: 767px){
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: none;
+        text-align: left;
+    }
+}
+@media screen and (max-width: 640px)
+{
+    .Headermobile .name a {
+        font-size: 1.5rem;
+    }
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: left;
+    }
+
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+    body {
+        overflow: inherit;
+    }
+    .btn {
+        font-size: 10px;
+    }
+    .next {
+        margin-left: -70px;
+    }
+    .prev {
+        margin-left: 30px !important;
+    }
+    .footer {
+        padding: 15px !important;
+        height: 15vh !important;
+    }
+
+    ul.menu {
+        width: 100% !important;
+    }
+    ul.menu li {
+        padding: 0 2px !important;
+    }
+    ul.menu li a {
+        font-size: 7px !important;
+    }
+    ul.sub-menu li a {
+        padding: 0 5px !important;
+        font-size: 8px;
+    }
+    .table-responsive {
+        min-height: .01%;
+        overflow-x: scroll;
+    }
+    .spbtn {
+        width: 45% !important;
+    }
+    .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate {
+        float: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (min-width: 280px) and (max-width: 479px) {
+    body {
+        overflow: inherit;
+    }
+    .btn {
+        font-size: 10px;
+    }
+    .prev {
+        margin-left: 10px !important;
+        font-size: 12px !important;
+        font-weight: 400;
+    }
+    .prev i {
+        font-size: 1.4rem !important;
+        position: absolute !important;
+        margin-left: -15px !important;
+        top: 0px !important;
+    }
+    .next {
+        font-size: 12px !important;
+        font-weight: 400;
+        margin-left: -52px;
+        position: absolute;
+    }
+    .next i {
+        font-size: 1.6rem !important;
+        position: absolute !important;
+        top: -2px !important;
+        margin-left: 3px !important;
+    }
+    ul.menu {
+        width: 100% !important;
+    }
+    ul.menu li {
+        padding: 0 8px !important;
+    }
+    ul.menu li a {
+        font-size: 8px !important;
+    }
+    ul.sub-menu li a {
+        padding: 0 5px !important;
+        font-size: 8px;
+    }
+    ul.sub-menu.open li {
+        padding: 0 0px !important;
+    }
+    ul.sub-menu.open li a {
+        font-size: 7px !important;
+    }
+    .table-responsive {
+        min-height: .01%;
+        overflow-x: scroll !important;
+        padding-bottom: 80px;
+    }
+    .spbtn {
+        width: 45% !important;
+    }
+    .font11 {
+        font-size: 8px !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        font-size: 14px !important;
+    }
+    .spbtn2 {
+        width: 45% !important;;
+    }
+    /*.m-l-15{
+        margin-left: 0 !important;
+        }*/
+        .spcust {
+            padding: 0px !important;
+        }
+        
+    }
