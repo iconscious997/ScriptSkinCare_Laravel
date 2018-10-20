@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //admin menu route
 Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], function () {
 
-	Route::get('/supplier', [
+	Route::match(['GET', 'POST'],'/supplier', [
 		'uses' => 'SupplierController@supplierList',
 		'as'   => 'supplier'
 	]);
@@ -146,5 +146,6 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		Route::get('/', 'SalesController@sales')->name('sales');
 	});
 
+	
 
 });

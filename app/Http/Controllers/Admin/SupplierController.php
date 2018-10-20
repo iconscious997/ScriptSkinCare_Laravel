@@ -42,7 +42,7 @@ class SupplierController extends Controller
         return view('admin.supplieradd');
     }
 
-    public function supplierstep1()
+   public function supplierstep1()
     {
         // Session::put('first', 1);
         if( Session::has('first') ) {
@@ -672,15 +672,119 @@ class SupplierController extends Controller
         return view( 'admin.supplierstep4',compact('company','all_supplier_data','brands_list'));
     }
 
-    public function supplierList()
+    public function supplierList(Request $request)
     {
-         // $data = Supplier::with('alljoindata_supplier')->all();
-         // echo $data->alljoindata_supplier->business_name;
-        $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+          
+
+            if ($request->isMethod('get')) {
+
+                //
+                  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
+                ->select('*')->get();
+            }
+    
+    if ($request->isMethod('post')) {
+                //
+
+           
+            
+            $query=[];
+
+          
+            if (isset($request->business_name) && !empty($request->business_name)) {
+                
+                     
+                 
+            
+            $query[]=['company_details.business_name', 'like','%' . $request->business_name. '%'];
+                    
+            }
+            
+            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {
+                
+                
+        $query[]=['company_details.business_telephone_number', 'like','%'. $request->business_telephone_number.'%'];
+                
+            }
+
+            if (isset($request->website) && !empty($request->website)) {
+                
+                 $query[]=['company_details.website', 'like','%'. $request->website.'%'];
+            }
+
+            if (isset($request->create_date) && !empty($request->create_date)) {
+                
+                
+            }
+
+            if (isset($request->first_name) && !empty($request->first_name)) {
+                
+                $query[]=['supplier_details.first_name', 'like','%'. $request->first_name.'%'];
+                
+            }
+
+            if (isset($request->last_name) && !empty($request->last_name)) {
+                
+                $query[]=['supplier_details.last_name', 'like','%'. $request->last_name.'%'];
+            }
+
+            if (isset($request->email) && !empty($request->email)) {
+                
+                 $query[]=['users.email', 'like','%'. $request->email.'%'];
+
+            }
+
+             if (isset($request->position) && !empty($request->position)) {
+                
+
+                
+            }
+
+            if (isset($request->pstatus) && !empty($request->pstatus)) {
+                
+                $query[]=['roles.id', '=',$request->pstatus];
+                
+            }
+            
+            if (isset($request->status) && !empty($request->status)) {
+                
+                $query[]=['supplier_details.status', '=',$request->status];
+            }
+
+
+            if(isset($query) && !empty($query)){
+
+                $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id')
+            ->where($query)
             ->select('*')->get();
+
+
+
+
+            }else{
+
+                $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')
+                ->join('users','supplier_details.user_id','=','users.id')
+                ->select('*')->get();
+            }
+            
+
+
+        }
+
+         // $data = Supplier::with('alljoindata_supplier')->all();
+         // echo $data->alljoindata_supplier->business_name;
+        
+            
+            
 
             $i=0;
 
@@ -732,7 +836,8 @@ class SupplierController extends Controller
          // dd($all_brand_name);
          // echo $i;
          //  die();
-        return view( 'admin.supplier-list',compact('data','all_brand_name'));
+         $all_roles=Role::all();
+        return view( 'admin.supplier-list',compact('data','all_brand_name','request','all_roles'));
     }
 
     public function finishSupplier($value='')
