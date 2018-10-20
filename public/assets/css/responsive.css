@@ -202,4 +202,7 @@
 
         margin-bottom: 10px;
     }
+    .dashblock {
+        height: 75vh !important;
+    }
 }

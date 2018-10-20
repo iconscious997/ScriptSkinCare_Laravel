@@ -828,27 +828,7 @@ hr {
     font-size: 16px;
 }
 
-.bg1{
-    background-color: #F1E3D9;
-}
-.bg2{
-    background-color: #FFE4DD;
-}
-#dashbaord h4{
-    font-size: 16px;
-    font-weight: 600;
-    height: 30px;
-    line-height: 1.4;
-}
-#dashbaord .bdright{
-    border-right: 1px solid #fff;
-}
-#dashbaord .bdright:last-child{
-    border-right: none;
-}
-#dashbaord .fh700{
-    height: 700px;
-}
+
 .table .thead-dark th {
     color: #333;
     background-color: #F9F3F0;
@@ -1292,10 +1272,10 @@ li.services a::after {
 }
 
 .export .dropdown-menu{
- min-width: 100%;
- border-radius: 0;
- margin: 0 5px;
- position: relative;
+   min-width: 100%;
+   border-radius: 0;
+   margin: 0 5px;
+   position: relative;
 }
 .gobtn{
     padding: 7.5px 12px;
@@ -1319,13 +1299,13 @@ li.services a::after {
 }
 
 .filter-section li a {
-   display: block;
-   color: #333;
-   text-align: center;
-   padding: 5px 10px;
-   text-decoration: none;
-   font-size: 12px;
-   margin-top: 10px;
+ display: block;
+ color: #333;
+ text-align: center;
+ padding: 5px 10px;
+ text-decoration: none;
+ font-size: 12px;
+ margin-top: 10px;
 }
 
 .filter-section .active {
@@ -1431,4 +1411,34 @@ li.services a::after {
 .dd-menu li.divider{
   padding: 0;
   border-bottom: 1px solid #cccccc;
+}
+/*****Dashboard****/
+.dashblock{
+    padding: 25px 25px;
+    height: 100vh;
+}
+.dashboard h4{
+    margin-bottom: 40px;
+    font-weight: 600;
+    height: 30px;
+    line-height: 1.5;
+}
+.dashboard .bg1{
+    background: #F1E3D9;
+}
+.dashboard .bg2{
+    background: #FFE4DD;
+}
+
+.dashboard .bdright{
+    border-right: 1px solid #fff;
+}
+.dashboard .bdright:last-child{
+    border-right: none;
+}
+.dashboard .btn{
+    padding: 5px 20px;
+}
+.dashboard .items p{
+    padding: 5px 0px;
 }
