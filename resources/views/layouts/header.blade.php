@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="_mytoken" content="{{csrf_token()}}" />
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" sizes="16x16" href="{{ ('public/assets/images/favicon.ico') }}">
     <title>{{ config('app.name') }}</title>
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/charts/modernizr.min.js') }}"></script>
+
     @yield('styles')
 </head>
 
@@ -64,7 +66,7 @@
                     <li>
                         <a href="javascript:void(0)" class="{{ request()->is('supplier*') ? 'active' : '' }}">Suppliers</a>
                         <ul class="sub-menu {{ request()->is('supplier*') ? 'open' : '' }}">
-                           
+                         
                             @can('supplier_list')
                             <li><a href="{{ route('supplier') }}" class="{{ request()->is('supplier') ? 'active' : '' }}">Supplier List</a></li>
                             @endcan
@@ -94,10 +96,11 @@
                     <li>
                         <a href="#">Online</a>
                         <ul class="sub-menu">
-                            <li><a href="javascript:void(0);">Orders</a> </li>
-                            <li><a href="javascript:void(0);">Customers</a> </li>
-                            <li><a href="javascript:void(0);">Coupons</a> </li>
-                            <li><a href="javascript:void(0);">Reports</a> </li>
+
+                            <li><a href="{{ route('orders') }}" class="{{ request()->is('orders') ? 'active' : '' }}">Orders</a> </li>
+                            <li><a href="{{ route('customer') }}" class="{{ request()->is('customers') ? 'active' : '' }}">Customers</a> </li>
+                            <li><a href="{{ route('coupons') }}" class="{{ request()->is('coupons') ? 'active' : '' }}">Coupons</a> </li>
+                            <li><a href="{{ route('reports') }}" class="{{ request()->is('reports') ? 'active' : '' }}">Reports</a> </li>
                         </ul>
                     </li>
                     <li>
@@ -108,16 +111,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Sales</a>
-                        <ul class="sub-menu">
-                            <li><a href="#">Sub-item 1</a></li>
-                            <li><a href="#">Sub-item 2</a></li>
-                            <li><a href="#">Sub-item 3</a></li>
-                            <li><a href="#">Sub-item 4</a></li>
-                            <li><a href="#">Sub-item 5</a></li>
-                            <li><a href="#">Sub-item 6</a></li>
-                            <li><a href="#">Sub-item 7</a></li>
-                        </ul>
+                        <a href="{{ route('sales') }}">Sales</a>
                     </li>
                     <li>
                         <a href="#">Admin</a>
