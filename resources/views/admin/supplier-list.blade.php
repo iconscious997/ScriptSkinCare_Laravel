@@ -75,10 +75,10 @@
 							<td>{{$item->business_name}}</td>
 							<td>{{$item->trading_name}}</td>
 							<td>{{$item->business_address_line_1}}{{$item->business_address_line_2}}{{$item->city}}{{$item->state}}{{$item->country}}</td>
-							<td>{{$item->mobile_number}}</td>
+							<td>{{$item->business_telephone_number}}</td>
 							<td>{{$item->website}}</td>
 							<td>{{$all_brand_name[$i]}}</td>
-							<td>{{$item->first_name}} {{$item->first_name}}</td>
+							<td>{{$item->first_name}} {{$item->last_name}}</td>
 							<td>{{$item->label}}</td>
 							<td>{{$item->email}}</td>
 							<td><a class="btn btn-green"> RESET</a></td>
@@ -118,42 +118,61 @@
 									<div class="clearfix">&nbsp;</div>
 									<div class="accordionblock">
 										<div class="row">
+
+						<form action="{{ url('/supplier') }}" method="post">
+@csrf
 											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Company:">
+													<input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
 												</div>
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="First Name:">
+													<input type="text" class="form-control" name="first_name" placeholder="First Name:" value="{{$request->first_name}}">
 												</div>
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Position:">
+													<select class="form-control" name="position">
+												<option value="">Select Position</option>
+												
+													</select>	
+													
 												</div>
 											</div>
 											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Business Phone No:">
+													<input type="text" class="form-control" name="business_telephone_number"  value="{{$request->business_telephone_number}}"placeholder="Business Phone No:">
 												</div>
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Surname:">
+													<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Surname:">
 												</div>
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Permission Status:">
-												</div>
-											</div>
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Website:">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Email:">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Status:">
+													<select class="form-control" name="pstatus">
+											<option value="">Select Permission Status</option>
+												@foreach( $all_roles as $role )
+
+												<option  value="{{ $role['id'] }}" {{ isset($request->pstatus)?($request->pstatus== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
+
+												@endforeach
+													</select>	
 												</div>
 											</div>
 											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Date Created:">
+													<input type="text" class="form-control" name="website" value="{{$request->website}}" placeholder="Website:">
+												</div>
+												<div class="form-group">
+													<input type="text" class="form-control" name="email" value="{{$request->email}}" placeholder="Email:">
+												</div>
+												<div class="form-group">
+													<select class="form-control" name="status">
+														<option value="">Select Status</option>
+														<option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
+														<option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
+													</select>
+													
+												</div>
+											</div>
+											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+												<div class="form-group">
+													<input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
 												</div>
 												<div class="form-group">
 													&nbsp;
@@ -162,6 +181,8 @@
 													<button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
 												</div>
 											</div>
+
+											</form>
 										</div>
 									</div>
 								</div>
