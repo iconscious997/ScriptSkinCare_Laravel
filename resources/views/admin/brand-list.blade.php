@@ -44,37 +44,23 @@
                     <tr>
                         <th>Brand Name</th>
                         <th>Registered Business Name</th>
-                        <th>Brand Logo</th>
-                        <!-- <th>Gender</th>
-                        <th>Registered Date</th>
-                        <th>Status</th>
-                        <th>Signup Source</th>
-                        <th>Registered By</th>
-                        <th>Recent Skin Type</th>
-                        <th>Recent Skin Concern</th>
-                        <th>Average Spend</th>
-                        <th>Overall Spend</th> -->
+                        <th >Brand Logo</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($data as $item)
                     <tr>
-                       
+
                         <td>{{$item->brand_name}}</td>
-                        <td>{{$item->business_name}}</td>
-                        <!-- <td>{{date("d-m-Y", strtotime($item->created_date))}}</td>
-                        <td>{{$item->status==0 ? 'Active' : 'Deactive'}}</td>
-                        <td>{{$item->signup_source}}</td>
-                        <td>{{$item->created_by}}</td>
-                        <td>{{$item->skin_type}}</td>
-                        <td>{{$item->skin_concerns}}</td> -->
-                        <!-- <td></td>
-                        <td></td>          -->           
-                        <td><img class="img-responsive" style="width:100px; " src="{{asset('public/images/brand')}}/{{$item->brand_logo}}"></td>
-                        <td class="flex">
-                            <a href='supplier-brandedit/{{$item->id}}' data-id={{$item->id}}><button type="button" class="btn btn-default "> EDIT</button></a> 
-                            <!-- <a href='javascript:void()' class='deactivaterow' msg="{{$item->status==1 ? 'Activate' : 'Deactivate'}}" data-id={{$item->id}}><button class="btn btn-default m-l-5">{{$item->status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a> -->
+                        <td>{{$item->business_name}}</td>        
+                        <td>
+                            <img class="img-responsive" style="width:50px; " src="{{asset('public/images/brand')}}/{{$item->brand_logo}}">
+                        </td>
+                        <td >
+                            <a href='supplier-brandedit/{{$item->id}}' data-id={{$item->id}}>
+                                <button type="button" class="btn btn-default "> EDIT</button>
+                            </a> 
                         </td>
                     </tr>                                
                     @endforeach                             
@@ -82,72 +68,72 @@
             </table>
         </div>
     </div>
-   <div id="footer">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Search Manage Brands List
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="accordionblock">
-                                        <div class="row">
+    <div id="footer">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Search Manage Brands List
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="accordionblock">
+                                    <div class="row">
 
-                        <form action="{{ url('/supplier-brand-list') }}" method="post">
-@csrf
+                                        <form action="{{ url('/supplier-brand-list') }}" method="post">
+                                            @csrf
                                             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
                                                 </div>
-                                               
+
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-                                              
+
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="brand_name"  value="{{$request->brand_name}}" placeholder="Brands Name:">
                                                 </div>
-                                               
+
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-                                                
-                                                    
+
+
                                                 <div class="form-group">
                                                     <select class="form-control" name="status">
                                                         <option value="">Select Status</option>
                                                         <option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
                                                         <option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
                                                     </select>
-                                                    
+
                                                 </div>
                                             </div>
                                             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
                                                 </div>
                                             </div>
 
-                                            </form>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
+    </div>
 
     <script type="text/javascript">
         $(document).ready(function() {

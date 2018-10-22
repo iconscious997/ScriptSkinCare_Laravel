@@ -13,26 +13,24 @@
     <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
         <h3 class="text-left mt-20">Search Customers</h3>
     </div>
-    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
+    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
 
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
-           <!--  <button type="button" class="btn btn-green m-l-5 btn-block"> SORT / ARRANGE BY</button> -->
-        </div>
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
             <div class="dropdown export">
                 <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Export PDF</a></li>
-                        <li><a href="#">Export Excel</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-                <button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Export PDF</a></li>
+                    <li><a href="#">Export Excel</a></li>
+                </ul>
             </div>
         </div>
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
+            <button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
+        </div>
     </div>
+</div>
 </div>
 <div class="content-fix ">
     <div class="table-responsive mb-30">
@@ -81,17 +79,17 @@
         </table>
     </div>
     <div class="footer p-10">
-        <div class="conatiner text-center">
-            <div class="row">
-                <div class="col-md-1 col-sm-1">&nbsp;</div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                    <div class="col-md-12 text-center mt-20 mb-10">
+        <div class="text-center">
+            <div class="">
+                <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 text-center">
+                    <div class="col-md-12  mt-20 mb-10">
                         <a href="{{ route('customeradd') }}" class="btn btn-light cs-pad">
                             + ADD A NEW CUSTOMER
                         </a>
                     </div>
                 </div>
-                <div class="col-md-1 col-sm-1">&nbsp;</div>
+                <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
             </div>
         </div>
     </div>
@@ -101,26 +99,26 @@
             $('#customers').DataTable();
         } );
 
-    $(document).on("click", ".deactivaterow", function(event) {
-        event.preventDefault();
-        var id = $(this).attr('data-id');
-        var msg = $(this).attr('msg');
-        var msgconf = $(this).attr('msgconf');
-        var status = 0;
-        if(msg == 'Deactivate') {
-            status = 1;
-        }
-        swal({
-            title: 'Are you sure?',
-            text: "You want to "+msg+"!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, '+msg+'',
-            cancelButtonText: 'Cancel',
-            confirmButtonClass: 'btn btn-success',
-            cancelButtonClass: 'btn btn-danger m-l-10',
-            buttonsStyling: false
-        }).then(function () {
+        $(document).on("click", ".deactivaterow", function(event) {
+            event.preventDefault();
+            var id = $(this).attr('data-id');
+            var msg = $(this).attr('msg');
+            var msgconf = $(this).attr('msgconf');
+            var status = 0;
+            if(msg == 'Deactivate') {
+                status = 1;
+            }
+            swal({
+                title: 'Are you sure?',
+                text: "You want to "+msg+"!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, '+msg+'',
+                cancelButtonText: 'Cancel',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger m-l-10',
+                buttonsStyling: false
+            }).then(function () {
         // call ajax function to delete it
         $.ajaxSetup({
             headers: {

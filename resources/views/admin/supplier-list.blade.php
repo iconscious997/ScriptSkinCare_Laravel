@@ -18,31 +18,27 @@
 	<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
 		<h3 class="text-left">Supplier List / Results (Products)</h3>
 	</div>
-	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 pull-right">
+	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
 		<div class="row">
-			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-				<!-- <button class="btn btn-green m-l-5 btn-block"> SORT / ARRANGE BY</button> -->
-			</div>
-			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
 				<div class="dropdown export">
-					<button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+					<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
 						<span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							{{-- <li>
+							<li>
 								<a href="javascript:void(0);" onClick ="$('#customers').tableExport({type:'pdf',escape:'false',tableName:'Suplier-list'});">Export PDF</a>
-							</li> --}}
+							</li>
 							<li>
 								<a href="javascript:void(0);" onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a>
 							</li>
 						</ul>
 					</div>
-					{{-- <button class="btn btn-default m-l-5 btn-block"> EXPORT DATA OPTIONS</button> --}}
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-					<button class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
+					<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
 				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-					<button class="btn btn-default m-l-5 btn-block"> + ADD NEW PRODUCT</button>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
+					<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>
 				</div>
 			</div>
 		</div>
@@ -119,68 +115,68 @@
 									<div class="accordionblock">
 										<div class="row">
 
-						<form action="{{ url('/supplier') }}" method="post">
-@csrf
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="first_name" placeholder="First Name:" value="{{$request->first_name}}">
-												</div>
-												<div class="form-group">
-													<select class="form-control" name="position">
-												<option value="">Select Position</option>
-												
-													</select>	
-													
-												</div>
-											</div>
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="business_telephone_number"  value="{{$request->business_telephone_number}}"placeholder="Business Phone No:">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Surname:">
-												</div>
-												<div class="form-group">
-													<select class="form-control" name="pstatus">
-											<option value="">Select Permission Status</option>
-												@foreach( $all_roles as $role )
+											<form action="{{ url('/supplier') }}" method="post">
+												@csrf
+												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+													<div class="form-group">
+														<input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
+													</div>
+													<div class="form-group">
+														<input type="text" class="form-control" name="first_name" placeholder="First Name:" value="{{$request->first_name}}">
+													</div>
+													<div class="form-group">
+														<select class="form-control" name="position">
+															<option value="">Select Position</option>
 
-												<option  value="{{ $role['id'] }}" {{ isset($request->pstatus)?($request->pstatus== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
+														</select>	
 
-												@endforeach
-													</select>	
+													</div>
 												</div>
-											</div>
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="website" value="{{$request->website}}" placeholder="Website:">
+												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+													<div class="form-group">
+														<input type="text" class="form-control" name="business_telephone_number"  value="{{$request->business_telephone_number}}"placeholder="Business Phone No:">
+													</div>
+													<div class="form-group">
+														<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Surname:">
+													</div>
+													<div class="form-group">
+														<select class="form-control" name="pstatus">
+															<option value="">Select Permission Status</option>
+															@foreach( $all_roles as $role )
+
+															<option  value="{{ $role['id'] }}" {{ isset($request->pstatus)?($request->pstatus== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
+
+															@endforeach
+														</select>	
+													</div>
 												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="email" value="{{$request->email}}" placeholder="Email:">
+												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+													<div class="form-group">
+														<input type="text" class="form-control" name="website" value="{{$request->website}}" placeholder="Website:">
+													</div>
+													<div class="form-group">
+														<input type="text" class="form-control" name="email" value="{{$request->email}}" placeholder="Email:">
+													</div>
+													<div class="form-group">
+														<select class="form-control" name="status">
+															<option value="">Select Status</option>
+															<option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
+															<option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
+														</select>
+
+													</div>
 												</div>
-												<div class="form-group">
-													<select class="form-control" name="status">
-														<option value="">Select Status</option>
-														<option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
-														<option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
-													</select>
-													
+												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+													<div class="form-group">
+														<input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
+													</div>
+													<div class="form-group">
+														&nbsp;
+													</div>
+													<div class="form-group">
+														<button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
+													</div>
 												</div>
-											</div>
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
-												</div>
-												<div class="form-group">
-													&nbsp;
-												</div>
-												<div class="form-group">
-													<button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
-												</div>
-											</div>
 
 											</form>
 										</div>

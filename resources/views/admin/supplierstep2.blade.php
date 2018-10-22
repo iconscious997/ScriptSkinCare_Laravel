@@ -22,11 +22,11 @@
                     <div class="col-md-6 mt-10">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 pull-left p-r-0">
-                                <button class="btn btn-green selected btn-block" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING USERS</button>
+                                <button class="btn btn-dark btn-block" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING USERS</button>
 
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 pull-right p-l-0">
-                                <button class="btn btn-green selected btn-block m-l-15" type="button" id="addadditionaluser"> + ADD ADDITIONAL USER</button>
+                                <button class="btn btn-dark btn-block m-l-15" type="button" id="addadditionaluser"> + ADD ADDITIONAL USER</button>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
                 <div class="col-md-1">&nbsp;</div>
 
                 <div class="col-md-10 text-center mt-30 mb-10">
-                    <button class="btn btn-dark selected" type="button" id="btnsavestep"> SAVE STEP 2 & ACTIVATE USER PROFILE</button>
+                    <button class="btn btn-dark" type="button" id="btnsavestep"> SAVE STEP 2 & ACTIVATE USER PROFILE</button>
                 </div>
                 <div class="col-md-1">&nbsp;</div>
             </div>
@@ -178,15 +178,15 @@
     </div>
 </form>
 <div class="footer">
-    <div class="conatiner text-center">
+    <div class=" text-center">
         <div class="">
-            <div class="col-md-1 col-sm-1">&nbsp;</div>
+            <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                 <button class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button>
                 <button class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button>
                 <button class="btn btn-default spbtn m-l-20"> + ADD A NEW BRAND</button>
             </div>
-            <div class="col-md-1 col-sm-1">&nbsp;</div>
+            <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
         </div>
     </div>
 </div>

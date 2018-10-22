@@ -507,12 +507,13 @@ input:-ms-input-placeholder {
 }
 .btn-dark {
     color: #333;
-    background-color: #fff;
+    background-color: #D7DBC2;
     border-color: #333;
 }
-
-.btn-dark.selected {
-    background: #D7DBC2;
+.btn-dark:hover {
+    color: #333;
+    background-color: #fff;
+    border-color: #333;
 }
 
 .btn-light {
@@ -535,6 +536,16 @@ input:-ms-input-placeholder {
 }
 .cs-pad{
     padding: 5px 65px;
+}
+.btn-default:hover {
+    color: #333;
+    background-color: transparent;
+    border-color: #333;
+}
+.btn-default:focus, .btn-default.focus {
+    color: #333;
+    background-color: #fff;
+    border-color: #333;
 }
 /*=================================
 Header & Footer Section
@@ -598,6 +609,7 @@ header{
     left: 0;
     z-index: 99;
     width: 100%;
+    display: block;
 }
 
 /*=================================
@@ -1291,10 +1303,10 @@ li.services a::after {
 }
 
 .export .dropdown-menu{
- min-width: 100%;
- border-radius: 0;
- margin: 0 5px;
- /*position: relative;*/
+   min-width: 100%;
+   border-radius: 0;
+   margin: 0 5px;
+   /*position: relative;*/
 }
 .gobtn{
     padding: 7.5px 12px;
@@ -1318,13 +1330,13 @@ li.services a::after {
 }
 
 .filter-section li a {
-   display: block;
-   color: #333;
-   text-align: center;
-   padding: 5px 10px;
-   text-decoration: none;
-   font-size: 12px;
-   margin-top: 10px;
+ display: block;
+ color: #333;
+ text-align: center;
+ padding: 5px 10px;
+ text-decoration: none;
+ font-size: 12px;
+ margin-top: 10px;
 }
 
 .filter-section .active {

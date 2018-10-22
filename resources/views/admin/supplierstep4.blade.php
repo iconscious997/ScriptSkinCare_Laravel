@@ -107,7 +107,7 @@
                                 </table>
                             </div>
                             <div class="text-center mt-20">
-                                
+
                                 <a class="btn btn-dark selected" href="<?php echo url('/supplierstep3/n'); ?>">ADD A BRAND (AUTO-ACTIVATE)</a>
                             </div>
                         </div>
@@ -134,43 +134,24 @@
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15 text-right">
-                           <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
-                            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
-                           </a>
+                         <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
+                         </a>
 
-                       </div>
-                   </div>
-                   <hr>
-               </div>
-               <div class="col-md-1">&nbsp;</div>
-           </div>
-          <!--  <div class="row">
-               <div class="col-md-2">&nbsp;</div>
-               <div class="col-md-8 text-center mt-30 mb-40">
-                <button class="btn btn-dark selected"> ACTIVATE SUPPLIER PROFILE</button>
-            </div>
-            <div class="col-md-2">&nbsp;</div>
-        </div> -->
-    </div>
-</div>
+                     </div>
+                 </div>
+                 <hr>
+             </div>
+             <div class="col-md-1">&nbsp;</div>
+         </div>
+     </div>
+ </div>
 
 </form>
 <div class="footer">
-    <div class="conatiner text-center">
+    <div class="text-center">
         <div class="row">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                {{-- <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <button class="btn btn-default btn-block"> + ADD NEW SUPPLIER</button>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <button class="btn btn-default btn-block"> + ADD A NEW USER</button>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <button class="btn btn-default btn-block"> +ADD A NEW BRAND</button>
-                    </div>
-                </div> --}}
                 <button class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button>
                 <button class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button>
                 <a href="<?php echo url('/supplierstep3/n'); ?>"><button type="button" class="btn btn-default spbtn m-l-20"> +ADD A NEW BRAND</button></a>
