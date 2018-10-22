@@ -88,9 +88,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Retail</a>
+                        <a href="javascript:void(0)" class="{{ request()->is('retail*') ? 'active' : '' }}">Retail</a>
                         <ul class="sub-menu">
-                            <li><a href="#">Retail List</a></li>
+                            <li><a href="{{ route('retail') }}" class="{{ request()->is('retail') ? 'active' : '' }}">Retail List</a></li>                        
+                            <li><a href="{{ route('retailadd') }}" class="{{ request()->is('retailadd') ? 'active' : '' }}">Create New Retail</a></li>
                         </ul>
                     </li>
                     <li>

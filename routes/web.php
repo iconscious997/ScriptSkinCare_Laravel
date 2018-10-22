@@ -147,5 +147,16 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		Route::get('/', 'SalesController@sales')->name('sales');
 	});
 
+	//Retail list
+	Route::get('/retail', [
+		'uses' => 'RetailController@index',
+		'as'   => 'retail'
+	]);
+
+	Route::get('/retailadd', [
+		'uses' 	=> 'RetailController@retailadd',
+		'as'	=> 'retailadd'
+	]);
+
 
 });
