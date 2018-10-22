@@ -97,8 +97,15 @@
                     <span class="inputError">{{ $errors->first('created_date') }}</span>
                     @endif
                 </div>
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" name="created_by" placeholder="Registered By:" value="{{ !empty($customer->created_by) ? $customer->created_by : old('created_by') }}">
+                <div class="form-group col-md-6">                    
+                     <select name="created_by" id="created_by">
+                        <option value="">Registered By:</option>
+                        @foreach( $user_admin_retailer as $users )
+                        <option  value="{{ $users['userid'] }}" {{ !empty($customer)?($customer->created_by == $users['userid'] ? 'selected' : ''):('') }}>{{ $users['name'] }} </option>
+
+                        @endforeach
+                    </select>
+                    <!-- <input type="text" class="form-control" name="created_by" placeholder="Registered By:" value="{{ !empty($customer->created_by) ? $customer->created_by : old('created_by') }}"> -->
                     @if ($errors->has('created_by'))
                     <span class="inputError">{{ $errors->first('created_by') }}</span>
                     @endif
@@ -139,19 +146,10 @@
     <div class="conatiner text-center">
         <div class="row">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                <!-- <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                    <button class="btn btn-default btn-block"> + ADD NEW SUPPLIER</button>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                    <button class="btn btn-default btn-block"> + ADD A NEW USER</button>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <button class="btn btn-default btn-block"> +ADD A NEW BRAND</button>
-                </div> -->
-                <button class="btn btn-default spbtn2"> + ADD NEW SUPPLIER</button>
-                <button class="btn btn-default spbtn2 m-l-20"> + ADD A NEW USER</button>
-                <button class="btn btn-default spbtn2 m-l-20"> + ADD A NEW BRAND</button>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">                
+                 <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-default spbtn2" type="button"> + ADD NEW SUPPLIER</button></a>
+                 <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn2 m-l-20" type="button"> + ADD A NEW USER</button></a>
+                 <a href="{{ url('/add-new-brand') }}"><button class="btn btn-default spbtn2 m-l-20" type="button"> + ADD A NEW BRAND</button></a>
             </div>
             <div class="col-md-1 col-sm-1">&nbsp;</div>
         </div>

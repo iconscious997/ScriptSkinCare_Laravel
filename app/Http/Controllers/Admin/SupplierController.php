@@ -679,7 +679,7 @@ class SupplierController extends Controller
             if ($request->isMethod('get')) {
 
                 //
-                  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
