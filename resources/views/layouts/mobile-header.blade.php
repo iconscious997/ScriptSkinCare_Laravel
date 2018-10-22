@@ -80,22 +80,34 @@
                 </a>
             </li>
             <li>
-                <a href="#" id="btn-0" data-toggle="collapse" data-target="#submenu_0" aria-expanded="false" class="" >
+                <a href="javascript:void(0)" id="btn-0" data-toggle="collapse" data-target="#submenu_0" aria-expanded="false" class="" >
                     <div class="col-xs-12">
                         Suppliers
                     </div>
                 </a>
                 <ul class="nav collapse" id="submenu_0" role="menu" aria-labelledby="btn-0">
+                    @can('supplier_list')
                     <li><a href="{{ route('supplier') }}" class="">Supplier List</a></li>
+                    @endcan
+                    @can('setup_new_supplier')
                     <li><a href="{{ route('supplierstep1') }}" class="">Set-Up New Supplier</a></li>
-                    <li><a href="#">Manage / Edit A Supplier</a></li>
-                    <li><a href="{{ route('supplierpermission') }}">Manage User Permissions</a></li>
-                    <li><a href="#">Manage Brands</a></li>
-                    <li><a href="#">Manage Role Permissions</a></li>
+                    @endcan
+                    @can('manage_edit_supplier')
+                    <li><a href="{{ route('company-list')}}">Manage / Edit A Supplier</a></li>
+                    @endcan
+                    @can('manage_user_permission')
+                    <li><a href="{{ route('supplier-data-list') }}">Manage User Permissions</a></li>
+                    @endcan
+                    @can('manage_brand')
+                    <li><a href="{{ route('brand-list')}}">Manage Brands</a></li>
+                    @endcan
+                    @can('manage_role_permission')
+                    <li><a href="{{ route('supplierpermission') }}">Manage Role Permissions</a></li>
+                    @endcan
                 </ul>
             </li>
             <li>
-                <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu_1" aria-expanded="false" class="" >
+                <a href="javascript:void(0)" id="btn-1" data-toggle="collapse" data-target="#submenu_1" aria-expanded="false" class="" >
                     <div class="col-xs-12">
                         Retail
                     </div>
@@ -118,7 +130,7 @@
                </ul>
            </li>
            <li>
-            <a href="#" id="btn-3" data-toggle="collapse" data-target="#submenu_3" aria-expanded="false" class="" >
+            <a href="javascript:void(0)" id="btn-3" data-toggle="collapse" data-target="#submenu_3" aria-expanded="false" class="" >
                 <div class="col-xs-12">
                     Customers
                 </div>
@@ -136,7 +148,7 @@
             </a>
         </li>
         <li>
-            <a href="#"  >
+            <a href="javascript:void(0)"  >
                 <div class="col-xs-12">
                     Admin
                 </div>
