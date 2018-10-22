@@ -16,7 +16,7 @@
 
 <div class="wizard spcust">
     <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-        <h3 class="text-left mt-20">Manage Companys</h3>
+        <h3 class="text-left mt-20">Manage / Edit A Supplier</h3>
     </div>
     <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
         <!-- <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
@@ -42,7 +42,7 @@
             <table class="table display" id="customers">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Business Name</th>
+                        <th>Registered Business Name</th>
                         <th>Trading Name</th>
                         <th>ABN</th>
                         <th>Address</th>
@@ -75,21 +75,80 @@
             </table>
         </div>
     </div>
-    <div class="footer p-10">
-        <div class="conatiner text-center">
+   <div id="footer">
             <div class="row">
-                <div class="col-md-1 col-sm-1">&nbsp;</div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                    <div class="col-md-12 text-center mt-20 mb-10">
-                        <a href="{{ route('customeradd') }}" class="btn btn-light spbtn">
-                            + ADD A NEW CUSTOMER
-                        </a>
+                <div class="col-md-12">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Search Manage / Edit A Supplier List
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <div class="clearfix">&nbsp;</div>
+                                    <div class="accordionblock">
+                                        <div class="row">
+
+                        <form action="{{ url('/supplier-company-list') }}" method="post">
+@csrf
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="email" placeholder="Email:" value="{{$request->email}}" >
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="business_telephone_number"  placeholder="Business Phone No:" value="{{$request->business_telephone_number}}">
+                                                </div>
+                                                  <div class="form-group">
+                                                    <select class="form-control" name="status">
+                                                        <option value="">Select Status
+<option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
+<option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
+                                                        </option>
+                                                        
+                                                    </select>
+                                                    
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="website" placeholder="Website:" value="{{$request->website}}" >
+                                                </div>
+                                                
+                                              
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="form-group">
+                                
+                                <input type="text" class="form-control datepicker"  name="create_date"   placeholder="Date Created:" readonly="" value="{{$request->create_date}}"                                                        >
+                                                </div>
+                                               
+                                                <div class="form-group">
+                                                    <button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
+                                                </div>
+                                            </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                <div class="col-md-1 col-sm-1">&nbsp;</div>
             </div>
         </div>
-    </div>
 
     <script type="text/javascript">
         $(document).ready(function() {

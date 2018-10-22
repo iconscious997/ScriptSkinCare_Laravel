@@ -107,7 +107,7 @@
                                 </table>
                             </div>
                             <div class="text-center mt-20">
-
+                                
                                 <a class="btn btn-dark selected" href="<?php echo url('/supplierstep3/n'); ?>">ADD A BRAND (AUTO-ACTIVATE)</a>
                             </div>
                         </div>
@@ -134,23 +134,23 @@
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15 text-right">
-                            <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
-                                {{-- &nbsp;<i class="ti-arrow-right"></i> --}}
-                            </a>
+                           <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
+                            <!-- &nbsp;<i class="ti-arrow-right"></i> -->
+                           </a>
 
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="col-md-1">&nbsp;</div>
-            </div>
-            <div class="row acbtn">
-             <div class="col-md-2">&nbsp;</div>
-             <div class="col-md-8 text-center mt-30 mb-40">
-                <button class="btn btn-dark selected "> ACTIVATE SUPPLIER PROFILE</button>
+                       </div>
+                   </div>
+                   <hr>
+               </div>
+               <div class="col-md-1">&nbsp;</div>
+           </div>
+          <!--  <div class="row">
+               <div class="col-md-2">&nbsp;</div>
+               <div class="col-md-8 text-center mt-30 mb-40">
+                <button class="btn btn-dark selected"> ACTIVATE SUPPLIER PROFILE</button>
             </div>
             <div class="col-md-2">&nbsp;</div>
-        </div>
+        </div> -->
     </div>
 </div>
 
