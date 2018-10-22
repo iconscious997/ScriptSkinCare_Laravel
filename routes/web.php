@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //admin menu route
 Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], function () {
 
-	Route::get('/supplier', [
+	Route::match(['GET', 'POST'],'/supplier', [
 		'uses' => 'SupplierController@supplierList',
 		'as'   => 'supplier'
 	]);
@@ -89,7 +89,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'brandedit'
 	]);
 
-	Route::get('/supplier-brand-list', [
+	Route::match(['GET', 'POST'],'/supplier-brand-list', [
 		'uses' 	=> 'BrandController@index',
 		'as'	=> 'brand-list'
 	]);
@@ -102,25 +102,13 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'companyedit'
 	]);
 
-	Route::get('/supplier-company-list', [
+	Route::match(['GET', 'POST'],'/supplier-company-list', [
 		'uses' 	=> 'CompanyController@index',
 		'as'	=> 'company-list'
 	]);
 	
 	Route::post('/companystore', 'CompanyController@companystore')->name('companystore');
-
-	// Company manage
-	Route::get('/supplier-companyedit/{id}', [
-		'uses' 	=> 'CompanyController@companyedit',
-		'as'	=> 'companyedit'
-	]);
-
-	Route::get('/supplier-company-list', [
-		'uses' 	=> 'CompanyController@index',
-		'as'	=> 'company-list'
-	]);
 	
-	Route::post('/companystore', 'CompanyController@companystore')->name('companystore');
 
 	// supplier manage user permissions
 	Route::get('/supplieruseredit/{id}', [
@@ -128,7 +116,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'supplier-data-edit'
 	]);
 
-	Route::get('/supplieruserlist', [
+	Route::match(['GET', 'POST'],'/supplieruserlist', [
 		'uses' 	=> 'SupplierController@supplieruserlist',
 		'as'	=> 'supplier-data-list'
 	]);
@@ -147,5 +135,6 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		Route::get('/', 'SalesController@sales')->name('sales');
 	});
 
+	
 
 });

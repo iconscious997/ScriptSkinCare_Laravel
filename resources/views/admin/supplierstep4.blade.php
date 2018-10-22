@@ -144,13 +144,13 @@
                </div>
                <div class="col-md-1">&nbsp;</div>
            </div>
-           <div class="row">
+          <!--  <div class="row">
                <div class="col-md-2">&nbsp;</div>
                <div class="col-md-8 text-center mt-30 mb-40">
                 <button class="btn btn-dark selected"> ACTIVATE SUPPLIER PROFILE</button>
             </div>
             <div class="col-md-2">&nbsp;</div>
-        </div>
+        </div> -->
     </div>
 </div>
 

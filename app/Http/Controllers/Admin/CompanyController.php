@@ -27,10 +27,79 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Company::all();
-        return view('admin.company-list',compact('data'));
+
+        if ($request->isMethod('get')) {
+
+            $data = Company::all();
+        }
+        if ($request->isMethod('post')) {
+
+            
+            if (isset($request->business_name) && !empty($request->business_name)) {
+                
+            
+                $query[]=['business_name', 'like','%' . $request->business_name. '%'];
+                    
+            }
+            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {
+                
+                
+                $query[]=['business_telephone_number', 'like','%'. $request->business_telephone_number.'%'];
+                
+            }
+
+             if (isset($request->website) && !empty($request->website)) {
+                
+                 $query[]=['website', 'like','%'. $request->website.'%'];
+            }
+              if (isset($request->email) && !empty($request->email)) {
+                
+                 $query[]=['email_address', 'like','%'. $request->email.'%'];
+
+            }
+
+             if (isset($request->status) && !empty($request->status)) {
+                
+                $query[]=['status', '=',$request->status];
+            }
+
+            if(isset($query) && !empty($query)){
+
+                
+
+                             $d = Company::
+                            where($query);
+                            if (isset($request->create_date) && !empty($request->create_date)) {
+                                        
+                        $d->whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+                      
+                    }
+
+                    $data = $d->get();
+
+            }else if(isset($request->create_date) && !empty($request->create_date)){
+
+
+
+                    $data = Company::whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) )->get();
+
+
+
+            }else{
+
+                $data = Company::all();
+            }
+
+           
+                    
+
+        }
+        // die();
+        
+        return view('admin.company-list',compact('data','request'));
+
     }
 
     // public function companyadd()

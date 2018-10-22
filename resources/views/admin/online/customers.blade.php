@@ -26,7 +26,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <!--<li><a href="#">Export PDF</a></li>-->
+                        <li><a href="#">Export PDF</a></li>
                         <li><a href="javascript:void(0)"  onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a>
                         </li>
                     </ul>
@@ -120,8 +120,8 @@
 
         //Donut Chart
         c3.generate({
-         bindto: '#donut-chart',
-         data: {
+           bindto: '#donut-chart',
+           data: {
             columns: [
             ['Customer Sales', 50],
             ['Guest Sales', 50],
