@@ -218,22 +218,22 @@
             var spid = $('#supplier_parent_id').val();
             var company_id = $('#company_id').val();
             var html = '';
-            if( spid != undefined ) {
+            // if( spid != undefined ) {
                 $.ajax({
                     type: "GET",
                     url: "<?php echo url('/get_list_of_supplier')?>/"+company_id,
                     success: function(data) {  
 
                     // alert("hii");
-                    console.log(data);
+                    
                     $('#supplier_list').append(data);
                 },
 
             })
 
-            } else {
-                html += '<p>No User Found</p>';
-            }
+            // } else {
+            //     html += '<p>No User Found</p>';
+            // }
                 // get data and show in modal popup
                 $('#modal-data').html(`<div class="modal-content">
                     <div class="modal-header">

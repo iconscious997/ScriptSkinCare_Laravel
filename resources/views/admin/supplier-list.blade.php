@@ -21,7 +21,7 @@
 	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 pull-right">
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-				<button class="btn btn-green m-l-5 btn-block"> SORT / ARRANGE BY</button>
+				<!-- <button class="btn btn-green m-l-5 btn-block"> SORT / ARRANGE BY</button> -->
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 				<div class="dropdown export">
@@ -86,10 +86,10 @@
 								<i class=" ti-check"></i> &nbsp;&nbsp; 
 								<i class=" ti-close"></i>
 							</td>
-							<td class="flex">
+							{{-- <td class="flex">
 								<button class="btn btn-green "> SAVE</button> 
 								<button class="btn btn-green m-l-5"> UNDO</button>
-							</td>
+							</td> --}}
 						</tr>
 						
 						@php $i++ @endphp

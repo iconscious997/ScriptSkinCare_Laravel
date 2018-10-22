@@ -28,11 +28,71 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Brand::join('company_details','brands.brand_company_id','=','company_details.id')->select('brands.brand_name','brands.id','brands.brand_logo','company_details.business_name')->get();
+
+        if ($request->isMethod('get')) {
         
-        return view('admin.brand-list',compact('data'));
+
+                $data = Brand::join('company_details','brands.brand_company_id','=','company_details.id')->select('brands.brand_name','brands.id','brands.brand_logo','company_details.business_name')->get();
+
+
+        }
+
+        if ($request->isMethod('post')) {
+
+             if (isset($request->business_name) && !empty($request->business_name)) {
+                
+            
+                $query[]=['company_details.business_name', 'like','%' . $request->business_name. '%'];
+                    
+            }
+
+             if (isset($request->brand_name) && !empty($request->brand_name)) {
+                
+                 $query[]=['brands.brand_name', 'like','%'. $request->brand_name.'%'];
+            }
+
+
+               if (isset($request->status) && !empty($request->status)) {
+                
+                $query[]=['brands.status', '=',$request->status];
+            }
+
+             if(isset($query) && !empty($query)){
+
+                
+
+                             $d = Brand::join('company_details','brands.brand_company_id','=','company_details.id')
+                            ->where($query);
+                            if (isset($request->create_date) && !empty($request->create_date)) {
+                                        
+                        $d->whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+                      
+                    }
+
+                    $data = $d->get();
+
+            }else if(isset($request->create_date) && !empty($request->create_date)){
+
+
+                      $data = Brand::join('company_details','brands.brand_company_id','=','company_details.id')
+                      ->whereDate('brands.created_date', '=', date("Y-m-d", strtotime($request->create_date)) )
+                      ->select('brands.brand_name','brands.id','brands.brand_logo','company_details.business_name')->get();
+                
+
+            }else{
+
+                  $data = Brand::join('company_details','brands.brand_company_id','=','company_details.id')->select('brands.brand_name','brands.id','brands.brand_logo','company_details.business_name')->get();
+            }
+
+
+
+        }
+
+        
+        
+        return view('admin.brand-list',compact('data','request'));
     }
 
     // public function brandadd()

@@ -16,7 +16,7 @@
 <div class="wizard">
 
 	<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
-		<h3 class="text-left">Manage User Permission</h3>
+		<h3 class="text-left">Manage User Permissions</h3>
 	</div>
 	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 pull-right">
 	
@@ -28,14 +28,13 @@
 		<table class="table display" id="customers">
 			<thead class="thead-dark">
 				<tr>
-					<th>Name</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>User Parent Name</th>
 					<th>Registered Business Name</th>
 					<th>Address</th>
 					<th>Business Tellphone Number</th>
 					<th>Phone Number</th>
-					<th>Brands</th>
-					
 					<th>User Role</th>
 					<th>Email</th>
 					<th>Actions</th>
@@ -47,14 +46,13 @@
 					@foreach($data as $item)
 
 						<tr>
-							<td>{{$item->first_name}} {{$item->last_name}}</td>
+							<td>{{$item->first_name}}</td>
+							<td>{{$item->last_name}}</td>
 							<td>{{$user_parent_name[$i]}}</td>
 							<td>{{$item->business_name}}</td>
 							<td>{{$item->business_address_line_1}}{{$item->business_address_line_2}}{{$item->city}}{{$item->state}}{{$item->country}}</td>
 							<td>{{$item->business_tel_number}}</td>
 							<td>{{$item->mobile_number}}</td>
-							<td>{{$all_brand_name[$i]}}</td>
-							
 							<td>{{$item->label}}</td>
 							<td>{{$item->email}}</td>
 							
@@ -73,7 +71,7 @@
 				</table>
 			</div>
 		</div>
-		<div id="footer">
+	<div id="footer">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -81,7 +79,7 @@
 							<div class="panel-heading" role="tab" id="headingOne">
 								<h4 class="panel-title">
 									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Search Supplier List
+										Search Manage User Permissions List
 									</a>
 								</h4>
 							</div>
@@ -90,50 +88,58 @@
 									<div class="clearfix">&nbsp;</div>
 									<div class="accordionblock">
 										<div class="row">
+
+						<form action="{{ url('/supplieruserlist') }}" method="post">
+@csrf
 											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Company:">
+													<input type="text" class="form-control" name="first_name" placeholder="First Name:" value="{{$request->first_name}}">
 												</div>
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="First Name:">
+													<select class="form-control" name="pstatus">
+											<option value="">Select Permission Status</option>
+												@foreach( $all_roles as $role )
+
+												<option  value="{{ $role['id'] }}" {{ isset($request->pstatus)?($request->pstatus== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
+
+												@endforeach
+													</select>	
 												</div>
+												
+											</div>
+											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+												
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Position:">
+													<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Surname:">
 												</div>
+													<div class="form-group">
+													<select class="form-control" name="status">
+														<option value="">Select Status</option>
+														<option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
+														<option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
+													</select>
+													
+												</div>
+												
+											</div>
+											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+												
+												<div class="form-group">
+													<input type="text" class="form-control" name="email" value="{{$request->email}}" placeholder="Email:">
+												</div>
+											
 											</div>
 											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Business Phone No:">
+													<input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
 												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Surname:">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Permission Status:">
-												</div>
-											</div>
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Website:">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Email:">
-												</div>
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Status:">
-												</div>
-											</div>
-											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="" placeholder="Date Created:">
-												</div>
-												<div class="form-group">
-													&nbsp;
-												</div>
+												
 												<div class="form-group">
 													<button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
 												</div>
 											</div>
+
+											</form>
 										</div>
 									</div>
 								</div>

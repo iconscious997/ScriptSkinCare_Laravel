@@ -689,7 +689,8 @@ class SupplierController extends Controller
     if ($request->isMethod('post')) {
                 //
 
-           
+        
+       
             
             $query=[];
 
@@ -715,10 +716,7 @@ class SupplierController extends Controller
                  $query[]=['company_details.website', 'like','%'. $request->website.'%'];
             }
 
-            if (isset($request->create_date) && !empty($request->create_date)) {
-                
-                
-            }
+           
 
             if (isset($request->first_name) && !empty($request->first_name)) {
                 
@@ -757,15 +755,35 @@ class SupplierController extends Controller
 
             if(isset($query) && !empty($query)){
 
-                $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-            ->where($query)
-            ->select('*')->get();
+            ->where($query);
+             if (isset($request->create_date) && !empty($request->create_date)) {
+                
+                
+                $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+
+                
+            }
+
+            $data = $d->select('*')->get();
 
 
 
+
+            } else if (isset($request->create_date) && !empty($request->create_date)){
+
+                 $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id');
+            
+            $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+
+                
+            $data = $d->select('*')->get();
 
             }else{
 
@@ -857,82 +875,194 @@ class SupplierController extends Controller
         return view( 'admin.supplier-list2');
     }
 
-    public function supplieruserlist($value='')
+    public function supplieruserlist(Request $request)
     {
      
-        $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+        if ($request->isMethod('get')) {
+
+            $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
             ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email')->get();
-// dd($data);
-            $i=0;
+            // dd($data);
+                       
 
-            $all_brand_name=array();
-            $user_parent_name=array();
-         foreach ($data as $value) {
+        }
+        if ($request->isMethod('post')) {
+
+
+
+            
+            $query=[];
+
+          
+            if (isset($request->business_name) && !empty($request->business_name)) {
                 
-                $temp_data=array();
-            if($value->user_parent_id!=0){
+                     
+                 
+            
+            $query[]=['company_details.business_name', 'like','%' . $request->business_name. '%'];
+                    
+            }
+            
+          
+
+           
+
+            if (isset($request->first_name) && !empty($request->first_name)) {
+                
+                $query[]=['supplier_details.first_name', 'like','%'. $request->first_name.'%'];
+                
+            }
+
+            if (isset($request->last_name) && !empty($request->last_name)) {
+                
+                $query[]=['supplier_details.last_name', 'like','%'. $request->last_name.'%'];
+            }
+
+            if (isset($request->email) && !empty($request->email)) {
+                
+                 $query[]=['users.email', 'like','%'. $request->email.'%'];
+
+            }
+
+             if (isset($request->position) && !empty($request->position)) {
+                
+
+                
+            }
+
+            if (isset($request->pstatus) && !empty($request->pstatus)) {
+                
+                $query[]=['roles.id', '=',$request->pstatus];
+                
+            }
+            
+            if (isset($request->status) && !empty($request->status)) {
+                
+                $query[]=['supplier_details.status', '=',$request->status];
+            }
 
 
-                $user_parent=Supplier::find($value->user_parent_id);
+            if(isset($query) && !empty($query)){
 
-               $temp_data=$user_parent->first_name." ".$user_parent->last_name;
+            $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id')
+            ->where($query);
+             if (isset($request->create_date) && !empty($request->create_date)) {
+                
+                
+                $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+
+                
+            }
+
+            $data = $d->select('*')->get();
+
+
+
+
+            }else if (isset($request->create_date) && !empty($request->create_date)) {
+
+                 $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id');
+            
+                
+                
+                $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+
+                
+            
+
+            $data = $d->select('*')->get();
 
             }else{
 
-                $temp_data="-";
+                $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')
+                ->join('users','supplier_details.user_id','=','users.id')
+                ->select('*')->get();
             }
+            
 
- array_push($user_parent_name, $temp_data);
-                
-                if ($value->brand_ids!=null) {
-                    $i++;
-                    # code...
-                    $add_brand_tmp=array();
-                    $tmp_remove = explode(',', $value->brand_ids);
+        }
 
-                 foreach ($tmp_remove as $sub) {
-    
-                         
-                        if (isset($sub) && !empty($sub)) {
-                            # code...
-                            $brands_data = Brand::find( $sub); 
-                          
+            
+                        $i=0;
 
-                          array_push($add_brand_tmp, $brands_data->brand_name);
+                        $all_brand_name=array();
+                        $user_parent_name=array();
+                     foreach ($data as $value) {
+                            
+                            $temp_data=array();
+                        if($value->user_parent_id!=0){
 
+
+                            $user_parent=Supplier::find($value->user_parent_id);
+
+                           $temp_data=$user_parent->first_name." ".$user_parent->last_name;
+
+                        }else{
+
+                            $temp_data="-";
                         }
 
-                         
-                        
-                            // if( $sub!=$brands->id) {
-                                // array_push($add_brand_tmp, $sub);
+                 array_push($user_parent_name, $temp_data);
+                                
+                                if ($value->brand_ids!=null) {
+                                    $i++;
+                                    # code...
+                                    $add_brand_tmp=array();
+                                    $tmp_remove = explode(',', $value->brand_ids);
 
-                               
-                            // }
+                                 foreach ($tmp_remove as $sub) {
+                    
+                                         
+                                        if (isset($sub) && !empty($sub)) {
+                                            # code...
+                                            $brands_data = Brand::find( $sub); 
+                                          
 
-                        // echo $sub;
-                    }
-                    $temp_data=implode(",", $add_brand_tmp);
-             // echo $value->brand_ids;
-             
-             
-                }else{
+                                          array_push($add_brand_tmp, $brands_data->brand_name);
 
-                    $temp_data="-";
-                }
-             
+                                        }
 
-             array_push($all_brand_name, $temp_data);
-              
+                                         
+                                        
+                                            // if( $sub!=$brands->id) {
+                                                // array_push($add_brand_tmp, $sub);
 
-         }
+                                               
+                                            // }
+
+                                        // echo $sub;
+                                    }
+                                    $temp_data=implode(",", $add_brand_tmp);
+                             // echo $value->brand_ids;
+                             
+                             
+                                }else{
+
+                                    $temp_data="-";
+                                }
+                             
+
+                             array_push($all_brand_name, $temp_data);
+                              
+
+                         }
+
+ $all_roles=Role::all();
          // dd($user_parent_name);
          // echo $i;
           // die();
-        return view( 'admin.supplier-data-list',compact('data','all_brand_name','user_parent_name'));   
+        return view( 'admin.supplier-data-list',compact('data','all_brand_name','user_parent_name','request','all_roles'));   
     }
 
 

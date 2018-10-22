@@ -43,7 +43,7 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Brand Name</th>
-                        <th>Company Name</th>
+                        <th>Registered Business Name</th>
                         <th>Brand Logo</th>
                         <!-- <th>Gender</th>
                         <th>Registered Date</th>
@@ -82,21 +82,72 @@
             </table>
         </div>
     </div>
-    <div class="footer p-10">
-        <div class="conatiner text-center">
+   <div id="footer">
             <div class="row">
-                <div class="col-md-1 col-sm-1">&nbsp;</div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                    <div class="col-md-12 text-center mt-20 mb-10">
-                        <a href="{{ route('customeradd') }}" class="btn btn-light spbtn">
-                            + ADD A NEW CUSTOMER
-                        </a>
+                <div class="col-md-12">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Search Manage Brands List
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <div class="clearfix">&nbsp;</div>
+                                    <div class="accordionblock">
+                                        <div class="row">
+
+                        <form action="{{ url('/supplier-brand-list') }}" method="post">
+@csrf
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                              
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="brand_name"  value="{{$request->brand_name}}" placeholder="Brands Name:">
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                
+                                                    
+                                                <div class="form-group">
+                                                    <select class="form-control" name="status">
+                                                        <option value="">Select Status</option>
+                                                        <option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
+                                                        <option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
+                                                    </select>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
+                                                </div>
+                                            </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                <div class="col-md-1 col-sm-1">&nbsp;</div>
             </div>
         </div>
-    </div>
 
     <script type="text/javascript">
         $(document).ready(function() {
