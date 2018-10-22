@@ -127,7 +127,7 @@
     <div class="col-md-10 text-center mt-60 mb-30">
         <div class="button-checkbox">
             <button type="button" class="btn" data-color="primary">MANUALLY ASSIGN FULL SKIN ASSESSMENT</button>
-            <input type="checkbox" class="hidden" />
+            <input type="checkbox" value="1" name="manual_skin_assessment" class="hidden" {{ !empty($customer->manual_skin_assessment) == '1' ? 'checked' : '' }} />
         </div>
         <button class="btn btn-default"> SAVE CHANGES</button><br>
     </div>
