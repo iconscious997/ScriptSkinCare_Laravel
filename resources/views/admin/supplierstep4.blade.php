@@ -152,9 +152,11 @@
         <div class="row">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                <button class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button>
-                <button class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button>
-                <a href="<?php echo url('/supplierstep3/n'); ?>"><button type="button" class="btn btn-default spbtn m-l-20"> +ADD A NEW BRAND</button></a>
+                 <a href="{{ url('/user-supplier-add') }}" ><button type="button" class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button></a>
+                   
+               <a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button></a>
+              
+                <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW BRAND</button></a>
             </div>
             <div class="col-md-1 col-sm-1">&nbsp;</div>
         </div>
