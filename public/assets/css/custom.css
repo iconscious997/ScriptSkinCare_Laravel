@@ -533,6 +533,9 @@ input:-ms-input-placeholder {
 .btn-pad{
     padding: 4px 45px;
 }
+.cs-pad{
+    padding: 5px 65px;
+}
 /*=================================
 Header & Footer Section
 ==================================*/
@@ -988,7 +991,7 @@ hr {
 /************Mobile Menu***************/
 .Headermobile {
   padding-top: 10px;
-  border-bottom: 1px solid #ddd;
+  /*border-bottom: 1px solid #ddd;*/
 }
 
 .Headermobile .toogle {
@@ -1288,10 +1291,10 @@ li.services a::after {
 }
 
 .export .dropdown-menu{
-   min-width: 100%;
-   border-radius: 0;
-   margin: 0 5px;
-   position: relative;
+ min-width: 100%;
+ border-radius: 0;
+ margin: 0 5px;
+ /*position: relative;*/
 }
 .gobtn{
     padding: 7.5px 12px;
@@ -1315,13 +1318,13 @@ li.services a::after {
 }
 
 .filter-section li a {
- display: block;
- color: #333;
- text-align: center;
- padding: 5px 10px;
- text-decoration: none;
- font-size: 12px;
- margin-top: 10px;
+   display: block;
+   color: #333;
+   text-align: center;
+   padding: 5px 10px;
+   text-decoration: none;
+   font-size: 12px;
+   margin-top: 10px;
 }
 
 .filter-section .active {

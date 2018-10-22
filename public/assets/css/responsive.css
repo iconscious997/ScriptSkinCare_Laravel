@@ -39,6 +39,16 @@
         }
     }
 
+    @media only screen 
+    and (min-device-width : 768px) 
+    and (max-device-width : 1024px) 
+    and (orientation : portrait) { 
+        body{
+            overflow:scroll;
+        }
+    }
+
+
 
 
     @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -137,58 +147,67 @@
         .col-xs-4.icons {
             display: contents;
         }
-    }
+        /*.spbtn {
+            width: 100%;
+            }*/
+            .filter-section li a{
+                padding: 5px 5px;
+            }
+            .gobtn {
+                padding: 10.5px 12px !important;
+            }
+        }
 
-    @media only screen and (min-width: 280px) and (max-width: 479px) {
-        body {
-            overflow-x: hidden;
-            overflow-y: scroll;
-        }
-        .btn {
-            font-size: 10px;
-        }
-        .prev {
-            margin-left: 10px !important;
-            font-size: 12px !important;
-            font-weight: 400;
-        }
-        .prev i {
-            font-size: 1.4rem !important;
-            position: absolute !important;
-            margin-left: -15px !important;
-            top: 0px !important;
-        }
-        .next {
-            font-size: 12px !important;
-            font-weight: 400;
-            margin-left: -52px;
-            position: absolute;
-        }
-        .next i {
-            font-size: 1.6rem !important;
-            position: absolute !important;
-            top: -2px !important;
-            margin-left: 3px !important;
-        }
-        ul.menu {
-            width: 100% !important;
-        }
-        ul.menu li {
-            padding: 0 8px !important;
-        }
-        ul.menu li a {
-            font-size: 8px !important;
-        }
-        ul.sub-menu li a {
-            padding: 0 5px !important;
-            font-size: 8px;
-        }
-        ul.sub-menu.open li {
-            padding: 0 0px !important;
-        }
-        ul.sub-menu.open li a {
-            font-size: 7px !important;
-        }
+        @media only screen and (min-width: 280px) and (max-width: 479px) {
+            body {
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+            .btn {
+                font-size: 8px;
+            }
+            .prev {
+                margin-left: 10px !important;
+                font-size: 12px !important;
+                font-weight: 400;
+            }
+            .prev i {
+                font-size: 1.4rem !important;
+                position: absolute !important;
+                margin-left: -15px !important;
+                top: 0px !important;
+            }
+            .next {
+                font-size: 12px !important;
+                font-weight: 400;
+                margin-left: -52px;
+                position: absolute;
+            }
+            .next i {
+                font-size: 1.6rem !important;
+                position: absolute !important;
+                top: -2px !important;
+                margin-left: 3px !important;
+            }
+            ul.menu {
+                width: 100% !important;
+            }
+            ul.menu li {
+                padding: 0 8px !important;
+            }
+            ul.menu li a {
+                font-size: 8px !important;
+            }
+            ul.sub-menu li a {
+                padding: 0 5px !important;
+                font-size: 8px;
+            }
+            ul.sub-menu.open li {
+                padding: 0 0px !important;
+            }
+            ul.sub-menu.open li a {
+                font-size: 7px !important;
+            }
     /*.table-responsive {
         min-height: .01%;
         overflow-x: scroll !important;
@@ -227,9 +246,6 @@
         .filter-section li a {
 
             margin-bottom: 10px;
-        }
-        .dashblock {
-            height: 75vh !important;
         }
         #footer {
             position: relative;

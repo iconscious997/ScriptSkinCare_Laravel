@@ -636,38 +636,39 @@ public function supplierstep3store(Request $request)
 }
 
 public function supplierstep4()
-{
+{ 
+    if( !Session::has('brand_id') ) {
 
-   if( !Session::has('brand_id') ) {
+        return redirect('/supplierstep3');
+    }
+    $company = Company::find(Session::get('first'));
+    $all_supplier_data = Supplier::where('company_id', Session::get('first'))->get();
 
-       return redirect('/supplierstep3');
+    $tmp = '';
+    $tmp_1 = array();
+    foreach ($all_supplier_data as $key => $value) {
+
+       if ($value->brand_ids!=null) {
+
+           $tmp .= $value->brand_ids;
+       }
+
    }
-   $company = Company::find(Session::get('first'));
-   $all_supplier_data = Supplier::where('company_id', Session::get('first'))->get();
 
-   $tmp = '';
-   $tmp_1 = array();
-   foreach ($all_supplier_data as $key => $value) {
+   $tmp_1=array_unique(explode(',', $tmp ));
+   $brands_list=array();
+   foreach ($tmp_1 as $key => $value) {
+               # code...
 
-    if ($value->brand_ids!=null) {
-
-        $tmp .= $value->brand_ids;
-    }
-    
-}
-
-$tmp_1=array_unique(explode(',', $tmp ));
-$brands_list=array();
-foreach ($tmp_1 as $key => $value) {
-                # code...
-
-    if (isset($value) && !empty($value)) {
+       if (isset($value) && !empty($value)) {
 
 
-        $brands_list[]= Brand::find($value);                        
-    }
-    
-} 
+           $brands_list[]= Brand::find($value);                        
+       }
+
+   } 
+
+   return view( 'admin.supplierstep4',compact('company','all_supplier_data','brands_list'));
 }
 
 
