@@ -7,7 +7,7 @@
     <div class="wizard">
         <div class="container">
             <div class="row">
-                <h3 class="text-center">Edit COMPANY DETAILS</h3>
+                <h3 class="text-center">EDIT COMPANY DETAILS</h3>
             </div>
         </div>
     </div>
@@ -90,13 +90,13 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <button class="btn btn-light btn-block"> + ADD NEW SUPPLIER</button>
+                        <a href="{{ url('/user-supplier-add') }}" ><button class="btn btn-light btn-block" type="button"> + ADD NEW SUPPLIER</button></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <button class="btn btn-light btn-block"> + ADD A NEW USER</button>
+                        <a href="{{ url('/add-new-user') }}"><button class="btn btn-light btn-block" type="button"> + ADD A NEW USER</button></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <button class="btn btn-light btn-block"> + ADD A NEW BRAND</button>
+                        <a href="{{ url('/add-new-brand') }}"><button class="btn btn-light btn-block" type="button"> + ADD A NEW BRAND</button></a>
                     </div>
                 </div>
             </div>

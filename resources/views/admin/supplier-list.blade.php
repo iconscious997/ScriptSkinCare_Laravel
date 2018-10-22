@@ -60,7 +60,7 @@
 						<th>User Email</th>
 						<th>Password Reset</th>
 						<th>Actions</th>
-						<th>&nbsp;</th>
+						{{-- <th>&nbsp;</th> --}}
 					</tr>
 					<tbody>
 						

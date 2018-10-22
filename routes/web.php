@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-	return redirect(route('login'));
-	//return view('home');
+return redirect(route('login'));
+//return view('home');
 });
 
 Auth::routes();
@@ -148,5 +148,32 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	]);
 
 
+	// add new user supplier add
+
+	Route::get('/user-supplier-add', [
+		'uses' 	=> 'SupplierController@usersupplieradd',
+		'as'	=> 'user-supplier-add'
+	]);
+
+	Route::post('/usersupplierstore', 'SupplierController@usersupplierstore')->name('usersupplierstore');
+
+	// add new user 
+
+	Route::get('/add-new-user', [
+		'uses' 	=> 'SupplierController@addnewuser',
+		'as'	=> 'add-new-user'
+	]);
+
+	Route::post('/addnewuserstore', 'SupplierController@addnewuserstore')->name('addnewuserstore');
+
+
+	// add new brand 
+
+	Route::get('/add-new-brand', [
+		'uses' 	=> 'BrandController@addnewbrand',
+		'as'	=> 'add-new-brand'
+	]);
+
+	Route::post('/addnewbrandstore', 'BrandController@addnewbrandstore')->name('addnewbrandstore');
 
 });
