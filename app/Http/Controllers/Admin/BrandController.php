@@ -244,5 +244,69 @@ class BrandController extends Controller
 
 
      
-}
+    }
+
+
+    public function addnewbrand()
+    {
+        
+         $company = Company::all();
+        return view('admin.add-new-brand',compact('company'));
+    }
+
+
+    public function addnewbrandstore(Request $request)
+    {
+        
+
+
+            // check for validation
+            $validatedData = $request->validate([
+                'brand_name'     => 'required',
+                'company_id'     => 'required',
+                'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                ]);
+
+            if ($request->file('brand_logo')) {
+                $randomNumber = time()."_".rand(1000, 9999);
+
+                $imageName = 'brand'.$randomNumber.'.'.$request->file('brand_logo')->getClientOriginalExtension();
+
+                $request->file('brand_logo')->move(
+                    base_path() . '/public/images/brand', $imageName
+                );
+
+            } else {
+                $imageName='img_avatar1.png';
+            }
+            
+            // now add data to supplier_details table
+            $brands = Brand::create([
+                'brand_name'               => $request->brand_name,
+                'brand_company_id'         => $request->company_id,
+                'brand_logo'               => $imageName,
+                'approved_by'              => 0,
+                'status'                   => 0,
+                'created_date'             => date('Y-m-d H:i:s'),
+                'created_by'               => \Auth::user()->id,
+                'modified_by'              => \Auth::user()->id,
+            ]);
+
+            if( !empty($brands->exists) ) {
+                // assign 
+               
+                // success
+                
+                setflashmsg('Record Inserted Successfully','1');
+                return redirect('/supplier-brand-list'); 
+            } else {
+                setflashmsg('Some error occured. Please try again','0');
+                return redirect('/add-new-brand');
+                
+            }
+
+
+    }
+
+
 }

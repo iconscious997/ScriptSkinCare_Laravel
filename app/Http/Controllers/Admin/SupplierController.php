@@ -1167,5 +1167,222 @@ class SupplierController extends Controller
     }
 
 
+    public function usersupplieradd()
+    {
+        
+
+        $company = Company::all();
+        return view( 'admin.user-supplier-add',compact('company'));
+
+    }
+
+    public function usersupplierstore(Request $request)
+    {
+        
+         $validatedData = $request->validate([
+                'first_name'                => 'required',
+                'last_name'                 => 'required',
+                'company_id'                 => 'required',
+                'business_tel_number'       => 'required|numeric',
+                'business_address_line_1'   => 'required',
+                // 'business_address_line_2'             => 'required|email',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
+                // check for available email address in user table
+                'email'                     => 'required|string|email|max:255|unique:users',
+                'password'                  => 'required|string',
+            ],[
+                'business_address_line_1.required' => 'Business Address is Required'
+            ]);
+
+
+            
+
+                 
+           
+                // create new user data to users table
+                $user = User::create([
+                    'name'          => $request->first_name,
+                    'email'         => $request->email,
+                    'password'      => Hash::make($request->password),
+                    'status'        => 0,
+                    'created_date'  => date('Y-m-d H:i:s'),
+                    'created_by'    => \Auth::user()->id,
+                    'modified_by'   => \Auth::user()->id,
+                ]);
+                // now add this user to specified role on role_user table
+                RoleUser::create([
+                    'role_id'       => 3,
+                    'user_id'       => $user->id,
+                    'status'        => 0,
+                    'created_date'  => date('Y-m-d H:i:s'),
+                    'created_by'    => \Auth::user()->id,
+                    'modified_by'   => \Auth::user()->id,
+                ]);
+
+
+
+                
+
+
+
+                // now add data to supplier_details table
+                $supplier = Supplier::create([
+                    'user_id'                   => $user->id,
+                    'company_id'                => $request->company_id,
+                    'user_parent_id'            =>  0,
+                    'first_name'                => $request->first_name,
+                    'last_name'                 => $request->last_name,
+                    'supplier_name'             => "",
+                    'business_tel_number'       => $request->business_tel_number,
+                    'business_address_line_1'   => $request->business_address_line_1,
+                    'business_address_line_2'   => $request->business_address_line_2,
+                    'city'                      => '',
+                    'state'                     => '',
+                    'country'                   => '',
+                    'mobile_number'             => $request->mobile_number,
+                    'status'                    => 0,
+                    'created_date'              => date('Y-m-d H:i:s'),
+                    'created_by'                => \Auth::user()->id,
+                    'modified_by'               => \Auth::user()->id,
+                ]);
+
+                
+                
+
+            
+         
+
+            if( !empty($supplier->exists) ) {
+            // success
+            
+            setflashmsg('Record Inserted Successfully','1');
+           
+                return redirect('/supplieruserlist');
+            
+        } else {
+          
+
+            setflashmsg('Some error occured. Please try again','0');
+            return redirect('/user-supplier-add');
+        }
+
+        
+
+    }
+
+
+    public function addnewuser()
+    {
+        
+         $supplier_admin = Supplier::join('role_user','supplier_details.user_id','=','role_user.user_id')
+             ->join('roles','role_user.role_id','=','roles.id')
+                ->where('roles.name', "supplier_admin")
+                ->select('supplier_details.id','supplier_details.first_name','supplier_details.last_name')->get();
+        $roles = Role::where('user_type', 1)->where('status', 0)
+        ->where('name','!=', "supplier_admin")
+        ->get();
+
+        return view( 'admin.add-new-user',compact('supplier_admin','roles'));
+
+    }
+
+    public function addnewuserstore(Request $request)
+    {
+        
+
+        // check for validation
+            $validatedData = $request->validate([
+                'first_name'                => 'required',
+                'last_name'                 => 'required',
+                'user_parent_id'            => 'required',
+                'business_tel_number'       => 'required|numeric',
+                'business_address_line_1'   => 'required',
+                'user_role'                 => 'required',
+                // 'business_address_line_2'             => 'required|email',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
+                // check for available email address in user table
+                'email'                     => 'required|string|email|max:255|unique:users',
+                'password'                  => 'required|string',
+            ],[
+                'business_address_line_1.required' => 'Business Address is Required'
+            ]);
+
+
+             
+
+                 $user_parent_id=Supplier::find($request->user_parent_id);
+                    
+                   
+
+
+                // create new user data to users table
+                $user = User::create([
+                    'name'          => $request->first_name,
+                    'email'         => $request->email,
+                    'password'      => Hash::make($request->password),
+                    'status'        => 0,
+                    'created_date'  => date('Y-m-d H:i:s'),
+                    'created_by'    => \Auth::user()->id,
+                    'modified_by'   => \Auth::user()->id,
+                ]);
+                // now add this user to specified role on role_user table
+                RoleUser::create([
+                    'role_id'       => $request->user_role,
+                    'user_id'       => $user->id,
+                    'status'        => 0,
+                    'created_date'  => date('Y-m-d H:i:s'),
+                    'created_by'    => \Auth::user()->id,
+                    'modified_by'   => \Auth::user()->id,
+                ]);
+
+
+
+                
+
+
+
+                // now add data to supplier_details table
+                $supplier = Supplier::create([
+                    'user_id'                   => $user->id,
+                    'company_id'                => $user_parent_id->company_id,
+                    'user_parent_id'            => $request->user_parent_id,
+                    'first_name'                => $request->first_name,
+                    'last_name'                 => $request->last_name,
+                    'supplier_name'             => "",
+                    'business_tel_number'       => $request->business_tel_number,
+                    'business_address_line_1'   => $request->business_address_line_1,
+                    'business_address_line_2'   => $request->business_address_line_2,
+                    'city'                      => '',
+                    'state'                     => '',
+                    'country'                   => '',
+                    'mobile_number'             => $request->mobile_number,
+                    'status'                    => 0,
+                    'created_date'              => date('Y-m-d H:i:s'),
+                    'created_by'                => \Auth::user()->id,
+                    'modified_by'               => \Auth::user()->id,
+                ]);
+
+                
+           
+
+            
+                if( !empty($supplier->exists) ) {
+                    // success
+                    
+                    setflashmsg('Record Inserted Successfully','1');
+                   
+                        return redirect('/supplieruserlist');
+                    
+                } else {
+                  
+
+                    setflashmsg('Some error occured. Please try again','0');
+                    return redirect('/add-new-user');
+                }
+
+
+            }
+
+
 
 }

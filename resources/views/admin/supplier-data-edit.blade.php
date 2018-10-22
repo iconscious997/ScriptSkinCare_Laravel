@@ -154,9 +154,9 @@
                         <button class="btn btn-default btn-block"> +ADD A NEW BRAND</button>
                     </div>
                   </div> --}}
-                  <button class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button>
-                  <button class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button>
-                  <button class="btn btn-default spbtn m-l-20"> + ADD A NEW BRAND</button>
+                  <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-default spbtn" type="button"> + ADD NEW SUPPLIER</button></a>
+                  <a href="{{ url('/add-new-user') }}"> <button class="btn btn-default spbtn m-l-20" type="button"> + ADD A NEW USER</button></a>
+                  <a href="{{ url('/add-new-brand') }}"><button class="btn btn-default spbtn m-l-20" type="button"> + ADD A NEW BRAND</button></a>
                 </div>
                 <div class="col-md-1 col-sm-1">&nbsp;</div>
               </div>
