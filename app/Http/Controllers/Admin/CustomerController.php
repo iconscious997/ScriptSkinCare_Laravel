@@ -8,6 +8,7 @@ use Session;
 use Validator;
 use DB;
 use App\Customer;
+use App\User;
 
 class CustomerController extends Controller
 {
@@ -28,19 +29,25 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $data = Customer::all();
+        // $data = Customer::all();
+
+        $data=Customer::join('users','client_details.created_by','=','users.id')
+                ->select('client_details.*', 'users.id as userid','users.name')->get();
         return view('admin.customers',compact('data'));
     }
 
     public function customeradd()
     {
-        return view('admin.customeradd');
+         $user_admin_retailer = User::whereIn('user_type',array(0,2))->get();
+          
+        return view('admin.customeradd',compact('user_admin_retailer'));
     }
 
     public function customeredit($id)
     {        
         $customer = Customer::where('id', $id)->first();                
-        return view('admin.customeradd',compact('customer'));
+        $user_admin_retailer = User::select('id as userid','name')->whereIn('user_type',array(0,2))->get();
+        return view('admin.customeradd',compact('customer','user_admin_retailer'));
     }
 
     public function customeractivedeactive($id,$status){
@@ -93,7 +100,7 @@ class CustomerController extends Controller
             $customer->skin_concerns            = $request->skin_concerns;
             $customer->skin_type                = $request->skin_type;
             $customer->manual_skin_assessment   = $request->manual_skin_assessment == 1? '1':'0';
-            $customer->created_by               = \Auth::user()->id;
+            $customer->created_by               = $request->created_by;
             $customer->modified_by              = \Auth::user()->id;            
             $customer->save();
             setflashmsg('Customer Details Updated Successfully','1');
@@ -130,7 +137,7 @@ class CustomerController extends Controller
                 'email'                 => request('email'),
                 'signup_source'         => request('signup_source'),
                 'created_date'          => date('Y-m-d', strtotime(request('created_date'))),
-                'created_by'            => \Auth::user()->id,            
+                'created_by'            => request('created_by'),            
                 'skin_concerns'         => request('skin_concerns'),
                 'skin_type'             => request('skin_type'),   
                 'manual_skin_assessment'=> request('manual_skin_assessment') == 1? '1':'0',
