@@ -3737,6 +3737,8 @@ tbody.collapse.in {
 }
 .btn .caret {
   margin-left: 0;
+  float: right;
+  margin-top: 5px;
 }
 .btn-lg .caret {
   border-width: 5px 5px 0;
