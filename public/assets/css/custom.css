@@ -56,6 +56,7 @@ button:focus {
     font-size: 12px;
     height: 34px;
     padding: 6px 12px;
+    background-color: #fff;
 }
 
 
@@ -497,9 +498,14 @@ input:-ms-input-placeholder {
     background-color: #fff;
     border-color: #333;
 }
-.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
+.btn-default:active:hover, .btn-default.active:hover {
     color: #333;
-    background-color: #fff;
+    background-color: transparent;
+    border-color: #333;
+}
+.btn-default .active {
+    color: #333;
+    background-color: transparent;
     border-color: #333;
 }
 .btn-transparent{
