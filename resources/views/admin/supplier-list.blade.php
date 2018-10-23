@@ -44,15 +44,18 @@
 			<table class="table display" id="customers">
 				<thead class="thead-dark">
 					<tr>
-						<th>Registered Business Name</th>
-						<th>Trading Name</th>
+						<th>Company</th>
 						<th>Address</th>
+						<th>Trading Name</th>
 						<th>Phone Number</th>
-						<th>Website</th>
+						<th>Business Website</th>
 						<th>Brands</th>
-						<th>Users</th>
-						<th>User Role</th>
-						<th>User Email</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Position</th>
+						<th>Permission Status</th>
+						<th>Status</th>
 						<th>Password Reset</th>
 						<th>Actions</th>
 						{{-- <th>&nbsp;</th> --}}
@@ -63,15 +66,18 @@
 						@foreach($data as $item)
 
 						<tr>
-							<td>{{$item->business_name}}</td>
-							<td>{{$item->trading_name}}</td>
+							<td><a href="{{ url('/supplier-list2') }}/{{$item->company_id}}">{{$item->business_name}}</a></td>
 							<td>{{$item->business_address_line_1}}{{$item->business_address_line_2}}{{$item->city}}{{$item->state}}{{$item->country}}</td>
+							<td>{{$item->trading_name}}</td>
 							<td>{{$item->business_telephone_number}}</td>
 							<td>{{$item->website}}</td>
 							<td>{{$all_brand_name[$i]}}</td>
-							<td>{{$item->first_name}} {{$item->last_name}}</td>
-							<td>{{$item->label}}</td>
+							<td>{{$item->first_name}}</td>
+							<td>{{$item->last_name}}</td>
 							<td>{{$item->email}}</td>
+							<td></td>
+							<td>{{$item->label}}</td>
+							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
 							<td><a class="btn btn-green"> RESET</a></td>
 							<td >
 								<i class=" ti-check"></i> &nbsp;&nbsp; 
