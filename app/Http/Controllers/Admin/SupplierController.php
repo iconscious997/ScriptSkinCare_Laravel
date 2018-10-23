@@ -60,7 +60,7 @@ class SupplierController extends Controller
             'trading_name'              => 'required',
             'abn'                       => 'required',
             'address'                   => 'required',
-            'business_telephone'        => 'required|numeric',
+            'business_telephone'        => 'required|numeric|digits_between:10,12',
             'email_address'             => 'required|email',
             'website'                   => 'required|url',
         ]);
@@ -178,10 +178,6 @@ class SupplierController extends Controller
 
             $supplier = Supplier::find($id);
 
-// SELECT supplier_details.id,supplier_details.supplier_name FROM `supplier_details` INNER JOIN role_user ON supplier_details.user_id=role_user.user_id INNER JOIN roles ON role_user.role_id=roles.id WHERE supplier_details.company_id=16 AND roles.name="supplier_admin"
-
-         
-
             
             if( !empty($supplier->user_id) ) {
                 // get this user seleced role
@@ -213,11 +209,11 @@ class SupplierController extends Controller
             $validatedData = $request->validate([
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
-                'business_tel_number'       => 'required|numeric',
+                'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
                 // 'business_address_line_2'             => 'required|email',
-                'mobile_number'             => 'required|numeric',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
             ],[
                 'business_address_line_1.required' => 'Business Address is Required'
             ]);
@@ -265,6 +261,13 @@ class SupplierController extends Controller
             $supplier->mobile_number             = $request->mobile_number;
             $supplier->modified_by               = \Auth::user()->id;
             $supplier->save();
+
+             if( !Session::has('parent_id') && $request->user_role==3) {
+
+                    Session::put('parent_id', $request->id);
+
+                }
+
             // now update user role
             $user_role = RoleUser::where('user_id', $supplier->user_id)->first();
             DB::statement("DELETE FROM role_user WHERE role_id = '$user_role->role_id' AND user_id = '$supplier->user_id'");
@@ -286,11 +289,11 @@ class SupplierController extends Controller
             $validatedData = $request->validate([
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
-                'business_tel_number'       => 'required|numeric',
+                'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
                 // 'business_address_line_2'             => 'required|email',
-                'mobile_number'             => 'required|numeric',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
                 // check for available email address in user table
                 'email'                     => 'required|string|email|max:255|unique:users',
                 'password'                  => 'required|string',
@@ -383,7 +386,7 @@ class SupplierController extends Controller
                 ]);
 
                 
-                if( !Session::has('parent_id') ) {
+                if( !Session::has('parent_id') && $request->user_role==3) {
 
                     Session::put('parent_id', $supplier->id);
 
@@ -488,7 +491,8 @@ class SupplierController extends Controller
                 
             $validatedData = $request->validate([
                 'brand_name'     => 'required',
-                // 'created_by'     => 'required',
+                'supplier_parent_id' => 'required',
+                'created_by'     => 'required',
                 'assign_to_user' => 'required',
                 'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'approved_by'    =>  'required',
@@ -507,7 +511,9 @@ class SupplierController extends Controller
             }
             $brands = Brand::find($request->id);
             $brands->brand_name = $request->brand_name;
+            $brands->supplier_parent_id = $request->supplier_parent_id;
             $brands->brand_logo = $imageName;
+            $brands->user_added_by= $request->created_by;
             $brands->approved_by= $request->approved_by;
             $brands->modified_by= \Auth::user()->id;
             $brands->save();
@@ -578,6 +584,7 @@ class SupplierController extends Controller
             // check for validation
             $validatedData = $request->validate([
                 'brand_name'     => 'required',
+                'supplier_parent_id'     => 'required',
                 'created_by'     => 'required',
                 'assign_to_user' => 'required',
                 'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -601,7 +608,9 @@ class SupplierController extends Controller
             $brands = Brand::create([
                 'brand_name'               => $request->brand_name,
                 'brand_company_id'         => Session::get('first'),
+                'supplier_parent_id'       => $request->supplier_parent_id,
                 'brand_logo'               => $imageName,
+                'user_added_by'            => $request->created_by,
                 'approved_by'              => $request->approved_by,
                 'status'                   => 0,
                 'created_date'             => date('Y-m-d H:i:s'),
@@ -679,7 +688,7 @@ class SupplierController extends Controller
             if ($request->isMethod('get')) {
 
                 //
-            $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
@@ -1096,11 +1105,11 @@ class SupplierController extends Controller
             $validatedData = $request->validate([
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
-                'business_tel_number'       => 'required|numeric',
+                'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
                 // 'business_address_line_2'             => 'required|email',
-                'mobile_number'             => 'required|numeric',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
             ],[
                 'business_address_line_1.required' => 'Business Address is Required'
             ]);
@@ -1183,7 +1192,7 @@ class SupplierController extends Controller
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
                 'company_id'                 => 'required',
-                'business_tel_number'       => 'required|numeric',
+                'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 // 'business_address_line_2'             => 'required|email',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
@@ -1295,7 +1304,7 @@ class SupplierController extends Controller
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
                 'user_parent_id'            => 'required',
-                'business_tel_number'       => 'required|numeric',
+                'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
                 // 'business_address_line_2'             => 'required|email',

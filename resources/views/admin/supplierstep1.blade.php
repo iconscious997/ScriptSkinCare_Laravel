@@ -96,7 +96,7 @@
 
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8 text-center mt-30 mb-20">
-					<button class="btn btn-dark btn-pad" type="button"> SAVE STEP 1</button>
+					<button class="btn btn-dark btn-pad" type="button" onclick="javascript:$('#first').submit();"> SAVE STEP 1</button>
 				</div>
 				<div class="col-md-2">&nbsp;</div>
 			</div>
