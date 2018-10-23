@@ -24,20 +24,18 @@
     <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
 
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
-            <div class="dropdown export" id="buttons">
+            <div class="dropdown export" >
                 <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
                     <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Export PDF</a></li>
-                    <li><a href="#">Export Excel</a></li>
+                <ul class="dropdown-menu p-0" id="buttons">
                 </ul>
             </div>
         </div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
-             <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
-        </div>
-    </div>
+         <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
+     </div>
+ </div>
 </div>
 </div>
 <div class="content-fix ">
@@ -106,40 +104,40 @@
         $(document).ready(function() {
             var table = $('#customers').DataTable();
             var buttons = new $.fn.dataTable.Buttons(table, {
-                 extend: 'collection',
-                 text: 'Export', 
-                 buttons: [
-                 $.extend( true, {}, {
+             extend: 'collection',
+             text: 'Export', 
+             buttons: [
+             $.extend( true, {}, {
                     // footer: true,
                     title: 'Customers',
                     extend: 'excelHtml5',
-                    className: 'btn btn-success',
+                    // className: 'btn btn-success',
                     exportOptions: {
                         columns: [  0, 1, 2, 3,4,5,6,7,8,9 ]
                     }
                 } ),   
-                $.extend( true, {}, {
+             $.extend( true, {}, {
                     // footer: true,
                     title: 'Customers',
                     extend: 'csvHtml5',
-                    className: 'btn btn-danger',
+                    // className: 'btn btn-danger',
                     exportOptions: {
                         columns: [  0, 1, 2, 3,4,5,6,7,8,9 ]
                     }
                 } ),
-                $.extend( true, {}, {
+             $.extend( true, {}, {
                     // footer: true,
                     title: 'Customers',
                     extend: 'pdfHtml5',
-                    className: 'btn btn-danger',
+                    // className: 'btn btn-danger',
                     orientation: 'landscape',
                     pageSize: 'LEGAL',
                     exportOptions: {
                         columns: [ 0, 1, 2, 3,4,5,6,7,8,9 ]
                     }
                 } )
-                ]
-            }).container().appendTo($('#buttons'));           
+             ]
+         }).container().appendTo($('#buttons'));           
         } );
 
         $(document).on("click", ".deactivaterow", function(event) {

@@ -787,10 +787,11 @@ ul.sub-menu a:hover:after {
 /************Mixing*****************/
 .wizard {
     padding: 22px 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background: #F1E3D9;
     vertical-align: middle;
     margin-top: 0px;
+    display: flex;
 }
 .spcust{
     padding:20px;
@@ -955,26 +956,36 @@ hr {
   div#customers_paginate {
       padding: 15px;
   }
-  .upload-btn-wrapper {
-      position: relative;
-      overflow: hidden;
-  }
-  .upload-btn-wrapper input[type=file] {
-      font-size: 100px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-  }
+  div#customers_length select {
+    border: 1px solid #333;
+    border-radius: 0;
+    border-color: #333;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    color: #333;
+    font-size: 12px;
+    height: 34px;
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
 
-  /* style glyph */
-  .inner-addon .ti-plus {
-      padding: 10px;
-      pointer-events: none;
-  }
+/* style glyph */
+.inner-addon .ti-plus {
+  padding: 10px;
+  pointer-events: none;
+}
 
-  /* align glyph */
-  .right-addon .ti-plus { 
+/* align glyph */
+.right-addon .ti-plus { 
     right: 0px;
     float: right;
     margin-top: -36px;
