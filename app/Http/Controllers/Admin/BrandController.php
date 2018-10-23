@@ -154,7 +154,8 @@ class BrandController extends Controller
 
             $validatedData = $request->validate([
                 'brand_name'     => 'required',
-                // 'created_by'     => 'required',
+                'supplier_parent_id' => 'required',
+                'created_by'     => 'required',
                 'assign_to_user' => 'required',
                 'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'approved_by'    =>  'required',
@@ -174,7 +175,9 @@ class BrandController extends Controller
             }
             $brands = Brand::find($request->id);
             $brands->brand_name = $request->brand_name;
+            $brands->supplier_parent_id = $request->supplier_parent_id;
             $brands->brand_logo = $imageName;
+            $brands->user_added_by= $request->created_by;
             $brands->approved_by= $request->approved_by;
             $brands->modified_by= \Auth::user()->id;
             $brands->save();
@@ -285,6 +288,7 @@ class BrandController extends Controller
                 'brand_name'               => $request->brand_name,
                 'brand_company_id'         => $request->company_id,
                 'brand_logo'               => $imageName,
+                'user_added_by'            => 0,
                 'approved_by'              => 0,
                 'status'                   => 0,
                 'created_date'             => date('Y-m-d H:i:s'),
