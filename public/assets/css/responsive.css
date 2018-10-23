@@ -45,6 +45,9 @@ and (orientation : portrait) {
         font-size: 8px !important;
         padding: 5px 5px !important;
     }
+    .btn-pad {
+        padding: 4px 45px !important;
+    }
 }
 
 
@@ -133,7 +136,12 @@ and (orientation : portrait) {
         margin-top: 20px;
     }
 }
-
+@media only screen and (min-width: 480px) and (max-width: 767px) and (orientation : landscape) {
+    body {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+}
 @media only screen 
 and (min-device-width : 320px) 
 and (orientation : portrait) { 
@@ -213,6 +221,7 @@ and (orientation : portrait) {
     }
     .dataTables_wrapper .dataTables_paginate .paginate_button {
         font-size: 14px !important;
+        margin-left: 0;
     }
     .spbtn2 {
         width: 45% !important;;
@@ -246,5 +255,14 @@ and (orientation : portrait) {
     .btn .caret {
         margin-top: 3px;
         position: absolute;
+    }
+    .cs-pad {
+        padding: 5px 85px;
+    }
+    div#customers_filter label {
+        line-height: 2;
+    }
+    div#customers_length label {
+        line-height: 2;
     }
 }
