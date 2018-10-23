@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <select class=""  title="Supplier" name="supplier_parent_id" id="supplier_parent_id">
                             @foreach($supplier as $item)
-        <option value="{{$item['id']}}" {{ (Session::get('parent_id') == $item['id'] ? 'selected' : '') }} {{ (isset($brands_data->supplier_parent_id)?$brands_data->supplier_parent_id == $item['id'] ? 'selected' : '':'') }} >{{$item['first_name']}} {{$item['last_name']}}</option>
+                            <option value="{{$item['id']}}" {{ (Session::get('parent_id') == $item['id'] ? 'selected' : '') }} {{ (isset($brands_data->supplier_parent_id)?$brands_data->supplier_parent_id == $item['id'] ? 'selected' : '':'') }} >{{$item['first_name']}} {{$item['last_name']}}</option>
                             @endforeach
                         </select>
 
@@ -54,11 +54,11 @@
                             }
                         }else{
 
-                                foreach ($sub_supplier as $item) {
+                            foreach ($sub_supplier as $item) {
 
-                                    echo '<option value="'.$item->id.'" >'.$item->first_name.' '.$item->last_name.'</option>';
-                                }
-                              }  
+                                echo '<option value="'.$item->id.'" >'.$item->first_name.' '.$item->last_name.'</option>';
+                            }
+                        }  
                         ?>
 
                     </select>
@@ -112,10 +112,10 @@
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     <ul class="pagination pagination-split">
-                        <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                        <li class="page-item "><a class="page-link" href="javascript:void(0)">2</a></li>
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">3</a></li>
-                        <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+                        <li class="page-item "><span class="page-link">1</span></li>
+                        <li class="page-item "><span class="page-link">2</span></li>
+                        <li class="page-item active"><span class="page-link">3</span></li>
+                        <li class="page-item"><span class="page-link">4</span></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right mt-15">
@@ -145,18 +145,18 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                        <a href="{{ url('/user-supplier-add') }}" > <button type="button" class="btn btn-default btn-block"> + ADD NEW SUPPLIER</button></a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                   </div>
+                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                        <a href="{{ url('/add-new-user') }}" >  <button type="button" class="btn btn-default btn-block"> + ADD A NEW USER</button></a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default btn-block"> +ADD A NEW BRAND</button></a>
-                    </div>
+                   </div>
+                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default btn-block"> +ADD A NEW BRAND</button></a>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-2">&nbsp;</div>
         </div>
+        <div class="col-md-2 col-sm-2">&nbsp;</div>
     </div>
+</div>
 </div>
 
 

@@ -151,10 +151,10 @@
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                             <ul class="pagination pagination-split">
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+                                <li class="page-item "><span class="page-link">1</span></li>
+                                <li class="page-item active"><span class="page-link">2</span></li>
+                                <li class="page-item"><span class="page-link">3</span></li>
+                                <li class="page-item"><span class="page-link">4</span></li>
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  mt-15 text-right">
@@ -183,9 +183,9 @@
             <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                 <a href="{{ url('/user-supplier-add') }}" ><button type="button" class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button></a>
-                   
-               <a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button></a>
-              
+                
+                <a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button></a>
+                
                 <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW BRAND</button></a>
 
             </div>
