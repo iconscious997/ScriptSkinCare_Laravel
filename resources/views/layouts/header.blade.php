@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/pages.css') }}">
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -68,7 +68,7 @@
                     <li>
                         <a href="javascript:void(0)" class="{{ request()->is('supplier*') ? 'active' : '' }}">Suppliers</a>
                         <ul class="sub-menu {{ request()->is('supplier*') ? 'open' : '' }}">
-                         
+                           
                             @can('supplier_list')
                             <li><a href="{{ route('supplier') }}" class="{{ request()->is('supplier') ? 'active' : '' }}">Supplier List</a></li>
                             @endcan

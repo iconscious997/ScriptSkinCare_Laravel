@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages.css') }}">
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <!-- Custom CSS -->
