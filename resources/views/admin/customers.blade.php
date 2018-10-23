@@ -14,25 +14,26 @@
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 <div class="wizard spcust">
-    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-        <h3 class="text-left mt-20">Search Customers</h3>
-    </div>
-    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
-
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
-            <div class="dropdown export" >
-                <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" id="buttons">
-                </ul>
-            </div>
+    <div class="col-md-12">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
+            <h3 class="text-left mt-20">Search Customers</h3>
         </div>
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
-           <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
-       </div>
-   </div>
-</div>
+        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
+
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 pull-right">
+                <div class="dropdown export" >
+                    <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" id="buttons">
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 pull-right">
+             <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
+         </div>
+     </div>
+ </div>
 </div>
 <div class="content-fix ">
     <div class="table-responsive mb-30">
@@ -83,15 +84,15 @@
     <div class="footer p-10">
         <div class="text-center">
             <div class="">
-                <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
+                <div class="col-md-1 col-sm-1 col-xs-1 hidden-xs">&nbsp;</div>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 text-center">
                     <div class="col-md-12  mt-20 mb-10">
-                        <a href="{{ route('customeradd') }}" class="btn btn-light cs-pad">
+                        <a href="{{ route('customeradd') }}" class="btn btn-default cs-pad">
                             + ADD A NEW CUSTOMER
                         </a>
                     </div>
                 </div>
-                <div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
+                <div class="col-md-1 col-sm-1 col-xs-1 hidden-xs">&nbsp;</div>
             </div>
         </div>
     </div>
@@ -100,10 +101,10 @@
         $(document).ready(function() {
             var table = $('#customers').DataTable();
             var buttons = new $.fn.dataTable.Buttons(table, {
-               extend: 'collection',
-               text: 'Export', 
-               buttons: [
-               $.extend( true, {}, {
+             extend: 'collection',
+             text: 'Export', 
+             buttons: [
+             $.extend( true, {}, {
                     // footer: true,
                     title: 'Customers',
                     extend: 'excelHtml5',
@@ -112,7 +113,7 @@
                         columns: [  0, 1, 2, 3,4,5,6,7,8,9 ]
                     }
                 } ),   
-               $.extend( true, {}, {
+             $.extend( true, {}, {
                     // footer: true,
                     title: 'Customers',
                     extend: 'csvHtml5',
@@ -121,7 +122,7 @@
                         columns: [  0, 1, 2, 3,4,5,6,7,8,9 ]
                     }
                 } ),
-               $.extend( true, {}, {
+             $.extend( true, {}, {
                     // footer: true,
                     title: 'Customers',
                     extend: 'pdfHtml5',
@@ -132,8 +133,8 @@
                         columns: [ 0, 1, 2, 3,4,5,6,7,8,9 ]
                     }
                 } )
-               ]
-           }).container().appendTo($('#buttons'));           
+             ]
+         }).container().appendTo($('#buttons'));           
         } );
 
         $(document).on("click", ".deactivaterow", function(event) {

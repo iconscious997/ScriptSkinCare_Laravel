@@ -14,45 +14,48 @@
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 <div class="wizard">
-
-	<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
-		<h3 class="text-left">Supplier List / Results</h3>
-	</div>
-	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
-		<div class="row">
-			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-				<div class="dropdown export">
-					<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-						<span class="caret"></span></button>
-						<ul class="dropdown-menu"  id="buttons">
-							
-						</ul>
-					</div>
-				</div>
+	<div class="col-md-12">
+		<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
+			<h3 class="text-left">Supplier List / Results</h3>
+		</div>
+		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
+			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-					<a href="{{ url('/user-supplier-add') }}"><button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
-					<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>
+					<div class="dropdown export">
+						<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu"  id="buttons">
+
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
+						<a href="{{ url('/user-supplier-add') }}"><button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
+						<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div class="content-fix ">
 		<div class="table-responsive mb-30">
 			<table class="table display" id="customers">
 				<thead class="thead-dark">
 					<tr>
-						<th>Registered Business Name</th>
-						<th>Trading Name</th>
+						<th>Company</th>
 						<th>Address</th>
+						<th>Trading Name</th>
 						<th>Phone Number</th>
-						<th>Website</th>
+						<th>Business Website</th>
 						<th>Brands</th>
-						<th>Users</th>
-						<th>User Role</th>
-						<th>User Email</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Email</th>
+						<th>Position</th>
+						<th>Permission Status</th>
+						<th>Status</th>
 						<th>Password Reset</th>
 						<th>Actions</th>
 						{{-- <th>&nbsp;</th> --}}
@@ -63,15 +66,18 @@
 						@foreach($data as $item)
 
 						<tr>
-							<td>{{$item->business_name}}</td>
-							<td>{{$item->trading_name}}</td>
+							<td><a href="{{ url('/supplier-list2') }}/{{$item->company_id}}">{{$item->business_name}}</a></td>
 							<td>{{$item->business_address_line_1}}{{$item->business_address_line_2}}{{$item->city}}{{$item->state}}{{$item->country}}</td>
+							<td>{{$item->trading_name}}</td>
 							<td>{{$item->business_telephone_number}}</td>
 							<td>{{$item->website}}</td>
 							<td>{{$all_brand_name[$i]}}</td>
-							<td>{{$item->first_name}} {{$item->last_name}}</td>
-							<td>{{$item->label}}</td>
+							<td>{{$item->first_name}}</td>
+							<td>{{$item->last_name}}</td>
 							<td>{{$item->email}}</td>
+							<td></td>
+							<td>{{$item->label}}</td>
+							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
 							<td><a class="btn btn-green"> RESET</a></td>
 							<td >
 								<i class=" ti-check"></i> &nbsp;&nbsp; 
@@ -217,7 +223,7 @@
                     orientation: 'landscape',
                     pageSize: 'LEGAL',
                     exportOptions: {
-                    	columns: [0,1,2,3,4,5,6,7,8,9]
+                    	columns: [0,1,2,3,4,5,6,7,8]
                     }
                 } )
 					]

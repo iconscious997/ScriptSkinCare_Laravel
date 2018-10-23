@@ -26,11 +26,11 @@
                     <div class="col-md-6 mt-10">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 p-r-0 ">
-                                <a href="{{ url('/customers') }}"><button class="btn btn-green selected btn-block font11" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING CUSTOMER</button></a>
+                                <a href="{{ url('/customers') }}"><button class="btn btn-dark selected btn-block font11" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING CUSTOMER</button></a>
 
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 p-l-0">
-                                <a href="{{ url('/customeradd') }}"><button class="btn btn-green selected btn-block m-l-15 font11" type="button" id="addadditionaluser"> + ADD ADDITIONAL CUSTOMER</button></a>
+                                <a href="{{ url('/customeradd') }}"><button class="btn btn-dark selected btn-block m-l-15 font11" type="button" id="addadditionaluser"> + ADD ADDITIONAL CUSTOMER</button></a>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                  </div>
                  <div class="row">
                     <div class="form-group col-md-6">
-                        <input type="text" class="form-control datepicker" name="dob" placeholder="Date of Birth:" readonly value="{{ !empty($customer->dob) ? date('m/d/Y',strtotime($customer->dob)) : old('dob') }}">
+                        <input type="text" class="form-control datepicker" name="dob" placeholder="Date of Birth:" readonly value="{{ !empty($customer->dob) ? date('d-m-Y',strtotime($customer->dob)) : old('dob') }}">
                         @if ($errors->has('dob'))
                         <span class="inputError">{{ $errors->first('dob') }}</span>
                         @endif
@@ -92,16 +92,17 @@
                </div>
                <div class="row">
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control datepicker" name="created_date" placeholder="Registered Date:" readonly value="{{ !empty($customer->created_date) ? date('m/d/Y',strtotime($customer->created_date)) : old('created_date') }}">
+                    <input type="text" class="form-control datepicker" name="created_date" placeholder="Registered Date:" readonly value="{{ !empty($customer->created_date) ? date('d-m-Y',strtotime($customer->created_date)) : old('created_date') }}">
                     @if ($errors->has('created_date'))
                     <span class="inputError">{{ $errors->first('created_date') }}</span>
                     @endif
                 </div>
-                <div class="form-group col-md-6">                    
+                <div class="form-group col-md-6">       
+               
                      <select name="created_by" id="created_by">
                         <option value="">Registered By:</option>
                         @foreach( $user_admin_retailer as $users )
-                        <option  value="{{ $users['userid'] }}" {{ !empty($customer)?($customer->created_by == $users['userid'] ? 'selected' : ''):('') }}>{{ $users['name'] }} </option>
+                        <option  value="{{ $users['userid'] }}" {{ !empty($customer)?($customer->registered_by == $users['userid'] ? 'selected' : ''):('') }}>{{ $users['name'] }} </option>
 
                         @endforeach
                     </select>
@@ -136,7 +137,7 @@
             <button type="button" class="btn" data-color="primary">MANUALLY ASSIGN FULL SKIN ASSESSMENT</button>
             <input type="checkbox" value="1" name="manual_skin_assessment" class="hidden" {{ !empty($customer->manual_skin_assessment) == '1' ? 'checked' : '' }} />
         </div>
-        <button class="btn btn-default"> SAVE CHANGES</button><br>
+        <button class="btn btn-dark"> SAVE CHANGES</button><br>
     </div>
     <div class="col-md-1">&nbsp;</div>
 </div>
@@ -156,4 +157,13 @@
     </div>
 </div>
 </form>
+<script type="text/javascript">
+    $(function(){
+    $('.datepicker').datepicker({
+            format: 'dd-mm-yyyy',
+            endDate: '+0d',
+            autoclose: true
+        });
+    });
+</script>
 @endsection

@@ -64,7 +64,7 @@
 
                         <div class="row">
                             <div class="col-md-offset-2 col-md-8 text-center mt-20 mb-20">
-                                <button class="btn btn-dark btn-pad selected" type="submit"> SAVE</button>
+                                <button class="btn btn-dark btn-pad selected" type="submit"> SAVE CHANGES</button>
                             </div>
                             <div class="col-md-2">&nbsp;</div>
                         </div>
@@ -83,13 +83,13 @@
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                           <a href="{{ url('/user-supplier-add') }}"> <button class="btn btn-light btn-block"> + ADD NEW SUPPLIER</button></a>
+                           <a href="{{ url('/user-supplier-add') }}"> <button class="btn btn-default btn-block"> + ADD NEW SUPPLIER</button></a>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                           <a href="{{ url('/add-new-user') }}"><button class="btn btn-light btn-block"> + ADD A NEW USER</button></a>
+                           <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block"> + ADD A NEW USER</button></a>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                            <a href="{{ url('/add-new-brand') }}"><button class="btn btn-light btn-block"> + ADD A NEW BRAND</button></a>
+                            <a href="{{ url('/add-new-brand') }}"><button class="btn btn-default btn-block"> + ADD A NEW BRAND</button></a>
                         </div>
                     </div>
                 </div>

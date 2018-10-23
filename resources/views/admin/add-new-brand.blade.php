@@ -75,25 +75,18 @@
 </form>
 <div class="footer">
     <div class="conatiner text-center">
-        <div class="row">
-            <div class="col-md-2 col-sm-2">&nbsp;</div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-light btn-block" type="button"> + ADD NEW SUPPLIER</button></a>
-                          
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <a href="{{ url('/add-new-user') }}"><button class="btn btn-light btn-block" type="button"> + ADD A NEW USER</button></a>
-                            
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <a href="{{ url('/add-new-brand') }}"><button class="btn btn-light btn-block" type="button"> +ADD A NEW BRAND</button></a>
-                         
-                    </div>
-                </div>
+        <div class="">
+            <div class="col-md-1 col-sm-1">&nbsp;</div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-default spbtn" type="button"> + ADD NEW SUPPLIER</button></a>
+                   
+
+                   
+                <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn m-l-20 " type="button"> + ADD A NEW USER</button></a>
+                <a href="{{ url('/add-new-brand') }}">
+                <button class="btn btn-default spbtn m-l-20 active" type="button"> + ADD A NEW BRAND</button></a>
             </div>
-            <div class="col-md-2 col-sm-2">&nbsp;</div>
+            <div class="col-md-1 col-sm-1">&nbsp;</div>
         </div>
     </div>
 </div>
