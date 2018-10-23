@@ -267,13 +267,13 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-9 text-center">
                 <div class="col-md-4">
-                    <button class="btn btn-light"> + ADD NEW SUPPLIER</button>
+                     <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-light"> + ADD NEW SUPPLIER</button></a>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-light"> + ADD A NEW USER</button>
+                    <a href="{{ url('/add-new-user') }}"><button class="btn btn-light"> + ADD A NEW USER</button></a>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-light"> +ADD A NEW BRAND</button>
+                    <a href="{{ url('/add-new-brand') }}"><button class="btn btn-light"> + ADD A NEW BRAND</button></a>
                 </div>
             </div>
         </div>

@@ -35,7 +35,7 @@
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-					<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
+					 <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
 					<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>

@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
-            <button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
+             <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
         </div>
     </div>
 </div>

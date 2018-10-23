@@ -23,7 +23,7 @@
 					<button class="btn btn-default m-l-5 btn-block"> EXPORT DATA OPTIONS</button>
 				</div>
 				<div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
-					<button class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
+					 <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
 				</div>
 				<div class="col-md-3 col-lg-3 col-sm-3 col-xs-6">
 					<button class="btn btn-default m-l-5 btn-block"> + ADD NEW PRODUCT</button>
