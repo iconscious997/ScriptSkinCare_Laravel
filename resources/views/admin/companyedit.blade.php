@@ -69,11 +69,25 @@
                 <div class="col-md-3">&nbsp;</div>
             </div>
             <div class="clearfix">&nbsp;</div>
-          
 
             <div class="row">
+                <div class="col-md-1">&nbsp;</div>
+                  <div class="col-md-10">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <a href="{{ url('/supplier-company-list') }}" ><button class="btn btn-dark btn-block" type="button"> EDIT SUPPLIER DETAILS* </button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <a href="{{ url('/supplieruserlist') }}"><button class="btn btn-dark btn-block" type="button"> EDIT USERS & PERMISSIONS* </button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <a href="{{ url('/supplier-brand-list') }}"><button class="btn btn-dark btn-block" type="button"> EDIT BRAND(S)</button></a>
+                    </div>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                </div>
+            
                 <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-20">
-                    <button class="btn btn-dark btn-pad selected" type="submit"> Update</button>
+                    <button class="btn btn-dark btn-pad selected" type="submit"> Save Changes</button>
 
                 </div>
                 <div class="col-md-2">&nbsp;</div>
@@ -90,13 +104,13 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <a href="{{ url('/user-supplier-add') }}" ><button class="btn btn-light btn-block" type="button"> + ADD NEW SUPPLIER</button></a>
+                        <a href="{{ url('/user-supplier-add') }}" ><button class="btn btn-default btn-block" type="button"> + ADD NEW SUPPLIER</button></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <a href="{{ url('/add-new-user') }}"><button class="btn btn-light btn-block" type="button"> + ADD A NEW USER</button></a>
+                        <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block" type="button"> + ADD A NEW USER</button></a>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <a href="{{ url('/add-new-brand') }}"><button class="btn btn-light btn-block" type="button"> + ADD A NEW BRAND</button></a>
+                        <a href="{{ url('/add-new-brand') }}"><button class="btn btn-default btn-block" type="button"> + ADD A NEW BRAND</button></a>
                     </div>
                 </div>
             </div>
