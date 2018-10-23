@@ -148,7 +148,7 @@
                    
 
                    
-                <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn m-l-20" type="button"> + ADD A NEW USER</button></a>
+                <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn m-l-20 active" type="button"> + ADD A NEW USER</button></a>
                 <a href="{{ url('/add-new-brand') }}">
                 <button class="btn btn-default spbtn m-l-20" type="button"> + ADD A NEW BRAND</button></a>
             </div>
@@ -156,7 +156,7 @@
         </div>
     </div>
 </div>
-</form>
+
 <script>
     $(document).ready(function() {
         $('#btnsavestep').on('click', function(e) {
