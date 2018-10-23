@@ -26,11 +26,11 @@
                     <div class="col-md-6 mt-10">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 p-r-0 ">
-                                <a href="{{ url('/customers') }}"><button class="btn btn-green selected btn-block font11" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING CUSTOMER</button></a>
+                                <a href="{{ url('/customers') }}"><button class="btn btn-dark selected btn-block font11" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING CUSTOMER</button></a>
 
                             </div>
                             <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 p-l-0">
-                                <a href="{{ url('/customeradd') }}"><button class="btn btn-green selected btn-block m-l-15 font11" type="button" id="addadditionaluser"> + ADD ADDITIONAL CUSTOMER</button></a>
+                                <a href="{{ url('/customeradd') }}"><button class="btn btn-dark selected btn-block m-l-15 font11" type="button" id="addadditionaluser"> + ADD ADDITIONAL CUSTOMER</button></a>
                             </div>
                         </div>
                     </div>

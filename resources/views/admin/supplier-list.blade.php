@@ -14,30 +14,30 @@
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 <div class="wizard">
-
-	<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
-		<h3 class="text-left">Supplier List / Results</h3>
-	</div>
-	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
-		<div class="row">
-			<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-				<div class="dropdown export">
-					<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-						<span class="caret"></span></button>
-						<ul class="dropdown-menu"  id="buttons">
-							
-						</ul>
-					</div>
-				</div>
+	<div class="col-md-12">
+		<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
+			<h3 class="text-left">Supplier List / Results</h3>
+		</div>
+		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
+			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-					<a href="{{ url('/user-supplier-add') }}"><button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
-					<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>
+					<div class="dropdown export">
+						<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu"  id="buttons">
+
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
+						<a href="{{ url('/user-supplier-add') }}"><button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
+						<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div class="content-fix ">
 		<div class="table-responsive mb-30">
