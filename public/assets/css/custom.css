@@ -503,10 +503,10 @@ input:-ms-input-placeholder {
     background-color: transparent;
     border-color: #333;
 }
-.btn-default .active {
-    color: #333;
-    background-color: transparent;
-    border-color: #333;
+.btn-default.active {
+    color: #333 !important;
+    background-color: transparent !important;
+    border-color: #333 !important;
 }
 .btn-transparent{
     background-color: transparent;

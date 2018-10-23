@@ -692,8 +692,9 @@ class SupplierController extends Controller
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*')->get();
+                ->select('*','supplier_details.status as sstatus')->get();
             }
+            
     
     if ($request->isMethod('post')) {
                 //
@@ -777,7 +778,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('*')->get();
+            $data = $d->select('*','supplier_details.status as sstatus')->get();
 
 
 
@@ -792,7 +793,7 @@ class SupplierController extends Controller
             $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
 
                 
-            $data = $d->select('*')->get();
+            $data = $d->select('*','supplier_details.status as sstatus')->get();
 
             }else{
 
@@ -800,7 +801,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*')->get();
+                ->select('*','supplier_details.status as sstatus')->get();
             }
             
 
@@ -879,9 +880,225 @@ class SupplierController extends Controller
         setflashmsg('Record Inserted Successfully','1');
         return redirect('/supplier');
     }
-    public function supplierList2()
+    public function supplierList2(Request $request , $id='')
     {
-        return view( 'admin.supplier-list2');
+        // echo "string";
+        // die();
+        if ($request->isMethod('get')) {
+
+            $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id')
+            ->select('supplier_details.*','company_details.business_name','company_details.business_telephone_number','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus')
+            ->where('supplier_details.company_id','=',$id)
+            ->get();
+            // dd($data);
+                       
+
+        }
+
+         if ($request->isMethod('post')) {
+
+    
+            
+            $query=[];
+
+            if ($request->search=="Users") {
+                
+                    if (isset($request->user_parent_id) && !empty($request->user_parent_id)) {
+
+                        $query[]=['supplier_details.user_parent_id', '=',$request->user_parent_id];
+
+                    }
+
+                    if (isset($request->role_id) && !empty($request->role_id)) {
+
+                        $query[]=['roles.id', '=',$request->role_id];
+
+                    }
+
+                    if (isset($request->last_name) && !empty($request->last_name)) {
+                
+                        $query[]=['supplier_details.last_name', 'like','%'. $request->last_name.'%'];
+                    }
+
+            }
+
+
+            if ($request->search=="Supplier") {
+                
+                    if (isset($request->company_id) && !empty($request->company_id)) {
+
+                        $query[]=['company_details.id', '=',$request->company_id];
+
+                    }
+
+                   
+
+                    if (isset($request->trading_name) && !empty($request->trading_name)) {
+                
+                        $query[]=['company_details.trading_name', 'like','%'. $request->trading_name.'%'];
+                    }
+
+            }
+
+
+            if ($request->search=="Brands") {
+                
+                    
+                    if (isset($request->user_parent_id) && !empty($request->user_parent_id)) {
+                
+                        $query[]=['supplier_details.id', '=',$request->user_parent_id];
+                    }
+
+            }
+
+                  
+            
+
+            if(isset($query) && !empty($query)){
+
+            $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','supplier_details.user_id','=','users.id')
+            ->where($query);
+            
+             if (isset($request->brand_id) && !empty($request->brand_id)) {
+                
+                 $d->whereRaw('FIND_IN_SET('.$request->brand_id.',brand_ids)');
+               
+
+                
+            }
+
+            $data = $d->select('*','supplier_details.status as sstatus')->get();
+
+
+
+
+            }else if (isset($request->brand_id) && !empty($request->brand_id)){
+
+                 $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                    ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                    ->join('roles','role_user.role_id','=','roles.id')
+                    ->join('users','supplier_details.user_id','=','users.id');
+                    
+                    $d->whereRaw('FIND_IN_SET('.$request->brand_id.',brand_ids)');
+                    $data = $d->select('*','supplier_details.status as sstatus')->get();
+
+            }
+            else {
+
+                $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')
+                ->join('users','supplier_details.user_id','=','users.id')
+                ->select('*','supplier_details.status as sstatus')->get();
+            }
+            
+
+        }
+
+
+            $i=0;
+
+                        $all_brand_name=array();
+                        $user_parent_name=array();
+                     foreach ($data as $value) {
+                            
+                            $temp_data=array();
+                        if($value->user_parent_id!=0){
+
+
+                            $user_parent=Supplier::find($value->user_parent_id);
+
+                           $temp_data=$user_parent->first_name." ".$user_parent->last_name;
+
+                        }else{
+
+                            $temp_data="-";
+                        }
+
+                     array_push($user_parent_name, $temp_data);
+                                
+                                if ($value->brand_ids!=null) {
+                                    $i++;
+                                    # code...
+                                    $add_brand_tmp=array();
+                                    $tmp_remove = explode(',', $value->brand_ids);
+
+                                 foreach ($tmp_remove as $sub) {
+                    
+                                         
+                                        if (isset($sub) && !empty($sub)) {
+                                            
+                                         
+                                    if ($request->search=="Brands" && isset($request->status)) {
+
+                                        $brands_data = Brand::where('id','=',$sub)->where('status','=',$request->status)->select('*')->first(); 
+                                        // echo '<pre>';
+                                        // print_r($brands_data);
+                                        if (isset($brands_data->id) ) {
+                                             
+                            array_push($add_brand_tmp, $brands_data->brand_name);
+                                        }
+                                    
+
+                                    }else{
+
+                                        $brands_data = Brand::find($sub); 
+                                  
+
+                                    array_push($add_brand_tmp, $brands_data->brand_name);
+
+                                    }
+                                            
+
+                                        }
+
+                                         
+                                        
+                                            // if( $sub!=$brands->id) {
+                                                // array_push($add_brand_tmp, $sub);
+
+                                               
+                                            // }
+
+                                        // echo $sub;
+                                    }
+                                    $temp_data=implode(",", $add_brand_tmp);
+                             // echo $value->brand_ids;
+                             
+                             
+                                }else{
+
+                                     if ($request->search=="Brands" && isset($request->status)) {
+
+                                        $temp_data="";
+                                     }else{
+                                        $temp_data="-";
+                                     }
+                                    
+                                }
+                             
+
+                             array_push($all_brand_name, $temp_data);
+                              
+
+                         }
+
+                         
+        $supplier_admin = Supplier::join('role_user','supplier_details.user_id','=','role_user.user_id')
+        ->join('roles','role_user.role_id','=','roles.id')
+        ->where('roles.name', "supplier_admin")
+        ->select('supplier_details.id','supplier_details.first_name','supplier_details.last_name')->get();    
+        $all_brand=Brand::all(); 
+        $all_roles = Role::where('user_type', 1)->where('status', 0)->get();
+        $company = Company::all();
+
+        return view( 'admin.supplier-list2',compact('data','all_brand_name','user_parent_name','request','all_roles','supplier_admin','company','all_brand'));
     }
 
     public function supplieruserlist(Request $request)
@@ -893,7 +1110,7 @@ class SupplierController extends Controller
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-            ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email')->get();
+            ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus')->get();
             // dd($data);
                        
 
@@ -969,7 +1186,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('*')->get();
+            $data = $d->select('*','supplier_details.status as sstatus')->get();
 
 
 
@@ -988,7 +1205,7 @@ class SupplierController extends Controller
                 
             
 
-            $data = $d->select('*')->get();
+            $data = $d->select('*','supplier_details.status as sstatus')->get();
 
             }else{
 
@@ -996,7 +1213,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*')->get();
+                ->select('*','supplier_details.status as sstatus')->get();
             }
             
 
@@ -1067,7 +1284,7 @@ class SupplierController extends Controller
 
                          }
 
- $all_roles=Role::all();
+                $all_roles=Role::all();
          // dd($user_parent_name);
          // echo $i;
           // die();
