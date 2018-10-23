@@ -6,8 +6,16 @@
 }
 
 </style>
-<script type="text/javascript" src="{{ asset('assets/js/2jquery.dataTables.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/3dataTables.bootstrap.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('assets/js/dataTables.bootstrap.js') }}"></script> -->
+
+<script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 <div class="wizard spcust">
     <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
@@ -16,7 +24,7 @@
     <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
 
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-right">
-            <div class="dropdown export">
+            <div class="dropdown export" id="buttons">
                 <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
                     <span class="caret"></span>
                 </button>
@@ -96,7 +104,42 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#customers').DataTable();
+            var table = $('#customers').DataTable();
+            var buttons = new $.fn.dataTable.Buttons(table, {
+                 extend: 'collection',
+                 text: 'Export', 
+                 buttons: [
+                 $.extend( true, {}, {
+                    // footer: true,
+                    title: 'Customers',
+                    extend: 'excelHtml5',
+                    className: 'btn btn-success',
+                    exportOptions: {
+                        columns: [  0, 1, 2, 3,4,5,6,7,8,9 ]
+                    }
+                } ),   
+                $.extend( true, {}, {
+                    // footer: true,
+                    title: 'Customers',
+                    extend: 'csvHtml5',
+                    className: 'btn btn-danger',
+                    exportOptions: {
+                        columns: [  0, 1, 2, 3,4,5,6,7,8,9 ]
+                    }
+                } ),
+                $.extend( true, {}, {
+                    // footer: true,
+                    title: 'Customers',
+                    extend: 'pdfHtml5',
+                    className: 'btn btn-danger',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    exportOptions: {
+                        columns: [ 0, 1, 2, 3,4,5,6,7,8,9 ]
+                    }
+                } )
+                ]
+            }).container().appendTo($('#buttons'));           
         } );
 
         $(document).on("click", ".deactivaterow", function(event) {
