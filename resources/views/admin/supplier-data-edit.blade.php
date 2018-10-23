@@ -133,7 +133,7 @@
   <div class="col-md-1">&nbsp;</div>
 
   <div class="col-md-10 text-center mt-30 mb-10">
-    <button class="btn btn-dark selected" type="button" id="btnsavestep"> Update</button>
+    <button class="btn btn-dark selected" type="button" id="btnsavestep"> Save Changes</button>
   </div>
   <div class="col-md-1">&nbsp;</div>
 </div>

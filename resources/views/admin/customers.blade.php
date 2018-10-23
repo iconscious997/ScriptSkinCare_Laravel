@@ -87,7 +87,7 @@
                 <div class="col-md-1 col-sm-1 col-xs-1 hidden-xs">&nbsp;</div>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 text-center">
                     <div class="col-md-12  mt-20 mb-10">
-                        <a href="{{ route('customeradd') }}" class="btn btn-light cs-pad">
+                        <a href="{{ route('customeradd') }}" class="btn btn-default cs-pad">
                             + ADD A NEW CUSTOMER
                         </a>
                     </div>
