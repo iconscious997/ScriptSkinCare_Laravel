@@ -8,6 +8,8 @@
 <!-- Bootstrap JavaScript -->
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/dataTables.bootstrap.js') }}"></script>
+
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('assets/plugins/multiselect/js/jquery.multi-select.js') }}"></script>
