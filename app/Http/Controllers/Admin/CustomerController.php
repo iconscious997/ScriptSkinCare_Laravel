@@ -31,15 +31,15 @@ class CustomerController extends Controller
     {
         // $data = Customer::all();
 
-        $data=Customer::join('users','client_details.created_by','=','users.id')
+        $data=Customer::join('users','client_details.registered_by','=','users.id')
                 ->select('client_details.*', 'users.id as userid','users.name')->get();
         return view('admin.customers',compact('data'));
     }
 
     public function customeradd()
     {
-         $user_admin_retailer = User::whereIn('user_type',array(0,2))->get();
-          
+         $user_admin_retailer = User::select('id as userid','name')->whereIn('user_type',array(0,2))->get();
+       
         return view('admin.customeradd',compact('user_admin_retailer'));
     }
 
@@ -72,7 +72,7 @@ class CustomerController extends Controller
                 'gender'         => 'required',            
                 // 'email'          => 'required|email',
                 'signup_source'  => 'required',
-                'created_date'   => 'required|date',
+                'created_date'   => 'required|date',                
                 'created_by'     => 'required',
                 'skin_concerns'  => 'required',
                 'skin_type'      => 'required',          
@@ -100,7 +100,8 @@ class CustomerController extends Controller
             $customer->skin_concerns            = $request->skin_concerns;
             $customer->skin_type                = $request->skin_type;
             $customer->manual_skin_assessment   = $request->manual_skin_assessment == 1? '1':'0';
-            $customer->created_by               = $request->created_by;
+            $customer->registered_by            = $request->created_by;
+            $customer->created_by               = \Auth::user()->id;
             $customer->modified_by              = \Auth::user()->id;            
             $customer->save();
             setflashmsg('Customer Details Updated Successfully','1');
@@ -137,7 +138,7 @@ class CustomerController extends Controller
                 'email'                 => request('email'),
                 'signup_source'         => request('signup_source'),
                 'created_date'          => date('Y-m-d', strtotime(request('created_date'))),
-                'created_by'            => request('created_by'),            
+                'registered_by'         => request('created_by'),            
                 'skin_concerns'         => request('skin_concerns'),
                 'skin_type'             => request('skin_type'),   
                 'manual_skin_assessment'=> request('manual_skin_assessment') == 1? '1':'0',
