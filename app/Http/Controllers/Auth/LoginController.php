@@ -36,6 +36,16 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function redirectPath()
+    {
+        if (\Auth::user()->user_type == 1) {
+            return route('supplierhome');
+            // or return route('routename');
+        }
+
+        return "/home";
+    }
     /*
     public function showLoginForm()
     {

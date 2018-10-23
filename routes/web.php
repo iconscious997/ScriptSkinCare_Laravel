@@ -20,6 +20,59 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// supplier menu
+Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Supplier'], function () {
+	Route::get('/home', [
+		'uses'	=> 'SupplierHomeController@index',
+		'as'	=> 'supplierhome'
+	]);
+
+	Route::get('/product', [
+		'uses'	=> 'SupplierHomeController@product',
+		'as'	=> 'supplierproduct'
+	]);
+
+	Route::get('/productadd', [
+		'uses'	=> 'SupplierHomeController@productadd',
+		'as'	=> 'supplierproductadd'
+	]);
+
+	Route::get('/company', [
+		'uses'	=> 'SupplierHomeController@company',
+		'as'	=> 'suppliercompany'
+	]);
+
+	Route::get('/companyadd', [
+		'uses'	=> 'SupplierHomeController@companyadd',
+		'as'	=> 'suppliercompanyadd'
+	]);
+
+	Route::get('/brand', [
+		'uses'	=> 'SupplierHomeController@brand',
+		'as'	=> 'supplierbrand'
+	]);
+
+	Route::get('/brandadd', [
+		'uses'	=> 'SupplierHomeController@brandadd',
+		'as'	=> 'supplierbrandadd'
+	]);
+
+	Route::post('/brandaddstore', [
+		'uses'	=> 'SupplierHomeController@brandaddstore',
+		'as'	=> 'supplierbrandaddstore'
+	]);
+
+	Route::get('/line', [
+		'uses'	=> 'SupplierHomeController@productline',
+		'as'	=> 'supplierproductline'
+	]);
+
+	Route::get('/lineadd', [
+		'uses'	=> 'SupplierHomeController@productlineadd',
+		'as'	=> 'supplierproductlineadd'
+	]);
+});
+
 //admin menu route
 Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], function () {
 

@@ -252,8 +252,7 @@ class BrandController extends Controller
 
     public function addnewbrand()
     {
-        
-         $company = Company::all();
+        $company = Company::all();
         return view('admin.add-new-brand',compact('company'));
     }
 
