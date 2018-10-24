@@ -130,6 +130,14 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 
 
 	Route::get('/supplier-list', 'SupplierController@supplierList')->name('supplier-list');
+
+	Route::get('/get_supplier_all/{id}', [
+		'uses' => 'SupplierController@get_supplier_all',
+		'as'   => 'get_supplier_all'
+	]);
+
+	Route::post('/update_supplier_list_data','SupplierController@update_supplier_list_data');
+
 	Route::match(['GET', 'POST'],'/supplier-list2/{id?}', 'SupplierController@supplierList2')->name('supplier-list2');
 
 	// supplier user permission
