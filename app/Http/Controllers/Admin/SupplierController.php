@@ -212,7 +212,7 @@ class SupplierController extends Controller
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
-                // 'business_address_line_2'             => 'required|email',
+                'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
             ],[
                 'business_address_line_1.required' => 'Business Address is Required'
@@ -292,7 +292,7 @@ class SupplierController extends Controller
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
-                // 'business_address_line_2'             => 'required|email',
+                'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
                 // check for available email address in user table
                 'email'                     => 'required|string|email|max:255|unique:users',
@@ -372,6 +372,7 @@ class SupplierController extends Controller
                     'first_name'                => $request->first_name,
                     'last_name'                 => $request->last_name,
                     'supplier_name'             => "",
+                    'position'                  => $request->position,
                     'business_tel_number'       => $request->business_tel_number,
                     'business_address_line_1'   => $request->business_address_line_1,
                     'business_address_line_2'   => $request->business_address_line_2,
@@ -701,7 +702,7 @@ class SupplierController extends Controller
 
         
        
-            
+
             $query=[];
 
           
@@ -731,6 +732,13 @@ class SupplierController extends Controller
             if (isset($request->first_name) && !empty($request->first_name)) {
                 
                 $query[]=['supplier_details.first_name', 'like','%'. $request->first_name.'%'];
+                
+            }
+
+
+            if (isset($request->position) && !empty($request->position)) {
+                
+                $query[]=['supplier_details.position', 'like','%'. $request->position.'%'];
                 
             }
 
@@ -895,7 +903,7 @@ class SupplierController extends Controller
             ->get();
             // dd($data);
                        
-
+ 
         }
 
          if ($request->isMethod('post')) {
@@ -1115,6 +1123,7 @@ class SupplierController extends Controller
                        
 
         }
+
         if ($request->isMethod('post')) {
 
 
@@ -1284,7 +1293,8 @@ class SupplierController extends Controller
 
                          }
 
-                $all_roles=Role::all();
+                
+        $all_roles = Role::where('user_type', 1)->where('status', 0)->get();
          // dd($user_parent_name);
          // echo $i;
           // die();
@@ -1325,7 +1335,7 @@ class SupplierController extends Controller
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
-                // 'business_address_line_2'             => 'required|email',
+                'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
             ],[
                 'business_address_line_1.required' => 'Business Address is Required'
@@ -1365,6 +1375,7 @@ class SupplierController extends Controller
             $supplier->first_name                = $request->first_name;
             $supplier->last_name                 = $request->last_name;
             $supplier->supplier_name             = "";
+            $supplier->position                  = $request->position;
             $supplier->business_tel_number       = $request->business_tel_number;
             $supplier->business_address_line_1   = $request->business_address_line_1;
             $supplier->business_address_line_2   = $request->business_address_line_2;
@@ -1411,7 +1422,7 @@ class SupplierController extends Controller
                 'company_id'                 => 'required',
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
-                // 'business_address_line_2'             => 'required|email',
+                'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
                 // check for available email address in user table
                 'email'                     => 'required|string|email|max:255|unique:users',
@@ -1459,6 +1470,7 @@ class SupplierController extends Controller
                     'first_name'                => $request->first_name,
                     'last_name'                 => $request->last_name,
                     'supplier_name'             => "",
+                    'position'                  => $request->position,
                     'business_tel_number'       => $request->business_tel_number,
                     'business_address_line_1'   => $request->business_address_line_1,
                     'business_address_line_2'   => $request->business_address_line_2,
@@ -1524,7 +1536,7 @@ class SupplierController extends Controller
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
-                // 'business_address_line_2'             => 'required|email',
+                'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
                 // check for available email address in user table
                 'email'                     => 'required|string|email|max:255|unique:users',
@@ -1575,6 +1587,7 @@ class SupplierController extends Controller
                     'first_name'                => $request->first_name,
                     'last_name'                 => $request->last_name,
                     'supplier_name'             => "",
+                    'position'                  => $request->position,
                     'business_tel_number'       => $request->business_tel_number,
                     'business_address_line_1'   => $request->business_address_line_1,
                     'business_address_line_2'   => $request->business_address_line_2,

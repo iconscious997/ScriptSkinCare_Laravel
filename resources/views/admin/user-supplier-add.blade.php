@@ -100,14 +100,20 @@
                             @endif
                         </div>
                          <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
+                            @if ($errors->has('position'))
+                            <span class="inputError">{{ $errors->first('position') }}</span>
+                            @endif
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <input type="text" class="form-control" {{ !empty($user->email) ? 'readonly' : '' }} name="email" id="email" placeholder="Email Address:" autocomplete="new-password" value="{{ !empty($user->email) ? $user->email : old('email') }}">
                             @if ($errors->has('email'))
                             <span class="inputError">{{ $errors->first('email') }}</span>
                             @endif
                         </div>
-                    </div>
-                    <div class="row">
-                       
                         <div class="form-group col-md-6">
                             <input type="password" {{ !empty($user->email) ? 'readonly' : '' }} class="form-control" name="password" id="password" placeholder="Password:" autocomplete="new-password" value="{{ !empty($user->email) ? '******' : '' }}">
                             @if ($errors->has('password'))

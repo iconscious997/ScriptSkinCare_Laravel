@@ -124,11 +124,35 @@
         @endif
       </div>
     </div>
+      <div class="row">
+                         <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
+                            @if ($errors->has('position'))
+                            <span class="inputError">{{ $errors->first('position') }}</span>
+                            @endif
+                        </div>
+
+                    </div>
     <div class="col-md-1">&nbsp;</div>
 
   </div>
 </div>
 
+<div class="row">
+                <div class="col-md-1">&nbsp;</div>
+                  <div class="col-md-10">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <a href="{{ url('/supplier-company-list') }}" ><button class="btn btn-dark btn-block" type="button"> EDIT SUPPLIER DETAILS* </button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <a href="{{ url('/supplieruserlist') }}"><button class="btn btn-dark btn-block" type="button"> EDIT USERS & PERMISSIONS* </button></a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <a href="{{ url('/supplier-brand-list') }}"><button class="btn btn-dark btn-block" type="button"> EDIT BRAND(S)</button></a>
+                    </div>
+                    </div>
+                    <div class="col-md-1">&nbsp;</div>
+                </div>
 <div class="row">
   <div class="col-md-1">&nbsp;</div>
 

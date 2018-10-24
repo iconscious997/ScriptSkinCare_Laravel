@@ -123,6 +123,15 @@
                             @endif
                         </div>
                     </div>
+                      <div class="row">
+                         <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
+                            @if ($errors->has('position'))
+                            <span class="inputError">{{ $errors->first('position') }}</span>
+                            @endif
+                        </div>
+
+                    </div>
                     <div class="col-md-1">&nbsp;</div>
 
                 </div>

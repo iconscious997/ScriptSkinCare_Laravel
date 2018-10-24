@@ -75,7 +75,7 @@
 							<td>{{$item->first_name}}</td>
 							<td>{{$item->last_name}}</td>
 							<td>{{$item->email}}</td>
-							<td></td>
+							<td>{{$item->position}}</td>
 							<td>{{$item->label}}</td>
 							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
 							<td><a class="btn btn-green"> RESET</a></td>
@@ -126,10 +126,11 @@
 														<input type="text" class="form-control" name="first_name" placeholder="First Name:" value="{{$request->first_name}}">
 													</div>
 													<div class="form-group">
-														<select class="form-control" name="position">
-															<option value="">Select Position</option>
+														
 
-														</select>	
+				<div class="form-group">
+				<input type="text" class="form-control" name="position" placeholder="Position:" value="{{$request->position}}">
+			</div>	
 
 													</div>
 												</div>
