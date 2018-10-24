@@ -157,7 +157,7 @@ p {
 }
 
 .mb-10 {
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 .mb-15 {
     margin-bottom: 15px;
@@ -329,6 +329,9 @@ p {
 .l-1{
     line-height: 1;
 }
+.nowrap{
+    white-space: nowrap !important;
+}
 .bordernone{
     border:none !important;
 }
@@ -436,8 +439,70 @@ p {
 }
 
 /*===================================================================================*/
+/*  Checkbox & Radio Button
+/*===================================================================================*/
+
+.checkbox label:after, 
+.radio label:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.checkbox .cr,
+.radio .cr {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #333;
+    width: 2em;
+    height: 2em;
+    float: left;
+    margin-right: 1.5em;
+    margin-top: -5px;
+}
+
+.radio .cr {
+    border-radius: 50%;
+}
+
+.checkbox .cr .cr-icon,
+.radio .cr .cr-icon {
+    position: absolute;
+    font-size: 1em;
+    line-height: 0;
+    top: 50%;
+    left: 20%;
+}
+
+.radio .cr .cr-icon {
+    margin-left: 0.04em;
+}
+
+.checkbox label input[type="checkbox"],
+.radio label input[type="radio"] {
+    display: none;
+}
+
+.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+.radio label input[type="radio"] + .cr > .cr-icon {
+    transform: scale(3) rotateZ(-20deg);
+    opacity: 0;
+    transition: all .3s ease-in;
+}
+
+.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+.radio label input[type="radio"]:checked + .cr > .cr-icon {
+    transform: scale(1) rotateZ(0deg);
+    opacity: 1;
+}
+
+.checkbox label input[type="checkbox"]:disabled + .cr,
+.radio label input[type="radio"]:disabled + .cr {
+    opacity: .5;
+}
 
 
+/*===================================================================================*/
 /*  Form Tags & button
 /*===================================================================================*/
 
@@ -639,6 +704,9 @@ ul.menu {
     /*border-bottom: 1px solid #333;*/
     width: 80%;
     margin: 0 auto;
+}
+.menu2{
+    width: 50% !important;
 }
 
 ul.menu li {
@@ -1478,7 +1546,12 @@ li.services a::after {
 .dashboard .bg2{
     background: #FFE4DD;
 }
-
+.bg3 {
+    background: #F8DED0;
+}
+.bg4 {
+    background: #F8DED0;
+}
 .dashboard .bdright{
     border-right: 1px solid #fff;
 }
@@ -1490,4 +1563,31 @@ li.services a::after {
 }
 .dashboard .items p{
     padding: 5px 0px;
+}
+
+.btn-search {
+   color: #333;
+   position: relative;
+   right: 10px;
+   font-size: 1.2rem;
+   float: right;
+   margin-top: -20px;
+}
+.h-34{
+    height: 34px;
+}
+.block70{
+    height: 70px;
+}
+.customslt{
+    padding: 6px 60px !important;
+}
+.supplier-pagination{
+    position: fixed;
+    right: 0;
+    bottom: 95px;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    display: block;
 }

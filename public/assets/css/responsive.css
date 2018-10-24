@@ -265,4 +265,11 @@ and (orientation : portrait) {
     div#customers_length label {
         line-height: 2;
     }
+    .block70 {
+        height: 100px;
+    }
+    .supplier-pagination {
+        position: relative;
+        bottom: 0;
+    }
 }

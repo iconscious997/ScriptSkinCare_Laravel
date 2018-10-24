@@ -9,9 +9,6 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/icon" sizes="16x16" href="{{ ('public/assets/images/favicon.ico') }}">
     <title>{{ config('app.name') }}</title>
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
@@ -124,13 +121,13 @@
                     </div>
                 </a>
                 <ul class="nav collapse" id="submenu_2" role="menu" aria-labelledby="btn-2">
-                   <li><a href="{{ route('orders') }}">Orders</a> </li>
-                   <li><a href="{{ route('customer') }}">Customers</a> </li>
-                   <li><a href="{{ route('coupons') }}" >Coupons</a> </li>
-                   <li><a href="{{ route('reports') }}">Reports</a> </li>
-               </ul>
-           </li>
-           <li>
+                 <li><a href="{{ route('orders') }}">Orders</a> </li>
+                 <li><a href="{{ route('customer') }}">Customers</a> </li>
+                 <li><a href="{{ route('coupons') }}" >Coupons</a> </li>
+                 <li><a href="{{ route('reports') }}">Reports</a> </li>
+             </ul>
+         </li>
+         <li>
             <a href="javascript:void(0)" id="btn-3" data-toggle="collapse" data-target="#submenu_3" aria-expanded="false" class="" >
                 <div class="col-xs-12">
                     Customers
