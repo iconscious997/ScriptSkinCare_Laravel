@@ -9,3 +9,15 @@ if( !function_exists('setflashmsg') ) {
 		}
 	}
 }
+
+if( !function_exists('covertDateServer') ) {
+	function covertDateServer($d) {
+		return date('Y-m-d', strtotime($d));
+	}
+}
+
+if( !function_exists('showDate') ) {
+	function showDate($d) {
+		return date('d-m-Y', strtotime($d));
+	}
+}

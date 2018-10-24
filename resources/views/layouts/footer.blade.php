@@ -46,7 +46,8 @@
 		@endif
 		$('.datepicker').datepicker({
 			autoclose: true,
-			todayHighlight: true
+			todayHighlight: true,
+			clearBtn: true
 		});
 
 		$('.sm-select').select2({
