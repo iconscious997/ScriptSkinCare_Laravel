@@ -110,7 +110,7 @@
 											<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
 												
 												<div class="form-group">
-													<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Surname:">
+													<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Last Name:">
 												</div>
 													<div class="form-group">
 													<select class="form-control" name="status">

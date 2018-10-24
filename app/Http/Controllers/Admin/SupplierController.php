@@ -944,7 +944,12 @@ class SupplierController extends Controller
 
                    
 
-                    if (isset($request->trading_name) && !empty($request->trading_name)) {
+                    if (isset($request->position) && !empty($request->position)) {
+                
+                        $query[]=['supplier_details.position', 'like','%'. $request->position.'%'];
+                    }
+
+                     if (isset($request->trading_name) && !empty($request->trading_name)) {
                 
                         $query[]=['company_details.trading_name', 'like','%'. $request->trading_name.'%'];
                     }
@@ -1164,7 +1169,7 @@ class SupplierController extends Controller
 
              if (isset($request->position) && !empty($request->position)) {
                 
-
+                $query[]=['supplier_details.position', 'like','%'. $request->position.'%'];
                 
             }
 

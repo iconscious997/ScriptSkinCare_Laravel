@@ -127,7 +127,7 @@ and (orientation : portrait) {
 												<input type="text" class="form-control" name="trading_name" id="trading_name" placeholder="Trading Name:">
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" name="" placeholder="Position:">
+												<input type="text" class="form-control" name="position" placeholder="Position:" value="{{$request->position}}">
 											</div>
 										</div>
 										<div class="col-md-6">

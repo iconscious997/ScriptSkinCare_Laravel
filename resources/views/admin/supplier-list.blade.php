@@ -139,7 +139,7 @@
 														<input type="text" class="form-control" name="business_telephone_number"  value="{{$request->business_telephone_number}}"placeholder="Business Phone No:">
 													</div>
 													<div class="form-group">
-														<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Surname:">
+														<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Last Name:">
 													</div>
 													<div class="form-group">
 														<select class="form-control" name="pstatus">
