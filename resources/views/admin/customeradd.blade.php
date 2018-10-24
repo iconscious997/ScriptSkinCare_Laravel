@@ -9,7 +9,7 @@
     <div class="wizard mb-20">
         <div class="container">
             <div class="row">
-                <h3 class="text-center">Edit Users & Permissions</h3>
+                <h3 class="text-center">EDIT USERS & PERMISSIONS</h3>
             </div>
         </div>
     </div>
@@ -137,7 +137,8 @@
             <button type="button" class="btn" data-color="primary">MANUALLY ASSIGN FULL SKIN ASSESSMENT</button>
             <input type="checkbox" value="1" name="manual_skin_assessment" class="hidden" {{ !empty($customer->manual_skin_assessment) == '1' ? 'checked' : '' }} />
         </div>
-        <button class="btn btn-dark"> SAVE CHANGES</button><br>
+        <br>
+        <button class="btn btn-pad btn-dark"> SAVE CHANGES</button><br>
     </div>
     <div class="col-md-1">&nbsp;</div>
 </div>

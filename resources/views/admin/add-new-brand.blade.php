@@ -5,7 +5,7 @@
     <div class="wizard">
         <div class="container">
             <div class="row">
-                <h3 class="text-center">ADD NEW BRAND</h3>
+                <h3 class="text-center">ADD A NEW BRAND</h3>
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
 
  <div class="row">
     <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
-        <button class="btn btn-dark btn-pad selected" type="submit">Save</button>
+        <button class="btn btn-dark btn-pad selected" type="submit">SAVE CHANGES</button>
     </div>
 </div>
 </div>

@@ -14,27 +14,11 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/export-sheet/jspdf/jspdf.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/plugins/export-sheet/jspdf/libs/base64.js') }}"></script>
 
-<div class="wizard spcust">
-    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-        <h3 class="text-left mt-20">Manage / Edit A Supplier</h3>
-    </div>
-    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
-        <!-- <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
-            <button type="button" class="btn btn-green m-l-5 btn-block"> SORT / ARRANGE BY</button>
-        </div>
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
-            <div class="dropdown export">
-                <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu"> -->
-                        <!-- <li><a href="#">Export PDF</a></li> -->
-                        <!-- <li><a href="javascript:void(0)"  onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a></li>
-                    </ul>
-                </div>
+     <div class="wizard">
+        <div class="container">
+            <div class="row">
+                <h3 class="text-center">MANAGE EDIT / SUPPLIER</h3>
             </div>
-            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-                <button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button>
-            </div> -->
         </div>
     </div>
     <div class="content-fix ">

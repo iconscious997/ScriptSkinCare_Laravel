@@ -5,7 +5,7 @@
     <div class="wizard">
         <div class="container">
             <div class="row">
-                <h3 class="text-center">Manage Role Permissions</h3>
+                <h3 class="text-center">MANAGE ROLE PERMISSIONS</h3>
             </div>
         </div>
     </div>

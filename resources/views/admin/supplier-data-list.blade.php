@@ -14,15 +14,13 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/export-sheet/jspdf/libs/base64.js') }}"></script>
 
 <div class="wizard">
-
-	<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
-		<h3 class="text-left">Manage User Permissions</h3>
+	<div class="container">
+		<div class="row">
+			<h3 class="text-center">MANAGE USER PERMISSIONS</h3>
+		</div>	
 	</div>
-	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 pull-right">
-	
-		</div>
+</div>
 
-	</div>
 <div class="content-fix ">
 	<div class="table-responsive mb-30">
 		<table class="table display" id="customers">
