@@ -3,7 +3,7 @@
 <div class="wizard">
     <div class="container">
         <div class="row">
-            <h3 class="text-center">BRANDS LIST</h3>
+            <h3 class="text-center">PRODUCT LINE LIST</h3>
         </div>
     </div>
 </div>
@@ -12,22 +12,18 @@
         <table class="table display" id="customers">
             <thead class="thead-dark">
                 <tr>
+                    <th>Product Line Name</th>
                     <th>Brand Name</th>
-                    <th>Registered Business Name</th>
-                    <th>Brand Logo</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $item)
                 <tr>
+                    <td>{{ $item->productline_name }}</td>
                     <td>{{ $item->brand_name }}</td>
-                    <td>{{ $item->business_name }}</td>
                     <td>
-                        <img class="img-responsive" style="width:50px; " src="{{ asset('public/images/brand').'/'.$item->brand_logo }}">
-                    </td>
-                    <td>
-                        <a href="{{ route('supplierbrandedit',$item->id) }}" data-id="{{$item->id}}">
+                        <a href="{{ route('supplierproductlineedit',$item->id) }}" data-id="{{ $item->id }}">
                             <button type="button" class="btn btn-default"> EDIT</button>
                         </a> 
                     </td>
@@ -45,7 +41,7 @@
                     <div class="panel-heading" role="tab" id="headingOne">
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Search Manage Brands List
+                                Search Manage Product line List
                             </a>
                         </h4>
                     </div>
@@ -55,11 +51,11 @@
                             <div class="accordionblock">
                                 <div class="row">
 
-                                    <form action="{{ route('supplierbrand') }}" method="post">
+                                    <form action="{{ route('supplierproductline') }}" method="post">
                                         @csrf
                                         <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{ !empty(request()->business_name) ? request()->business_name : '' }}">
+                                                <input type="text" class="form-control" name="productline_name" placeholder="Product line Name:" value="{{ !empty(request()->productline_name) ? request()->productline_name : '' }}">
                                             </div>
 
                                         </div>

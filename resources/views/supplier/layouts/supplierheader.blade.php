@@ -81,7 +81,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:void(0)" class="{{ request()->is('supplier/com*') ? 'active' : '' }}">Companys</a>
+                        <a href="javascript:void(0)" class="{{ request()->is('supplier/com*') ? 'active' : '' }}">Company Details</a>
                         <ul class="sub-menu {{ request()->is('supplier/com*') ? 'open' : '' }}">
                             <li><a href="{{ route('suppliercompany') }}" class="{{ request()->is('supplier/company') ? 'active' : '' }}">Company List</a></li>
                             <li><a href="{{ route('suppliercompanyadd') }}" class="{{ request()->is('supplier/companyadd') ? 'active' : '' }}">Create New Company</a></li>
@@ -90,7 +90,7 @@
                     <li>
                         <a href="javascript:void(0)" class="{{ request()->is('supplier/brand*') ? 'active' : '' }}">Brands</a>
                         <ul class="sub-menu {{ request()->is('supplier/brand*') ? 'open' : '' }}">
-                            <li><a href="{{ route('supplierbrand') }}" class="{{ request()->is('supplier/brand') ? 'active' : '' }}">Brand List</a></li>
+                            <li><a href="{{ route('supplierbrand') }}" class="{{ request()->is('supplier/brand') ? 'active' : '' }}">Brands List</a></li>
                             <li><a href="{{ route('supplierbrandadd') }}" class="{{ request()->is('supplier/brandadd') ? 'active' : '' }}">Create New Brand</a></li>
                         </ul>
                     </li>

@@ -45,8 +45,10 @@
 		$.Notification.notify('error','top right','Error', '{{ Session::get('notify-error') }}');
 		@endif
 		$('.datepicker').datepicker({
+			format: 'dd-mm-yyyy',
 			autoclose: true,
-			todayHighlight: true
+			todayHighlight: true,
+			clearBtn: true
 		});
 
 		$('.sm-select').select2({

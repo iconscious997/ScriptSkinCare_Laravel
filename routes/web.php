@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-return redirect(route('login'));
+	return redirect(route('login'));
 //return view('home');
 });
 
@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'suppliercompanyadd'
 	]);
 
-	Route::get('/brand', [
+	Route::match(['GET', 'POST'],'/brand', [
 		'uses'	=> 'SupplierHomeController@brand',
 		'as'	=> 'supplierbrand'
 	]);
@@ -57,19 +57,29 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'supplierbrandadd'
 	]);
 
+	Route::match(['GET', 'POST'],'/brandedit/{id}', [
+		'uses'	=> 'SupplierHomeController@brandedit',
+		'as'	=> 'supplierbrandedit'
+	]);
+
 	Route::post('/brandaddstore', [
 		'uses'	=> 'SupplierHomeController@brandaddstore',
 		'as'	=> 'supplierbrandaddstore'
 	]);
 
-	Route::get('/line', [
+	Route::match(['GET', 'POST'], '/line', [
 		'uses'	=> 'SupplierHomeController@productline',
 		'as'	=> 'supplierproductline'
 	]);
 
-	Route::get('/lineadd', [
+	Route::match(['GET', 'POST'], '/lineadd', [
 		'uses'	=> 'SupplierHomeController@productlineadd',
 		'as'	=> 'supplierproductlineadd'
+	]);
+
+	Route::match(['GET', 'POST'],'/lineedit/{id}', [
+		'uses'	=> 'SupplierHomeController@productlineedit',
+		'as'	=> 'supplierproductlineedit'
 	]);
 });
 
@@ -147,7 +157,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'brand-list'
 	]);
 
-    Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
+	Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
 
 	// Company manage
 	Route::get('/supplier-companyedit/{id}', [
