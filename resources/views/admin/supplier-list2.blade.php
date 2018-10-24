@@ -58,7 +58,7 @@ and (orientation : portrait) {
 					<th>User Role</th>
 					<th>User Email</th>
 					<th>Password Reset</th>
-					<th>Actions</th>
+					{{-- <th>Actions</th> --}}
 					
 				</tr>
 				<tbody>
@@ -76,10 +76,10 @@ and (orientation : portrait) {
 							<td>{{$item->label}}</td>
 							<td>{{$item->email}}</td>
 							<td><a class="btn btn-green"> RESET</a></td>
-							<td >
+						{{-- 	<td >
 								<i class=" ti-check"></i> &nbsp;&nbsp; 
 								<i class=" ti-close"></i>
-							</td>
+							</td> --}}
 							{{-- <td class="flex">
 								<button class="btn btn-green "> SAVE</button> 
 								<button class="btn btn-green m-l-5"> UNDO</button>

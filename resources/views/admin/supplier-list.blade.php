@@ -16,7 +16,7 @@
 <div class="wizard">
 	<div class="col-md-12">
 		<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-5">
-			<h3 class="text-left">Supplier List / Results</h3>
+			<h3 class="text-left">SUPPLIER LIST / RESULTS</h3>
 		</div>
 		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
 			<div class="row">
@@ -263,7 +263,7 @@
                     </div>
                     <div class="modal-footer">
                     <button class="btn btn-dark selected" type="submit" id="btnsavestep">SAVE CHANGES</button>
-                   
+                    <button type="button" class="btn btn-default" data-dismiss="modal">UNDO</button>
                     </div>
                     </form>
                     </div>`);
