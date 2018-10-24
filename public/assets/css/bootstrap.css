@@ -4733,12 +4733,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   border: 1px solid #333;
   border-radius: 50%;
   font-weight: 600;
-  /*line-height: 1.42857143;
-  padding: 6px 12px;*/
-  width: 35px;
-  height: 35px;
-  line-height: 1.4;
-  padding: 7px 8px;
+  line-height: 1.42857143;
+  padding: 6px 12px;
+
 }
 /*.pagination > li:first-child > a,
 .pagination > li:first-child > span {

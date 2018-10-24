@@ -36,3 +36,12 @@
 		</div>
 	</div>
 </div>
+<style type="text/css">
+.pagination > li > a,
+.pagination > li > span {
+	width: 35px;
+	height: 35px;
+	line-height: 1.4;
+	padding: 7px 8px;
+}
+</style>
