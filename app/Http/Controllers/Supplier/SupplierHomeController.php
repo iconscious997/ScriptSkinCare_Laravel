@@ -22,10 +22,57 @@ class SupplierHomeController extends Controller
     	return view('supplier.product.list', compact('data', 'all_roles') );
     }
 
-    public function productadd()
+    public function productstep1()
     {
-    	return view('supplier.product.add');
+    	return view('supplier.product.productstep1');
     }
+
+    public function productstep2()
+    {
+        return view('supplier.product.productstep2');
+    }
+
+    public function productstep3()
+    {
+        return view('supplier.product.productstep3');
+    }
+
+    public function productstep4()
+    {
+        return view('supplier.product.productstep4');
+    }
+
+    public function productstep5()
+    {
+        return view('supplier.product.productstep5');
+    }
+
+    public function productstep6()
+    {
+        return view('supplier.product.productstep6');
+    }
+
+    public function productstep7()
+    {
+        return view('supplier.product.productstep7');
+    }
+
+    public function productstep8()
+    {
+        return view('supplier.product.productstep8');
+    }
+
+    public function productstep9()
+    {
+        return view('supplier.product.productstep9');
+    }
+
+    public function productstep10()
+    {
+        return view('supplier.product.productstep10');
+    }
+
+
 
     public function company()
     {
@@ -74,7 +121,7 @@ class SupplierHomeController extends Controller
         } else {
             $imageName='img_avatar1.png';
         }
-            
+
         // now add data to supplier_details table
         $brands = Brand::create([
             'brand_name'               => $request->brand_name,

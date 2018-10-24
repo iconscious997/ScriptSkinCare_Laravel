@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-return redirect(route('login'));
+	return redirect(route('login'));
 //return view('home');
 });
 
@@ -32,9 +32,59 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'supplierproduct'
 	]);
 
-	Route::get('/productadd', [
-		'uses'	=> 'SupplierHomeController@productadd',
-		'as'	=> 'supplierproductadd'
+	Route::get('/productstep1', [
+		'uses'	=> 'SupplierHomeController@productstep1',
+		'as'	=> 'supplierproductstep1'
+	]);
+
+	Route::get('/productstep2', [
+		'uses'	=> 'SupplierHomeController@productstep2',
+		'as'	=> 'supplierproductstep2'
+	]);
+
+	Route::get('/productstep3', [
+		'uses'	=> 'SupplierHomeController@productstep3',
+		'as'	=> 'supplierproductstep3'
+	]);
+
+	Route::get('/productstep3', [
+		'uses'	=> 'SupplierHomeController@productstep3',
+		'as'	=> 'supplierproductstep3'
+	]);
+
+	Route::get('/productstep4', [
+		'uses'	=> 'SupplierHomeController@productstep4',
+		'as'	=> 'supplierproductstep4'
+	]);
+
+	Route::get('/productstep5', [
+		'uses'	=> 'SupplierHomeController@productstep5',
+		'as'	=> 'supplierproductstep5'
+	]);
+
+	Route::get('/productstep6', [
+		'uses'	=> 'SupplierHomeController@productstep6',
+		'as'	=> 'supplierproductstep6'
+	]);
+
+	Route::get('/productstep7', [
+		'uses'	=> 'SupplierHomeController@productstep7',
+		'as'	=> 'supplierproductstep7'
+	]);
+
+	Route::get('/productstep8', [
+		'uses'	=> 'SupplierHomeController@productstep8',
+		'as'	=> 'supplierproductstep8'
+	]);
+
+	Route::get('/productstep9', [
+		'uses'	=> 'SupplierHomeController@productstep9',
+		'as'	=> 'supplierproductstep9'
+	]);
+
+	Route::get('/productstep10', [
+		'uses'	=> 'SupplierHomeController@productstep10',
+		'as'	=> 'supplierproductstep10'
 	]);
 
 	Route::get('/company', [
@@ -147,7 +197,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'brand-list'
 	]);
 
-    Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
+	Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
 
 	// Company manage
 	Route::get('/supplier-companyedit/{id}', [
