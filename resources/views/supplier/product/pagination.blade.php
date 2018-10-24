@@ -1,8 +1,8 @@
 <div class="container">
-	<div class="supplier-pagination">
+	<div class="">
 		<div class="row">
-			<div class="col-md-2">&nbsp;</div>
-			<div class="col-md-8 text-center">
+			<div class="col-md-1">&nbsp;</div>
+			<div class="col-md-10 text-center">
 				<hr>
 				<div class="row">
 					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15">
@@ -32,7 +32,7 @@
 				</div>
 				<hr>
 			</div>
-			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-1">&nbsp;</div>
 		</div>
 	</div>
 </div>
