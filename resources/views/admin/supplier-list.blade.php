@@ -67,7 +67,7 @@
 
 						<tr>
 							<td><a href="{{ url('/supplier-list2') }}/{{$item->company_id}}">{{$item->business_name}}</a></td>
-							<td>{{$item->business_address_line_1}}{{$item->business_address_line_2}}{{$item->city}}{{$item->state}}{{$item->country}}</td>
+							<td>{{$item->address}}</td>
 							<td>{{$item->trading_name}}</td>
 							<td>{{$item->business_telephone_number}}</td>
 							<td>{{$item->website}}</td>
@@ -80,8 +80,9 @@
 							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
 							<td><a class="btn btn-green"> RESET</a></td>
 							<td >
-								<i class=" ti-check"></i> &nbsp;&nbsp; 
-								<i class=" ti-close"></i>
+								 
+                                <button type="button" class="btn btn-default viewexistinguser" data-role="{{$item->label}}" data-id="{{$item->id}}" > EDIT</button>
+                            
 							</td>
 							{{-- <td class="flex">
 								<button class="btn btn-green "> SAVE</button> 
@@ -228,10 +229,143 @@
                     }
                 } )
 					]
-				}).container().appendTo($('#buttons'));           
+				}).container().appendTo($('#buttons'));  
+
+
+
+
+				$('.viewexistinguser').on('click', function(e) {
+            
+            var supplier_id = $(this).data("id");
+            
+            
+            
+                $.ajax({
+                    type: "GET",
+                    url: "<?php echo url('/get_supplier_all')?>/"+supplier_id,
+                    success: function(data) {  
+
+                    $('#supplier_detail').append(data);
+                },
+
+            })
+
+                // get data and show in modal popup
+                $('#modal-data').html(`<div class="modal-content">
+                    <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit `+$(this).data("role")+`</h4>
+                    </div>
+                    <form action="<?php echo url('/update_supplier_list_data');?>" onsubmit="return  validations_id();" method="POST" >
+                    <div class="modal-body" id="supplier_detail">
+                    
+
+                    </div>
+                    <div class="modal-footer">
+                    <button class="btn btn-dark selected" type="submit" id="btnsavestep">SAVE CHANGES</button>
+                   
+                    </div>
+                    </form>
+                    </div>`);
+                $('#myModal').modal();
+            });         
 			} );
 			
+			function validations_id() {
+				// body...
+				var isvalid = true;
 
+				if($.trim($("#business_name").val())=="" || $.trim($("#business_name").val())==null)
+			    {
+			        $("#businesserror").text("Please enter registered business name");
+			        $("#business_name").focus();
+			        return false;
+			    }
+			    
+			    if($.trim($("#trading_name").val())=="" || $.trim($("#trading_name").val())==null)
+			    {
+			        $("#trading_nameerror").text("Please enter trading name");
+			        $("#trading_name").focus();
+			        return false;
+			    }
+
+			    if($.trim($("#address").val())=="" || $.trim($("#address").val())==null)
+			    {
+			        $("#addresserror").text("Please enter address");
+			        $("#address").focus();
+			        return false;
+			    }
+			    
+			    if($.trim($("#business_telephone_number").val())=="" || $.trim($("#business_telephone_number").val())==null)
+			    {
+			        $("#bustelerror").text("Please enter business telephone");
+			        $("#business_telephone_number").focus();
+			        return false;
+			    }
+
+			    if($("#business_telephone_number").val().length<10 || $("#business_telephone_number").val().length> 12)
+				{
+					$("#bustelerror").text("The business tel number must be between 10 and 12 digits.");
+			        $("#business_telephone_number").focus();
+			        return false;
+				}
+
+
+			    if($.trim($("#website").val())=="" || $.trim($("#website").val())==null)
+			    {
+			        $("#websiteerror").text("Please enter website");
+			        $("#website").focus();
+			        return false;
+			    }
+			    
+			    if($.trim($("#brands_data").val())=="" || $.trim($("#brands_data").val())==null)
+			    {
+			        $("#brands_dataerror").text("Please select brands");
+			        $("#brands_data").focus();
+			        return false;
+			    }
+
+			    if($.trim($("#first_name").val())=="" || $.trim($("#first_name").val())==null)
+			    {
+			        $("#firstnameerror").text("Please enter first name");
+			        $("#first_name").focus();
+			        return false;
+			    }
+			    
+			    if($.trim($("#last_name").val())=="" || $.trim($("#last_name").val())==null)
+			    {
+			        $("#lastnameerror").text("Please enter last name");
+			        $("#last_name").focus();
+			        return false;
+			    }
+
+			    if($.trim($("#position").val())=="" || $.trim($("#position").val())==null)
+			    {
+			        $("#positionerror").text("Please enter position");
+			        $("#position").focus();
+			        return false;
+			    }
+
+			    if($.trim($("#user_role").val())=="" || $.trim($("#user_role").val())==null)
+			    {
+			        $("#user_roleerror").text("Please select user role");
+			        $("#user_role").focus();
+			        return false;
+			    }
+
+			    if($.trim($("#status").val())=="" || $.trim($("#status").val())==null)
+			    {
+			        $("#statuserror").text("Please enter position");
+			        $("#status").focus();
+			        return false;
+			    }
+
+
+			    if(!isvalid){
+        
+			        return false;
+			    }
+			}
 		</script>
 		@endsection
 

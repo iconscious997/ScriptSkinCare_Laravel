@@ -343,6 +343,7 @@ class SupplierController extends Controller
                     'name'          => $request->first_name,
                     'email'         => $request->email,
                     'password'      => Hash::make($request->password),
+                    'user_type'     => 1,
                     'status'        => 0,
                     'created_date'  => date('Y-m-d H:i:s'),
                     'created_by'    => \Auth::user()->id,
@@ -693,7 +694,7 @@ class SupplierController extends Controller
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
             }
             
     
@@ -786,7 +787,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('*','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
 
 
 
@@ -801,7 +802,7 @@ class SupplierController extends Controller
             $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
 
                 
-            $data = $d->select('*','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
 
             }else{
 
@@ -809,7 +810,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
             }
             
 
@@ -986,7 +987,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('*','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
 
 
 
@@ -999,7 +1000,7 @@ class SupplierController extends Controller
                     ->join('users','supplier_details.user_id','=','users.id');
                     
                     $d->whereRaw('FIND_IN_SET('.$request->brand_id.',brand_ids)');
-                    $data = $d->select('*','supplier_details.status as sstatus')->get();
+                    $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
 
             }
             else {
@@ -1008,7 +1009,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
             }
             
 
@@ -1200,7 +1201,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('*','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
 
 
 
@@ -1219,7 +1220,7 @@ class SupplierController extends Controller
                 
             
 
-            $data = $d->select('*','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
 
             }else{
 
@@ -1227,7 +1228,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('*','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
             }
             
 
@@ -1446,6 +1447,7 @@ class SupplierController extends Controller
                     'name'          => $request->first_name,
                     'email'         => $request->email,
                     'password'      => Hash::make($request->password),
+                    'user_type'     => 1,
                     'status'        => 0,
                     'created_date'  => date('Y-m-d H:i:s'),
                     'created_by'    => \Auth::user()->id,
@@ -1563,6 +1565,7 @@ class SupplierController extends Controller
                     'name'          => $request->first_name,
                     'email'         => $request->email,
                     'password'      => Hash::make($request->password),
+                    'user_type'     => 1,
                     'status'        => 0,
                     'created_date'  => date('Y-m-d H:i:s'),
                     'created_by'    => \Auth::user()->id,
@@ -1626,6 +1629,201 @@ class SupplierController extends Controller
 
 
             }
+
+            public function get_supplier_all($id='')
+            {
+                 $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                    ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                    ->join('roles','role_user.role_id','=','roles.id')
+                    ->join('users','supplier_details.user_id','=','users.id')
+                    ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','roles.id as roles_id','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->where('supplier_details.id', $id)->first();
+                  // echo $data->first_name;
+           $roles = Role::where('user_type', 1)->where('status', 0)->get();     
+
+            $brands_data = Brand::where('brand_company_id','=',$data->company_id)->get();  
+         $send_data='';
+         // // foreach ($data as $key => $value) {
+             
+
+
+
+             $send_data.='
+             
+    <input type="hidden" name="_token" value="'.csrf_token().'">
+               <div class="row">
+            <div class="form-group col-md-6">
+             <input type="text" class="form-control" name="business_name" id="business_name" placeholder="Registered Business Name:" value="'.$data->business_name.'">
+             
+             <span class="inputError" id="businesserror"></span>
+            
+           </div>
+           <div class="form-group col-md-6">
+            <input type="text" class="form-control" name="trading_name" id="trading_name" placeholder="Trading Name:" value="'.$data->trading_name.'">
+            
+            <span class="inputError" id="trading_nameerror"></span>
+            
+          </div>
+          </div>
+
+             <div class="row">
+            <div class="form-group col-md-6">
+             
+             
+             <input type="text" class="form-control" name="address" id="address" placeholder="Address:" value="'.$data->address.'">
+             
+             <span class="inputError" id="addresserror"></span>
+            
+           </div>
+           <div class="form-group col-md-6">
+            <input type="text" class="form-control" name="business_telephone_number" id="business_telephone_number" placeholder="Business Telephone:" onkeypress="return isNumberKey(event)" value="'.$data->business_telephone_number.'">
+            
+            <span class="inputError" id="bustelerror"></span>
+            
+          </div>
+          </div>
+           <div class="row">
+            <div class="form-group col-md-6">
+             
+             
+             <input type="text" class="form-control" name="website" id="website" placeholder="Website:" value="'.$data->website.'">
+             
+             <span class="inputError" id="websiteerror"></span>
+            
+           </div>
+           <div class="form-group col-md-6">
+            
+             <select name="brands_data[]" class="sm-select" id="brands_data" multiple="multiple">
+            ';
+
+             foreach( $brands_data as $role ){
+            $send_data.='<option  value="'.$role->id.'"  '.(in_array($role->id,explode(',', $data->brand_ids))?'selected':'').' >'.$role->brand_name.'</option>';
+            }
+
+             $send_data.='</select>
+            <span class="inputError" id="brands_dataerror"></span>
+            
+          </div>
+          </div>
+             <div class="row">
+            <div class="form-group col-md-6">
+             
+             <input type="hidden" name="id" value="'.$data->id.'">
+             <input type="hidden" name="company_id" value="'.$data->company_id.'">
+             <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name:" value="'.$data->first_name.'">
+             
+             <span class="inputError" id="firstnameerror"></span>
+            
+           </div>
+           <div class="form-group col-md-6">
+            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name:" value="'.$data->last_name.'">
+            
+            <span class="inputError" id="lastnameerror"></span>
+            
+          </div>
+          </div>
+
+          <div class="row">
+               <div class="form-group col-md-6">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email Address:" readonly value="'.$data->email.'">
+                
+                <span class="inputError"></span>
+                
+              </div>
+              <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="'.$data->position.'">
+                            
+                            <span class="inputError" id="positionerror"></span>
+                            
+                        </div>
+      </div>
+      <div class="row">
+
+        <div class="form-group col-md-6">
+           <select name="user_role" id="user_role">
+            <option value="">Select User Role</option>';
+            foreach( $roles as $role ){
+            $send_data.='<option '.($data->roles_id == $role->id ? 'selected' : '').' value="'.$role->id.'">'.$role->label.'</option>';
+            }
+          $send_data.='</select>
+          
+          <span class="inputError" id="user_roleerror"></span>
+          
+        </div>
+
+    <div class="form-group col-md-6">
+           <select name="status" id="status">
+           <option value="">Select Status</option>
+            <option value="0" '.($data->status==0 ? 'selected' : '').' >Active</option>
+            <option value="1" '.($data->status== 1 ? 'selected' : '') .'>Deactive</option>
+          </select>
+          
+          <span class="inputError" id="statuserror"></span>
+          
+        </div>
+      </div>
+
+          ';
+
+                    
+         // // }
+                return $send_data;
+            }
+
+
+        public function update_supplier_list_data(Request $request)
+        {
+                
+                
+            $company = Company::find($request->company_id);
+            $company->business_name                 = $request->business_name;
+            $company->trading_name                  = $request->trading_name;
+            $company->address                       = $request->address;
+            $company->business_telephone_number     = $request->business_telephone_number;
+            $company->website                       = $request->website;
+            $company->modified_by                   = \Auth::user()->id;
+            $company->save();
+
+            $supplier = Supplier::find($request->id);
+            $supplier->first_name      = $request->first_name;
+            $supplier->last_name       = $request->last_name;
+            $supplier->position        = $request->position;
+            $supplier->brand_ids        = implode(',',$request->brands_data);
+            $supplier->status          = $request->status;
+            $supplier->modified_by     = \Auth::user()->id;
+            $supplier->save();
+
+
+             // now update user role
+            $user_role = RoleUser::where('user_id', $supplier->user_id)->first();
+            DB::statement("DELETE FROM role_user WHERE role_id = '$user_role->role_id' AND user_id = '$supplier->user_id'");
+            // RoleUser::where('user_id', $supplier->user_id)->first()->delete();
+            RoleUser::create([
+                'role_id'       => $request->user_role,
+                'user_id'       => $supplier->user_id,
+                'status'        => 0,
+                'created_date'  => date('Y-m-d H:i:s'),
+                'created_by'    => \Auth::user()->id,
+                'modified_by'   => \Auth::user()->id,
+            ]);
+            
+             if( !empty($supplier->exists) ) {
+                    // success
+                    
+                    setflashmsg('Record Updated Successfully','1');
+                   
+                        return redirect('/supplier');
+                    
+                } else {
+                  
+
+                    setflashmsg('Some error occured. Please try again','0');
+                    return redirect('/supplier');
+                }
+
+
+
+
+        }
 
 
 

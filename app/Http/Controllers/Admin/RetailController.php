@@ -39,28 +39,13 @@ class RetailController extends Controller
         return view('admin.retail',compact('data'));
     }
 
-    public function customeradd()
+    public function retailadd()
     {
-        return view('admin.customeradd');
-    }
-
-    public function customeredit($id)
-    {        
-        $customer = Customer::where('id', $id)->first();                
-        return view('admin.customeradd',compact('customer'));
-    }
-
-    public function customeractivedeactive($id,$status){
-
-        DB::table('client_details')
-        ->where("client_details.id", '=',  $id)
-        ->update(['client_details.status'=> $status]);
-
-        return redirect('/customers');
+        return view('admin.retailadd');
     }
 
     
-    public function customerstore(Request $request)
+    public function retailstore(Request $request)
     {   
 
         if( !empty( $request->id ) ) { 
@@ -89,20 +74,20 @@ class RetailController extends Controller
                 'skin_type.required'     => 'Most Recent Skin Type is required'
             ]);
 
-            $customer = Customer::find($request->id);
-            $customer->first_name       = $request->first_name;
-            $customer->last_name        = $request->last_name;
-            $customer->dob              = date('Y-m-d', strtotime($request->dob));
-            $customer->gender           = $request->gender;
-            $customer->email            = $request->email;
-            $customer->signup_source    = $request->signup_source;
-            $customer->created_date     = date('Y-m-d', strtotime($request->created_date));
-            $customer->skin_concerns    = $request->skin_concerns;
-            $customer->skin_type        = $request->skin_type;
-            $customer->created_by       = \Auth::user()->id;
-            $customer->modified_by      = \Auth::user()->id;
-            $customer->save();
-            setflashmsg('Customer Details Updated Successfully','1');
+            $retail = retail::find($request->id);
+            $retail->first_name       = $request->first_name;
+            $retail->last_name        = $request->last_name;
+            $retail->dob              = date('Y-m-d', strtotime($request->dob));
+            $retail->gender           = $request->gender;
+            $retail->email            = $request->email;
+            $retail->signup_source    = $request->signup_source;
+            $retail->created_date     = date('Y-m-d', strtotime($request->created_date));
+            $retail->skin_concerns    = $request->skin_concerns;
+            $retail->skin_type        = $request->skin_type;
+            $retail->created_by       = \Auth::user()->id;
+            $retail->modified_by      = \Auth::user()->id;
+            $retail->save();
+            setflashmsg('retail Details Updated Successfully','1');
         }else{
 
             $validatedData = $request->validate([
@@ -128,7 +113,7 @@ class RetailController extends Controller
                 'skin_concerns.required' => 'Most Recent Skin Concern is required',
                 'skin_type.required' => 'Most Recent Skin Type is required'
             ]);
-            $customer = Customer::create([                
+            $retail = retail::create([                
                 'first_name'     => request('first_name'),
                 'last_name'      => request('last_name'),
                 'dob'            => date( 'Y-m-d', strtotime(request('dob'))),
@@ -142,10 +127,25 @@ class RetailController extends Controller
                 'modified_by'    => \Auth::user()->id,
             ]);
 
-            setflashmsg('Customer Added Successfully','1');
+            setflashmsg('retail Added Successfully','1');
         }
 
-        return redirect('/customers');
+        return redirect('/retails');
+    }
+
+     public function retailedit($id)
+    {        
+        $retail = retail::where('id', $id)->first();                
+        return view('admin.retailadd',compact('retail'));
+    }
+
+    public function retailactivedeactive($id,$status){
+
+        DB::table('client_details')
+        ->where("client_details.id", '=',  $id)
+        ->update(['client_details.status'=> $status]);
+
+        return redirect('/retails');
     }
 
 
