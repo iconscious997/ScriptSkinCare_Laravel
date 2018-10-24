@@ -16,7 +16,7 @@
 <div class="wizard spcust">
     <div class="col-md-12">
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-            <h3 class="text-left mt-20">Search Customers</h3>
+            <h3 class="text-left mt-20">SEARCH CUSTOMERS</h3>
         </div>
         <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
 
