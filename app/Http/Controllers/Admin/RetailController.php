@@ -139,13 +139,13 @@ class RetailController extends Controller
         return view('admin.retailadd',compact('retail'));
     }
 
-    public function retailactivedeactive($id,$status){
+    public function clinicactivedeactive($id,$status){
+       
+        DB::table('clinic_details')
+        ->where("clinic_details.id", '=',  $id)
+        ->update(['clinic_details.status'=> $status]);
 
-        DB::table('client_details')
-        ->where("client_details.id", '=',  $id)
-        ->update(['client_details.status'=> $status]);
-
-        return redirect('/retails');
+        return redirect('/retail');
     }
 
 

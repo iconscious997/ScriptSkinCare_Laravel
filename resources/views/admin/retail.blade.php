@@ -15,7 +15,7 @@
 
 <div class="wizard spcust">
     <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-        <h3 class="text-left mt-20">Search Retail</h3>
+        <h3 class="text-left mt-20">RETAIL LIST / RESULTS</h3>
     </div>
     <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
@@ -43,12 +43,16 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Business Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Website</th>
-                        <th>Users</th>
-                        <th>User Role</th>
-                        <th>User Email</th>                        
+                        <th>Trading Name</th>
+                        <th>Business Address</th>
+                        <th>Business Phone</th>
+                        <th>Business Website</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Position</th>
+                        <th>Permission Status</th>
+                        <th>Status</th>                        
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -56,17 +60,20 @@
                     @php $i=0 @endphp
                         @foreach($data as $item)
                         <tr>
-                            <td>{{$item->clinic_name}}</td>                            
-                            <td>{{$item->business_address_line_1}}{{$item->business_address_line_2}}{{$item->city}}{{$item->state}}{{$item->country}}</td>
-                            <td>{{$item->mobile_number}}</td>
-                            <td>{{$item->website}}</td>                            
-                            <td>{{$item->first_name}} {{$item->first_name}}</td>
+                            <td>{{$item->clinic_name}}</td>
+                            <td>{{$item->trading_name}}</td>
+                            <td>{{$item->clinic_location}}</td>
+                            <td>{{$item->telephone_number}}</td>
+                            <td>{{$item->clinic_website}}</td>                            
+                            <td>{{$item->first_name}}</td>
+                            <td>{{$item->last_name}}</td>
+                            <td>{{$item->email}}</td>
+                            <td>{{$item->position}}</td>
                             <td>{{$item->label}}</td>
-                            <td>{{$item->email}}</td>                            
-                            <td class="flex">
-                               <a href='customeredit/{{$item->id}}' data-id={{$item->id}}><button type="button" class="btn btn-default "> EDIT</button></a> 
-                               <!--  <a href='javascript:void()' class='deactivaterow' msg="{{$item->status==1 ? 'Activate' : 'Deactivate'}}" data-id={{$item->id}}><button class="btn btn-default m-l-5">{{$item->status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a> -->
-                            </td>                         
+                            <td>{{$item->clinic_status==0 ? 'Activated' : 'Deactived'}}</td>                           
+                            <td class="flex">                                 
+                                <a href='javascript:void()' class='deactivaterow' msg="{{$item->clinic_status==1 ? 'Activate' : 'Deactivate'}}" msgconf="{{$item->clinic_status==1 ? 'Activated' : 'Deactivated'}}" data-id={{$item->id}}><button class="btn btn-default m-l-5">{{$item->clinic_status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a>
+                                </td>
                         </tr>                        
                         @php $i++ @endphp
                         @endforeach                               
@@ -123,11 +130,11 @@
 
         $.ajax({
             type: "GET",
-            url: "<?php echo url('/customeractivedeactive')?>/"+id+"/"+status,
-            success: function(data) {             
+            url: "<?php echo url('/clinicactivedeactive')?>/"+id+"/"+status,
+            success: function(data) {                             
                 swal({
                     title: msg+'!',
-                    text: 'Customer has been '+msg+'.',
+                    text: 'Retail has been '+msg+'.',
                     type: 'success'
                 }).then(function() {
                     location.reload();
@@ -137,12 +144,12 @@
                 alert('error');
             }
         })
-    }, function (dismiss) {
-        // dismiss can be 'cancel', 'overlay',
-        // 'close', and 'timer'
-    })
-
+        }, function (dismiss) {
+            // dismiss can be 'cancel', 'overlay',
+            // 'close', and 'timer'
         })
+
+     })
     </script>
     @endsection
 
