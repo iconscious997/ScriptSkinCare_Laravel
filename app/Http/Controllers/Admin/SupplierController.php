@@ -694,7 +694,7 @@ class SupplierController extends Controller
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
             }
             
     
@@ -1826,5 +1826,14 @@ class SupplierController extends Controller
         }
 
 
+        public function update_supplier_password(Request $request)
+        {
+
+            $supplier   = User::find($request->hmid);
+            $supplier->password = Hash::make($request->newpassword);           
+            $supplier->save();
+            setflashmsg('Password has been reset successfully','1');
+              return redirect('/supplier');
+        }
 
 }

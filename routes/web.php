@@ -198,6 +198,8 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 
 	Route::post('/update_supplier_list_data','SupplierController@update_supplier_list_data');
 
+	Route::post('/updatesupplierpassword','SupplierController@update_supplier_password');
+
 	Route::match(['GET', 'POST'],'/supplier-list2/{id?}', 'SupplierController@supplierList2')->name('supplier-list2');
 
 	// supplier user permission
