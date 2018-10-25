@@ -204,15 +204,17 @@
 		      </div>
 
 		      <!-- Modal body -->
-		      <form action="{{ url('/updatesupplierpassword') }}" method="post">
+		      <form action="{{ url('/updatesupplierpassword') }}" onsubmit="return  validations_password();"  method="post">
 				@csrf
 				<input type="hidden" name="hmid" id="hmid" value="">
 		      <div class="modal-body">		      	
 		      	<div class="form-group">
-		        	<input type="text" class="form-control" name="newpassword"  value="" placeholder="New Password">
+		        	<input type="password" class="form-control" name="newpassword"  value="" id="newpassword" placeholder="New Password">
+		        	<span class="inputError" id="newpasserror"></span>
 		    	</div>
 		    	<div class="form-group">
-		        	<input type="text" class="form-control" name="confirmpassword"  value="" placeholder="Confirm Password">
+		        	<input type="password" class="form-control" name="confirmpassword" id="confirmpassword" value="" placeholder="Confirm Password">
+		        	<span class="inputError" id="confirmpasserror"></span>
 		    	</div>
 		      </div>
 		      <!-- Modal footer -->
@@ -311,6 +313,37 @@
             });         
 			} );
 			
+			function validations_password() {
+				
+				var isvalid = true;
+				if($.trim($("#newpassword").val())=="" || $.trim($("#newpassword").val())==null)
+			    {
+			        $("#newpasserror").text("Please enter new password");
+			        $("#newpassword").focus();
+			        return false;
+			    }
+			    
+			    if($.trim($("#confirmpassword").val())=="" || $.trim($("#confirmpassword").val())==null)
+			    {
+			        $("#confirmpasserror").text("Please enter confirm password");
+			        $("#confirmpassword").focus();
+			        return false;
+			    }
+
+			    if($("#newpassword").val()!=$("#confirmpassword").val())
+			    {
+			    	$("#confirmpassword").val('');
+			        $("#confirmpasserror").text("Please enter new password and confirm password must be same.");
+			        $("#confirmpassword").focus();
+			        return false;
+			    }
+
+			    if(!isvalid){
+        
+			        return false;
+			    }
+
+			}
 			function validations_id() {
 				// body...
 				var isvalid = true;

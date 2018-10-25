@@ -787,7 +787,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
 
 
 
@@ -802,7 +802,7 @@ class SupplierController extends Controller
             $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
 
                 
-            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
 
             }else{
 
@@ -810,7 +810,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
             }
             
 
@@ -895,13 +895,19 @@ class SupplierController extends Controller
         // die();
         if ($request->isMethod('get')) {
 
-            $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            $d=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-            ->select('supplier_details.*','company_details.business_name','company_details.business_telephone_number','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus')
-            ->where('supplier_details.company_id','=',$id)
-            ->get();
+            ->select('supplier_details.*','company_details.business_name','company_details.business_telephone_number','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus','users.id as user_id');
+            
+            if ($id!='') {
+                
+                $d->where('supplier_details.company_id','=',$id);
+
+            }
+            
+            $data=$d->get();
             // dd($data);
                        
  
@@ -987,7 +993,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
 
 
 
@@ -1000,7 +1006,7 @@ class SupplierController extends Controller
                     ->join('users','supplier_details.user_id','=','users.id');
                     
                     $d->whereRaw('FIND_IN_SET('.$request->brand_id.',brand_ids)');
-                    $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+                    $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
 
             }
             else {
@@ -1009,7 +1015,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
             }
             
 
@@ -1112,7 +1118,7 @@ class SupplierController extends Controller
         $all_roles = Role::where('user_type', 1)->where('status', 0)->get();
         $company = Company::all();
 
-        return view( 'admin.supplier-list2',compact('data','all_brand_name','user_parent_name','request','all_roles','supplier_admin','company','all_brand'));
+        return view( 'admin.supplier-list2',compact('data','all_brand_name','user_parent_name','request','all_roles','supplier_admin','company','all_brand','id'));
     }
 
     public function supplieruserlist(Request $request)
@@ -1124,7 +1130,7 @@ class SupplierController extends Controller
             ->join('role_user','supplier_details.user_id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')
             ->join('users','supplier_details.user_id','=','users.id')
-            ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus')->get();
+            ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus','users.id as user_id')->get();
             // dd($data);
                        
 
@@ -1201,7 +1207,7 @@ class SupplierController extends Controller
                 
             }
 
-            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
 
 
 
@@ -1220,7 +1226,7 @@ class SupplierController extends Controller
                 
             
 
-            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+            $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
 
             }else{
 
@@ -1228,7 +1234,7 @@ class SupplierController extends Controller
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->get();
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
             }
             
 
@@ -1636,7 +1642,7 @@ class SupplierController extends Controller
                     ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                     ->join('roles','role_user.role_id','=','roles.id')
                     ->join('users','supplier_details.user_id','=','users.id')
-                    ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','roles.id as roles_id','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus')->where('supplier_details.id', $id)->first();
+                    ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','roles.id as roles_id','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->where('supplier_details.id', $id)->first();
                   // echo $data->first_name;
            $roles = Role::where('user_type', 1)->where('status', 0)->get();     
 
@@ -1830,10 +1836,20 @@ class SupplierController extends Controller
         {
 
             $supplier   = User::find($request->hmid);
-            $supplier->password = Hash::make($request->newpassword);           
+            $supplier->password = Hash::make($request->newpassword);
             $supplier->save();
             setflashmsg('Password has been reset successfully','1');
-              return redirect('/supplier');
+
+            if ($request->supplier_list==2) {
+                
+                return redirect('/supplier-list2/');
+
+            }else{
+
+                return redirect('/supplier');
+                
+            }
+            
         }
 
 }

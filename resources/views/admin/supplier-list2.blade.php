@@ -75,7 +75,7 @@ and (orientation : portrait) {
 							<td>{{$item->first_name}} {{$item->last_name}}</td>
 							<td>{{$item->label}}</td>
 							<td>{{$item->email}}</td>
-							<td><a class="btn btn-green"> RESET</a></td>
+							<td><a class="btn btn-green preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}" > RESET</a></td>
 						{{-- 	<td >
 								<i class=" ti-check"></i> &nbsp;&nbsp; 
 								<i class=" ti-close"></i>
@@ -310,8 +310,61 @@ and (orientation : portrait) {
 			</div>
 		</div>
 	</div>
+	<!-- The Modal -->
+		<div class="modal" id="myPModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Reset Password for <span id="mfname"></span> <span id="mlname"></span></h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+
+		      <!-- Modal body -->
+		      <form action="{{ url('/updatesupplierpassword') }}" onsubmit="return  validations_password();" method="post">
+				@csrf
+				<input type="hidden" name="hmid" id="hmid" value="">
+				<input type="hidden" name="supplier_id" value="{{$id}}">
+				<input type="hidden" name="supplier_list" value="2">
+		      <div class="modal-body">		      	
+		      	<div class="form-group">
+		        	<input type="password" class="form-control" id="newpassword" name="newpassword"  value="" placeholder="New Password">
+		        	<span class="inputError" id="newpasserror"></span>
+		    	</div>
+		    	<div class="form-group">
+		        	<input type="password" class="form-control" name="confirmpassword" id="confirmpassword"  value="" placeholder="Confirm Password">
+		        	<span class="inputError" id="confirmpasserror"></span>
+		    	</div>
+		      </div>
+		      <!-- Modal footer -->
+		      <div class="modal-footer">		        			        	
+		      		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">&nbsp;</div>		      		
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                         <button type="submit" class="btn btn-green btn-block">Submit</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">                       
+                          <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</button> 
+                    </div>
+                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">&nbsp;</div>
+		      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+
+			$('.preset').on('click', function(e) {
+					$('#mfname').text($(this).attr('fname').toUpperCase());					 
+					$('#mlname').text($(this).attr('lname').toUpperCase());					 					
+					$('#hmid').val($(this).attr('mid'));					 
+					$('#myPModal').modal();
+				});
+
+			
+
 			var table = $('#customers').DataTable();
 			var buttons = new $.fn.dataTable.Buttons(table, {
 				extend: 'collection',
@@ -349,7 +402,37 @@ and (orientation : portrait) {
 				]
 			}).container().appendTo($('#buttons'));           
 		} );
-		
+		function validations_password() {
+				
+				var isvalid = true;
+				if($.trim($("#newpassword").val())=="" || $.trim($("#newpassword").val())==null)
+			    {
+			        $("#newpasserror").text("Please enter new password");
+			        $("#newpassword").focus();
+			        return false;
+			    }
+			    
+			    if($.trim($("#confirmpassword").val())=="" || $.trim($("#confirmpassword").val())==null)
+			    {
+			        $("#confirmpasserror").text("Please enter confirm password");
+			        $("#confirmpassword").focus();
+			        return false;
+			    }
+
+			    if($("#newpassword").val()!=$("#confirmpassword").val())
+			    {
+			    	$("#confirmpassword").val('');
+			        $("#confirmpasserror").text("Please enter new password and confirm password must be same.");
+			        $("#confirmpassword").focus();
+			        return false;
+			    }
+
+			    if(!isvalid){
+        
+			        return false;
+			    }
+
+			}
 
 	</script>
 	@endsection
