@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 use Session;
 use Validator;
 use DB;
+use Hash;
 use Excel;
 use App\Retail;
+use App\Clinic;
+use App\Role;
+use App\User;
+use App\RoleUser;
 
 class RetailController extends Controller
 {
@@ -34,103 +39,321 @@ class RetailController extends Controller
             ->join('roles','role_user.role_id','=','roles.id')        
             ->join('clinic_details','retail_details.id','=','retail_details.clinic_id')    
             ->join('users','retail_details.user_id','=','users.id')
-            ->select('*')->get();
+            ->select('*')->toSql();
 
         return view('admin.retail',compact('data'));
     }
 
     public function retailadd()
     {
+         if( Session::has('retail_site_id') ) {
+            $retailsite = Clinic::find(Session::get('retail_site_id'));
+
+            return view('admin.retailadd', compact('retailsite'));
+        }
+
         return view('admin.retailadd');
     }
 
     
-    public function retailstore(Request $request)
-    {   
+    public function retailsitestore(Request $request)
+    {
+        
+        $validatedData = $request->validate([
+            'clinic_name'               => 'required',
+            'trading_name'              => 'required',
+            'clinic_location'           => 'required',
+            'telephone_number'          => 'required|numeric|digits_between:10,12',
+            'clinic_email'              => 'required|email',
+            'clinic_website'            => 'required|url',
+        ]);
 
-        if( !empty( $request->id ) ) { 
+        // here check if id is present then update data
+        if( !empty( $request->id ) ) {
+            $clinic = Clinic::find($request->id);
+            $clinic->clinic_name                 = $request->clinic_name;
+            $clinic->trading_name                  = $request->trading_name;
+            $clinic->clinic_location                       = $request->clinic_location;
+            $clinic->telephone_number     = $request->telephone_number;
+            $clinic->clinic_email                 = $request->clinic_email;
+            $clinic->clinic_website                       = $request->clinic_website;
+            $clinic->modified_by                   = \Auth::user()->id;
+            $clinic->save();
 
-            $validatedData = $request->validate([
-                'first_name'     => 'required',
-                'last_name'      => 'required',
-                'dob'            => 'required',
-                'gender'         => 'required',            
-                // 'email'          => 'required|email',
-                'signup_source'  => 'required',
-                'created_date'   => 'required|date',
-                'created_by'     => 'required',
-                'skin_concerns'  => 'required',
-                'skin_type'      => 'required',          
-            ],[
-                'first_name.required'    => 'First Name is required',
-                'last_name.required'     => 'Last Name is required',
-                'dob.required'           => 'Date of Birth is required',
-                'gender.required'        => 'Gender is required',
-                'email.required'         => 'Email is required',
-                'signup_source.required' => 'Sign-up is required',
-                'created_date.required'  => 'Registered Date is required',
-                'created_by.required'    => 'Registered By is required',
-                'skin_concerns.required' => 'Most Recent Skin Concern is required',
-                'skin_type.required'     => 'Most Recent Skin Type is required'
+            // 
+            setflashmsg('Record Updated Successfully','1');
+            // dd($request);
+        } else {
+            $clinic = Clinic::create([
+                'clinic_name'                => request('clinic_name'),
+                'trading_name'               => request('trading_name'),
+                'clinic_location'            => request('clinic_location'),
+                'telephone_number'           => request('telephone_number'),
+                'clinic_email'               => request('clinic_email'),
+                'clinic_website'             => request('clinic_website'),
+                'status'                     => 0,
+                'created_date'               => date('Y-m-d H:i:s'),
+                'created_by'                 => \Auth::user()->id,
+                'modified_by'                => \Auth::user()->id,
             ]);
 
-            $retail = retail::find($request->id);
-            $retail->first_name       = $request->first_name;
-            $retail->last_name        = $request->last_name;
-            $retail->dob              = date('Y-m-d', strtotime($request->dob));
-            $retail->gender           = $request->gender;
-            $retail->email            = $request->email;
-            $retail->signup_source    = $request->signup_source;
-            $retail->created_date     = date('Y-m-d', strtotime($request->created_date));
-            $retail->skin_concerns    = $request->skin_concerns;
-            $retail->skin_type        = $request->skin_type;
-            $retail->created_by       = \Auth::user()->id;
-            $retail->modified_by      = \Auth::user()->id;
-            $retail->save();
-            setflashmsg('retail Details Updated Successfully','1');
-        }else{
-
-            $validatedData = $request->validate([
-                'first_name'     => 'required',
-                'last_name'      => 'required',
-                'dob'            => 'required',
-                'gender'         => 'required',            
-                'email'          => 'required|email|max:255|unique:client_details',
-                'signup_source'  => 'required',
-                'created_date'   => 'required|date',
-                'created_by'     => 'required',
-                'skin_concerns'  => 'required',
-                'skin_type'      => 'required',          
-            ],[
-                'first_name.required'   => 'First Name is required',
-                'last_name.required'    => 'Last Name is required',
-                'dob.required'          => 'Date of Birth is required',
-                'gender.required'       => 'Gender is required',
-                'email.required'        => 'Email is required',
-                'signup_source.required'=> 'Sign-up is required',
-                'created_date.required' => 'Registered Date is required',
-                'created_by.required'   => 'Registered By is required',
-                'skin_concerns.required' => 'Most Recent Skin Concern is required',
-                'skin_type.required' => 'Most Recent Skin Type is required'
-            ]);
-            $retail = retail::create([                
-                'first_name'     => request('first_name'),
-                'last_name'      => request('last_name'),
-                'dob'            => date( 'Y-m-d', strtotime(request('dob'))),
-                'gender'         => request('gender'),
-                'email'          => request('email'),
-                'signup_source'  => request('signup_source'),
-                'created_date'   => date('Y-m-d', strtotime(request('created_date'))),
-                'created_by'     => \Auth::user()->id,            
-                'skin_concerns'  => request('skin_concerns'),
-                'skin_type'      => request('skin_type'),            
-                'modified_by'    => \Auth::user()->id,
-            ]);
-
-            setflashmsg('retail Added Successfully','1');
+            setflashmsg('Record Inserted Successfully','1');
         }
 
-        return redirect('/retails');
+         if($clinic->exists) {
+            // success
+            Session::put('retail_site_id', $clinic->id);
+            return redirect('/retail-user');
+        }
+
+    }
+
+    public function retail_user_add()
+    {
+         if( !Session::has('retail_site_id') ) {
+
+             return redirect('/retailadd');
+        }
+
+          $retail_admin = Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
+             ->join('roles','role_user.role_id','=','roles.id')
+                ->where('retail_details.clinic_id', Session::get('retail_site_id'))
+                ->where('roles.name', "retail_admin")
+                ->select('retail_details.id','retail_details.first_name','retail_details.last_name')->get()->toArray();
+
+        $retailsite = Clinic::find(Session::get('retail_site_id'));
+         $roles = Role::where('user_type', 2)->where('status', 0)->get();
+        return view('admin.retail-user',compact('roles','retailsite','retail_admin'));
+    }
+    public function retailuserstore(Request $request)
+    {   
+
+         if( $request->whattodo == 'new' ) {
+            // if request is for new then reset session
+            if( Session::has('retail_details_id') ) {
+                Session::forget('retail_details_id');
+            }
+        }
+
+
+        $retail = null;
+        if( !empty( $request->id ) && $request->whattodo == 'update' ) {
+    
+       
+    
+            // check for validation
+            $validatedData = $request->validate([
+                'first_name'                => 'required',
+                'last_name'                 => 'required',
+                'telephone_number'       => 'required|numeric|digits_between:10,12',
+                'clinic_location'   => 'required',
+                'user_role'                 => 'required',
+                'position'                  => 'required',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
+            ],[
+                'clinic_location.required' => 'Business Address is Required'
+            ]);
+
+            
+              if(isset($request->user_parent_id)){
+
+                    
+                    if ($request->user_role==6 && $request->user_selected_role==6) {
+                
+                       
+                                # code...
+                      setflashmsg('Please Select Different User and User Role ','2');
+                        return redirect('/retail-user');
+
+                    }else if($request->user_role==6){
+
+                    setflashmsg('Please Select Different User and User Role ','2');
+                    return redirect('/retail-user');
+
+                    }else{
+
+                        $user_parent_id=$request->user_parent_id;
+
+                    }
+
+                }else{
+
+                    $user_parent_id=0;
+
+                }
+
+        
+            $retail = Retail::find($request->id);
+            $retail->user_parent_id            = $user_parent_id;
+            $retail->first_name                = $request->first_name;
+            $retail->last_name                 = $request->last_name;
+            $retail->retail_name             = "";
+            $retail->telephone_number       = $request->telephone_number;
+            $retail->clinic_location   = $request->clinic_location;
+            $retail->business_address_line_2   = $request->business_address_line_2;
+            $retail->city                      = '';
+            $retail->state                     = '';
+            $retail->country                   = '';
+            $retail->mobile_number             = $request->mobile_number;
+            $retail->modified_by               = \Auth::user()->id;
+            $retail->save();
+
+             if( !Session::has('parent_id') && $request->user_role==6) {
+
+                    Session::put('parent_id', $request->id);
+
+                }
+
+            // now update user role
+            $user_role = RoleUser::where('user_id', $retail->user_id)->first();
+            DB::statement("DELETE FROM role_user WHERE role_id = '$user_role->role_id' AND user_id = '$retail->user_id'");
+            // RoleUser::where('user_id', $retail->user_id)->first()->delete();
+            RoleUser::create([
+                'role_id'       => $request->user_role,
+                'user_id'       => $retail->user_id,
+                'status'        => 0,
+                'created_date'  => date('Y-m-d H:i:s'),
+                'created_by'    => \Auth::user()->id,
+                'modified_by'   => \Auth::user()->id,
+            ]);
+            // dd($request);
+            setflashmsg('Record Updated Successfully','1');
+        } else {
+
+
+            // check for validation
+            $validatedData = $request->validate([
+                'first_name'                => 'required',
+                'last_name'                 => 'required',
+                'telephone_number'          => 'required|numeric|digits_between:10,12',
+                'clinic_location'           => 'required',
+                'user_role'                 => 'required',
+                'position'                  => 'required',
+                'mobile_number'             => 'required|numeric|digits_between:10,12',
+                // check for available email address in user table
+                'email'                     => 'required|string|email|max:255|unique:users',
+                'password'                  => 'required|string',
+            ],[
+                'clinic_location.required' => 'Business Address is Required'
+            ]);
+           
+           if(isset($request->user_parent_id)){
+
+
+                if ($request->user_role==6 && $request->user_selected_role==6) {
+            
+                   
+                            # code...
+                    setflashmsg('Please Select Different User and User Role','2');
+                    return redirect('/retail-user');
+
+                }else if($request->user_role==6){
+
+                    setflashmsg('Please Select Different User and User Role ','2');
+
+                    return redirect('/retail-user');
+
+                }else{
+
+                    $user_parent_id=$request->user_parent_id;
+
+                }
+
+              
+
+            }else{
+
+                $user_parent_id=0;
+              
+            }
+    
+            
+
+            DB::transaction(function() use ($request,$retail) {
+
+                 
+           
+                // create new user data to users table
+                $user = User::create([
+                    'name'          => $request->first_name,
+                    'email'         => $request->email,
+                    'password'      => Hash::make($request->password),
+                    'user_type'     => 1,
+                    'status'        => 0,
+                    'created_date'  => date('Y-m-d H:i:s'),
+                    'created_by'    => \Auth::user()->id,
+                    'modified_by'   => \Auth::user()->id,
+                ]);
+                // now add this user to specified role on role_user table
+                RoleUser::create([
+                    'role_id'       => $request->user_role,
+                    'user_id'       => $user->id,
+                    'status'        => 0,
+                    'created_date'  => date('Y-m-d H:i:s'),
+                    'created_by'    => \Auth::user()->id,
+                    'modified_by'   => \Auth::user()->id,
+                ]);
+
+
+
+                
+
+
+
+                // now add data to retail_details table
+                $retail = Retail::create([
+                    'user_id'                   => $user->id,
+                    'user_role_id'               => $request->user_role,
+                    'user_parent_id'            => ($request->user_parent_id ? $request->user_parent_id : 0),
+                    'first_name'                => $request->first_name,
+                    'last_name'                 => $request->last_name,
+                    'email'                     => $request->email,
+                    'business_tel_number'       => $request->telephone_number,
+                    'address_line_1'            => $request->clinic_location,
+                    'mobile_number'             => $request->mobile_number,
+                    'address_line_2'   => '',
+                    'city'                      => '',
+                    'state'                     => '',
+                    'country'                   => '',
+                    'clinic_id'                => Session::get('retail_site_id'),
+                    'position'                  => $request->position,
+                    'status'                    => 0,
+                    'created_date'              => date('Y-m-d H:i:s'),
+                    'created_by'                => \Auth::user()->id,
+                    'modified_by'               => \Auth::user()->id,
+                ]);
+
+                
+                if( !Session::has('parent_id') && $request->user_role==6) {
+
+                    Session::put('parent_id', $retail->id);
+
+                }
+            
+            Session::put('retail_details_id', $retail->id);
+
+            });
+
+            setflashmsg('Record Inserted Successfully','1');
+        }
+
+
+
+
+        // if( !empty($retail->exists) ) {
+            // success
+            
+            if( $request->savestep == 0 ) {
+
+                session()->forget('retail_site_id');
+                session()->forget('retail_details_id');
+                session()->forget('parent_id');
+                
+                return redirect('/retail');
+            } else {
+           
+                return redirect('/retail-user');
+            }
     }
 
      public function retailedit($id)
