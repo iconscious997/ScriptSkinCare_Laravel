@@ -2,7 +2,7 @@
 @section('content')
 <form action="{{ route('supplierproductlineadd') }}" method="POST" id="first" enctype="multipart/form-data">
     @csrf
-    <div class="wizard">
+    <div class="wizard bg3">
         <div class="container">
             <div class="row">
                 <h3 class="text-center">ADD NEW PRODUCT LINE</h3>

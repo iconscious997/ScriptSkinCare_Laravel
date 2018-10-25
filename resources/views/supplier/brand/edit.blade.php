@@ -2,7 +2,7 @@
 @section('content')
 <form action="{{ route('supplierbrandedit',$brand->id) }}" method="POST" id="first" enctype="multipart/form-data">
     @csrf
-    <div class="wizard">
+    <div class="wizard bg3">
         <div class="container">
             <div class="row">
                 <h3 class="text-center">MANAGE BRAND</h3>
@@ -39,28 +39,28 @@
                         <div class="upload-btn-wrapper">
                             <button class="form-control text-left">Upload Logo: (Height: 50px and Width: 200px</button>
                             <div class="inner-addon right-addon">
-                             <i class="ti-plus"></i>
-                             <input type="file" name="brand_logo" id="brand_logo" />
-                             @if ($errors->has('brand_logo'))
-                             <span class="inputError">{{ $errors->first('brand_logo') }}</span>
-                             @endif
-                         </div>
-                     </div>
-                 </div>
-             </div>
+                               <i class="ti-plus"></i>
+                               <input type="file" name="brand_logo" id="brand_logo" />
+                               @if ($errors->has('brand_logo'))
+                               <span class="inputError">{{ $errors->first('brand_logo') }}</span>
+                               @endif
+                           </div>
+                       </div>
+                   </div>
+               </div>
 
-         </div>
-
-
-         <input type="hidden" name="id" value="{{ $brand->id }}">
-         <input type="hidden" name="old_image_name" value="{{ $brand->brand_logo }}">
-
-         <div class="col-md-3">&nbsp;</div>
-     </div>
-     <div class="clearfix">&nbsp;</div>
+           </div>
 
 
-     <div class="row">
+           <input type="hidden" name="id" value="{{ $brand->id }}">
+           <input type="hidden" name="old_image_name" value="{{ $brand->brand_logo }}">
+
+           <div class="col-md-3">&nbsp;</div>
+       </div>
+       <div class="clearfix">&nbsp;</div>
+
+
+       <div class="row">
         <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
             <button class="btn btn-dark btn-pad selected" type="submit"> Save Changes</button>
         </div>
@@ -80,9 +80,9 @@
 
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                     <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block" type="button"> + ADD NEW COMPANY</button></a>
-                 </div>
-                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                       <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block" type="button"> + ADD NEW COMPANY</button></a>
+                   </div>
+                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <a href="{{ route('supplierproductlineadd') }}"> <button class="btn btn-default btn-block" type="button"> + ADD NEW PRODUCT LINE</button></a>
                 </div>
             </div>

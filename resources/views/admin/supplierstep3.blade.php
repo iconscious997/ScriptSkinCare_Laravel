@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="content-fix">
+    <div class="content-fix wow fadeIn" data-wow-duration="2s">
         <div class="container">
             <div class="row">
                 <div class="col-md-3">&nbsp;</div>
@@ -70,15 +70,15 @@
                     <div class="upload-btn-wrapper">
                         <button class="form-control text-left">Upload Logo: (Height: 50px and Width: 200px</button>
                         <div class="inner-addon right-addon">
-                         <i class="ti-plus"></i>
-                         <input type="file" name="brand_logo" id="brand_logo" />
-                         @if ($errors->has('brand_logo'))
-                         <span class="inputError">{{ $errors->first('brand_logo') }}</span>
-                         @endif
-                     </div>
-                 </div>
-             </div>
-             <div class="form-group">
+                           <i class="ti-plus"></i>
+                           <input type="file" name="brand_logo" id="brand_logo" />
+                           @if ($errors->has('brand_logo'))
+                           <span class="inputError">{{ $errors->first('brand_logo') }}</span>
+                           @endif
+                       </div>
+                   </div>
+               </div>
+               <div class="form-group">
                 <select class="" title="Approved By" name="approved_by" id="approved_by">
                     <option value="" disabled selected>Approved By</option>
                     @foreach($supplier as $item)
@@ -119,16 +119,16 @@
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-right mt-15">
-                 <a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">NEXT &nbsp;<i class="ti-arrow-right"></i></a>
+                   <a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">NEXT &nbsp;<i class="ti-arrow-right"></i></a>
 
-             </div>
-         </div>
-         <hr>
-     </div>
-     <div class="col-md-2">&nbsp;</div>
- </div>
+               </div>
+           </div>
+           <hr>
+       </div>
+       <div class="col-md-2">&nbsp;</div>
+   </div>
 
- <div class="row">
+   <div class="row">
     <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
         <button class="btn btn-dark btn-pad selected" type="submit"> SAVE STEP 3 & ACTIVATE</button>
     </div>
@@ -144,12 +144,12 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                       <a href="{{ url('/user-supplier-add') }}" > <button type="button" class="btn btn-default btn-block"> + ADD NEW SUPPLIER</button></a>
-                   </div>
-                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                       <a href="{{ url('/add-new-user') }}" >  <button type="button" class="btn btn-default btn-block"> + ADD A NEW USER</button></a>
-                   </div>
-                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                     <a href="{{ url('/user-supplier-add') }}" > <button type="button" class="btn btn-default btn-block"> + ADD NEW SUPPLIER</button></a>
+                 </div>
+                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                     <a href="{{ url('/add-new-user') }}" >  <button type="button" class="btn btn-default btn-block"> + ADD A NEW USER</button></a>
+                 </div>
+                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default btn-block"> +ADD A NEW BRAND</button></a>
                 </div>
             </div>

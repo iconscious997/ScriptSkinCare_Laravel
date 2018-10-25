@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="content-fix">
+    <div class="content-fix wow fadeIn" data-wow-duration="2s">
         <div class="container">
 
             <div class="row mt-20 mb-20">
@@ -135,17 +135,17 @@
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15 text-right">
-                           <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
-                           </a>
+                         <a href="{{ route('finishSupplier') }}" class="next" id="nextBtn">FINISH 
+                         </a>
 
-                       </div>
-                   </div>
-                   <hr>
-               </div>
-               <div class="col-md-1">&nbsp;</div>
-           </div>
-       </div>
-   </div>
+                     </div>
+                 </div>
+                 <hr>
+             </div>
+             <div class="col-md-1">&nbsp;</div>
+         </div>
+     </div>
+ </div>
 
 </form>
 <div class="footer">
@@ -153,14 +153,14 @@
         <div class="row">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-               <a href="{{ url('/user-supplier-add') }}" ><button type="button" class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button></a>
-               
-               <a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button></a>
-               
-               <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW BRAND</button></a>
-           </div>
-           <div class="col-md-1 col-sm-1">&nbsp;</div>
-       </div>
-   </div>
+             <a href="{{ url('/user-supplier-add') }}" ><button type="button" class="btn btn-default spbtn"> + ADD NEW SUPPLIER</button></a>
+             
+             <a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button></a>
+             
+             <a href="{{ url('/add-new-brand') }}"><button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW BRAND</button></a>
+         </div>
+         <div class="col-md-1 col-sm-1">&nbsp;</div>
+     </div>
+ </div>
 </div>
 @endsection

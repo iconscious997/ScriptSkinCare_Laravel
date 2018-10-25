@@ -11,7 +11,7 @@
 		</div>
 	</div>
 
-	<div class="content-fix">
+	<div class="content-fix wow fadeIn" data-wow-duration="2s">
 		<div class="container">
 
 			<div class="row mt-20 ">

@@ -2,7 +2,7 @@
 @section('content')
 <form action="{{ route('supplierproductlineedit',$proline->id) }}" method="POST" id="first" enctype="multipart/form-data">
     @csrf
-    <div class="wizard">
+    <div class="wizard bg3">
         <div class="container">
             <div class="row">
                 <h3 class="text-center">MANAGE PRODUCT LINE</h3>
@@ -71,9 +71,9 @@
 
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                     <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block" type="button"> + ADD NEW COMPANY</button></a>
-                 </div>
-                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                       <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block" type="button"> + ADD NEW COMPANY</button></a>
+                   </div>
+                   <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <a href="{{ route('supplierbrandadd') }}"> <button class="btn btn-default btn-block" type="button"> + ADD NEW BRAND</button></a>
                 </div>
             </div>

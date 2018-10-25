@@ -2,7 +2,7 @@
 @section('content')
 <form action="{{ route('supplierbrandaddstore') }}" method="POST" id="first" enctype="multipart/form-data">
     @csrf
-    <div class="wizard">
+    <div class="wizard bg3">
         <div class="container">
             <div class="row">
                 <h3 class="text-center">ADD NEW BRAND</h3>
@@ -47,23 +47,23 @@
                             <div class="upload-btn-wrapper">
                                 <button class="form-control text-left">Upload Logo: (Height: 50px and Width: 200px</button>
                                 <div class="inner-addon right-addon">
-                                 <i class="ti-plus"></i>
-                                 <input type="file" name="brand_logo" id="brand_logo" />
-                                 @if ($errors->has('brand_logo'))
-                                 <span class="inputError">{{ $errors->first('brand_logo') }}</span>
-                                 @endif
-                             </div>
-                         </div>
-                     </div>
+                                   <i class="ti-plus"></i>
+                                   <input type="file" name="brand_logo" id="brand_logo" />
+                                   @if ($errors->has('brand_logo'))
+                                   <span class="inputError">{{ $errors->first('brand_logo') }}</span>
+                                   @endif
+                               </div>
+                           </div>
+                       </div>
 
-                 </div>
+                   </div>
 
-                 <div class="col-md-3">&nbsp;</div>
-             </div>
-             <div class="clearfix">&nbsp;</div>
+                   <div class="col-md-3">&nbsp;</div>
+               </div>
+               <div class="clearfix">&nbsp;</div>
 
 
-             <div class="row">
+               <div class="row">
                 <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
                     <button class="btn btn-dark btn-pad selected" type="submit">Save CHANGES</button>
                 </div>

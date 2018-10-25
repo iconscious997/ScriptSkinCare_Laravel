@@ -1,4 +1,8 @@
 $(function () {
+
+    /* Wow Initialize */
+    new WOW().init();
+    
     $('.button-checkbox').each(function () {
 
         // Settings

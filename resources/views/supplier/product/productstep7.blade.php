@@ -1,7 +1,7 @@
 @extends('supplier.suppliermaster')
 @section('content')
 <style type="text/css">
-	
+
 </style>
 <form action="" method="POST" id="first">
 	@csrf
@@ -14,7 +14,7 @@
 		</div>
 	</div>
 
-	<div class="content-fix">
+	<div class="content-fix wow fadeIn" data-wow-duration="2s">
 		<div class="container">
 
 			<div class="row mt-20 mb-20">
