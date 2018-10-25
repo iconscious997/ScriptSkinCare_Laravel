@@ -78,14 +78,14 @@
 							<td>{{$item->position}}</td>
 							<td>{{$item->label}}</td>
 							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
-							<td><a class="btn btn-green"> RESET</a></td>
+							<td><a class="btn btn-green preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a></td>
 							<td >
 								 
                                 <button type="button" class="btn btn-default viewexistinguser" data-role="{{$item->label}}" data-id="{{$item->id}}" > EDIT</button>
                             
 							</td>
 							{{-- <td class="flex">
-								<button class="btn btn-green "> SAVE</button> 
+								<button class="btn btn-green"> SAVE</button> 
 								<button class="btn btn-green m-l-5"> UNDO</button>
 							</td> --}}
 						</tr>
@@ -192,8 +192,54 @@
 				</div>
 			</div>
 		</div>
+		<!-- The Modal -->
+		<div class="modal" id="myPModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Reset Password for <span id="mfname"></span> <span id="mlname"></span></h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+
+		      <!-- Modal body -->
+		      <form action="{{ url('/updatesupplierpassword') }}" method="post">
+				@csrf
+				<input type="hidden" name="hmid" id="hmid" value="">
+		      <div class="modal-body">		      	
+		      	<div class="form-group">
+		        	<input type="text" class="form-control" name="newpassword"  value="" placeholder="New Password">
+		    	</div>
+		    	<div class="form-group">
+		        	<input type="text" class="form-control" name="confirmpassword"  value="" placeholder="Confirm Password">
+		    	</div>
+		      </div>
+		      <!-- Modal footer -->
+		      <div class="modal-footer">		        			        	
+		      		<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">&nbsp;</div>		      		
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                         <button type="submit" class="btn btn-green btn-block">Submit</button>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">                       
+                          <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Close</button> 
+                    </div>
+                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">&nbsp;</div>
+		      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
 		<script type="text/javascript">
 			$(document).ready(function() {
+
+				$('.preset').on('click', function(e) {
+					$('#mfname').text($(this).attr('fname').toUpperCase());					 
+					$('#mlname').text($(this).attr('lname').toUpperCase());					 					
+					$('#hmid').val($(this).attr('mid'));					 
+					$('#myPModal').modal();
+				});
+
 				var table = $('#customers').DataTable();
 				var buttons = new $.fn.dataTable.Buttons(table, {
 					extend: 'collection',
@@ -231,15 +277,9 @@
 					]
 				}).container().appendTo($('#buttons'));  
 
-
-
-
 				$('.viewexistinguser').on('click', function(e) {
             
-            var supplier_id = $(this).data("id");
-            
-            
-            
+           		var supplier_id = $(this).data("id");            
                 $.ajax({
                     type: "GET",
                     url: "<?php echo url('/get_supplier_all')?>/"+supplier_id,
