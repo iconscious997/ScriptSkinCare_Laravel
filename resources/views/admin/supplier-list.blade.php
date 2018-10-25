@@ -30,10 +30,10 @@
 						</div>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-						<a href="{{ url('/user-supplier-add') }}"><button class="btn btn-dark m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
+						<a href="{{ url('/user-supplier-add') }}"><button class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
 					</div>
 					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
-						<button class="btn btn-dark m-l-5 btn-block"> + ADD NEW PRODUCT</button>
+						<button class="btn btn-green m-l-5 btn-block"> + ADD NEW PRODUCT</button>
 					</div>
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 							<td>{{$item->position}}</td>
 							<td>{{$item->label}}</td>
 							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
-							<td><a class="btn btn-green preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a></td>
+							<td><a class="btn btn-dark preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a></td>
 							<td >
 								
 								<button type="button" class="btn btn-default viewexistinguser" data-role="{{$item->label}}" data-id="{{$item->id}}" > EDIT</button>

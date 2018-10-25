@@ -618,6 +618,12 @@ input:-ms-input-placeholder {
     background-color: #D7DBC2;
     border-color: #333;
 }
+.btn-green:hover {
+    color: #333;
+    background-color: transparent;
+    border-color: #333;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3); 
+}
 .btn-white {
     color: #333;
     background-color: #fff;
