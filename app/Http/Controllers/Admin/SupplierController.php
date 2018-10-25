@@ -951,9 +951,9 @@ class SupplierController extends Controller
 
                    
 
-                    if (isset($request->position) && !empty($request->position)) {
+                    if (isset($request->email) && !empty($request->email)) {
                 
-                        $query[]=['supplier_details.position', 'like','%'. $request->position.'%'];
+                        $query[]=['users.email', 'like','%'. $request->email.'%'];
                     }
 
                      if (isset($request->trading_name) && !empty($request->trading_name)) {
@@ -967,9 +967,9 @@ class SupplierController extends Controller
             if ($request->search=="Brands") {
                 
                     
-                    if (isset($request->user_parent_id) && !empty($request->user_parent_id)) {
+                    if (isset($request->user_parent_id_barnd) && !empty($request->user_parent_id_barnd)) {
                 
-                        $query[]=['supplier_details.id', '=',$request->user_parent_id];
+                        $query[]=['supplier_details.id', '=',$request->user_parent_id_barnd];
                     }
 
             }

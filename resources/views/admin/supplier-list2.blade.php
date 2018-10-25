@@ -100,7 +100,7 @@ and (orientation : portrait) {
 						<div class="panel-heading" role="tab" id="headingOne">
 							<h4 class="panel-title">
 								<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									Search Supplier List
+									Search Suppliers 
 								</a>
 							</h4>
 						</div>
@@ -115,8 +115,8 @@ and (orientation : portrait) {
 										<div class="col-md-12">
 											<div class="form-group">
 												
-				<select name="company_id" id="company_id">
-				<option value="">Select Compnay</option>
+				<select class="form-control" name="company_id" id="company_id">
+				<option value="">Select Registered Business Name</option>
 				@foreach( $company as $role )
 				<option  value="{{ $role['id'] }}" {{ isset($request)?($request->company_id == $role['id'] ? 'selected' : ''):('') }} >{{ $role['business_name'] }}</option>
 
@@ -127,7 +127,7 @@ and (orientation : portrait) {
 												<input type="text" class="form-control" name="trading_name" id="trading_name" placeholder="Trading Name:">
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" name="position" placeholder="Position:" value="{{$request->position}}">
+												<input type="text" class="form-control" name="email" placeholder="Email:" value="{{$request->position}}">
 											</div>
 										</div>
 										<div class="col-md-6">
@@ -170,7 +170,7 @@ and (orientation : portrait) {
 												<input type="text" class="form-control" name="last_name" placeholder="Last Name:" value="{{$request->last_name}}">
 											</div>
 											<div class="form-group">
-												 <select name="user_parent_id" id="user_parent_id">
+												 <select class="form-control" name="user_parent_id" id="user_parent_id">
 				              <option value="">Select Supplier</option>
 				              @foreach( $supplier_admin as $role )
 				              <option  value="{{ $role['id'] }}" {{ isset($request)?($request->user_parent_id == $role['id'] ? 'selected' : ''):('') }}>{{ $role['first_name'] }}  {{ $role['last_name'] }}</option>
@@ -180,7 +180,7 @@ and (orientation : portrait) {
 											</div>
 											<div class="form-group">
 												<select class="form-control" name="role_id" id="role_id">
-															<option value="">Select Roles</option>
+															<option value="">Select User Roles</option>
 															@foreach( $all_roles as $role )
 
 					<option  value="{{ $role['id'] }}" {{ isset($request->role_id)?($request->role_id== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
@@ -226,7 +226,7 @@ and (orientation : portrait) {
 										@csrf
 										<div class="col-md-12">
 											<div class="form-group">
-												<select name="brand_id" id="brand_id">
+												<select class="form-control" name="brand_id" id="brand_id">
 				              <option value="">Select Brand</option>
 				              @foreach( $all_brand as $role )
 				              <option  value="{{ $role['id'] }}" {{ isset($request)?($request->brand_id == $role['id'] ? 'selected' : ''):('') }}>{{ $role['brand_name'] }}</option>
@@ -235,10 +235,10 @@ and (orientation : portrait) {
 				            </select>
 											</div>
 											<div class="form-group">
-												<select name="user_parent_id" id="user_parent_id">
+												<select class="form-control" name="user_parent_id_barnd" id="user_parent_id">
 				              <option value="">Select Supplier</option>
 				              @foreach( $supplier_admin as $role )
-				              <option  value="{{ $role['id'] }}" {{ isset($request)?($request->user_parent_id == $role['id'] ? 'selected' : ''):('') }}>{{ $role['first_name'] }}  {{ $role['last_name'] }}</option>
+				              <option  value="{{ $role['id'] }}" {{ isset($request)?($request->user_parent_id_barnd == $role['id'] ? 'selected' : ''):('') }}>{{ $role['first_name'] }}  {{ $role['last_name'] }}</option>
 				              
 				              @endforeach
 				            </select>

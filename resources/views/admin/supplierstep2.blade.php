@@ -16,7 +16,7 @@
                 <div class="col-md-10">
                     <div class="col-md-6">
                         <div class="row">
-                            <h4>Set-Up Users & Permissions:</h4>
+                            <h4 class="bold-700 font17 mb-5" >Set-Up Users & Permissions:</h4>
                         </div>
                     </div>
                     <div class="col-md-6 mt-10">
