@@ -65,7 +65,7 @@ a:link,
 a:visited,
 a:active,
 a:hover {
-    cursor: pointer;
+    cursor: default;
     text-decoration: none;
     outline: none;
     color: #333;
@@ -437,7 +437,10 @@ p {
 .col-95 {
   float: left;
 }
-
+.logo h3 a {
+    font-family: serif;
+    font-size: 28px;
+}
 /*===================================================================================*/
 /*  Checkbox & Radio Button
 /*===================================================================================*/
@@ -562,12 +565,91 @@ input:-ms-input-placeholder {
     color: #333;
     background-color: #fff;
     border-color: #333;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    position: relative;
+
 }
-.btn-default:active:hover, .btn-default.active:hover {
+.btn-default:hover {
     color: #333;
     background-color: transparent;
     border-color: #333;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.3);  
 }
+.btn-default:focus, .btn-default.focus {
+    color: #333;
+    background-color: #fff;
+    border-color: #333;
+}
+.btn-default::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border: 1px solid rgba(255,255,255,0.5);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.btn-default:hover::before{
+    opacity: 0;
+    -webkit-transform: scale(1.2,1.2);
+    transform: scale(1.2,1.2);
+}
+.btn-default::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    /*background-color: rgba(255,255,255,0.25);*/
+    background-color: rgba(205, 221, 224, 0.25);
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-transform: scale(0.5,0.5);
+    transform: scale(0.5,0.5);
+}
+.btn-default:hover::after{
+    opacity: 1 ;
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);
+    color: #333 !important;
+
+}
+.ripple{
+  position: relative;
+  overflow: hidden; 
+}
+
+.ripple:before {
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.6);
+  content:'';
+  position: absolute;
+  top: 50%; left: 50%;
+  width:0; height:0;
+}
+
+.ripple:focus:before {
+  transition: all 0.5s ease-out;
+  opacity:0;
+  width:160px;
+  height:160px;
+  margin-top:-80px;
+  margin-left:-80px;
+}
+
 .btn-default.active {
     color: #333 !important;
     background-color: transparent !important;
@@ -608,16 +690,7 @@ input:-ms-input-placeholder {
 .cs-pad{
     padding: 5px 65px;
 }
-.btn-default:hover {
-    color: #333;
-    background-color: transparent;
-    border-color: #333;
-}
-.btn-default:focus, .btn-default.focus {
-    color: #333;
-    background-color: #fff;
-    border-color: #333;
-}
+
 /*=================================
 Header & Footer Section
 ==================================*/

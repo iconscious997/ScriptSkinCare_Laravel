@@ -1,6 +1,6 @@
 @extends('supplier.suppliermaster')
 @section('content')
-<div class="wizard">
+<div class="wizard bg3">
     <div class="container">
         <div class="row">
             <h3 class="text-center">PRODUCT LINE LIST</h3>

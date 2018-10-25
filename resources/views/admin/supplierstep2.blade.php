@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <div class="content-fix">
+    <div class="content-fix wow fadeIn" data-wow-duration="2s" >
         <div class="container">
             <div class="row mt-20 mb-20">
                 <div class="col-md-1">&nbsp;</div>
@@ -139,53 +139,53 @@
                     </div>
 
                     <div class="row">
-                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
-                            @if ($errors->has('position'))
-                            <span class="inputError">{{ $errors->first('position') }}</span>
-                            @endif
-                        </div>
-
+                     <div class="form-group col-md-6">
+                        <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
+                        @if ($errors->has('position'))
+                        <span class="inputError">{{ $errors->first('position') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-1">&nbsp;</div>
 
                 </div>
-            </div>
-            <div class="row mt-40 mb-10">
-                <div class="col-md-1">&nbsp;</div>
-                <div class="col-md-10 text-center">
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15">
-                            <a href="{{ route('supplierstep1') }}" class="prev" id="prevBtn"><i class="ti-arrow-left"></i> &nbsp;PREVIOUS</a>
-                        </div>
-                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                            <ul class="pagination pagination-split">
-                                <li class="page-item "><span class="page-link">1</span></li>
-                                <li class="page-item active"><span class="page-link">2</span></li>
-                                <li class="page-item"><span class="page-link">3</span></li>
-                                <li class="page-item"><span class="page-link">4</span></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  mt-15 text-right">
-                            <a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">NEXT &nbsp;<i class="ti-arrow-right"></i></a>
-
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-                <div class="col-md-1">&nbsp;</div>
-            </div>
-            <div class="row">
                 <div class="col-md-1">&nbsp;</div>
 
-                <div class="col-md-10 text-center mt-30 mb-10">
-                    <button class="btn btn-dark" type="button" id="btnsavestep"> SAVE STEP 2 & ACTIVATE USER PROFILE</button>
-                </div>
-                <div class="col-md-1">&nbsp;</div>
             </div>
         </div>
+        <div class="row mt-40 mb-10">
+            <div class="col-md-1">&nbsp;</div>
+            <div class="col-md-10 text-center">
+                <hr>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15">
+                        <a href="{{ route('supplierstep1') }}" class="prev" id="prevBtn"><i class="ti-arrow-left"></i> &nbsp;PREVIOUS</a>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <ul class="pagination pagination-split">
+                            <li class="page-item "><span class="page-link">1</span></li>
+                            <li class="page-item active"><span class="page-link">2</span></li>
+                            <li class="page-item"><span class="page-link">3</span></li>
+                            <li class="page-item"><span class="page-link">4</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  mt-15 text-right">
+                        <a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">NEXT &nbsp;<i class="ti-arrow-right"></i></a>
+
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">&nbsp;</div>
+
+            <div class="col-md-10 text-center mt-30 mb-10">
+                <button class="btn btn-dark" type="button" id="btnsavestep"> SAVE STEP 2 & ACTIVATE USER PROFILE</button>
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+        </div>
     </div>
+</div>
 </form>
 <div class="footer">
     <div class=" text-center">

@@ -15,11 +15,12 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/icons.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+
 	<link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/buttons.dataTables.min.css') }}">
 
 	<link rel="stylesheet" href="{{ asset('assets/css/pages.css') }}">
-	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 	<!-- Custom CSS -->
 	<!-- Sweet Alert -->
 	<link href="{{ asset('assets/plugins/sweet-alert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css">
@@ -29,6 +30,8 @@
 	<link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 	<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+
 	<script type="text/javascript" src="{{ asset('assets/plugins/charts/modernizr.min.js') }}"></script>
 
 	@yield('styles')
@@ -63,6 +66,7 @@
 	{{-- <script src="{{ asset('assets/plugins/notifications/notify.min.js') }}"></script> --}}
 	<script src="{{ asset('assets/plugins/notifications/notify.js') }}"></script>
 	<script src="{{ asset('assets/plugins/notifications/notify-metro.js') }}"></script>
+	<script src="{{ asset('assets/js/wow.min.js') }}"></script>
 	<script src="{{ asset('assets/js/jquery.core.js') }}"></script>
 	<script src="{{ asset('assets/js/scripts.js') }}"></script>
 	@yield('scripts')

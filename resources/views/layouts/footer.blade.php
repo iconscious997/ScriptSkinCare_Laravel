@@ -19,6 +19,7 @@
 {{-- <script src="{{ asset('assets/plugins/notifications/notify.min.js') }}"></script> --}}
 <script src="{{ asset('assets/plugins/notifications/notify.js') }}"></script>
 <script src="{{ asset('assets/plugins/notifications/notify-metro.js') }}"></script>
+<script src="{{ asset('assets/js/wow.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.core.js') }}"></script>
 <script src="{{ asset('assets/js/scripts.js') }}"></script>
 @yield('scripts')
