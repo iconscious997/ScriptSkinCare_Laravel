@@ -75,7 +75,7 @@
                                             @csrf
                                             <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
+                                                    <input type="text" class="form-control" name="business_name" placeholder="Registered Business Name:" value="{{$request->business_name}}">
                                                 </div>
 
                                             </div>
