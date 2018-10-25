@@ -270,6 +270,11 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'retailadd'
 	]);
 
+	Route::get('/clinicactivedeactive/{id}/{status}', [
+		'uses' => 'RetailController@clinicactivedeactive',
+		'as'   => 'clinicactivedeactive'
+	]);
+
 
 	// add new user supplier add
 

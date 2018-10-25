@@ -66,7 +66,7 @@
                     </td>
                     <td>{{$item->gender}}</td>
                     <td>{{date("d-m-Y", strtotime($item->created_date))}}</td>
-                    <td>{{$item->status==0 ? 'Actived' : 'Deactived'}}</td>
+                    <td>{{$item->status==0 ? 'Activated' : 'Deactivated'}}</td>
                     <td>{{$item->signup_source}}</td>
                     <td>{{$item->name}}</td>
                     <td>{{$item->skin_type}}</td>
