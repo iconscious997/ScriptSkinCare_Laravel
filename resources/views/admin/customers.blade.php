@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 pull-right">
                     <div class="dropdown export" >
-                        <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+                        <button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" id="buttons">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 pull-right">
-                   <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
+                   <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-default m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
                </div>
            </div>
        </div>
@@ -74,8 +74,8 @@
                     <td></td>
                     <td></td>                    
                     <td class="flex">
-                        <a href='customeredit/{{$item->id}}' data-id={{$item->id}}><button type="button" class="btn btn-default "> VIEW</button></a> 
-                        <a href='javascript:void()' class='deactivaterow' msg="{{$item->status==1 ? 'Activate' : 'Deactivate'}}" msgconf="{{$item->status==1 ? 'Activated' : 'Deactivated'}}" data-id={{$item->id}}><button class="btn btn-default m-l-5">{{$item->status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a>
+                        <a href='customeredit/{{$item->id}}' data-id={{$item->id}}><button type="button" class="btn btn-dark "> VIEW</button></a> 
+                        <a href='javascript:void()' class='deactivaterow' msg="{{$item->status==1 ? 'Activate' : 'Deactivate'}}" msgconf="{{$item->status==1 ? 'Activated' : 'Deactivated'}}" data-id={{$item->id}}><button class="btn btn-dark m-l-5">{{$item->status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a>
                     </td>
                 </tr>                                
                 @endforeach                             
