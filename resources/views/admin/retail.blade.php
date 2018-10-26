@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-                <button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW RETAIL</button>
+                <a href="{{ url('/retailadd') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW RETAIL</button></a>
             </div>
         </div>
     </div>

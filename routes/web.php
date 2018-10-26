@@ -270,10 +270,32 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'retailadd'
 	]);
 
+	Route::match(['GET','POST'],'/retail-site-list', [
+		'uses' => 'ClinicController@index',
+		'as'   => 'retail-site-list'
+	]);
+
+	Route::get('/retail-site-edit/{id}','ClinicController@clinicedit');
+	Route::post('/clinicstore','ClinicController@clinicstore');
+	Route::get('/new-retail','ClinicController@clinicadd');
+	Route::post('/clinicinsert','ClinicController@clinicinsert');
+
+	Route::match(['GET','POST'],'/retail-user-list', [
+		'uses' 	=> 'RetailController@retailuserlist',
+		'as'	=> 'retail-user-list'
+	]);
+
+
+	Route::get('/new-retail-user', 'RetailController@newretailuser');
+	Route::post('/newretailuserstore', 'RetailController@newretailuserstore');
 
 	Route::post('/retailsitestore', 'RetailController@retailsitestore');
 	Route::post('/retailuserstore', 'RetailController@retailuserstore');
-	Route::get('/retail-user', 'RetailController@retail_user_add');
+	Route::post('/retailuserupdate', 'RetailController@retailuserupdate');
+	Route::match(['GET','POST'],'/retail-user/{id?}', 'RetailController@retail_user_add');
+	Route::get('/get_list_of_retail_user/{id}', 'RetailController@get_list_of_retail_user');
+
+	Route::get('/retail-user-edit/{id}', 'RetailController@retailuseredit');
 
 	// add new user supplier add
 

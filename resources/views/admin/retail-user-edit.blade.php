@@ -1,11 +1,11 @@
 @extends('layouts.master')
 @section('content')
-<form action="{{ url('/retailuserstore') }}" method="POST" id="first">
+<form action="{{ url('/retailuserupdate') }}" method="POST" id="first">
     @csrf
     <div class="wizard">
         <div class="container">
             <div class="row">
-                <h3 class="text-center">RETAIL USER</h3>
+                <h3 class="text-center">EDIT RETAIL USER</h3>
             </div>
         </div>
     </div>
@@ -14,21 +14,9 @@
             <div class="row mt-20 mb-20">
                 <div class="col-md-1">&nbsp;</div>
                 <div class="col-md-10">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <h4 class="bold-700 font17 mb-5" >RETAIL USER:</h4>
-                        </div>
-                    </div>
+                   
                     <div class="col-md-6 mt-10">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 pull-left p-r-0">
-                                <button class="btn btn-dark btn-block" type="button" id="viewexistinguser"> VIEW / EDIT EXISTING USERS</button>
-
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 pull-right p-l-0">
-                                <button class="btn btn-dark btn-block m-l-15" type="button" id="addadditionaluser"> + ADD ADDITIONAL USER</button>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="col-md-1">&nbsp;</div>
@@ -144,30 +132,7 @@
 
             </div>
         </div>
-        <div class="row mt-40 mb-10">
-            <div class="col-md-1">&nbsp;</div>
-            <div class="col-md-10 text-center">
-                <hr>
-                <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15">
-                        <a href="{{ route('retailadd') }}" class="prev" id="prevBtn"><i class="ti-arrow-left"></i> &nbsp;PREVIOUS</a>
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                        <ul class="pagination pagination-split">
-                            <li class="page-item "><span class="page-link">1</span></li>
-                            <li class="page-item active"><span class="page-link">2</span></li>
-                            
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  mt-15 text-right">
-                        <a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">FINSH &nbsp;<i class="ti-arrow-right"></i></a>
-
-                    </div>
-                </div>
-                <hr>
-            </div>
-            <div class="col-md-1">&nbsp;</div>
-        </div>
+       
         <div class="row">
             <div class="col-md-1">&nbsp;</div>
 
@@ -202,67 +167,7 @@
         $('#first').submit();
     });
 
-        $('#addadditionaluser').on('click', function(e) {
-        // clear all fields
-        $('#first_name').val('');
-        $('#last_name').val('');
-        $('#supplier_name').val('');
-        $('#telephone_number').val('');
-        $('#clinic_location').val('');
-        $('#business_address_line_2').val('');
-        $('#user_role').val('');
-        $('#mobile_number').val('');
-        $('#position').val('');
-        $('#email').val('').removeAttr('readonly');
-        $('#password').val('').removeAttr('readonly');
-        $('#whattodo').val('new');
-    });
-
-        $('#viewexistinguser').on('click', function(e) {
-            var spid = $('#supplier_parent_id').val();
-            var clinic_id = $('#clinic_id').val();
-            var html = '';
-            // if( spid != undefined ) {
-                $.ajax({
-                    type: "GET",
-                    url: "<?php echo url('/get_list_of_retail_user')?>/"+clinic_id,
-                    success: function(data) {  
-
-                    // alert("hii");
-                    
-                    $('#supplier_list').append(data);
-                },
-
-            })
-
-            // } else {
-            //     html += '<p>No User Found</p>';
-            // }
-                // get data and show in modal popup
-                $('#modal-data').html(`<div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">List Users</h4>
-                    </div>
-                    <div class="modal-body">
-                    <table class="table display" id="customers">
-                    <thead class="thead-dark">
-                    <tr>
-                    <th>Name</th>
-                    <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody  id="supplier_list">
-                    </tbody>
-                    </table>
-
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>`);
-                $('#myModal').modal();
-            });
+       
     });
 </script>
 @endsection
