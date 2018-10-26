@@ -9,6 +9,7 @@ use Validator;
 use DB;
 use Excel;
 use App\Retail;
+use App\Role;
 
 class RetailController extends Controller
 {
@@ -30,13 +31,77 @@ class RetailController extends Controller
 
     public function index(Request $request)
     {
-         $data=Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
-            ->join('roles','role_user.role_id','=','roles.id')        
-            ->join('clinic_details','retail_details.id','=','retail_details.clinic_id')    
-            ->join('users','retail_details.user_id','=','users.id')
-            ->select('*')->get();
+          
+        if ($request->isMethod('get')) { 
+            $data=Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')        
+                ->join('clinic_details','retail_details.id','=','retail_details.clinic_id')    
+                ->join('users','retail_details.user_id','=','users.id')
+                ->select('*')->get();
+        }
 
-        return view('admin.retail',compact('data'));
+        //needs to do search query 
+        if ($request->isMethod('post')) {
+             $query=[];
+          
+            if (isset($request->business_name) && !empty($request->business_name)) {
+                            
+                $query[]=['clinic_details.clinic_name', 'like','%' . $request->business_name. '%'];                    
+            }
+            
+            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {               
+                
+                $query[]=['clinic_details.telephone_number', 'like','%'. $request->business_telephone_number.'%'];                
+            }
+
+            if (isset($request->website) && !empty($request->website)) {                
+                 $query[]=['clinic_details.clinic_website', 'like','%'. $request->website.'%'];
+            }
+           
+            if (isset($request->first_name) && !empty($request->first_name)) {                
+               $query[]=['retail_details.first_name', 'like','%'. $request->first_name.'%'];                
+            }
+
+            if (isset($request->position) && !empty($request->position)) {                
+                $query[]=['retail_details.position', 'like','%'. $request->position.'%'];
+            }
+
+            if (isset($request->last_name) && !empty($request->last_name)) {
+                $query[]=['retail_details.last_name', 'like','%'. $request->last_name.'%'];
+            }
+
+            if (isset($request->email) && !empty($request->email)) {
+                 $query[]=['retail_details.email', 'like','%'. $request->email.'%'];
+            }
+
+            
+            if (isset($request->pstatus) && !empty($request->pstatus)) {                
+                $query[]=['roles.id', '=',$request->pstatus];                
+            }
+            
+            if (isset($request->status) && !empty($request->status)) {                
+                $query[]=['retail_details.status', '=',$request->status];
+            }
+
+
+            if(isset($query) && !empty($query)){
+
+            $d = Retail::join('clinic_details','retail_details.clinic_id','=','clinic_details.id')
+            ->join('role_user','retail_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','retail_details.user_id','=','users.id')
+            ->where($query);
+             if (isset($request->create_date) && !empty($request->create_date)) {                                
+                $d->whereDate('retail_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );                
+            }
+
+            $data = $d->select('retail_details.id','retail_details.clinic_id','retail_details.first_name','retail_details.last_name','retail_details.position','roles.label','retail_details.email','clinic_details.clinic_name','clinic_details.clinic_location','clinic_details.trading_name','clinic_details.telephone_number','clinic_details.clinic_website','clinic_details.clinic_status','users.id as user_id')->get();
+        }
+     }
+
+
+        $all_roles=Role::all();    
+        return view('admin.retail',compact('data','request','all_roles'));
     }
 
     public function retailadd()

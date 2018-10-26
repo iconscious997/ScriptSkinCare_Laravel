@@ -25,7 +25,6 @@
 						<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu"  id="buttons">
-
 							</ul>
 						</div>
 					</div>

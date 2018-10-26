@@ -259,11 +259,13 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	});
 
 
-	//Retail list
-	Route::get('/retail', [
-		'uses' => 'RetailController@index',
-		'as'   => 'retail'
+	//Retail list	
+	Route::match(['GET', 'POST'],'/retail', [
+		'uses' 	=> 'RetailController@index',
+		'as'	=> 'retail'
 	]);
+
+	
 
 	Route::get('/retailadd', [
 		'uses' 	=> 'RetailController@retailadd',
