@@ -69,7 +69,7 @@
                             <td>{{$item->label}}</td>
                             <td>{{$item->clinic_status==0 ? 'Activated' : 'Deactived'}}</td>                           
                             <td class="flex">                                 
-                                <a href='javascript:void()' class='deactivaterow' msg="{{$item->clinic_status==1 ? 'Activate' : 'Deactivate'}}" msgconf="{{$item->clinic_status==1 ? 'Activated' : 'Deactivated'}}" data-id={{$item->id}}><button class="btn btn-default m-l-5">{{$item->clinic_status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a>
+                                <a href='javascript:void()' class='deactivaterow' msg="{{$item->clinic_status==1 ? 'Activate' : 'Deactivate'}}" msgconf="{{$item->clinic_status==1 ? 'Activated' : 'Deactivated'}}" data-id={{$item->clinic_id}}><button class="btn btn-default m-l-5">{{$item->clinic_status==1 ? 'ACTIVATE' : 'DEACTIVATE'}}</button></a>
                                 </td>
                         </tr>                        
                         @php $i++ @endphp

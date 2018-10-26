@@ -103,6 +103,12 @@ class RetailController extends Controller
             }
 
             $data = $d->select('retail_details.id','retail_details.clinic_id','retail_details.first_name','retail_details.last_name','retail_details.position','roles.label','retail_details.email','clinic_details.clinic_name','clinic_details.clinic_location','clinic_details.trading_name','clinic_details.telephone_number','clinic_details.clinic_website','clinic_details.clinic_status','users.id as user_id')->get();
+        }else{
+             $data=Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')        
+                ->join('clinic_details','clinic_details.id','=','retail_details.clinic_id')    
+                ->join('users','retail_details.user_id','=','users.id')
+                ->select('*')->get();
         }
      }
 
@@ -796,7 +802,7 @@ class RetailController extends Controller
        
         DB::table('clinic_details')
         ->where("clinic_details.id", '=',  $id)
-        ->update(['clinic_details.status'=> $status]);
+        ->update(['clinic_details.clinic_status'=> $status]);
 
         return redirect('/retail');
     }
