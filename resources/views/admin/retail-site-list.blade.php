@@ -31,7 +31,7 @@
                         <th>Address</th>
                         <th>Business Telephone</th>
                         <th>Email</th>
-                        <th>clinic_website</th>
+                        <th>Website</th>
                         
                         <th>Actions</th>
                     </tr>
