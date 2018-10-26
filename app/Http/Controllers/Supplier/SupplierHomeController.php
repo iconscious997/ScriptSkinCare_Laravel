@@ -10,6 +10,7 @@ use Validator;
 use App\Supplier;
 use App\Brand;
 use App\Mymodel\Supplier\Productline;
+use App\Mymodel\Supplier\Product;
 
 class SupplierHomeController extends Controller
 {
@@ -25,7 +26,123 @@ class SupplierHomeController extends Controller
 
 	public function productstep1()
 	{
-		return view('supplier.product.productstep1');
+		// get company id for current user
+		$s = Supplier::where('user_id', \Auth::user()->id)->first();
+		// get brands list
+		$brands = Brand::where('brand_company_id', $s->company_id)->get();
+		// get product line list
+		if( Session::has('productstep1') ) {
+			$product = Product::find(Session::get('productstep1'));
+			$brand_id = $product->brand_id;
+			$proline = Productline::where('brand_id',$brand_id)->get();
+			return view('supplier.product.productstep1', compact('brands', 'product', 'proline') );
+		}
+		// $proline = Productline::find( $id );
+		return view('supplier.product.productstep1', compact('brands') );
+	}
+
+	public function productstep1store(Request $request)
+	{
+		
+		if( !empty( $request->id ) && $request->check_data == 'update' ) {
+			// check for validation
+			$validatedData = $request->validate([
+				'brand_id'     		=> 'required',
+				'product_line_id'	=> 'required',
+				'product_name'     	=> 'required',
+				'product_code'     	=> 'required',
+				'product_size'     	=> 'required',
+			],[
+				'brand_id.required'			=> "Brand Name is Required",
+				'product_line_id.required'	=> "Product Line is Required"
+			]);
+
+			if ($request->file('product_image')) {
+				$randomNumber = time()."_".rand(1000, 9999);
+
+				$imageName = \Auth::user()->id.'_product_'.$randomNumber.'_'.$request->file('product_image')->getClientOriginalExtension();
+
+				$request->file('product_image')->move(
+					base_path() . '/public/images/product', $imageName
+				);
+			} else {
+				$imageName = $request->old_image_name;
+			}
+			$product = Product::find($request->id);
+			$product->brand_id 			= $request->brand_id;
+			$product->product_line_id 	= $request->product_line_id;
+			$product->product_name 		= $request->product_name;
+			$product->product_code 		= $request->product_code;
+			$product->product_size 		= $request->product_size;
+			$product->product_image 	= $imageName;
+			$product->product_text 		= $request->product_text;
+			$product->save();
+			setflashmsg('Record Updated Successfully','1');
+			return redirect()->route('supplierproductstep2');
+		} else {
+			// check for validation
+			$validatedData = $request->validate([
+				'brand_id'     		=> 'required',
+				'product_line_id'	=> 'required',
+				'product_name'     	=> 'required',
+				'product_code'     	=> 'required',
+				'product_size'     	=> 'required',
+				'product_image'     => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+			],[
+				'brand_id.required'			=> "Brand Name is Required",
+				'product_line_id.required'	=> "Product Line is Required"
+			]);
+
+			if ($request->file('product_image')) {
+				$randomNumber = time()."_".rand(1000, 9999);
+
+				$imageName = \Auth::user()->id.'_product_'.$randomNumber.'_'.$request->file('product_image')->getClientOriginalExtension();
+
+				$request->file('product_image')->move(
+					base_path() . '/public/images/product', $imageName
+				);
+
+			} else {
+				$imageName='img_avatar1.png';
+			}
+			// now add data to supplier_details table
+			$product = Product::create([
+				'brand_id'              => $request->brand_id,
+				'product_line_id'       => $request->product_line_id,
+				'product_name'     		=> $request->product_name,
+				'product_code'     		=> $request->product_code,
+				'product_size'     		=> $request->product_size,
+				'product_image'			=> $imageName,
+				'product_text'			=> $request->product_text,
+				'status'                => 0,
+				'created_date'          => date('Y-m-d H:i:s'),
+				'created_by'            => \Auth::user()->id,
+				'modified_by'           => \Auth::user()->id,
+			]);
+
+			// dd($product);
+			if( !empty($product->exists) ) {
+	            // success
+				Session::put('productstep1', $product->id);
+				setflashmsg('Record Inserted Successfully','1');
+				return redirect()->route('supplierproductstep2');
+			} else {
+				setflashmsg('Some error occured. Please try again','0');
+				return redirect()->route('supplierproductstep1');
+			}
+
+		}
+	}
+
+	public function getproductlinebybrand(Request $request)
+	{
+		$brand_id = $request->brand_id;
+		$proline = Productline::where('brand_id',$brand_id)->get();
+		$output = '<option value="" disabled selected>Please select your product line</option>';
+		foreach($proline as $row) {
+			$output .= '<option value="'.$row->id.'">'.$row->productline_name.'</option>';
+		}
+		echo $output;
 	}
 
 	public function productstep2()
@@ -193,7 +310,7 @@ class SupplierHomeController extends Controller
 			// $brands->approved_by = $request->approved_by;
 			$brands->modified_by = \Auth::user()->id;
 			$brands->save();
-			
+
 			setflashmsg('Record Updated Successfully','1');
 			return redirect()->route('supplierbrand');
 		} else {
@@ -286,7 +403,7 @@ class SupplierHomeController extends Controller
 			$proline->productline_name = $request->productline_name;
 			$proline->modified_by = \Auth::user()->id;
 			$proline->save();
-			
+
 			setflashmsg('Record Updated Successfully','1');
 			return redirect()->route('supplierproductline');
 		} else {
