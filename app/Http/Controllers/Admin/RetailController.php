@@ -41,7 +41,7 @@ class RetailController extends Controller
         if ($request->isMethod('get')) { 
             $data=Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')        
-                ->join('clinic_details','retail_details.id','=','retail_details.clinic_id')    
+                ->join('clinic_details','clinic_details.id','=','retail_details.clinic_id')    
                 ->join('users','retail_details.user_id','=','users.id')
                 ->select('*')->get();
         }
