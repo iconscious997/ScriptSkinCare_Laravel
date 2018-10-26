@@ -15,6 +15,7 @@ use App\Role;
 use App\User;
 use App\RoleUser;
 
+
 class RetailController extends Controller
 {
     /**
@@ -35,13 +36,79 @@ class RetailController extends Controller
 
     public function index(Request $request)
     {
-         $data=Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
-            ->join('roles','role_user.role_id','=','roles.id')        
-            ->join('clinic_details','retail_details.clinic_id','=','clinic_details.id')    
-            ->join('users','retail_details.user_id','=','users.id')
-            ->select('*')->get();
+
+          
+        if ($request->isMethod('get')) { 
+            $data=Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')        
+                ->join('clinic_details','retail_details.id','=','retail_details.clinic_id')    
+                ->join('users','retail_details.user_id','=','users.id')
+                ->select('*')->get();
+        }
+
+        //needs to do search query 
+        if ($request->isMethod('post')) {
+             $query=[];
+          
+            if (isset($request->business_name) && !empty($request->business_name)) {
+                            
+                $query[]=['clinic_details.clinic_name', 'like','%' . $request->business_name. '%'];                    
+            }
             
-        return view('admin.retail',compact('data'));
+            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {               
+                
+                $query[]=['clinic_details.telephone_number', 'like','%'. $request->business_telephone_number.'%'];                
+            }
+
+            if (isset($request->website) && !empty($request->website)) {                
+                 $query[]=['clinic_details.clinic_website', 'like','%'. $request->website.'%'];
+            }
+           
+            if (isset($request->first_name) && !empty($request->first_name)) {                
+               $query[]=['retail_details.first_name', 'like','%'. $request->first_name.'%'];                
+            }
+
+            if (isset($request->position) && !empty($request->position)) {                
+                $query[]=['retail_details.position', 'like','%'. $request->position.'%'];
+            }
+
+            if (isset($request->last_name) && !empty($request->last_name)) {
+                $query[]=['retail_details.last_name', 'like','%'. $request->last_name.'%'];
+            }
+
+            if (isset($request->email) && !empty($request->email)) {
+                 $query[]=['retail_details.email', 'like','%'. $request->email.'%'];
+            }
+
+            
+            if (isset($request->pstatus) && !empty($request->pstatus)) {                
+                $query[]=['roles.id', '=',$request->pstatus];                
+            }
+            
+            if (isset($request->status) && !empty($request->status)) {                
+                $query[]=['retail_details.status', '=',$request->status];
+            }
+
+
+            if(isset($query) && !empty($query)){
+
+            $d = Retail::join('clinic_details','retail_details.clinic_id','=','clinic_details.id')
+            ->join('role_user','retail_details.user_id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')
+            ->join('users','retail_details.user_id','=','users.id')
+            ->where($query);
+             if (isset($request->create_date) && !empty($request->create_date)) {                                
+                $d->whereDate('retail_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );                
+            }
+
+            $data = $d->select('retail_details.id','retail_details.clinic_id','retail_details.first_name','retail_details.last_name','retail_details.position','roles.label','retail_details.email','clinic_details.clinic_name','clinic_details.clinic_location','clinic_details.trading_name','clinic_details.telephone_number','clinic_details.clinic_website','clinic_details.clinic_status','users.id as user_id')->get();
+        }
+     }
+
+
+        $all_roles=Role::all();    
+        return view('admin.retail',compact('data','request','all_roles'));
+
     }
 
     public function retailadd()
@@ -113,10 +180,9 @@ class RetailController extends Controller
          if( !Session::has('retail_site_id') ) {
 
              return redirect('/retailadd');
-        }
+         }
 
         
-
          if($id == NULL) $id = Session::get('retail_details_id');
 
           $retail_admin = Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
@@ -143,11 +209,8 @@ class RetailController extends Controller
             return view('admin.retail-user',compact('roles','retailsite','retail_admin'));
 
         }
-
-        
-
-
     }
+
     public function retailuserstore(Request $request)
     {   
 
@@ -318,11 +381,6 @@ class RetailController extends Controller
                 ]);
 
 
-
-                
-
-
-
                 // now add data to retail_details table
                 $retail = Retail::create([
                     'user_id'                   => $user->id,
@@ -379,7 +437,7 @@ class RetailController extends Controller
             }
     }
 
-      public function get_list_of_retail_user($id='')
+    public function get_list_of_retail_user($id='')
     {   
          $data=Retail::where('clinic_id', $id)->get();
 
@@ -409,30 +467,14 @@ class RetailController extends Controller
                        
 
         }
-
         
 
-        if ($request->isMethod('post')) {
-
-
-
-            
-            $query=[];
-
-          
-            if (isset($request->clinic_name) && !empty($request->clinic_name)) {
-                
-                     
-                 
-            
-            $query[]=['clinic_details.clinic_name', 'like','%' . $request->clinic_name. '%'];
-                    
+        if ($request->isMethod('post')) {            
+            $query=[];          
+            if (isset($request->clinic_name) && !empty($request->clinic_name)) {            
+                $query[]=['clinic_details.clinic_name', 'like','%' . $request->clinic_name. '%'];                    
             }
             
-          
-
-           
-
             if (isset($request->first_name) && !empty($request->first_name)) {
                 
                 $query[]=['retail_details.first_name', 'like','%'. $request->first_name.'%'];
@@ -738,12 +780,6 @@ class RetailController extends Controller
                     'modified_by'               => \Auth::user()->id,
                 ]);
 
-                
-             
-            
-           
-
-            
 
             setflashmsg('Record Inserted Successfully','1');
 

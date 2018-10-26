@@ -98,6 +98,7 @@ class SupplierController extends Controller
 
             setflashmsg('Record Inserted Successfully','1');
         }
+
         /*
         if ($validatedData->fails())
         {
@@ -686,88 +687,54 @@ class SupplierController extends Controller
     public function supplierList(Request $request)
     {
           
-
             if ($request->isMethod('get')) {
-
-                //
-                  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
-            ->join('role_user','supplier_details.user_id','=','role_user.user_id')
-            ->join('roles','role_user.role_id','=','roles.id')
-            ->join('users','supplier_details.user_id','=','users.id')
+          
+                $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')
+                ->join('users','supplier_details.user_id','=','users.id')
                 ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
             }
-            
-    
-    if ($request->isMethod('post')) {
-                //
-
-        
-       
+                
+            if ($request->isMethod('post')) {
 
             $query=[];
-
           
             if (isset($request->business_name) && !empty($request->business_name)) {
-                
-                     
-                 
-            
-            $query[]=['company_details.business_name', 'like','%' . $request->business_name. '%'];
-                    
+                            
+                $query[]=['company_details.business_name', 'like','%' . $request->business_name. '%'];                    
             }
             
-            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {
+            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {               
                 
-                
-        $query[]=['company_details.business_telephone_number', 'like','%'. $request->business_telephone_number.'%'];
-                
+                $query[]=['company_details.business_telephone_number', 'like','%'. $request->business_telephone_number.'%'];                
             }
 
-            if (isset($request->website) && !empty($request->website)) {
-                
+            if (isset($request->website) && !empty($request->website)) {                
                  $query[]=['company_details.website', 'like','%'. $request->website.'%'];
             }
-
            
-
-            if (isset($request->first_name) && !empty($request->first_name)) {
-                
-                $query[]=['supplier_details.first_name', 'like','%'. $request->first_name.'%'];
-                
+            if (isset($request->first_name) && !empty($request->first_name)) {                
+               $query[]=['supplier_details.first_name', 'like','%'. $request->first_name.'%'];                
             }
 
-
-            if (isset($request->position) && !empty($request->position)) {
-                
+            if (isset($request->position) && !empty($request->position)) {                
                 $query[]=['supplier_details.position', 'like','%'. $request->position.'%'];
-                
             }
 
             if (isset($request->last_name) && !empty($request->last_name)) {
-                
                 $query[]=['supplier_details.last_name', 'like','%'. $request->last_name.'%'];
             }
 
             if (isset($request->email) && !empty($request->email)) {
-                
                  $query[]=['users.email', 'like','%'. $request->email.'%'];
-
             }
 
-             if (isset($request->position) && !empty($request->position)) {
-                
-
-                
-            }
-
-            if (isset($request->pstatus) && !empty($request->pstatus)) {
-                
-                $query[]=['roles.id', '=',$request->pstatus];
-                
+            if (isset($request->pstatus) && !empty($request->pstatus)) {                
+                $query[]=['roles.id', '=',$request->pstatus];                
             }
             
-            if (isset($request->status) && !empty($request->status)) {
-                
+            if (isset($request->status) && !empty($request->status)) {                
                 $query[]=['supplier_details.status', '=',$request->status];
             }
 
@@ -878,9 +845,7 @@ class SupplierController extends Controller
     }
 
     public function finishSupplier($value='')
-    {
-
-        
+    {        
         session()->forget('first');
         session()->forget('parent_id');
         session()->forget('supplier_parent_id');
@@ -889,6 +854,7 @@ class SupplierController extends Controller
         setflashmsg('Record Inserted Successfully','1');
         return redirect('/supplier');
     }
+
     public function supplierList2(Request $request , $id='')
     {
         // echo "string";
