@@ -106,7 +106,7 @@ class RetailController extends Controller
      }
 
 
-        $all_roles=Role::all();    
+        $all_roles=Role::where('user_type', 2)->where('status', 0)->get();
         return view('admin.retail',compact('data','request','all_roles'));
 
     }
@@ -785,6 +785,16 @@ class RetailController extends Controller
 
             return redirect('/retail-user-list');
 
+    }
+
+
+    public function clinicactivedeactive($id,$status){
+       
+        DB::table('clinic_details')
+        ->where("clinic_details.id", '=',  $id)
+        ->update(['clinic_details.status'=> $status]);
+
+        return redirect('/retail');
     }
 
 

@@ -285,6 +285,10 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'retail-user-list'
 	]);
 
+	Route::get('/clinicactivedeactive/{id}/{status}', [
+		'uses' => 'RetailController@clinicactivedeactive',
+		'as'   => 'clinicactivedeactive'
+	]);
 
 	Route::get('/new-retail-user', 'RetailController@newretailuser');
 	Route::post('/newretailuserstore', 'RetailController@newretailuserstore');
