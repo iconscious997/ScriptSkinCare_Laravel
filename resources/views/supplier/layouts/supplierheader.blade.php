@@ -36,7 +36,7 @@
                         <li><a href="{{ route('supplierproduct') }}" class="{{ request()->is('supplier/product') ? 'active' : '' }}">Product List</a></li>
                         @endcan
                         @can('new_product')
-                        <li><a href="{{ route('supplierproductstep1') }}" class="{{ request()->is('supplier/productstep1') ? 'active' : '' }}">Add New Product</a></li>
+                        <li><a href="{{ route('supplierproductstep1') }}" class="{{ request()->is('supplier/productstep*') ? 'active' : '' }}">Add New Product</a></li>
                         @endcan
                         <li><a href="javascript:void(0)" class="">Manage A Products</a></li>
                         @can('manage_role_permission')

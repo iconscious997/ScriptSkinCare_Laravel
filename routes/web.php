@@ -27,6 +27,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'supplierhome'
 	]);
 
+	Route::get('/getproductlinebybrand', [
+		'uses'	=> 'SupplierHomeController@getproductlinebybrand',
+		'as'	=> 'getproductlinebybrand'
+	]);
+
 	Route::get('/product', [
 		'uses'	=> 'SupplierHomeController@product',
 		'as'	=> 'supplierproduct'
@@ -35,6 +40,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 	Route::get('/productstep1', [
 		'uses'	=> 'SupplierHomeController@productstep1',
 		'as'	=> 'supplierproductstep1'
+	]);
+
+	Route::post('/productstep1store', [
+		'uses'	=> 'SupplierHomeController@productstep1store',
+		'as'	=> 'supplierproductstep1store'
 	]);
 
 	Route::get('/productstep2', [
