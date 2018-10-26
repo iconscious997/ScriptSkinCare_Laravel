@@ -106,8 +106,9 @@ class RetailController extends Controller
         }
      }
 
+ 
 
-        $all_roles=Role::all();    
+        $all_roles=Role::where('user_type', 2)->where('status', 0)->get();
         return view('admin.retail',compact('data','request','all_roles'));
 
     }

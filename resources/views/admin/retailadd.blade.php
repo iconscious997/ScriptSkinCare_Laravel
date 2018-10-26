@@ -7,7 +7,7 @@
 	<div class="wizard">
 		<div class="container">
 			<div class="row">
-				<h3 class="text-center">Retail Site</h3>
+				<h3 class="text-center">RETAIL SITE</h3>
 			</div>
 		</div>
 	</div>
