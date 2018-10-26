@@ -305,6 +305,7 @@ class RetailController extends Controller
             ]);
             // dd($request);
             setflashmsg('Record Updated Successfully','1');
+            Session::put('retail_details_id', $retail->id);
         } else {
 
 
@@ -413,6 +414,7 @@ class RetailController extends Controller
                 }
             
            
+            Session::put('retail_details_id', $retail->id);
 
             });
 
@@ -420,7 +422,7 @@ class RetailController extends Controller
         }
 
 
-        Session::put('retail_details_id', $retail->id);
+        
 
         // if( !empty($retail->exists) ) {
             // success
