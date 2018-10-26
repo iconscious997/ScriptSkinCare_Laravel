@@ -94,7 +94,7 @@
                         <a href="javascript:void(0)" class="{{ request()->is('retail*') ? 'active' : '' }}">Retail</a>
                         <ul class="sub-menu {{ request()->is('retail*') ? 'open' : '' }}" >
                             <li><a href="{{ route('retail') }}" class="{{ request()->is('retail') ? 'active' : '' }}">Retail List</a></li>                        
-                            <li><a href="{{ route('retailadd') }}" class="{{ request()->is('retailadd') ? 'active' : '' }}">Create New Retail</a></li>
+                            <li><a href="{{ route('retailadd') }}" class="{{ request()->is('retailadd') ? 'active' : '' }}">Set-Up New Retail</a></li>
 
                                 <li><a href="{{ route('retail-site-list') }}" class="{{ request()->is('retail-site-list') ? 'active' : '' }}">Manage / Edit Retail</a></li>                        
                                 <li><a href="{{ route('retail-user-list') }}" class="{{ request()->is('retail-user-list') ? 'active' : '' }}">Manage Retail User Permission</a></li>

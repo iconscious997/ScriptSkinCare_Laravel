@@ -24,10 +24,12 @@
             <div class="dropdown export">
                 <button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
                     <span class="caret"></span></button>
-                    <ul class="dropdown-menu"  id="buttons"></ul>
-            </div>
+                    <ul class="dropdown-menu"  id="buttons">
 
-            <div class="col-lg-4 col-md-3 col-sm-4 col-xs-6 pull-right">
+                    </ul>
+                </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-4 col-xs-6 pull-right">
                 <a href="{{ url('/retailadd') }}"><button class="btn btn-green m-l-5 btn-block"> + ADD NEW RETAIL</button></a>
             </div>
         </div>
