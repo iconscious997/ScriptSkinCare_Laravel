@@ -98,16 +98,18 @@
 </form>
 
 <div class="footer">
-	<div class="text-center">
-		<div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
-		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-			<a href="{{ url('/new-retail') }}" ><button type="button" class="btn btn-default ripple spbtn"> + ADD NEW RETAIL</button></a>
 
-			<a href="{{ url('/new-retail-user') }}" > <button type="button" class="btn btn-default ripple spbtn m-l-20"> + ADD A NEW USER</button></a>
+	<div class=" text-center">
+		<div class="">
+			<div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+				<a href="{{ url('/new-retail') }}" ><button type="button" class="btn btn-default ripple spbtn"> + ADD NEW RETAIL</button></a>
 
-			
+				<a href="{{ url('/new-retail-user') }}" > <button type="button" class="btn btn-default ripple spbtn m-l-20"> + ADD A NEW USER</button></a>
+
+			</div>
+			<div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
 		</div>
-		<div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
 	</div>
 </div>
 @endsection

@@ -13,28 +13,26 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
-<div class="wizard">
-    {{-- <div class="col-md-12"> --}}
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-            <h3 class="text-left mt-20">SEARCH CUSTOMERS</h3>
+
+<div class="wizard spcust">
+    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
+        <h3 class="text-left mt-20">SEARCH CUSTOMERS</h3>
+    </div>
+    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 hidden-xs">&nbsp;</div>
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+            <a href="{{ url('/user-supplier-add') }}" class="btn btn-default m-l-5 btn-block"> + ADD NEW SUPPLIER</a>
         </div>
-        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 pull-right">
-                    <div class="dropdown export" >
-                        <button class="btn btn-default m-l-5 btn-block btn-transparent dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" id="buttons">
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 pull-right">
-                   <a href="{{ url('/user-supplier-add') }}"><button type="button" class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
-               </div>
-           </div>
-       </div>
-   {{-- </div> --}}
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+           <div class="dropdown export">
+            <button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu"  id="buttons">
+
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="content-fix ">
     <div class="table-responsive mb-30">

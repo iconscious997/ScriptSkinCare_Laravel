@@ -48,6 +48,13 @@ and (orientation : portrait) {
     .btn-pad {
         padding: 4px 45px !important;
     }
+    .spfooter{
+        position: relative !important;
+        display: grid !important;
+    }
+    .btn .caret {
+        position: absolute;
+    }
 }
 
 
@@ -232,7 +239,8 @@ and (orientation : portrait) {
     .footer {
         padding: 15px !important;
         position: relative !important;
-        display: -webkit-box;
+        /*display: -webkit-box;*/
+        display: grid;
     }
     .content-fix {
         overflow-y: hidden;

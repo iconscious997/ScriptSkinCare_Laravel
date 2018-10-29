@@ -81,4 +81,4 @@
         $('#customers').DataTable();
     } );
 </script>
-@endsection\
+@endsection
