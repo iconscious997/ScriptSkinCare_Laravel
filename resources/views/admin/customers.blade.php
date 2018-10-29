@@ -21,7 +21,7 @@
     <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 hidden-xs">&nbsp;</div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-            <a href="{{ url('/user-supplier-add') }}" class="btn btn-default m-l-5 btn-block"> + ADD NEW SUPPLIER</a>
+            <a href="{{ url('/supplier-company-add') }}" class="btn btn-default m-l-5 btn-block"> + ADD NEW SUPPLIER</a>
         </div>
         <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
            <div class="dropdown export">

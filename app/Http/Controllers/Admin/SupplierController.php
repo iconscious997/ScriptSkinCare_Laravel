@@ -840,7 +840,9 @@ class SupplierController extends Controller
          // dd($all_brand_name);
          // echo $i;
          //  die();
-         $all_roles=Role::all();
+           $all_roles = Role::where('user_type', 1)->where('status', 0)
+        ->get();
+         
         return view( 'admin.supplier-list',compact('data','all_brand_name','request','all_roles'));
     }
 
@@ -1295,8 +1297,10 @@ class SupplierController extends Controller
 
         $user_selected_role = RoleUser::where('user_id', $supplier->user_id)->first();
         $user = User::find($supplier->user_id);
+
+        $company = Company::all();
         
-        return view('admin.supplier-data-edit', compact('supplier','roles','user_selected_role', 'user','supplier_admin'));
+        return view('admin.supplier-data-edit', compact('supplier','roles','user_selected_role', 'user','supplier_admin','company'));
        
 
     }
@@ -1310,6 +1314,7 @@ class SupplierController extends Controller
             $validatedData = $request->validate([
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
+                'company_id'                 => 'required',
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
@@ -1349,6 +1354,7 @@ class SupplierController extends Controller
 
         
             $supplier = Supplier::find($request->id);
+            $supplier->company_id               = $request->company_id;
             $supplier->user_parent_id            = $user_parent_id;
             $supplier->first_name                = $request->first_name;
             $supplier->last_name                 = $request->last_name;
@@ -1490,17 +1496,45 @@ class SupplierController extends Controller
 
     public function addnewuser()
     {
+        $roles = Role::where('user_type', 1)->where('status', 0)
+        ->get();
+        $company = Company::all();
+
+        return view( 'admin.add-new-user',compact('roles','company'));
+
+    }
+
+    public function get_supplier_company($id)
+    {
         
-         $supplier_admin = Supplier::join('role_user','supplier_details.user_id','=','role_user.user_id')
+      
+
+                $supplier_admin = Supplier::join('role_user','supplier_details.user_id','=','role_user.user_id')
              ->join('roles','role_user.role_id','=','roles.id')
+                ->where('supplier_details.company_id', $id)
                 ->where('roles.name', "supplier_admin")
                 ->select('supplier_details.id','supplier_details.first_name','supplier_details.last_name')->get();
-        $roles = Role::where('user_type', 1)->where('status', 0)
-        ->where('name','!=', "supplier_admin")
-        ->get();
 
-        return view( 'admin.add-new-user',compact('supplier_admin','roles'));
+            $send_data='';
+                
 
+            
+                if ($supplier_admin->count()) {
+                    
+                     $send_data.='<option value="">Select Supplier User</option>';
+                    foreach ($supplier_admin as  $value) {
+
+                     $send_data.=' <option  value="'.$value->id.'" >'.$value->first_name.' '.$value->last_name.'</option>';
+
+                 }
+
+                }else{
+
+                       $send_data.=' <option  value=" " > No Supplier </option>';
+                }
+
+                 
+                return $send_data;
     }
 
     public function addnewuserstore(Request $request)
@@ -1511,7 +1545,7 @@ class SupplierController extends Controller
             $validatedData = $request->validate([
                 'first_name'                => 'required',
                 'last_name'                 => 'required',
-                'user_parent_id'            => 'required',
+                'company_id'                => 'required',
                 'business_tel_number'       => 'required|numeric|digits_between:10,12',
                 'business_address_line_1'   => 'required',
                 'user_role'                 => 'required',
@@ -1527,7 +1561,35 @@ class SupplierController extends Controller
 
              
 
-                 $user_parent_id=Supplier::find($request->user_parent_id);
+                   if(isset($request->user_parent_id)){
+
+
+                if ($request->user_role==3 && $request->user_selected_role==3) {
+            
+                   
+                            # code...
+                    setflashmsg('Please Select Different User and User Role','2');
+                    return redirect('/add-new-user');
+
+                }else if($request->user_role==3){
+
+                    setflashmsg('Please Select Different User and User Role ','2');
+
+                    return redirect('/add-new-user');
+
+                }else{
+
+                    $user_parent_id=$request->user_parent_id;
+
+                }
+
+              
+
+            }else{
+
+                $user_parent_id=0;
+              
+            }
                     
                    
 
@@ -1562,8 +1624,8 @@ class SupplierController extends Controller
                 // now add data to supplier_details table
                 $supplier = Supplier::create([
                     'user_id'                   => $user->id,
-                    'company_id'                => $user_parent_id->company_id,
-                    'user_parent_id'            => $request->user_parent_id,
+                    'company_id'                => $request->company_id,
+                    'user_parent_id'            => $user_parent_id,
                     'first_name'                => $request->first_name,
                     'last_name'                 => $request->last_name,
                     'supplier_name'             => "",

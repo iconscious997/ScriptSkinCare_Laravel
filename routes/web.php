@@ -235,6 +235,12 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
 
 	// Company manage
+	Route::get('/supplier-company-add', [
+		'uses' 	=> 'CompanyController@companyadd',
+		'as'	=> 'company-add'
+	]);
+
+	Route::post('/companyinsert','CompanyController@companyinsert');
 	Route::get('/supplier-companyedit/{id}', [
 		'uses' 	=> 'CompanyController@companyedit',
 		'as'	=> 'companyedit'
@@ -334,6 +340,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 
 	Route::post('/addnewuserstore', 'SupplierController@addnewuserstore')->name('addnewuserstore');
 
+	Route::get('get_supplier_company/{id}','SupplierController@get_supplier_company');
 
 	// add new brand 
 

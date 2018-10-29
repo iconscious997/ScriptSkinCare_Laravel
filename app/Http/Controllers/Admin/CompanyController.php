@@ -102,15 +102,49 @@ class CompanyController extends Controller
 
     }
 
-    // public function companyadd()
-    // {
-    //     return view('admin.companyadd');
-    // }
+    public function companyadd()
+    {
+
+
+        return view('admin.company-add');
+    }
 
     public function companyedit($id)
     {        
        $company = Company::find($id);
        return view('admin.companyedit', compact('company'));
+
+    }
+
+    public function companyinsert(Request $request)
+    {
+        
+          $validatedData = $request->validate([
+            'registered_business_name'  => 'required',
+            'trading_name'              => 'required',
+            'abn'                       => 'required',
+            'address'                   => 'required',
+            'business_telephone'        => 'required|numeric|digits_between:10,12',
+            'email_address'             => 'required|email',
+            'website'                   => 'required|url',
+        ]);
+
+          $company = Company::create([
+                'business_name'                 => request('registered_business_name'),
+                'trading_name'                  => request('trading_name'),
+                'abn'                           => request('abn'),
+                'address'                       => request('address'),
+                'business_telephone_number'     => request('business_telephone'),
+                'email_address'                 => request('email_address'),
+                'website'                       => request('website'),
+                'status'                        => 0,
+                'created_date'                  => date('Y-m-d H:i:s'),
+                'created_by'                    => \Auth::user()->id,
+                'modified_by'                   => \Auth::user()->id,
+            ]);
+
+            setflashmsg('Record Inserted Successfully','1'); 
+             return redirect('/supplier-company-list');
 
     }
 

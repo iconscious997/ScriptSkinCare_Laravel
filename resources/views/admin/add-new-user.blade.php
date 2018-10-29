@@ -57,24 +57,49 @@
                         <div class="form-group col-md-6">
 
 
-                            <select name="user_parent_id" id="user_parent_id">
-                                <option value="">Select Supplier User</option>
-                                @foreach( $supplier_admin as $role )
-                                <option  value="{{ $role['id'] }}" >{{ $role['first_name'] }} {{ $role['last_name'] }}</option>
+                            <select name="company_id" id="company_id" onchange="supplier_user(this.value);">
+                                <option value="">Select Company</option>
+                                @foreach( $company as $role )
+                                <option  value="{{ $role['id'] }}" >{{ $role['business_name'] }}</option>
 
                                 @endforeach
+                            </select>
+                            @if ($errors->has('company_id'))
+                            <span class="inputError">{{ $errors->first('company_id') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group col-md-6">
+
+
+                            <select name="user_parent_id" id="user_parent_id">
+                                <option value="">Select Supplier User</option>
+                               
                             </select>
                             @if ($errors->has('user_parent_id'))
                             <span class="inputError">{{ $errors->first('user_parent_id') }}</span>
                             @endif
                         </div>
-                        <div class="form-group col-md-6">
+                       
+                    </div>
+                        <div class="row">
+
+                         <div class="form-group col-md-6">
                             <input type="text" class="form-control" name="business_tel_number" id="business_tel_number" placeholder="Business Telephone No:" value="{{ !empty($supplier->business_tel_number) ? $supplier->business_tel_number : old('business_tel_number') }}">
                             @if ($errors->has('business_tel_number'))
                             <span class="inputError">{{ $errors->first('business_tel_number') }}</span>
                             @endif
                         </div>
+                        
+                         <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
+                            @if ($errors->has('position'))
+                            <span class="inputError">{{ $errors->first('position') }}</span>
+                            @endif
+                        </div>
+
                     </div>
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <input type="text" class="form-control" name="business_address_line_1" id="business_address_line_1" placeholder="Business Address:" value="{{ !empty($supplier->business_address_line_1) ? $supplier->business_address_line_1 : old('business_address_line_1') }}">
@@ -123,15 +148,7 @@
                             @endif
                         </div>
                     </div>
-                      <div class="row">
-                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="position" id="position" placeholder="Position :" value="{{ !empty($supplier->position) ? $supplier->position : old('position') }}">
-                            @if ($errors->has('position'))
-                            <span class="inputError">{{ $errors->first('position') }}</span>
-                            @endif
-                        </div>
 
-                    </div>
                     <div class="col-md-1">&nbsp;</div>
 
                 </div>
@@ -153,7 +170,7 @@
         <div class="">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                <a href="{{ url('/user-supplier-add') }}"><button class="btn btn-default spbtn" type="button"> + ADD NEW SUPPLIER</button></a>
+                <a href="{{ url('/supplier-company-add') }}"><button class="btn btn-default spbtn" type="button"> + ADD NEW SUPPLIER</button></a>
                    
 
                    
@@ -191,5 +208,27 @@
 
         
     });
+
+    function supplier_user(id) {
+        // body...
+        if (id) {
+
+            $.ajax({
+
+            type:"GET",
+            url:"<?php echo url('/get_supplier_company')?>/"+id,
+             success: function(data) {  
+                   
+                    
+                    $('#user_parent_id').html(data);
+                },
+        });
+            
+        }else{
+
+            $('#user_parent_id').html('<option value="">Select Supplier User</option>');
+        } 
+        
+    }
 </script>
 @endsection
