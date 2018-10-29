@@ -97,7 +97,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'supplierproductstep10'
 	]);
 
-	Route::get('/company', [
+	Route::match(['GET','POST'],'/company', [
 		'uses'	=> 'SupplierHomeController@company',
 		'as'	=> 'suppliercompany'
 	]);
@@ -105,6 +105,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 	Route::get('/companyadd', [
 		'uses'	=> 'SupplierHomeController@companyadd',
 		'as'	=> 'suppliercompanyadd'
+	]);
+
+	Route::match(['GET', 'POST'],'/companyedit/{id}', [
+		'uses'	=> 'SupplierHomeController@companyedit',
+		'as'	=> 'suppliercompanyedit'
 	]);
 
 	Route::match(['GET', 'POST'],'/brand', [

@@ -190,10 +190,126 @@ class SupplierHomeController extends Controller
 		return view('supplier.product.productstep10');
 	}
 
-	public function company()
+	public function company(Request $request)
 	{
-		$data = $all_roles = [];
-		return view('supplier.product.list', compact('data', 'all_roles') );
+		
+
+            $open = false;
+		if ($request->isMethod('post')) {
+			$d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id');
+			if( !empty($request->business_name) ) {
+				$open = true;
+				$d->where('company_details.business_name', 'LIKE', '%'.$request->business_name.'%');
+			}
+			if( !empty($request->trading_name) ) {
+				$open = true;
+				$d->where('company_details.trading_name', 'LIKE', '%'.$request->trading_name.'%');
+			}
+
+
+			if( !empty($request->business_telephone_number) ) {
+				$open = true;
+				$d->where('company_details.business_telephone_number', 'LIKE', '%'.$request->business_telephone_number.'%');
+			}
+			if( !empty($request->email) ) {
+				$open = true;
+				$d->where('company_details.email_address', 'LIKE', '%'.$request->email.'%');
+			}
+			if( !empty($request->website) ) {
+						$open = true;
+						$d->where('company_details.website', 'LIKE', '%'.$request->website.'%');
+					}
+
+			if(isset($request->status) ) {
+
+				$open = true;
+				$d->where('company_details.status', '=', $request->status);
+
+			}
+			if ( !empty($request->create_date) ) {
+				$open = true;
+				$d->whereDate('company_details.created_date', '=', covertDateServer($request->create_date) );
+			}
+
+			$data = $d->where('supplier_details.id','=',\Auth::user()->id)->get();
+
+
+		} else {
+
+			  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                ->select('company_details.*')
+                ->where('supplier_details.id','=',\Auth::user()->id)
+                ->get();
+		}
+
+		   $i=0;
+
+                        $all_brand_name=array();
+                        $user_parent_name=array();
+                     foreach ($data as $value) {
+                            
+                            $temp_data=array();
+                        if($value->user_parent_id!=0){
+
+
+                            $user_parent=Supplier::find($value->user_parent_id);
+
+                           $temp_data=$user_parent->first_name." ".$user_parent->last_name;
+
+                        }else{
+
+                            $temp_data="-";
+                        }
+
+                 array_push($user_parent_name, $temp_data);
+                                
+                                if ($value->brand_ids!=null) {
+                                    $i++;
+                                    # code...
+                                    $add_brand_tmp=array();
+                                    $tmp_remove = explode(',', $value->brand_ids);
+
+                                 foreach ($tmp_remove as $sub) {
+                    
+                                         
+                                        if (isset($sub) && !empty($sub)) {
+                                            # code...
+                                            $brands_data = Brand::find( $sub); 
+                                          
+
+                                          array_push($add_brand_tmp, $brands_data->brand_name);
+
+                                        }
+
+                                         
+                                        
+                                            // if( $sub!=$brands->id) {
+                                                // array_push($add_brand_tmp, $sub);
+
+                                               
+                                            // }
+
+                                        // echo $sub;
+                                    }
+                                    $temp_data=implode(",", $add_brand_tmp);
+                             // echo $value->brand_ids;
+                             
+                             
+                                }else{
+
+                                    $temp_data="-";
+                                }
+                             
+
+                             array_push($all_brand_name, $temp_data);
+                              
+
+                         }
+         
+
+		
+
+		return view('supplier.company.list', compact('data', 'open','request','all_brand_name') );
 	}
 
 	public function companyadd()
@@ -201,6 +317,28 @@ class SupplierHomeController extends Controller
 		return view('supplier.product.add');
 	}
 
+	public function companyedit($id, Request $request)
+	{
+
+		if ($request->isMethod('post')) {
+
+
+
+
+		}else{
+
+			$company=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+                ->select('company_details.*')
+                ->where('supplier_details.id','=',\Auth::user()->id)
+                ->where('company_details.id','=',$id)
+                ->first();
+
+                
+		return view('supplier.company.edit', compact('company','request') );
+
+		}
+		
+	}
 	public function brand(Request $request)
 	{
 		$open = false;
