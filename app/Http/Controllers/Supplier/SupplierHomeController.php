@@ -237,7 +237,10 @@ class SupplierHomeController extends Controller
 		} else {
 
 			  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
-                ->select('company_details.*')
+                ->join('role_user','supplier_details.user_id','=','role_user.user_id')
+                ->join('roles','role_user.role_id','=','roles.id')
+                ->join('users','supplier_details.user_id','=','users.id')
+                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')
                 ->where('supplier_details.id','=',\Auth::user()->id)
                 ->get();
 		}
