@@ -97,6 +97,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'supplierproductstep10'
 	]);
 
+	Route::get('/common', [
+		'uses'	=> 'SupplierHomeController@common',
+		'as'	=> 'suppliercompanydashborad'
+	]);
+
 	Route::match(['GET','POST'],'/company', [
 		'uses'	=> 'SupplierHomeController@company',
 		'as'	=> 'suppliercompany'

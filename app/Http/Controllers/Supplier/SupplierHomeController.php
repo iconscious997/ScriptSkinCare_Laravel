@@ -190,11 +190,15 @@ class SupplierHomeController extends Controller
 		return view('supplier.product.productstep10');
 	}
 
+	public function common() {
+		return view('supplier.common');
+	}
+
 	public function company(Request $request)
 	{
 		
 
-            $open = false;
+		$open = false;
 		if ($request->isMethod('post')) {
 			$d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id');
 			if( !empty($request->business_name) ) {
@@ -216,9 +220,9 @@ class SupplierHomeController extends Controller
 				$d->where('company_details.email_address', 'LIKE', '%'.$request->email.'%');
 			}
 			if( !empty($request->website) ) {
-						$open = true;
-						$d->where('company_details.website', 'LIKE', '%'.$request->website.'%');
-					}
+				$open = true;
+				$d->where('company_details.website', 'LIKE', '%'.$request->website.'%');
+			}
 
 			if(isset($request->status) ) {
 
@@ -236,79 +240,79 @@ class SupplierHomeController extends Controller
 
 		} else {
 
-			  $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
-                ->join('role_user','supplier_details.user_id','=','role_user.user_id')
-                ->join('roles','role_user.role_id','=','roles.id')
-                ->join('users','supplier_details.user_id','=','users.id')
-                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')
-                ->where('supplier_details.id','=',\Auth::user()->id)
-                ->get();
+			$data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+			->join('role_user','supplier_details.user_id','=','role_user.user_id')
+			->join('roles','role_user.role_id','=','roles.id')
+			->join('users','supplier_details.user_id','=','users.id')
+			->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')
+			->where('supplier_details.id','=',\Auth::user()->id)
+			->get();
 		}
 
-		   $i=0;
+		$i=0;
 
-                        $all_brand_name=array();
-                        $user_parent_name=array();
-                     foreach ($data as $value) {
-                            
-                            $temp_data=array();
-                        if($value->user_parent_id!=0){
+		$all_brand_name=array();
+		$user_parent_name=array();
+		foreach ($data as $value) {
+			
+			$temp_data=array();
+			if($value->user_parent_id!=0){
 
 
-                            $user_parent=Supplier::find($value->user_parent_id);
+				$user_parent=Supplier::find($value->user_parent_id);
 
-                           $temp_data=$user_parent->first_name." ".$user_parent->last_name;
+				$temp_data=$user_parent->first_name." ".$user_parent->last_name;
 
-                        }else{
+			}else{
 
-                            $temp_data="-";
-                        }
+				$temp_data="-";
+			}
 
-                 array_push($user_parent_name, $temp_data);
-                                
-                                if ($value->brand_ids!=null) {
-                                    $i++;
+			array_push($user_parent_name, $temp_data);
+			
+			if ($value->brand_ids!=null) {
+				$i++;
                                     # code...
-                                    $add_brand_tmp=array();
-                                    $tmp_remove = explode(',', $value->brand_ids);
+				$add_brand_tmp=array();
+				$tmp_remove = explode(',', $value->brand_ids);
 
-                                 foreach ($tmp_remove as $sub) {
-                    
-                                         
-                                        if (isset($sub) && !empty($sub)) {
+				foreach ($tmp_remove as $sub) {
+					
+					
+					if (isset($sub) && !empty($sub)) {
                                             # code...
-                                            $brands_data = Brand::find( $sub); 
-                                          
+						$brands_data = Brand::find( $sub); 
+						
 
-                                          array_push($add_brand_tmp, $brands_data->brand_name);
+						array_push($add_brand_tmp, $brands_data->brand_name);
 
-                                        }
+					}
 
-                                         
-                                        
+					
+					
                                             // if( $sub!=$brands->id) {
                                                 // array_push($add_brand_tmp, $sub);
 
-                                               
+					
                                             // }
 
                                         // echo $sub;
-                                    }
-                                    $temp_data=implode(",", $add_brand_tmp);
+				}
+				$temp_data=implode(",", $add_brand_tmp);
                              // echo $value->brand_ids;
-                             
-                             
-                                }else{
+				
+				
+			}else{
 
-                                    $temp_data="-";
-                                }
-                             
+				$temp_data="-";
+			}
+			
 
-                             array_push($all_brand_name, $temp_data);
-                              
+			array_push($all_brand_name, $temp_data);
+			
 
-                         }
-         
+		}
+		
 
 		
 
@@ -331,13 +335,13 @@ class SupplierHomeController extends Controller
 		}else{
 
 			$company=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
-                ->select('company_details.*')
-                ->where('supplier_details.id','=',\Auth::user()->id)
-                ->where('company_details.id','=',$id)
-                ->first();
+			->select('company_details.*')
+			->where('supplier_details.id','=',\Auth::user()->id)
+			->where('company_details.id','=',$id)
+			->first();
 
-                
-		return view('supplier.company.edit', compact('company','request') );
+			
+			return view('supplier.company.edit', compact('company','request') );
 
 		}
 		

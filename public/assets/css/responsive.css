@@ -55,6 +55,9 @@ and (orientation : portrait) {
     .btn .caret {
         position: absolute;
     }
+    #footer.width50 {
+        width: 100% !important;
+    }
 }
 
 
@@ -279,5 +282,8 @@ and (orientation : portrait) {
     .supplier-pagination {
         position: relative;
         bottom: 0;
+    }
+    #footer.width50 {
+        width: 100% !important;
     }
 }
