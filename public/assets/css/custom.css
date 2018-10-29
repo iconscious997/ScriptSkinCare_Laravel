@@ -102,7 +102,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 p {
     line-height: 1.5;
 }
-
+.bgwhite{
+    background-color: #fff;
+}
 .no-margin {
     margin: 0;
 }
@@ -699,6 +701,9 @@ header{
     z-index: 99;
     width: 100%;
     display: block;
+}
+#footer.width50 {
+    width: 50% !important;
 }
 
 /*=================================
@@ -1591,11 +1596,11 @@ li.services a::after {
 }
 
 .export .dropdown-menu{
-   min-width: 100%;
-   border-radius: 0;
-   margin: 0 5px;
-   /*position: relative;*/
-   padding: 0;
+ min-width: 100%;
+ border-radius: 0;
+ margin: 0 5px;
+ /*position: relative;*/
+ padding: 0;
 }
 .gobtn{
     padding: 7.5px 12px;
@@ -1619,13 +1624,13 @@ li.services a::after {
 }
 
 .filter-section li a {
- display: block;
- color: #333;
- text-align: center;
- padding: 5px 10px;
- text-decoration: none;
- font-size: 12px;
- margin-top: 10px;
+   display: block;
+   color: #333;
+   text-align: center;
+   padding: 5px 10px;
+   text-decoration: none;
+   font-size: 12px;
+   margin-top: 10px;
 }
 
 .filter-section .active {
@@ -1737,6 +1742,13 @@ li.services a::after {
     padding: 25px 25px;
     height: 100vh;
 }
+.dashblock2{
+    padding: 25px 25px;
+    height: 50vh;
+}
+.dashblock2 .mt-40{
+    padding: 50px;
+}
 .dashboard h4{
     margin-bottom: 40px;
     font-weight: 600;
@@ -1769,12 +1781,12 @@ li.services a::after {
 }
 
 .btn-search {
- color: #333;
- position: relative;
- right: 10px;
- font-size: 1.2rem;
- float: right;
- margin-top: -20px;
+   color: #333;
+   position: relative;
+   right: 10px;
+   font-size: 1.2rem;
+   float: right;
+   margin-top: -20px;
 }
 .h-34{
     height: 34px;

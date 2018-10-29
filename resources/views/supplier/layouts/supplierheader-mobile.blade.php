@@ -69,7 +69,7 @@
 		<li>
 			<a href="javascript:void(0)" id="btn-1" data-toggle="collapse" data-target="#submenu_1" aria-expanded="false" class="" >
 				<div class="col-xs-12">
-					Companys
+					Company Details,Brands & Users
 				</div>
 			</a>
 			<ul class="nav collapse" id="submenu_1" role="menu" aria-labelledby="btn-1">

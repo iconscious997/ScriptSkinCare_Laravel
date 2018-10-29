@@ -5,34 +5,28 @@
 	border-radius: 0; 
 }
 </style>
-<script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-
-<div class="wizard">
+<div class="wizard bg3">
 	<div class="col-md-12">
 		<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-10">
-			<h3 class="text-left">SUPPLIER LIST / RESULTS</h3>
+			<h3 class="text-left">[Company Name]</h3>
 		</div>
 		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
+					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductstep1') }}';"> + ADD NEW PRODUCT LINE</button>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
+					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductstep1') }}';"> + ADD NEW BRAND</button>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
 					<div class="dropdown export">
-						<button class="btn btn-dark m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+						<button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu"  id="buttons">
+
 							</ul>
 						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-						<a href="{{ url('/supplier-company-add') }}"><button class="btn btn-green m-l-5 btn-block"> + ADD NEW SUPPLIER</button></a>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
-						<button class="btn btn-green m-l-5 btn-block"> + ADD NEW PRODUCT</button>
 					</div>
 				</div>
 			</div>
@@ -80,7 +74,7 @@
 							<td><a class="btn btn-dark preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a></td>
 							<td >
 								
-								<button type="button" class="btn btn-default viewexistinguser" data-role="{{$item->label}}" data-id="{{$item->id}}" > EDIT</button>
+								<button type="button" class="btn btn-dark viewexistinguser" data-role="{{$item->label}}" data-id="{{$item->id}}" > EDIT</button>
 								
 							</td>
 							{{-- <td class="flex">
@@ -98,15 +92,63 @@
 				</table>
 			</div>
 		</div>
-		<div id="footer">
+		<div id="footer" class="width50">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6 col-xs-12">
+					<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingTwo">
+								<h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+										Search Brands
+									</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body">
+									<div class="clearfix">&nbsp;</div>
+									<div class="accordionblock">
+										<div class="row">
+											<form action="" method="post">
+												@csrf
+												<div class="col-md-12">
+													<div class="form-group">
+														<input type="text" class="form-control" name="" placeholder="Brand Name:" value="">
+													</div>
+
+													<div class="form-group">
+														<input type="text" class="form-control" name="" placeholder="Supplier: [Default By Log-In]" value="">
+													</div>
+
+													<div class="form-group">
+														<input type="text" class="form-control" name="" placeholder="Status:" value="">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<p class="advsearch">Advanced Search</p>
+												</div>
+												<div class="col-md-6">
+													<p>
+														<input type="hidden" name="search" value="Users">
+														<button class="btn btn-default pull-right" type="submit">VIEW RESULTS</button>
+													</p>
+
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xs-12">
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
 								<h4 class="panel-title">
 									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Search Supplier List
+										Search Users
 									</a>
 								</h4>
 							</div>
@@ -115,71 +157,31 @@
 									<div class="clearfix">&nbsp;</div>
 									<div class="accordionblock">
 										<div class="row">
-
-											<form action="{{ url('/supplier') }}" method="post">
+											<form action="" method="post">
 												@csrf
-												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
+												<div class="col-md-12">
 													<div class="form-group">
-														<input type="text" class="form-control" name="business_name" placeholder="Company:" value="{{$request->business_name}}">
+														<input type="text" class="form-control" name="" placeholder="Last Name:" value="">
 													</div>
+
 													<div class="form-group">
-														<input type="text" class="form-control" name="first_name" placeholder="First Name:" value="{{$request->first_name}}">
+														<input type="text" class="form-control" name="" placeholder="Email:" value="">
 													</div>
+
 													<div class="form-group">
-														
-
-														<div class="form-group">
-															<input type="text" class="form-control" name="position" placeholder="Position:" value="{{$request->position}}">
-														</div>	
-
+														<input type="text" class="form-control" name="" placeholder="User Role:" value="">
 													</div>
 												</div>
-												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-													<div class="form-group">
-														<input type="text" class="form-control" name="business_telephone_number"  value="{{$request->business_telephone_number}}"placeholder="Business Phone No:">
-													</div>
-													<div class="form-group">
-														<input type="text" class="form-control" name="last_name"  value="{{$request->last_name}}" placeholder="Last Name:">
-													</div>
-													<div class="form-group">
-														<select class="form-control" name="pstatus">
-															<option value="">Select Permission Status</option>
-															{{-- @foreach( $all_roles as $role )
-
-															<option  value="{{ $role['id'] }}" {{ isset($request->pstatus)?($request->pstatus== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
-
-															@endforeach --}}
-														</select>	
-													</div>
+												<div class="col-md-6">
+													<p class="advsearch">Advanced Search</p>
 												</div>
-												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-													<div class="form-group">
-														<input type="text" class="form-control" name="website" value="{{$request->website}}" placeholder="Website:">
-													</div>
-													<div class="form-group">
-														<input type="text" class="form-control" name="email" value="{{$request->email}}" placeholder="Email:">
-													</div>
-													<div class="form-group">
-														<select class="form-control" name="status">
-															<option value="">Select Status</option>
-															{{-- <option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
-															<option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option> --}}
-														</select>
+												<div class="col-md-6">
+													<p>
+														<input type="hidden" name="search" value="Users">
+														<button class="btn btn-default pull-right" type="submit">VIEW RESULTS</button>
+													</p>
 
-													</div>
 												</div>
-												<div class="col-md-3 col-lg-3 col-sm-3 col-xs-12">
-													<div class="form-group">
-														<input type="text" class="form-control datepicker"  name="create_date"  value="{{$request->create_date}}" placeholder="Date Created:" readonly="">
-													</div>
-													<div class="form-group">
-														&nbsp;
-													</div>
-													<div class="form-group">
-														<button class="btn btn-default font12 mt-5 width100 p-7">APPLY FILTER</button>
-													</div>
-												</div>
-
 											</form>
 										</div>
 									</div>
@@ -187,7 +189,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -441,3 +442,6 @@
 		</script>
 		@endsection
 
+		@section('scripts')
+		@include('layouts.datatablejs')
+		@endsection
