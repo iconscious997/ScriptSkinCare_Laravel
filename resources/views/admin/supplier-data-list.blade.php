@@ -31,7 +31,7 @@
 					<th>User Parent Name</th>
 					<th>Registered Business Name</th>
 					<th>Address</th>
-					<th>Business Tellphone Number</th>
+					<th>Business Telephone Number</th>
 					<th>Phone Number</th>
 					<th>User Role</th>
 					<th>Email</th>

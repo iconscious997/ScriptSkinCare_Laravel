@@ -427,7 +427,7 @@
 
 				if($.trim($("#status").val())=="" || $.trim($("#status").val())==null)
 				{
-					$("#statuserror").text("Please enter position");
+					$("#statuserror").text("Please enter status");
 					$("#status").focus();
 					return false;
 				}

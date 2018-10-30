@@ -904,7 +904,7 @@ class SupplierController extends Controller
                     $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );                
                 }
 
-                $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
+                $data = $d->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus','users.id as user_id')->get();
             }else if (isset($request->create_date) && !empty($request->create_date)) {
 
                  $d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
@@ -914,14 +914,14 @@ class SupplierController extends Controller
                 
                 $d->whereDate('supplier_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );            
 
-                $data = $d->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
+                $data = $d->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus','users.id as user_id')->get();
             }else{
 
                 $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
                 ->join('role_user','supplier_details.user_id','=','role_user.user_id')
                 ->join('roles','role_user.role_id','=','roles.id')
                 ->join('users','supplier_details.user_id','=','users.id')
-                ->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')->get();
+                ->select('supplier_details.*','company_details.business_name','company_details.trading_name','company_details.website','roles.label','users.email','supplier_details.status as sstatus','users.id as user_id')->get();
             }            
 
         }
@@ -1388,8 +1388,8 @@ class SupplierController extends Controller
                             <div class="form-group col-md-6">
                                 <select name="status" id="status">
                                     <option value="">Select Status</option>
-                                    <option value="0" '.($data->status==0 ? 'selected' : '').' >Active</option>
-                                    <option value="1" '.($data->status== 1 ? 'selected' : '') .'>Deactive</option>
+                                    <option value="0" '.($data->sstatus==0 ? 'selected' : '').' >Active</option>
+                                    <option value="1" '.($data->sstatus== 1 ? 'selected' : '') .'>Deactive</option>
                                 </select>          
                                 <span class="inputError" id="statuserror"></span>          
                             </div>
