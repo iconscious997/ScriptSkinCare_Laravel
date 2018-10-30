@@ -130,6 +130,13 @@ class RetailController extends Controller
             'telephone_number'          => 'required|numeric|digits_between:10,12',
             'clinic_email'              => 'required|email',
             'clinic_website'            => 'required|url',
+        ],[
+            'clinic_name.required'      => 'Retail Name is required',
+            'trading_name.required'     => 'Trading Name is required',
+            'clinic_location.required'  => 'Retail Location is required',
+            'telephone_number.required' => 'Telephone is required',
+            'clinic_email.required'     => 'Retail Email is required',
+            'clinic_website.required'   => 'Retail Website is required'                          
         ]);
 
         // here check if id is present then update data
@@ -223,7 +230,13 @@ class RetailController extends Controller
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
                 
             ],[
-                'clinic_location.required' => 'Business Address is Required'
+                'first_name.required'       => 'First Name is required',
+                'last_name.required'        => 'Last Name is required',
+                'telephone_number.required' => 'Telephone is required',
+                'clinic_location.required'  => 'Retail Location is required',
+                'user_role.required'        => 'User Role is required',
+                'position.required'         => 'Position is required',
+                'mobile_number.required'    => 'Mobile is required'                          
             ]);
             
             if(isset($request->user_parent_id)){
@@ -295,8 +308,16 @@ class RetailController extends Controller
                 // check for available email address in user table
                 'email'                     => 'required|string|email|max:255|unique:users',
                 'password'                  => 'required|string',
-            ],[
-                'clinic_location.required' => 'Business Address is Required'
+            ],[                
+                'first_name.required'       => 'First Name is required',
+                'last_name.required'        => 'Last Name is required',
+                'telephone_number.required' => 'Telephone is required',
+                'clinic_location.required'  => 'Retail Location is required',
+                'user_role.required'        => 'User Role is required',
+                'position.required'         => 'Position is required',
+                'mobile_number.required'    => 'Mobile is required',
+                'email.required'            => 'Email is Required',
+                'password.required'         => 'Password is Required'
             ]);
            
            if(isset($request->user_parent_id)){
@@ -527,7 +548,13 @@ class RetailController extends Controller
             'mobile_number'             => 'required|numeric|digits_between:10,12',
             
         ],[
-            'clinic_location.required' => 'Business Address is Required'
+            'first_name.required'       => 'First Name is required',
+            'last_name.required'        => 'Last Name is required',
+            'telephone_number.required' => 'Telephone is required',
+            'clinic_location.required'  => 'Business Address is Required',
+            'user_role.required'        => 'User Role is Required',
+            'position.required'         => 'Position is Required',
+            'mobile_number.required'    => 'Mobile is Required'
         ]);
 
 
@@ -604,7 +631,16 @@ class RetailController extends Controller
                 'email'                     => 'required|string|email|max:255|unique:users',
                 'password'                  => 'required|string',
             ],[
-                'clinic_location.required' => 'Business Address is Required'
+                'first_name.required'       => 'First Name is required',
+                'last_name.required'        => 'Last Name is required',
+                'telephone_number.required' => 'Telephone is required',
+                'clinic_location.required'  => 'Retail Location is required',
+                'user_role.required'        => 'User Role is required',
+                'position.required'         => 'Position is required',
+                'clinic_id.required'        => 'Retail is required',
+                'mobile_number.required'    => 'Mobile is Required',
+                'email.required'            => 'Email is Required',
+                'password.required'         => 'password is Required'
             ]);
            
             // create new user data to users table

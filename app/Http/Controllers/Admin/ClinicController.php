@@ -123,6 +123,12 @@ class ClinicController extends Controller
             'telephone_number'          => 'required|numeric|digits_between:10,12',
             'clinic_email'              => 'required|email',
             'clinic_website'            => 'required|url',
+        ],[
+            'clinic_name.required'      => 'Retail Name is required',
+            'trading_name.required'     => 'Trading Name is required',
+            'clinic_location.required'  => 'Location is required',
+            'clinic_email.required'     => 'Email is required',
+            'clinic_website.required'   => 'Retail Website is required'         
         ]);
         
         $clinic = Clinic::create([
