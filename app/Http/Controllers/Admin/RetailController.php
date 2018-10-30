@@ -168,7 +168,7 @@ class RetailController extends Controller
                 'modified_by'                => \Auth::user()->id,
             ]);
 
-            setflashmsg('Record Inserted Successfully','1');
+            setflashmsg('Retail Added Successfully','1');
         }
 
          if($clinic->exists) {
@@ -292,7 +292,7 @@ class RetailController extends Controller
                 'modified_by'   => \Auth::user()->id,
             ]);
             
-            setflashmsg('Record Updated Successfully','1');
+            setflashmsg('Retail Updated Successfully','1');
             Session::put('retail_details_id', $retail->id);
         } else {
 
@@ -392,7 +392,7 @@ class RetailController extends Controller
 
             });
 
-            setflashmsg('Record Inserted Successfully','1');
+            setflashmsg('Retail Added Successfully','1');
         }        
 
                    
@@ -603,7 +603,7 @@ class RetailController extends Controller
                 'modified_by'   => \Auth::user()->id,
             ]);
 
-            setflashmsg('Record Updated Successfully','1');
+            setflashmsg('Retail User Updated Successfully','1');
             return redirect('/retail-user-list');
     }
 
@@ -675,7 +675,7 @@ class RetailController extends Controller
                 'business_tel_number'       => $request->telephone_number,
                 'address_line_1'            => $request->clinic_location,
                 'mobile_number'             => $request->mobile_number,
-                'address_line_2'   => '',
+                'address_line_2'            => '',
                 'city'                      => '',
                 'state'                     => '',
                 'country'                   => '',

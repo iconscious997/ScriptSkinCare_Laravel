@@ -126,7 +126,7 @@ class SupplierHomeController extends Controller
 			if( !empty($product->exists) ) {
 	            // success
 				Session::put('productstep1', $product->id);
-				setflashmsg('Record Inserted Successfully','1');
+				setflashmsg('Company Added Successfully','1');
 				return redirect()->route('supplierproductstep2');
 			} else {
 				setflashmsg('Some error occured. Please try again','0');
@@ -491,7 +491,7 @@ class SupplierHomeController extends Controller
 
 		if( !empty($brands->exists) ) {
             // success
-			setflashmsg('Record Inserted Successfully','1');
+			setflashmsg('Brand Added Successfully','1');
 		} else {
 			setflashmsg('Some error occured. Please try again','0');
 		}
@@ -528,7 +528,7 @@ class SupplierHomeController extends Controller
 			$brands->modified_by = \Auth::user()->id;
 			$brands->save();
 
-			setflashmsg('Record Updated Successfully','1');
+			setflashmsg('Brand Updated Successfully','1');
 			return redirect()->route('supplierbrand');
 		} else {
 			$brand = Brand::join('company_details','brands.brand_company_id','=','company_details.id')
@@ -591,7 +591,7 @@ class SupplierHomeController extends Controller
 
 			if( !empty($prodline->exists) ) {
 	            // success
-				setflashmsg('Record Inserted Successfully','1');
+				setflashmsg('Product Line Added Successfully','1');
 			} else {
 				setflashmsg('Some error occured. Please try again','0');
 			}
@@ -621,7 +621,7 @@ class SupplierHomeController extends Controller
 			$proline->modified_by = \Auth::user()->id;
 			$proline->save();
 
-			setflashmsg('Record Updated Successfully','1');
+			setflashmsg('Product Line Updated Successfully','1');
 			return redirect()->route('supplierproductline');
 		} else {
 			// get company id for current user
