@@ -113,53 +113,53 @@
 				</table>
 			</div>
 		</div>
-		<div id="footer" class="width50">
-			<div class="row">
-				<div class="col-md-6 col-xs-12">
-					<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingTwo">
-								<h4 class="panel-title">
-									<a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-										Search Brands
-									</a>
-								</h4>
-							</div>
-							<div id="collapseTwo" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingTwo">
-								<div class="panel-body">
-									<div class="clearfix">&nbsp;</div>
-									<div class="accordionblock">
-										<div class="row">
-											<form action="{{ url('/supplier/company') }}" method="post">
-												@csrf
-												<div class="col-md-12">
-													<div class="form-group">
-														<input type="text" class="form-control" name="brand_name" placeholder="Brand Name:" value="{{$request->brand_name}}">
-													</div>
+		<div  id="advfilter" class="width50">
+			<div class="col-md-6 col-xs-12 col-ms-6">
+				<div class="advance-filter">
+					<div class="row filter-advance">
+						<div class="col-md-12">
+							<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingTwo">
+										<h4 class="panel-title">
+											<a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+												Search Brands
+											</a>
+										</h4>
+									</div>
+									<div id="collapseTwo" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingTwo">
+										<div class="panel-body">
+											<div class="clearfix">&nbsp;</div>
+											<div class="accordionblock">
+												<div class="row">
+													<form action="" method="post">
+														@csrf
+														<div class="col-md-12">
+															<div class="form-group">
+																<input type="text" class="form-control" name="" placeholder="Brand Name:" value="">
+															</div>
 
-													<div class="form-group">
-														<input type="text" class="form-control" name="supplier_name" placeholder="Supplier: [Default By Log-In]" value="{{Session::get('supplier_first_name')}} {{Session::get('supplier_last_name')}}" readonly="">
-													</div>
+															<div class="form-group">
+																<input type="text" class="form-control" name="" placeholder="Supplier: [Default By Log-In]" value="">
+															</div>
 
-													<div class="form-group">
-														<select class="form-control" name="status">
-			                                                <option value="">Select Status</option>
-			                                                <option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
-			                                                <option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
-			                                            </select>
-													</div>
-												</div>
-												<div class="col-md-6">
-													<p class="advsearch">Advanced Search</p>
-												</div>
-												<div class="col-md-6">
-													<p>
-														<input type="hidden" name="search" value="Brands">
-														<button class="btn btn-default pull-right" type="submit">VIEW RESULTS</button>
-													</p>
+															<div class="form-group">
+																<input type="text" class="form-control" name="" placeholder="Status:" value="">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<p class="advsearch">Advanced Search</p>
+														</div>
+														<div class="col-md-6">
+															<p>
+																<input type="hidden" name="search" value="Users">
+																<button class="btn btn-default pull-right" type="submit">VIEW RESULTS</button>
+															</p>
 
+														</div>
+													</form>
 												</div>
-											</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -167,54 +167,53 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-xs-12">
-					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-						<div class="panel panel-default">
-							<div class="panel-heading" role="tab" id="headingOne">
-								<h4 class="panel-title">
-									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Search Users
-									</a>
-								</h4>
-							</div>
-							<div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
-								<div class="panel-body">
-									<div class="clearfix">&nbsp;</div>
-									<div class="accordionblock">
-										<div class="row">
-											<form action="{{ url('/supplier/company') }}" method="post">
-												@csrf
-												<div class="col-md-12">
-													<div class="form-group">
-														<input type="text" class="form-control" name="last_name" placeholder="Last Name:" value="{{$request->last_name}}">
-													</div>
+			</div>
+			<div class="col-md-6 col-xs-12 col-ms-6">
+				<div class="advance-filter">
+					<div class="row filter-advance">
+						<div class="col-md-12">
+							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+									<div class="panel-heading" role="tab" id="headingOne">
+										<h4 class="panel-title">
+											<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+												Search Users
+											</a>
+										</h4>
+									</div>
+									<div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
+										<div class="panel-body">
+											<div class="clearfix">&nbsp;</div>
+											<div class="accordionblock">
+												<div class="row">
+													<form action="" method="post">
+														@csrf
+														<div class="col-md-12">
+															<div class="form-group">
+																<input type="text" class="form-control" name="" placeholder="Last Name:" value="">
+															</div>
 
-													<div class="form-group">
-														<input type="text" class="form-control" name="email" placeholder="Email:" value="{{$request->email}}">
-													</div>
+															<div class="form-group">
+																<input type="text" class="form-control" name="" placeholder="Email:" value="">
+															</div>
 
-													<div class="form-group">
-														 <select class="form-control" name="role_id" id="role_id">
-                                                        <option value="">Select User Roles</option>
-                                                        @foreach( $all_roles as $role )
+															<div class="form-group">
+																<input type="text" class="form-control" name="" placeholder="User Role:" value="">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<p class="advsearch">Advanced Search</p>
+														</div>
+														<div class="col-md-6">
+															<p>
+																<input type="hidden" name="search" value="Users">
+																<button class="btn btn-default pull-right" type="submit">VIEW RESULTS</button>
+															</p>
 
-                                                        <option  value="{{ $role['id'] }}" {{ isset($request->role_id)?($request->role_id== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
-
-                                                        @endforeach
-                                                    </select>
-													</div>
+														</div>
+													</form>
 												</div>
-												<div class="col-md-6">
-													<p class="advsearch">Advanced Search</p>
-												</div>
-												<div class="col-md-6">
-													<p>
-														<input type="hidden" name="search" value="Users">
-														<button class="btn btn-default pull-right" type="submit">VIEW RESULTS</button>
-													</p>
-
-												</div>
-											</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -316,7 +315,7 @@
 				}).container().appendTo($('#buttons'));  
 
 				$('.viewexistinguser').on('click', function(e) {
-					
+
 					var supplier_id = $(this).data("id");            
 					$.ajax({
 						type: "GET",
@@ -348,9 +347,9 @@
                 $('#myModal').modal();
             });         
 			} );
-			
+
 			function validations_password() {
-				
+
 				var isvalid = true;
 				if($.trim($("#newpassword").val())=="" || $.trim($("#newpassword").val())==null)
 				{
@@ -358,7 +357,7 @@
 					$("#newpassword").focus();
 					return false;
 				}
-				
+
 				if($.trim($("#confirmpassword").val())=="" || $.trim($("#confirmpassword").val())==null)
 				{
 					$("#confirmpasserror").text("Please enter confirm password");
@@ -375,7 +374,7 @@
 				}
 
 				if(!isvalid){
-					
+
 					return false;
 				}
 

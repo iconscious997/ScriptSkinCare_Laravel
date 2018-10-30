@@ -31,7 +31,9 @@ and (orientation : landscape) {
     .btn {
         font-size: 9px !important;
     }
-
+    .advance-filter {
+        bottom: -250px;
+    }
 }
 
 @media only screen 
@@ -57,6 +59,16 @@ and (orientation : portrait) {
     }
     #footer.width50 {
         width: 100% !important;
+    }
+    .advance-filter {
+        position: relative;
+        border-top: none;
+        bottom: -260px;
+        padding: 0;
+    }
+    #advfilter.width50 {
+        width: 50% !important;
+        display: -webkit-inline-box;
     }
 }
 
@@ -283,7 +295,17 @@ and (orientation : portrait) {
         position: relative;
         bottom: 0;
     }
-    #footer.width50 {
+    #advfilter.width50 {
         width: 100% !important;
     }
+    .advance-filter {
+        position: relative;
+        border-top: none;
+        bottom: 0;
+        padding: 0;
+    }
+    .filter-advance{
+        background: #CDDDE0;
+    }
+
 }
