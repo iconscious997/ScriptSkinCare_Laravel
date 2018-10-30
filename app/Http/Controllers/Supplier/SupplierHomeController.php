@@ -377,8 +377,9 @@ class SupplierHomeController extends Controller
 	public function brandadd()
 	{	
 		// echo \Auth::user()->id;
-		$s = new Supplier;
+		$s = new Supplier;		
 		$company = $s->get_company( \Auth::user()->id );
+		 
 		return view('supplier.brand.add', compact('company'));
 	}
 
