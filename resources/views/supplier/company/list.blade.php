@@ -14,10 +14,10 @@
 		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductstep1') }}';"> + ADD NEW PRODUCT LINE</button>
+					<a href="lineadd"><button class="btn btn-default m-l-5 btn-block" type="button"> + ADD NEW PRODUCT LINE</button></a>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductstep1') }}';"> + ADD NEW BRAND</button>
+					<a href="brandadd"><button class="btn btn-default m-l-5 btn-block" type="button"> + ADD NEW BRAND</button></a>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right">
 					<div class="dropdown export">
