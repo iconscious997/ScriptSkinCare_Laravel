@@ -80,7 +80,7 @@
 							<td><a class="btn btn-dark preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a></td>
 							<td >
 								
-								<button type="button" class="btn btn-default viewexistinguser" data-role="{{$item->label}}" data-id="{{$item->id}}" > EDIT</button>
+								<button type="button" class="btn btn-default" onclick="viewexistinguser({{$item->id}},'{{$item->label}}')"  > EDIT</button>
 								
 							</td>
 							{{-- <td class="flex">
@@ -198,7 +198,7 @@
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">Reset Password for <span id="mfname"></span> <span id="mlname"></span></h4>
+						<h4 class="modal-title">Password Reset for <span id="mfname"></span> <span id="mlname"></span></h4>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -232,6 +232,41 @@
 			</div>
 		</div>
 		<script type="text/javascript">
+
+			function viewexistinguser(id,role) {
+
+					
+					var supplier_id = id;            
+					$.ajax({
+						type: "GET",
+						url: "<?php echo url('/get_supplier_all')?>/"+supplier_id,
+						success: function(data) {  
+
+							$('#supplier_detail').append(data);
+						},
+
+						})
+
+	                // get data and show in modal popup
+	                $('#modal-data').html(`<div class="modal-content">
+	                	<div class="modal-header">
+	                	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	                	<h4 class="modal-title">Edit `+role+`</h4>
+	                	</div>
+	                	<form action="<?php echo url('/update_supplier_list_data');?>" onsubmit="return  validations_id();" method="POST" >
+	                	<div class="modal-body" id="supplier_detail">
+	                	
+
+	                	</div>
+	                	<div class="modal-footer">
+	                	<button class="btn btn-dark selected" type="submit" id="btnsavestep">SAVE CHANGES</button>
+	                	<button type="button" class="btn btn-default" data-dismiss="modal">UNDO</button>
+	                	</div>
+	                	</form>
+	                	</div>`);
+	                $('#myModal').modal();
+				}
+
 			$(document).ready(function() {
 
 				$('.preset').on('click', function(e) {
@@ -278,38 +313,12 @@
 					]
 				}).container().appendTo($('#buttons'));  
 
-				$('.viewexistinguser').on('click', function(e) {
+				
+				// $('.viewexistinguser').on('click', function(e) {
 					
-					var supplier_id = $(this).data("id");            
-					$.ajax({
-						type: "GET",
-						url: "<?php echo url('/get_supplier_all')?>/"+supplier_id,
-						success: function(data) {  
 
-							$('#supplier_detail').append(data);
-						},
-
-					})
-
-                // get data and show in modal popup
-                $('#modal-data').html(`<div class="modal-content">
-                	<div class="modal-header">
-                	<button type="button" class="close" data-dismiss="modal">&times;</button>
-                	<h4 class="modal-title">Edit `+$(this).data("role")+`</h4>
-                	</div>
-                	<form action="<?php echo url('/update_supplier_list_data');?>" onsubmit="return  validations_id();" method="POST" >
-                	<div class="modal-body" id="supplier_detail">
-                	
-
-                	</div>
-                	<div class="modal-footer">
-                	<button class="btn btn-dark selected" type="submit" id="btnsavestep">SAVE CHANGES</button>
-                	<button type="button" class="btn btn-default" data-dismiss="modal">UNDO</button>
-                	</div>
-                	</form>
-                	</div>`);
-                $('#myModal').modal();
-            });         
+					
+    //         });         
 			} );
 			
 			function validations_password() {
