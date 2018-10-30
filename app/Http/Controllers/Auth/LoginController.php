@@ -53,9 +53,13 @@ class LoginController extends Controller
 
              $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
             ->Where('supplier_details.user_id',\Auth::user()->id)
-            ->select('company_details.business_name')->first();
+            ->select('company_details.*','supplier_details.first_name','supplier_details.last_name')->first();
+
+            Session::put('supplier_first_name', $data->first_name);
+            Session::put('supplier_last_name', $data->last_name);
 
             Session::put('company_name', $data->business_name);
+            Session::put('company_id', $data->id);
 
             return route('supplierhome');
             // or return route('routename');
