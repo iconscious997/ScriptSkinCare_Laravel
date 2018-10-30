@@ -1073,7 +1073,7 @@ class SupplierController extends Controller
             ]);
 
             // dd($request);
-            setflashmsg('Supplier Updated Successfully','1'); 
+            setflashmsg('Supplier User Updated Successfully','1'); 
 
             return redirect('/supplieruserlist');
     }
