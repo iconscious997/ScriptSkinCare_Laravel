@@ -1390,13 +1390,33 @@ class SupplierController extends Controller
             ]);
             
              if( !empty($supplier->exists) ) {
+
                     // success                    
                     setflashmsg('Supplier Updated Successfully','1');                   
-                    return redirect('/supplier');                    
+                    
+                   
+
+                        
+                    
+
                 } else {
                     setflashmsg('Some error occured. Please try again','0');
-                    return redirect('/supplier');
+                        
                 }
+
+
+                    if(Session::get('role_user_name')=='supplier_admin'){
+
+                        return redirect('/supplier/company');
+
+                        }else{
+
+                            return redirect('/supplier');
+                        }
+
+
+
+
         }
 
 
@@ -1407,10 +1427,25 @@ class SupplierController extends Controller
             $supplier->save();
             setflashmsg('Password has been reset successfully','1');
 
-            if ($request->supplier_list==2) {                
-                return redirect('/supplier-list2/');
-            }else{
-                return redirect('/supplier');                
-            }            
+
+                    if(Session::get('role_user_name')=='supplier_admin'){
+
+                        return redirect('/supplier/company');
+
+                        }else{
+
+                            if ($request->supplier_list==2) {
+                
+                                return redirect('/supplier-list2/');
+
+                            }else{
+
+                                return redirect('/supplier');
+                                
+                            }
+                        }
+            
+            
+
         }
 }
