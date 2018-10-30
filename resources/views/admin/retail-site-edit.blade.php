@@ -7,7 +7,7 @@
 	<div class="wizard">
 		<div class="container">
 			<div class="row">
-				<h3 class="text-center">RETAIL SITE</h3>
+				<h3 class="text-center">EDIT RETAIL</h3>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 				<div class="col-md-3">&nbsp;</div>
 				<div class="col-md-6">
 					<div class="clearfix">&nbsp;</div>
-					<h4 class="bold-700 font17 mb-5">Please Enter Retail Site:</h4>
+					<h4 class="bold-700 font17 mb-5">Please Enter Retail Detail:</h4>
 					<div class="clearfix">&nbsp;</div>
 					<div class="form-group">
 						@if ( !empty($retailsite) )
