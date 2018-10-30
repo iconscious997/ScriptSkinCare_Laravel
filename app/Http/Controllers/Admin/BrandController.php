@@ -117,7 +117,13 @@ class BrandController extends Controller
                 'assign_to_user' => 'required',
                 'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'approved_by'    =>  'required',
-
+            ],[
+                'brand_name.required'           => 'Brand Name is required',
+                'supplier_parent_id.required'   => 'Supplier is required',
+                'created_by.required'           => 'Created By is required',
+                'assign_to_user.required'       => 'Assign to User is required',
+                'brand_logo.required'           => 'Brand Logo is required',
+                'approved_by.required'          => 'Approved is required'                
             ]);
 
             if ($request->file('brand_logo')) {

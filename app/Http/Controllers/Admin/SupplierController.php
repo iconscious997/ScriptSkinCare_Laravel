@@ -171,7 +171,13 @@ class SupplierController extends Controller
                 'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
             ],[
-                'business_address_line_1.required' => 'Business Address is Required'
+                'first_name.required'               => 'First Name is required',
+                'last_name.required'                => 'Last Name is required',
+                'business_tel_number.required'      => 'Business Telephone is required',
+                'business_address_line_1.required'  => 'Business Address is required',
+                'user_role.required'                => 'User Role is required',
+                'position.required'                 => 'Position is required',
+                'mobile_number.required'            => 'Mobile is Required'
             ]);
 
             
@@ -247,7 +253,15 @@ class SupplierController extends Controller
                 'email'                     => 'required|string|email|max:255|unique:users',
                 'password'                  => 'required|string',
             ],[
-                'business_address_line_1.required' => 'Business Address is Required'
+                'first_name.required'               => 'First Name is required',
+                'last_name.required'                => 'Last Name is required',
+                'business_tel_number.required'      => 'Business Telephone is required',
+                'business_address_line_1.required'  => 'Business Address is required',
+                'user_role.required'                => 'User Role is required',
+                'position.required'                 => 'Position is required', 
+                'mobile_number.required'            => 'Mobile is Required',
+                'email.required'                    => 'Email is Required',
+                'password.required'                 => 'Password is Required'
             ]);
 
            if(isset($request->user_parent_id)){
@@ -393,7 +407,13 @@ class SupplierController extends Controller
                 'assign_to_user' => 'required',
                 'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'approved_by'    =>  'required',
-
+            ],[
+                'brand_name.required'           => 'Brand Name is required',
+                'supplier_parent_id.required'   => 'Supplier Name is required',
+                'created_by.required'           => 'Created By is required',
+                'assign_to_user.required'       => 'Assign to User is required',
+                'brand_logo.required'           => 'Brand Logo is required',
+                'approved_by.required'          => 'Approved By is required'                
             ]);
             if ($request->file('brand_logo')) {
                 $randomNumber = rand(1, 10000);
@@ -989,7 +1009,14 @@ class SupplierController extends Controller
                 'position'                  => 'required',
                 'mobile_number'             => 'required|numeric|digits_between:10,12',
             ],[
-                'business_address_line_1.required' => 'Business Address is Required'
+                'first_name.required'               => 'First Name is required',
+                'last_name.required'                => 'Last Name is required',
+                'company_id.required'               => 'Company is required',
+                'business_tel_number.required'      => 'Business Telephone is required',
+                'business_address_line_1.required'  => 'Business Address is required',
+                'user_role.required'                => 'User Role is required',
+                'position.required'                 => 'Position is required',
+                'mobile_number.required'            => 'Mobile Number is required'
             ]);
 
 
@@ -1073,7 +1100,15 @@ class SupplierController extends Controller
                 'email'                     => 'required|string|email|max:255|unique:users',
                 'password'                  => 'required|string',
             ],[
-                'business_address_line_1.required' => 'Business Address is Required'
+                'first_name.required'               => 'First Name is required',
+                'last_name.required'                => 'Last Name is required',
+                'company_id.required'               => 'Company is required',
+                'business_tel_number.required'      => 'Business Telephone is required',
+                'business_address_line_1.required'  => 'Business Address is required',
+                'position.required'                 => 'Postion is required',
+                'mobile_number.required'            => 'Mobile is required',
+                'email.required'                    => 'Email is required',
+                'password.required'                 => 'Password is required'
             ]);
 
                 // create new user data to users table
@@ -1180,7 +1215,16 @@ class SupplierController extends Controller
                 'email'                     => 'required|string|email|max:255|unique:users',
                 'password'                  => 'required|string',
             ],[
-                'business_address_line_1.required' => 'Business Address is Required'
+                'first_name.required'               => 'First Name is required',
+                'last_name.required'                => 'Last Name is required',
+                'company_id.required'               => 'Company is required',
+                'business_tel_number.required'      => 'Business Telephone is required',
+                'business_address_line_1.required'  => 'Business Address is required',
+                'user_role.required'                => 'User Role is required',
+                'position.required'                 => 'Postion is required',
+                'mobile_number.required'            => 'Mobile is required',
+                'email.required'                    => 'Email is required',
+                'password.required'                 => 'Password is required'
             ]);            
 
             if(isset($request->user_parent_id)){
