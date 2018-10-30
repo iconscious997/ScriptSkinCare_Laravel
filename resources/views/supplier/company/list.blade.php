@@ -435,9 +435,7 @@
 					return false;
 				}
 
-
-				if(!isvalid){
-					
+				if(!isvalid){					
 					return false;
 				}
 			}

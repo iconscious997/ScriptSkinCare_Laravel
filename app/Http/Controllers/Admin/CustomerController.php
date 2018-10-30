@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -29,7 +28,6 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        // $data = Customer::all();
 
         $data=Customer::join('users','client_details.registered_by','=','users.id')
                 ->select('client_details.*', 'users.id as userid','users.name')->get();
@@ -38,8 +36,7 @@ class CustomerController extends Controller
 
     public function customeradd()
     {
-         $user_admin_retailer = User::select('id as userid','name')->whereIn('user_type',array(0,2))->get();
-       
+         $user_admin_retailer = User::select('id as userid','name')->whereIn('user_type',array(0,2))->get();       
         return view('admin.customeradd',compact('user_admin_retailer'));
     }
 
@@ -55,7 +52,6 @@ class CustomerController extends Controller
         DB::table('client_details')
         ->where("client_details.id", '=',  $id)
         ->update(['client_details.status'=> $status]);
-
          return redirect('/customers');
     }
 
@@ -82,7 +78,7 @@ class CustomerController extends Controller
                 'dob.required'           => 'Date of Birth is required',
                 'gender.required'        => 'Gender is required',
                 // 'email.required'         => 'Email is required',
-                'signup_source.required' => 'Sign-up is required',
+                'signup_source.required' => 'Sign-up Source is required',
                 'created_date.required'  => 'Registered Date is required',
                 'created_by.required'    => 'Registered By is required',
                 'skin_concerns.required' => 'Most Recent Skin Concern is required',
@@ -124,7 +120,7 @@ class CustomerController extends Controller
                 'dob.required'          => 'Date of Birth is required',
                 'gender.required'       => 'Gender is required',
                 'email.required'        => 'Email is required',
-                'signup_source.required'=> 'Sign-up is required',
+                'signup_source.required'=> 'Sign-up Source is required',
                 'created_date.required' => 'Registered Date is required',
                 'created_by.required'   => 'Registered By is required',
                 'skin_concerns.required' => 'Most Recent Skin Concern is required',

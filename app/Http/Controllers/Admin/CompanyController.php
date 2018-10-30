@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -29,97 +28,65 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-
         if ($request->isMethod('get')) {
-
             $data = Company::all();
         }
-        if ($request->isMethod('post')) {
 
+        if ($request->isMethod('post')) {
             
             if (isset($request->business_name) && !empty($request->business_name)) {
-                
-            
                 $query[]=['business_name', 'like','%' . $request->business_name. '%'];
-                    
-            }
-            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {
-                
-                
-                $query[]=['business_telephone_number', 'like','%'. $request->business_telephone_number.'%'];
-                
             }
 
-             if (isset($request->website) && !empty($request->website)) {
-                
+            if (isset($request->business_telephone_number) && !empty($request->business_telephone_number)) {
+                $query[]=['business_telephone_number', 'like','%'. $request->business_telephone_number.'%'];                
+            }
+
+            if (isset($request->website) && !empty($request->website)) {                
                  $query[]=['website', 'like','%'. $request->website.'%'];
             }
-              if (isset($request->email) && !empty($request->email)) {
-                
-                 $query[]=['email_address', 'like','%'. $request->email.'%'];
 
+            if (isset($request->email) && !empty($request->email)) {                
+                 $query[]=['email_address', 'like','%'. $request->email.'%'];
             }
 
-             if (isset($request->status) && !empty($request->status)) {
-                
+            if (isset($request->status) && !empty($request->status)) {                
                 $query[]=['status', '=',$request->status];
             }
 
             if(isset($query) && !empty($query)){
+                $d = Company::
+                where($query);
 
-                
+                if (isset($request->create_date) && !empty($request->create_date)) {
+                    $d->whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) );                      
+                }
 
-                             $d = Company::
-                            where($query);
-                            if (isset($request->create_date) && !empty($request->create_date)) {
-                                        
-                        $d->whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
-                      
-                    }
-
-                    $data = $d->get();
+                $data = $d->get();
 
             }else if(isset($request->create_date) && !empty($request->create_date)){
 
-
-
-                    $data = Company::whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) )->get();
-
-
-
+                $data = Company::whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) )->get();
             }else{
-
                 $data = Company::all();
             }
-
-           
-                    
-
         }
-        // die();
-        
+                
         return view('admin.company-list',compact('data','request'));
-
     }
 
-    public function companyadd()
-    {
-
-
+    public function companyadd() {
         return view('admin.company-add');
     }
 
-    public function companyedit($id)
-    {        
+    public function companyedit($id){        
        $company = Company::find($id);
        return view('admin.companyedit', compact('company'));
-
     }
 
     public function companyinsert(Request $request)
-    {
-        
-          $validatedData = $request->validate([
+    {        
+        $validatedData = $request->validate([
             'registered_business_name'  => 'required',
             'trading_name'              => 'required',
             'abn'                       => 'required',
@@ -129,7 +96,7 @@ class CompanyController extends Controller
             'website'                   => 'required|url',
         ]);
 
-          $company = Company::create([
+        $company = Company::create([
                 'business_name'                 => request('registered_business_name'),
                 'trading_name'                  => request('trading_name'),
                 'abn'                           => request('abn'),
@@ -141,22 +108,11 @@ class CompanyController extends Controller
                 'created_date'                  => date('Y-m-d H:i:s'),
                 'created_by'                    => \Auth::user()->id,
                 'modified_by'                   => \Auth::user()->id,
-            ]);
+        ]);
 
-            setflashmsg('Record Inserted Successfully','1'); 
-             return redirect('/supplier-company-list');
-
-    }
-
-    // public function companyactivedeactive($id,$status){
-        
-    //     DB::table('client_details')
-    //     ->where("client_details.id", '=',  $id)
-    //     ->update(['client_details.status'=> $status]);
-
-    //      return redirect('/companys');
-    // }
-
+        setflashmsg('Record Inserted Successfully','1'); 
+        return redirect('/supplier-company-list');
+    }   
     
     public function companystore(Request $request)
     {   
@@ -182,15 +138,10 @@ class CompanyController extends Controller
             $company->modified_by                   = \Auth::user()->id;
             $company->save();
 
-            // 
             setflashmsg('Record Updated Successfully','1');
 
-
-            if($company->exists) {
-            // success
-            
-                    return redirect('/supplier-company-list');
-                }
-     
-        }
+            if($company->exists) {                        
+                return redirect('/supplier-company-list');
+            }     
+    }
 }
