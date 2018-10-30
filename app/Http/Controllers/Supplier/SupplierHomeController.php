@@ -191,13 +191,16 @@ class SupplierHomeController extends Controller
 	}
 
 	public function common() {
-		return view('supplier.common');
+
+		$data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')			
+			->select('supplier_details.id','supplier_details.company_id','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website')
+			->where('supplier_details.id','=',\Auth::user()->id)
+			->first();
+		return view('supplier.common',compact('data'));
 	}
 
 	public function company(Request $request)
 	{
-		
-		
 		$open = false;
 		if ($request->isMethod('post')) {
 			$d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id');
