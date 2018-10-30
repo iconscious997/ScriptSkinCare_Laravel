@@ -60,7 +60,7 @@
                             <select name="company_id" id="company_id" onchange="supplier_user(this.value);">
                                 <option value="">Select Company</option>
                                 @foreach( $company as $role )
-                                <option  value="{{ $role['id'] }}" >{{ $role['business_name'] }}</option>
+                                <option  value="{{ $role['id'] }}" {{old('company_id')==$role['id']?'selected':''}} >{{ $role['business_name'] }}</option>
 
                                 @endforeach
                             </select>
@@ -119,7 +119,7 @@
                            <select name="user_role" id="user_role">
                             <option value="">Select User Role</option>
                             @foreach( $roles as $role )
-                            <option  value="{{ $role->id }}">{{ $role->label }}</option>
+                            <option  value="{{ $role->id }}" {{old('user_role')==$role->id?'selected':''}} >{{ $role->label }}</option>
                             @endforeach
                           </select>
                           @if ($errors->has('user_role'))
