@@ -197,7 +197,7 @@ class SupplierHomeController extends Controller
 	public function company(Request $request)
 	{
 		
-
+		
 		$open = false;
 		if ($request->isMethod('post')) {
 			$d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id');
@@ -235,7 +235,7 @@ class SupplierHomeController extends Controller
 				$d->whereDate('company_details.created_date', '=', covertDateServer($request->create_date) );
 			}
 
-			$data = $d->where('supplier_details.id','=',\Auth::user()->id)->get();
+			$data = $d->where('supplier_details.user_id','=',\Auth::user()->id)->get();
 
 
 		} else {
@@ -245,10 +245,11 @@ class SupplierHomeController extends Controller
 			->join('roles','role_user.role_id','=','roles.id')
 			->join('users','supplier_details.user_id','=','users.id')
 			->select('supplier_details.id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')
-			->where('supplier_details.id','=',\Auth::user()->id)
+			->where('supplier_details.user_id','=',\Auth::user()->id)
 			->get();
 		}
 
+		
 		$i=0;
 
 		$all_brand_name=array();
@@ -336,7 +337,7 @@ class SupplierHomeController extends Controller
 
 			$company=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
 			->select('company_details.*')
-			->where('supplier_details.id','=',\Auth::user()->id)
+			->where('supplier_details.user_id','=',\Auth::user()->id)
 			->where('company_details.id','=',$id)
 			->first();
 
@@ -377,9 +378,8 @@ class SupplierHomeController extends Controller
 	public function brandadd()
 	{	
 		// echo \Auth::user()->id;
-		$s = new Supplier;		
+		$s = new Supplier;
 		$company = $s->get_company( \Auth::user()->id );
-		 
 		return view('supplier.brand.add', compact('company'));
 	}
 

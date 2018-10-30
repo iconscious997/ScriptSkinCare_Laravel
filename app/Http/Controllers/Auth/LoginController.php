@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Role;
+use App\User;
+use App\RoleUser;
+use App\Supplier;
+use Session;
 
 class LoginController extends Controller
 {
@@ -39,7 +44,19 @@ class LoginController extends Controller
 
     public function redirectPath()
     {
-        if (\Auth::user()->user_type == 1) {
+
+         $check_data=RoleUser::join('roles','role_user.role_id','=','roles.id')->Where('role_user.user_id',\Auth::user()->id)->select('roles.*')->first();
+
+         Session::put('role_user_name', $check_data->name);
+         
+         if ($check_data->name=='supplier_admin') {
+
+             $data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+            ->Where('supplier_details.user_id',\Auth::user()->id)
+            ->select('company_details.business_name')->first();
+
+            Session::put('company_name', $data->business_name);
+
             return route('supplierhome');
             // or return route('routename');
         }

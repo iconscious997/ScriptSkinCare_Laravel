@@ -5,7 +5,7 @@
     <div class="dashboard">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 dashblock2 bg3 bdright">
             <div class="text-center mt-40">
-                <h4>[Company Name Here]</h4>
+                <h4>{{Session::get('company_name')}}</h4>
                 <p>
                     <button class="btn btn-default btn-block" onclick="location.href='';"> 
                         VIEW FULL DETAILS
