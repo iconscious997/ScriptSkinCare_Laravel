@@ -21,19 +21,11 @@
 	<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 ">
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-right">
-				<button class="btn btn-green m-l-5 btn-block"> SORT / ARRANGE BY</button>
-			</div>
-			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-right">
 				<div class="dropdown export">
 					<button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
 						<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							{{-- <li>
-								<a href="javascript:void(0);" onClick ="$('#customers').tableExport({type:'pdf',escape:'false',tableName:'Suplier-list'});">Export PDF</a>
-							</li> --}}
-							<li>
-								<a href="javascript:void(0);" onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a>
-							</li>
+						<ul class="dropdown-menu"  id="buttons">
+
 						</ul>
 					</div>
 				</div>
@@ -163,8 +155,44 @@
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#customers').DataTable();
-		});
+			var table = $('#customers').DataTable();
+			var buttons = new $.fn.dataTable.Buttons(table, {
+				extend: 'collection',
+				text: 'Export', 
+				buttons: [
+				$.extend( true, {}, {
+                    // footer: true,
+                    title: 'Suppliers',
+                    extend: 'excelHtml5',
+                    // className: 'btn btn-success',
+                    exportOptions: {
+                    	columns: [0,1,2,3,4,5,6,7,8]
+                    }
+                } ),   
+				$.extend( true, {}, {
+                    // footer: true,
+                    title: 'Suppliers',
+                    extend: 'csvHtml5',
+                    // className: 'btn btn-danger',
+                    exportOptions: {
+                    	columns: [0,1,2,3,4,5,6,7,8]
+                    }
+                } ),
+				$.extend( true, {}, {
+                    // footer: true,
+                    title: 'Suppliers',
+                    extend: 'pdfHtml5',
+                    // className: 'btn btn-danger',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    exportOptions: {
+                    	columns: [0,1,2,3,4,5,6,7,8,9]
+                    }
+                } )
+				]
+			}).container().appendTo($('#buttons'));           
+		} );
+
 
 	</script>
 	@endsection
