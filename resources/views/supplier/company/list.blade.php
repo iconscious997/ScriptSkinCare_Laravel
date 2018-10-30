@@ -14,7 +14,7 @@
 		<div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15">
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
-					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductstep1') }}';"> + ADD NEW PRODUCT LINE</button>
+					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductline') }}';"> + ADD NEW PRODUCT LINE</button>
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 pull-right">
 					<button class="btn btn-default m-l-5 btn-block" onclick="location.href='{{ route('supplierproductstep1') }}';"> + ADD NEW BRAND</button>
