@@ -110,7 +110,7 @@ class CompanyController extends Controller
                 'modified_by'                   => \Auth::user()->id,
         ]);
 
-        setflashmsg('Record Inserted Successfully','1'); 
+        setflashmsg('Company Added Successfully','1'); 
         return redirect('/supplier-company-list');
     }   
     
@@ -146,7 +146,7 @@ class CompanyController extends Controller
             $company->modified_by                   = \Auth::user()->id;
             $company->save();
 
-            setflashmsg('Record Updated Successfully','1');
+            setflashmsg('Company Updated Successfully','1');
 
             if($company->exists) {                        
                 return redirect('/supplier-company-list');
