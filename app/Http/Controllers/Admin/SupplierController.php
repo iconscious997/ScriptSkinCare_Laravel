@@ -63,6 +63,14 @@ class SupplierController extends Controller
             'business_telephone'        => 'required|numeric|digits_between:10,12',
             'email_address'             => 'required|email',
             'website'                   => 'required|url',
+        ],[
+            'registered_business_name.required'   => 'Registered Business Name is required',
+            'trading_name.required'               => 'Trading Name is required',
+            'abn.required'                        => 'ABN is required',
+            'address.required'                    => 'Address is required',
+            'business_telephone.required'         => 'Business Telephone is required',
+            'email_address.required'              => 'Email is required',
+            'website.required'                    => 'Website is required'               
         ]);
 
         // here check if id is present then update data
