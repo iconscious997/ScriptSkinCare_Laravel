@@ -98,36 +98,36 @@
                     @endif
                 </div>
                 <div class="form-group col-md-6">       
-               
-                     <select name="created_by" id="created_by">
-                        <option value="">Registered By:</option>
-                        @foreach( $user_admin_retailer as $users )
-                        <option  value="{{ $users['userid'] }}" {{ !empty($customer)?($customer->registered_by == $users['userid'] ? 'selected' : ''):('') }}>{{ $users['name'] }} </option>
+                   
+                 <select name="created_by" id="created_by">
+                    <option value="">Registered By:</option>
+                    @foreach( $user_admin_retailer as $users )
+                    <option  value="{{ $users['userid'] }}" {{old('created_by')==$users['userid']?'selected':''}}>{{ $users['name'] }} </option>
 
-                        @endforeach
-                    </select>
-                    <!-- <input type="text" class="form-control" name="created_by" placeholder="Registered By:" value="{{ !empty($customer->created_by) ? $customer->created_by : old('created_by') }}"> -->
-                    @if ($errors->has('created_by'))
-                    <span class="inputError">{{ $errors->first('created_by') }}</span>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-             <div class="form-group col-md-6">
-                 <input type="text" class="form-control" name="skin_concerns" placeholder="Most Recent Skin Concern:" value="{{ !empty($customer->skin_concerns) ? $customer->skin_concerns : old('skin_concerns') }}">
-                 @if ($errors->has('skin_concerns'))
-                 <span class="inputError">{{ $errors->first('skin_concerns') }}</span>
-                 @endif
-             </div>
-             <div class="form-group col-md-6">
-                <input type="text" class="form-control" name="skin_type" placeholder="Most Recent Skin Type:" value="{{ !empty($customer->skin_type) ? $customer->skin_type : old('skin_type') }}">
-                @if ($errors->has('skin_type'))
-                <span class="inputError">{{ $errors->first('skin_type') }}</span>
+                    @endforeach
+                </select>
+                <!-- <input type="text" class="form-control" name="created_by" placeholder="Registered By:" value="{{ !empty($customer->created_by) ? $customer->created_by : old('created_by') }}"> -->
+                @if ($errors->has('created_by'))
+                <span class="inputError">{{ $errors->first('created_by') }}</span>
                 @endif
             </div>
         </div>
-        <div class="col-md-1">&nbsp;</div>
+        <div class="row">
+         <div class="form-group col-md-6">
+             <input type="text" class="form-control" name="skin_concerns" placeholder="Most Recent Skin Concern:" value="{{ !empty($customer->skin_concerns) ? $customer->skin_concerns : old('skin_concerns') }}">
+             @if ($errors->has('skin_concerns'))
+             <span class="inputError">{{ $errors->first('skin_concerns') }}</span>
+             @endif
+         </div>
+         <div class="form-group col-md-6">
+            <input type="text" class="form-control" name="skin_type" placeholder="Most Recent Skin Type:" value="{{ !empty($customer->skin_type) ? $customer->skin_type : old('skin_type') }}">
+            @if ($errors->has('skin_type'))
+            <span class="inputError">{{ $errors->first('skin_type') }}</span>
+            @endif
+        </div>
     </div>
+    <div class="col-md-1">&nbsp;</div>
+</div>
 </div>
 
 <div class="row">
@@ -149,18 +149,18 @@
         <div class="row">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">                
-                 <a href="{{ url('/supplier-company-add') }}"><button class="btn btn-default spbtn2" type="button"> + ADD NEW SUPPLIER</button></a>
-                 <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn2 m-l-20" type="button"> + ADD A NEW USER</button></a>
-                 <a href="{{ url('/add-new-brand') }}"><button class="btn btn-default spbtn2 m-l-20" type="button"> + ADD A NEW BRAND</button></a>
-            </div>
-            <div class="col-md-1 col-sm-1">&nbsp;</div>
-        </div>
-    </div>
+             <a href="{{ url('/supplier-company-add') }}"><button class="btn btn-default spbtn2" type="button"> + ADD NEW SUPPLIER</button></a>
+             <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn2 m-l-20" type="button"> + ADD A NEW USER</button></a>
+             <a href="{{ url('/add-new-brand') }}"><button class="btn btn-default spbtn2 m-l-20" type="button"> + ADD A NEW BRAND</button></a>
+         </div>
+         <div class="col-md-1 col-sm-1">&nbsp;</div>
+     </div>
+ </div>
 </div>
 </form>
 <script type="text/javascript">
     $(function(){
-    $('.datepicker').datepicker({
+        $('.datepicker').datepicker({
             format: 'dd-mm-yyyy',
             endDate: '+0d',
             autoclose: true
