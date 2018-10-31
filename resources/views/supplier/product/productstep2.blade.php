@@ -31,81 +31,44 @@
 						<div class="form-group col-md-6">
 							<h4 class="font16 bold-600">Basic Skincare</h4>
 							<div class="row ">
+								@foreach( $category as $cat )
+								@if( $cat->step_no == 2 )
 								<div class="col-md-6  p-0">
-									<div class="checkbox">
+									<div class="radio">
 										<label>
-											<input type="checkbox" value="">
+											<input type="radio" name="skintype" value="{{ $cat->id }}">
 											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Cleanser / makeup remover
+											{{ $cat->category_name }}
 										</label>
 									</div>
 								</div>
-								<div class="col-md-6 p-0">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Moisteriser
-										</label>
-									</div>
-								</div>
-								<div class="col-md-6 p-0">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Toner
-										</label>
-									</div>
-								</div>
-								<div class="col-md-6 p-0">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Sunscreen
-										</label>
-									</div>
-								</div>
+								@endif
+								@endforeach
 							</div>
 						</div>
 						<div class="form-group col-md-6">	
 							<h4 class="font16 bold-600">Active Skincare</h4>
 							<div class="row ">
+								@foreach( $category as $cat )
+								@if( $cat->step_no == 21 )
 								<div class="col-md-6  p-0">
-									<div class="checkbox">
+									<div class="radio">
 										<label>
-											<input type="checkbox" value="">
+											<input type="radio" name="skintype" value="{{ $cat->id }}">
 											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Scrub
+											{{ $cat->category_name }}
 										</label>
 									</div>
 								</div>
-								<div class="col-md-6 p-0">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Actives
-										</label>
-									</div>
-								</div>
-								<div class="col-md-6 p-0">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" value="">
-											<span class="cr"><i class="cr-icon ti-check"></i></span>
-											Treatments
-										</label>
-									</div>
-								</div>
+								@endif
+								@endforeach
 							</div>
 						</div>
 					</div>
 					
 					<div class="row">
 						<div class="form-group col-md-12">
-							<textarea class="form-control" rows="10" placeholder="Customized product categorisation area"></textarea>
+							<p>Please select the most accurate description of your product. Select 1 per column.</p>
 						</div>
 					</div>
 				</div>
