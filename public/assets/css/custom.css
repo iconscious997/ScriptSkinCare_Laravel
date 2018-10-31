@@ -467,7 +467,7 @@ p {
 }
 
 .radio .cr {
-    border-radius: 50%;
+    border-radius: 0;
 }
 
 .checkbox .cr .cr-icon,
@@ -913,7 +913,16 @@ ul.sub-menu a:hover:after {
     padding: 8px 20px;
 }
 .table-responsive {
-
+    /*overflow-x: hidden;*/
+}
+ul.dtr-details li {
+    padding: 5px;
+}
+ul.dtr-details li span.dtr-title {
+    font-weight: 600;
+}
+ul.dtr-details li span.dtr-data {
+    margin-left: 10px;
 }
 
 /************Mixing*****************/
