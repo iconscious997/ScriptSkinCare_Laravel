@@ -450,7 +450,7 @@ class SupplierHomeController extends Controller
 	{	
 		// echo \Auth::user()->id;
 		$s = new Supplier;
-		$company = $s->get_company( \Auth::user()->id );
+		$company = $s->get_company(\Auth::user()->id);
 		return view('supplier.brand.add', compact('company'));
 	}
 
@@ -488,6 +488,24 @@ class SupplierHomeController extends Controller
 			'created_by'               => \Auth::user()->id,
 			'modified_by'              => \Auth::user()->id,
 		]);
+
+
+		$supplier = Supplier::where('user_id',\Auth::user()->id)->first();
+
+		$tmp = explode(',', $supplier->brand_ids);
+        
+        if( !in_array($brands->id, $tmp) ) {
+            array_push($tmp, $brands->id);
+            $supplier->brand_ids   = implode(',', $tmp);
+        }else if (in_array($brands->id, $tmp)) {
+             $supplier->brand_ids  = implode(',', $tmp);
+        }else{                    
+            $supplier->brand_ids   = $brands->id;
+        }
+
+        $supplier->save();
+                
+
 
 		if( !empty($brands->exists) ) {
             // success

@@ -77,19 +77,23 @@
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="accordionblock">
                                                 <div class="row">
-                                                    <form action="" method="post">
+                                                   <form action="" method="post">
                                                         @csrf
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="" placeholder="Brand Name:" value="">
+                                                                <input type="text" class="form-control" name="brand_name" placeholder="Brand Name:" value="{{$request->brand_name}}">
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="" placeholder="Supplier: [Default By Log-In]" value="">
+                                                                <input type="text" class="form-control" name="supplier_name" placeholder="Supplier: [Default By Log-In]" value="{{Session::get('supplier_first_name')}} {{Session::get('supplier_last_name')}}" readonly="">
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="" placeholder="Status:" value="">
+                                                                <select class="form-control" name="status">
+                                                                        <option value="">Select Status</option>
+                                                                        <option value="0"{{ isset($request->status)?($request->status==0 ? 'selected' : ''):('') }} >Active</option>
+                                                                        <option value="1"{{ isset($request->status)?($request->status== 1 ? 'selected' : ''):('') }} >Deactive</option>
+                                                                    </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
@@ -135,15 +139,22 @@
                                                         @csrf
                                                         <div class="col-md-12">
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="" placeholder="Last Name:" value="">
+                                                                <input type="text" class="form-control" name="last_name" placeholder="Last Name:" value="{{$request->last_name}}">
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="" placeholder="Email:" value="">
+                                                                    <input type="text" class="form-control" name="email" placeholder="Email:" value="{{$request->email}}">
                                                             </div>
 
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" name="" placeholder="User Role:" value="">
+                                                                 <select class="form-control" name="role_id" id="role_id">
+                                                                    <option value="">Select User Roles</option>
+                                                                    @foreach( $all_roles as $role )
+
+                                                                    <option  value="{{ $role['id'] }}" {{ isset($request->role_id)?($request->role_id== $role['id'] ? 'selected' : ''):('') }}>{{ $role['label'] }}</option>
+
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
