@@ -204,7 +204,11 @@ class BrandController extends Controller
             'brand_name'     => 'required',
             'company_id'     => 'required',
             'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        ]);
+        ],[
+                'brand_name.required'           => 'Brand Name is required',
+                'company_id.required'           => 'Company is required',
+                
+            ]);
 
         if ($request->file('brand_logo')) {
             $randomNumber = time()."_".rand(1000, 9999);

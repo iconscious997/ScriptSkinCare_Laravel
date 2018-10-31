@@ -124,10 +124,11 @@ class ClinicController extends Controller
             'clinic_email'              => 'required|email',
             'clinic_website'            => 'required|url',
         ],[
-            'clinic_name.required'      => 'Retail Name is required',
+            'clinic_name.required'      => 'Registered Business Name is required',
             'trading_name.required'     => 'Trading Name is required',
-            'clinic_location.required'  => 'Location is required',
-            'clinic_email.required'     => 'Email is required',
+            'clinic_location.required'  => 'Retail(Clinic) Location is required',
+            'telephone_number.required' => 'Telephone is required',
+            'clinic_email.required'     => 'Retail Email is required',
             'clinic_website.required'   => 'Retail Website is required'         
         ]);
         

@@ -331,7 +331,7 @@ and (orientation : portrait) {
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Reset Password for <span id="mfname"></span> <span id="mlname"></span></h4>
+                    <h4 class="modal-title">Password Reset for <span id="mfname"></span> <span id="mlname"></span></h4>
                 </div>
                 <form action="{{ url('/updatesupplierpassword') }}" onsubmit="return  validations_password();" method="post">
                     @csrf
