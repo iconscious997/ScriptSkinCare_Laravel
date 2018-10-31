@@ -77,7 +77,7 @@
                                             <div class="clearfix">&nbsp;</div>
                                             <div class="accordionblock">
                                                 <div class="row">
-                                                   <form action="" method="post">
+                                                   <form action="{{ url('/supplier/brand') }}" method="post">
                                                         @csrf
                                                         <div class="col-md-12">
                                                             <div class="form-group">
