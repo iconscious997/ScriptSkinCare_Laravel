@@ -20,7 +20,7 @@
             <div class="text-center mt-40">
                 <h4>[Brands & Product Lines]</h4>
                 <p>
-                    <a href="/company"><button class="btn btn-default btn-block" type="button"> 
+                    <a href="{{ route('supplierbrandadd') }}"><button class="btn btn-default btn-block" type="button"> 
                         VIEW FULL DETAILS
                     </button></a>
                 </p>
@@ -30,7 +30,7 @@
             <div class="text-center mt-40">
                 <h4>[Users]</h4>
                 <p>
-                    <button class="btn btn-default btn-block" onclick="location.href='';"> 
+                    <button class="btn btn-default btn-block" onclick="location.href='{{ route('supplieruseradd') }}';"> 
                         VIEW FULL DETAILS
                     </button>
                 </p>
