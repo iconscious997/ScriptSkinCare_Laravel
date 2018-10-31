@@ -1184,8 +1184,8 @@ public function addnewuser()
     ->where('roles.name', "supplier_admin")
     ->select('supplier_details.id','supplier_details.first_name','supplier_details.last_name')->get();
 
-    echo old('company_id');
     
+
     // }
     return view( 'admin.add-new-user',compact('roles','company','old_supplier'));
 

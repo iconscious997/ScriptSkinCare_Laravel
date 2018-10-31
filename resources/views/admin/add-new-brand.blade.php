@@ -18,7 +18,7 @@
                     <div class="clearfix">&nbsp;</div>
                     
                     <div class="clearfix">&nbsp;</div>
-                   
+                    
                     <div class="form-group">
                         <input type="text" class="form-control" name="brand_name" value="{{ !empty($brands_data->brand_name) ? $brands_data->brand_name : old('brand_name') }}"
                         id="brand_name" placeholder="Brand Name:">
@@ -27,20 +27,20 @@
                         @endif
                     </div>
                     <div class="form-group">
-                         <select name="company_id" id="company_id">
-                                <option value="">Select Compnay</option>
-                                @foreach( $company as $role )
-                                <option  value="{{ $role['id'] }}" >{{ $role['business_name'] }}</option>
+                     <select name="company_id" id="company_id">
+                        <option value="">Select Compnay</option>
+                        @foreach( $company as $role )
+                        <option  value="{{ $role['id'] }}" {{old('company_id')==$role['id']?'selected':''}} >{{ $role['business_name'] }}</option>
 
-                                @endforeach
-                            </select>
+                        @endforeach
+                    </select>
 
-                            @if ($errors->has('company_id'))
-                            <span class="inputError">{{ $errors->first('company_id') }}</span>
-                            @endif
-                    </div>
-                    
-                  
+                    @if ($errors->has('company_id'))
+                    <span class="inputError">{{ $errors->first('company_id') }}</span>
+                    @endif
+                </div>
+                
+                
                 <div class="form-group">
                     <div class="upload-btn-wrapper">
                         <button class="form-control text-left">Upload Logo: (Height: 50px and Width: 200px</button>
@@ -54,21 +54,21 @@
                  </div>
              </div>
              
-                  
+             
+         </div>
+
+
+         
+         <div class="col-md-3">&nbsp;</div>
+     </div>
+     <div class="clearfix">&nbsp;</div>
+     
+
+     <div class="row">
+        <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
+            <button class="btn btn-dark btn-pad selected" type="submit">SAVE CHANGES</button>
         </div>
-
-
-        
-        <div class="col-md-3">&nbsp;</div>
     </div>
-    <div class="clearfix">&nbsp;</div>
-   
-
- <div class="row">
-    <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
-        <button class="btn btn-dark btn-pad selected" type="submit">SAVE CHANGES</button>
-    </div>
-</div>
 </div>
 </div>
 
@@ -79,17 +79,17 @@
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                 <a href="{{ url('/supplier-company-add') }}"><button class="btn btn-default spbtn" type="button"> + ADD NEW SUPPLIER</button></a>
-                   
+                
 
-                   
+                
                 <a href="{{ url('/add-new-user') }}"><button class="btn btn-default spbtn m-l-20 " type="button"> + ADD A NEW USER</button></a>
                 <a href="{{ url('/add-new-brand') }}">
-                <button class="btn btn-default spbtn m-l-20 active" type="button"> + ADD A NEW BRAND</button></a>
+                    <button class="btn btn-default spbtn m-l-20 active" type="button"> + ADD A NEW BRAND</button></a>
+                </div>
+                <div class="col-md-1 col-sm-1">&nbsp;</div>
             </div>
-            <div class="col-md-1 col-sm-1">&nbsp;</div>
         </div>
     </div>
-</div>
 
 
-@endsection
+    @endsection
