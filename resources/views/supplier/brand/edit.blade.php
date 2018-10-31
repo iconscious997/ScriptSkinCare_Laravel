@@ -76,14 +76,14 @@
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                        <a href="{{ url('/user-supplier-add') }}" ><button class="btn btn-default btn-block" type="button"> + ADD NEW PRODUCT</button></a>
+                     <a href="{{ route('supplierbrandadd') }}" ><button class="btn btn-default btn-block" type="button"> + ADD NEW BRAND</button></a>
 
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                       <a href="{{ url('/add-new-user') }}"><button class="btn btn-default btn-block" type="button"> + ADD NEW COMPANY</button></a>
+                        <a href="{{ route('supplieruseradd') }}"><button class="btn btn-default btn-block active" type="button"> + ADD NEW USER</button></a>
                    </div>
                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <a href="{{ route('supplierproductlineadd') }}"> <button class="btn btn-default btn-block" type="button"> + ADD NEW PRODUCT LINE</button></a>
+                      <a href="{{ route('supplierproductlineadd') }}"><button class="btn btn-default btn-block" type="button"> + ADD NEW PRODUCT LINE</button></a>
                 </div>
             </div>
         </div>

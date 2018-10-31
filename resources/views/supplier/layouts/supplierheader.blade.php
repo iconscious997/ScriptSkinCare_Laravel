@@ -45,14 +45,14 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('suppliercompanydashborad') }}" class="{{ request()->is('supplier/com*') ? 'active' : '' }} {{ request()->is('supplier/brand*') ? 'active' : '' }}">Company Details,Brands & Users</a>
-                    <ul class="sub-menu {{ request()->is('supplier/com*') ? 'open' : '' }}{{ request()->is('supplier/brand*') ? 'open' : '' }}">
+                    <a href="{{ route('suppliercompanydashborad') }}" class="{{ request()->is('supplier/com*') ? 'active' : '' }} {{ request()->is('supplier/brand*') ? 'active' : '' }} {{ request()->is('supplier/user*') ? 'active' : '' }} ">Company Details,Brands & Users</a>
+                    <ul class="sub-menu {{ request()->is('supplier/com*') ? 'open' : '' }} {{ request()->is('supplier/brand*') ? 'open' : '' }} {{ request()->is('supplier/user*') ? 'open' : '' }}">
 
-                       <li><a href="{{ route('suppliercompany') }}" class="{{ request()->is('supplier/company') ? 'active' : '' }}">Company Details</a></li>
+                       <li><a href="{{ route('suppliercompany') }}" class="{{ request()->is('supplier/company*') ? 'active' : '' }}">Company Details</a></li>
 
-                       <li><a href="{{ route('supplierbrand') }}" class="{{ request()->is('supplier/brand') ? 'active' : '' }}">Brands</a></li>
+                       <li><a href="{{ route('supplierbrand') }}" class="{{ request()->is('supplier/brand*') ? 'active' : '' }}">Brands</a></li>
 
-                       <li><a href="{{ route('suppliercompanyadd') }}" class="{{ request()->is('supplier/companyadd') ? 'active' : '' }}">Users</a></li>
+                       <li><a href="{{ route('supplieruser') }}" class="{{ request()->is('supplier/user*') ? 'active' : '' }}">Users</a></li>
                     </ul>
                 </li>               
             </ul>
