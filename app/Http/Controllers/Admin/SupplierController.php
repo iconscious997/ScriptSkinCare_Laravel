@@ -106,13 +106,16 @@ class SupplierController extends Controller
 
             setflashmsg('Company Added Successfully','1');
         }
-
         
         if($company->exists) {
             // success
             Session::put('first', $company->id);
-            return redirect('/supplierstep2');
-        }        
+            if( $request->savestep == 0 ) {
+                return redirect('/supplierstep2');
+            } else {
+                return redirect('/supplierstep1');
+            }
+        }
         
     }
 
@@ -1183,6 +1186,7 @@ public function addnewuser()
     ->where('supplier_details.company_id', old('company_id'))
     ->where('roles.name', "supplier_admin")
     ->select('supplier_details.id','supplier_details.first_name','supplier_details.last_name')->get();
+
 
     
 

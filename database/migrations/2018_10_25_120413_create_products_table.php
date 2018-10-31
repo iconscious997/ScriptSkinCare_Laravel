@@ -43,7 +43,7 @@ class CreateProductsTable extends Migration
             ->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->integer('created_by');
             $table->integer('modified_by');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

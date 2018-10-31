@@ -46,7 +46,7 @@
 							<span class="inputError">{{ $errors->first('brand_id') }}</span>
 							@endif
 						</div>
-						<div class="form-group col-md-6">	
+						<div class="form-group col-md-6">
 							<div class="input-group">
 								<select class="" id="product_line_id" name="product_line_id">
 									<option value="" disabled selected>Please select your product line</option>

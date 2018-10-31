@@ -12,6 +12,8 @@ use App\Brand;
 use App\Role;
 use App\Mymodel\Supplier\Productline;
 use App\Mymodel\Supplier\Product;
+use App\Mymodel\Supplier\Category;
+use App\Mymodel\Supplier\Subcategory;
 
 
 class SupplierHomeController extends Controller
@@ -149,7 +151,11 @@ class SupplierHomeController extends Controller
 
 	public function productstep2()
 	{
-		return view('supplier.product.productstep2');
+		$category = Category::where(function($q) {
+			$q->where('step_no', 2)
+			->orWhere('step_no', 21);
+		})->get();
+		return view('supplier.product.productstep2', compact('category') );
 	}
 
 	public function productstep3()
@@ -195,9 +201,9 @@ class SupplierHomeController extends Controller
 	public function common() {
 
 		$data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')			
-			->select('supplier_details.id','supplier_details.company_id','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website')
-			->where('supplier_details.id','=',\Auth::user()->id)
-			->first();
+		->select('supplier_details.id','supplier_details.company_id','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website')
+		->where('supplier_details.id','=',\Auth::user()->id)
+		->first();
 		return view('supplier.common',compact('data'));
 	}
 
@@ -224,12 +230,12 @@ class SupplierHomeController extends Controller
 				$d->where('users.email', 'LIKE', '%'.$request->email.'%');
 			}
 
-			 if (isset($request->role_id) && !empty($request->role_id)) {
+			if (isset($request->role_id) && !empty($request->role_id)) {
 
-                $open = true;
+				$open = true;
 				$d->where('roles.id', '=', $request->role_id);
 
-            }
+			}
 
 
 			
@@ -288,36 +294,36 @@ class SupplierHomeController extends Controller
                                             # code...
 						if ($request->search=="Brands") {
 
-								if(isset($request->status)){
+							if(isset($request->status)){
 
-										$query[]=['status','=',$request->status];
-										
-									}
+								$query[]=['status','=',$request->status];
 
-									if(isset($request->brand_name)){
+							}
 
-										
-									$query[]=['brand_name', 'like','%'. $request->brand_name.'%'];
+							if(isset($request->brand_name)){
 
-										
-									}
-                                        $brands_data = Brand::where('id','=',$sub)->where($query)->select('*')->first(); 
-                                        
+
+								$query[]=['brand_name', 'like','%'. $request->brand_name.'%'];
+
+
+							}
+							$brands_data = Brand::where('id','=',$sub)->where($query)->select('*')->first(); 
+
                                         // dump($brands_data);
-                                        if (isset($brands_data->id) ) {
-                                             
-                           					 array_push($add_brand_tmp, $brands_data->brand_name);
-                                        }
-                                    
+							if (isset($brands_data->id) ) {
 
-                                    }else{
+								array_push($add_brand_tmp, $brands_data->brand_name);
+							}
 
-                                        $brands_data = Brand::find($sub); 
-                                  
 
-                                    array_push($add_brand_tmp, $brands_data->brand_name);
+						}else{
 
-                                    }
+							$brands_data = Brand::find($sub); 
+
+
+							array_push($add_brand_tmp, $brands_data->brand_name);
+
+						}
 
 					}
 
@@ -337,14 +343,14 @@ class SupplierHomeController extends Controller
 				
 			}else{
 
-				 				if ($request->search=="Brands") {
+				if ($request->search=="Brands") {
 
-                                        $temp_data="";
+					$temp_data="";
 
-                                     }else{
+				}else{
 
-                                        $temp_data="-";
-                                     }
+					$temp_data="-";
+				}
 			}
 			
 
@@ -493,18 +499,18 @@ class SupplierHomeController extends Controller
 		$supplier = Supplier::where('user_id',\Auth::user()->id)->first();
 
 		$tmp = explode(',', $supplier->brand_ids);
-        
-        if( !in_array($brands->id, $tmp) ) {
-            array_push($tmp, $brands->id);
-            $supplier->brand_ids   = implode(',', $tmp);
-        }else if (in_array($brands->id, $tmp)) {
-             $supplier->brand_ids  = implode(',', $tmp);
-        }else{                    
-            $supplier->brand_ids   = $brands->id;
-        }
 
-        $supplier->save();
-                
+		if( !in_array($brands->id, $tmp) ) {
+			array_push($tmp, $brands->id);
+			$supplier->brand_ids   = implode(',', $tmp);
+		}else if (in_array($brands->id, $tmp)) {
+			$supplier->brand_ids  = implode(',', $tmp);
+		}else{                    
+			$supplier->brand_ids   = $brands->id;
+		}
+
+		$supplier->save();
+
 
 
 		if( !empty($brands->exists) ) {

@@ -23,6 +23,7 @@
 					<div class="form-group">
 						@if ( !empty($company) )
 						<input type="hidden" name="id" value="{{ $company->id }}">
+						<input type="hidden" name="savestep" id="savestep" value="0">
 						@endif
 						<input type="text" class="form-control" name="registered_business_name" id="registered_business_name" placeholder="Registered Business Name:" value="{{ !empty($company->business_name) ? $company->business_name : old('registered_business_name') }}">
 						@if ($errors->has('registered_business_name'))
@@ -96,7 +97,7 @@
 
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8 text-center mt-30 mb-20">
-					<button class="btn btn-dark btn-pad" type="button" onclick="javascript:$('#first').submit();"> SAVE STEP 1</button>
+					<button class="btn btn-dark btn-pad" type="button" id="btnsavestep"> SAVE STEP 1</button>
 				</div>
 				<div class="col-md-2">&nbsp;</div>
 			</div>
@@ -119,4 +120,12 @@
 		<div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function() {
+		$('#btnsavestep').on('click', function(e) {
+        // set the savestep to 1 so we can track that we have to redirect to next or not
+        $('#savestep').val(1);
+        $('#first').submit();
+    });
+</script>
 @endsection
