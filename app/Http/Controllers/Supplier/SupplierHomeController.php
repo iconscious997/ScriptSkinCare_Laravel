@@ -9,8 +9,10 @@ use DB;
 use Validator;
 use App\Supplier;
 use App\Brand;
+use App\Role;
 use App\Mymodel\Supplier\Productline;
 use App\Mymodel\Supplier\Product;
+
 
 class SupplierHomeController extends Controller
 {
@@ -124,7 +126,7 @@ class SupplierHomeController extends Controller
 			if( !empty($product->exists) ) {
 	            // success
 				Session::put('productstep1', $product->id);
-				setflashmsg('Record Inserted Successfully','1');
+				setflashmsg('Company Added Successfully','1');
 				return redirect()->route('supplierproductstep2');
 			} else {
 				setflashmsg('Some error occured. Please try again','0');
@@ -190,10 +192,169 @@ class SupplierHomeController extends Controller
 		return view('supplier.product.productstep10');
 	}
 
-	public function company()
+	public function common() {
+
+		$data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')			
+			->select('supplier_details.id','supplier_details.company_id','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website')
+			->where('supplier_details.id','=',\Auth::user()->id)
+			->first();
+		return view('supplier.common',compact('data'));
+	}
+
+	public function company(Request $request)
 	{
-		$data = $all_roles = [];
-		return view('supplier.product.list', compact('data', 'all_roles') );
+		$open = false;
+		if ($request->isMethod('post')) {
+			$d = Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+			->join('role_user','supplier_details.user_id','=','role_user.user_id')
+			->join('roles','role_user.role_id','=','roles.id')
+			->join('users','supplier_details.user_id','=','users.id')
+			->select('supplier_details.id','supplier_details.user_id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id');
+			if( !empty($request->supplier_name) ) {
+				$open = true;
+				$d->where('supplier_details.user_id', '=',\Auth::user()->id);
+			}
+			if( !empty($request->last_name) ) {
+				$open = true;
+				$d->where('supplier_details.last_name', 'LIKE', '%'.$request->last_name.'%');
+			}
+
+			if( !empty($request->email) ) {
+				$open = true;
+				$d->where('users.email', 'LIKE', '%'.$request->email.'%');
+			}
+
+			 if (isset($request->role_id) && !empty($request->role_id)) {
+
+                $open = true;
+				$d->where('roles.id', '=', $request->role_id);
+
+            }
+
+
+			
+
+			$data = $d->where('supplier_details.company_id','=',Session::get('company_id'))->get();
+
+
+		} else {
+
+			$data=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+			->join('role_user','supplier_details.user_id','=','role_user.user_id')
+			->join('roles','role_user.role_id','=','roles.id')
+			->join('users','supplier_details.user_id','=','users.id')
+			->select('supplier_details.id','supplier_details.user_id','supplier_details.company_id','supplier_details.brand_ids','supplier_details.first_name','supplier_details.last_name','supplier_details.position','roles.label','users.email','company_details.business_name','company_details.address','company_details.trading_name','company_details.business_telephone_number','company_details.website','supplier_details.status as sstatus','users.id as user_id')
+			->where('supplier_details.company_id','=',Session::get('company_id'))
+			->get();
+
+		}
+
+
+
+		
+		$i=0;
+
+		$all_brand_name=array();
+		$user_parent_name=array();
+		foreach ($data as $value) {
+			
+			$temp_data=array();
+			if($value->user_parent_id!=0){
+
+
+				$user_parent=Supplier::find($value->user_parent_id);
+
+				$temp_data=$user_parent->first_name." ".$user_parent->last_name;
+
+			}else{
+
+				$temp_data="-";
+			}
+
+			array_push($user_parent_name, $temp_data);
+			
+			if ($value->brand_ids!=null) {
+				$i++;
+                                    # code...
+				$add_brand_tmp=array();
+				$tmp_remove = explode(',', $value->brand_ids);
+
+				foreach ($tmp_remove as $sub) {
+					
+					$query=[];
+
+					if (isset($sub) && !empty($sub)) {
+
+                                            # code...
+						if ($request->search=="Brands") {
+
+								if(isset($request->status)){
+
+										$query[]=['status','=',$request->status];
+										
+									}
+
+									if(isset($request->brand_name)){
+
+										
+									$query[]=['brand_name', 'like','%'. $request->brand_name.'%'];
+
+										
+									}
+                                        $brands_data = Brand::where('id','=',$sub)->where($query)->select('*')->first(); 
+                                        
+                                        // dump($brands_data);
+                                        if (isset($brands_data->id) ) {
+                                             
+                           					 array_push($add_brand_tmp, $brands_data->brand_name);
+                                        }
+                                    
+
+                                    }else{
+
+                                        $brands_data = Brand::find($sub); 
+                                  
+
+                                    array_push($add_brand_tmp, $brands_data->brand_name);
+
+                                    }
+
+					}
+
+					
+					
+                                            // if( $sub!=$brands->id) {
+                                                // array_push($add_brand_tmp, $sub);
+
+					
+                                            // }
+
+                                        // echo $sub;
+				}
+				$temp_data=implode(",", $add_brand_tmp);
+                             // echo $value->brand_ids;
+				
+				
+			}else{
+
+				 				if ($request->search=="Brands") {
+
+                                        $temp_data="";
+
+                                     }else{
+
+                                        $temp_data="-";
+                                     }
+			}
+			
+
+			array_push($all_brand_name, $temp_data);
+			
+
+		}
+		
+		$all_roles = Role::where('user_type',1)->where('status', 0)->get();
+		return view('supplier.company.list', compact('data', 'open','request','all_brand_name','all_roles') );
 	}
 
 	public function companyadd()
@@ -201,39 +362,95 @@ class SupplierHomeController extends Controller
 		return view('supplier.product.add');
 	}
 
+	public function companyedit($id, Request $request)
+	{
+
+		if ($request->isMethod('post')) {
+
+
+
+
+		}else{
+
+			$company=Supplier::join('company_details','supplier_details.company_id','=','company_details.id')
+			->select('company_details.*')
+			->where('supplier_details.user_id','=',\Auth::user()->id)
+			->where('company_details.id','=',$id)
+			->first();
+
+			
+			return view('supplier.company.edit', compact('company','request') );
+
+		}
+		
+	}
 	public function brand(Request $request)
 	{
 		$open = false;
 		if ($request->isMethod('post')) {
-			$d = Brand::join('company_details','brands.brand_company_id','=','company_details.id');
-			if( !empty($request->business_name) ) {
+
+			$d = Supplier::join('brands',\DB::raw("FIND_IN_SET(brands.id, supplier_details.brand_ids)"),">",\DB::raw("'0'"))
+			->join('company_details','supplier_details.company_id','=','company_details.id')
+			->join('role_user','supplier_details.user_id','=','role_user.user_id')
+			->join('roles','role_user.role_id','=','roles.id')
+			->join('users','supplier_details.user_id','=','users.id')
+			->select('brands.*','company_details.business_name');
+
+			if( !empty($request->last_name) ) {
 				$open = true;
-				$d->where('company_details.business_name', 'LIKE', '%'.$request->business_name.'%');
+				$d->where('supplier_details.last_name', 'LIKE', '%'.$request->last_name.'%');
 			}
+			if( !empty($request->email) ) {
+				$open = true;
+				$d->where('users.email', 'LIKE', '%'.$request->email.'%');
+			}
+
 			if( !empty($request->brand_name) ) {
 				$open = true;
 				$d->where('brands.brand_name', 'LIKE', '%'.$request->brand_name.'%');
 			}
-			if( !empty($request->status) ) {
+
+			if( !empty($request->supplier_name) ) {
 				$open = true;
-				$d->where('brands.status', '=', $request->status);
+				$d->where('supplier_details.user_id','=',\Auth::user()->id);
+			}
+
+			if(isset($request->status) ) {
+				$open = true;
+				$d->where('brands.status', '=',$request->status);
+			}
+
+			if( !empty($request->role_id) ) {
+				$open = true;
+				$d->where('role_user.role_id', '=', $request->role_id);
 			}
 			if ( !empty($request->create_date) ) {
 				$open = true;
 				$d->whereDate('brands.created_date', '=', covertDateServer($request->create_date) );
 			}
+			$d->where('supplier_details.user_id','=',\Auth::user()->id);
 			$data = $d->get();
+
 		} else {
-			$data = Brand::join('company_details','brands.brand_company_id','=','company_details.id')->select('brands.brand_name','brands.id','brands.brand_logo','company_details.business_name')->get();
+
+
+			$data=Supplier::join('brands',\DB::raw("FIND_IN_SET(brands.id, supplier_details.brand_ids)"),">",\DB::raw("'0'"))
+			->join('company_details','supplier_details.company_id','=','company_details.id')
+			->select('brands.*','company_details.business_name')
+			->where('supplier_details.user_id','=',\Auth::user()->id)
+			->get();
+
+
 		}
-		return view('supplier.brand.list', compact('data', 'open') );
+		$all_roles = Role::where('user_type',1)->where('status', 0)->get();
+		return view('supplier.brand.list', compact('data', 'open','all_roles','request') );
 	}
 
 	public function brandadd()
 	{	
 		// echo \Auth::user()->id;
 		$s = new Supplier;
-		$company = $s->get_company( \Auth::user()->id );
+		$company = $s->get_company(\Auth::user()->id);
 		return view('supplier.brand.add', compact('company'));
 	}
 
@@ -272,9 +489,27 @@ class SupplierHomeController extends Controller
 			'modified_by'              => \Auth::user()->id,
 		]);
 
+
+		$supplier = Supplier::where('user_id',\Auth::user()->id)->first();
+
+		$tmp = explode(',', $supplier->brand_ids);
+        
+        if( !in_array($brands->id, $tmp) ) {
+            array_push($tmp, $brands->id);
+            $supplier->brand_ids   = implode(',', $tmp);
+        }else if (in_array($brands->id, $tmp)) {
+             $supplier->brand_ids  = implode(',', $tmp);
+        }else{                    
+            $supplier->brand_ids   = $brands->id;
+        }
+
+        $supplier->save();
+                
+
+
 		if( !empty($brands->exists) ) {
             // success
-			setflashmsg('Record Inserted Successfully','1');
+			setflashmsg('Brand Added Successfully','1');
 		} else {
 			setflashmsg('Some error occured. Please try again','0');
 		}
@@ -311,7 +546,7 @@ class SupplierHomeController extends Controller
 			$brands->modified_by = \Auth::user()->id;
 			$brands->save();
 
-			setflashmsg('Record Updated Successfully','1');
+			setflashmsg('Brand Updated Successfully','1');
 			return redirect()->route('supplierbrand');
 		} else {
 			$brand = Brand::join('company_details','brands.brand_company_id','=','company_details.id')
@@ -374,7 +609,7 @@ class SupplierHomeController extends Controller
 
 			if( !empty($prodline->exists) ) {
 	            // success
-				setflashmsg('Record Inserted Successfully','1');
+				setflashmsg('Product Line Added Successfully','1');
 			} else {
 				setflashmsg('Some error occured. Please try again','0');
 			}
@@ -404,7 +639,7 @@ class SupplierHomeController extends Controller
 			$proline->modified_by = \Auth::user()->id;
 			$proline->save();
 
-			setflashmsg('Record Updated Successfully','1');
+			setflashmsg('Product Line Updated Successfully','1');
 			return redirect()->route('supplierproductline');
 		} else {
 			// get company id for current user

@@ -237,7 +237,7 @@
 
 </form>
 
-<div class="footer">
+<div class="footer spfooter">
 	<div class="text-center">
 		<div class="col-md-3 col-sm-3 hidden-xs">&nbsp;</div>
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

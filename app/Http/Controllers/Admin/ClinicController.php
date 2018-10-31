@@ -31,77 +31,50 @@ class ClinicController extends Controller
     {
 
         if ($request->isMethod('get')) {
-
             $data = Clinic::all();
         }
 
         if ($request->isMethod('post')) {
-
-
             
-            if (isset($request->clinic_name) && !empty($request->clinic_name)) {
-               
+            if (isset($request->clinic_name) && !empty($request->clinic_name)) {               
                 $query[]=['clinic_name', 'like','%' . $request->clinic_name. '%'];
-                    
-            }
-            if (isset($request->telephone_number) && !empty($request->telephone_number)) {
-                
-                
-                $query[]=['telephone_number', 'like','%'. $request->telephone_number.'%'];
-                
             }
 
-             if (isset($request->clinic_website) && !empty($request->clinic_website)) {
-                
+            if (isset($request->telephone_number) && !empty($request->telephone_number)) {
+                $query[]=['telephone_number', 'like','%'. $request->telephone_number.'%'];
+            }
+
+            if (isset($request->clinic_website) && !empty($request->clinic_website)) {
                  $query[]=['clinic_website', 'like','%'. $request->clinic_website.'%'];
             }
-              if (isset($request->email) && !empty($request->email)) {
-                
-                 $query[]=['clinic_email', 'like','%'. $request->email.'%'];
 
+            if (isset($request->email) && !empty($request->email)) {                
+                 $query[]=['clinic_email', 'like','%'. $request->email.'%'];
             }
 
-             if (isset($request->status) && !empty($request->status)) {
-                
+            if (isset($request->status) && !empty($request->status)) {                
                 $query[]=['clinic_status', '=',$request->status];
             }
 
             if(isset($query) && !empty($query)){
-
                 
+                $d = Clinic::
+                where($query);
+                
+                if (isset($request->create_date) && !empty($request->create_date)) {
+                   $d->whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) );                      
+                }
 
-                             $d = Clinic::
-                            where($query);
-                            if (isset($request->create_date) && !empty($request->create_date)) {
-                                        
-                        $d->whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
-                      
-                    }
-
-                    $data = $d->get();
-                    
+                $data = $d->get();                    
 
             }else if(isset($request->create_date) && !empty($request->create_date)){
-
-
-
-                    $data = Clinic::whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) )->get();
-
-
-
+                  $data = Clinic::whereDate('created_date', '=', date("Y-m-d", strtotime($request->create_date)) )->get();
             }else{
-
                 $data = Clinic::all();
-            }
-
-           
-                    
-
+            }       
         }
-        // die();
-        
-        return view('admin.retail-site-list',compact('data','request'));
 
+        return view('admin.retail-site-list',compact('data','request'));
     }
 
     public function clinicadd()
@@ -113,22 +86,10 @@ class ClinicController extends Controller
     {        
        $retailsite = Clinic::find($id);
        return view('admin.retail-site-edit', compact('retailsite'));
-
     }
-
-    // public function clinicactivedeactive($id,$status){
         
-    //     DB::table('client_details')
-    //     ->where("client_details.id", '=',  $id)
-    //     ->update(['client_details.status'=> $status]);
-
-    //      return redirect('/clinics');
-    // }
-
-    
     public function clinicstore(Request $request)
     {   
-
            $validatedData = $request->validate([
             'clinic_name'               => 'required',
             'trading_name'              => 'required',
@@ -139,22 +100,18 @@ class ClinicController extends Controller
         ]);
         
             $clinic = Clinic::find($request->id);
-            $clinic->clinic_name                 = $request->clinic_name;
-            $clinic->trading_name                  = $request->trading_name;
-            $clinic->clinic_location                       = $request->clinic_location;
-            $clinic->telephone_number     = $request->telephone_number;
-            $clinic->clinic_email                 = $request->clinic_email;
-            $clinic->clinic_website                       = $request->clinic_website;
-            $clinic->modified_by                   = \Auth::user()->id;
+            $clinic->clinic_name       = $request->clinic_name;
+            $clinic->trading_name      = $request->trading_name;
+            $clinic->clinic_location   = $request->clinic_location;
+            $clinic->telephone_number  = $request->telephone_number;
+            $clinic->clinic_email      = $request->clinic_email;
+            $clinic->clinic_website    = $request->clinic_website;
+            $clinic->modified_by       = \Auth::user()->id;
             $clinic->save();
-
-            // 
-            setflashmsg('Record Updated Successfully','1');   
-
-            return redirect('/retail-site-list'); 
-     
+            
+            setflashmsg('Retail Updated Successfully','1');
+            return redirect('/retail-site-list');      
     }
-
 
     public function clinicinsert(Request $request)
     {
@@ -166,26 +123,29 @@ class ClinicController extends Controller
             'telephone_number'          => 'required|numeric|digits_between:10,12',
             'clinic_email'              => 'required|email',
             'clinic_website'            => 'required|url',
+        ],[
+            'clinic_name.required'      => 'Retail Name is required',
+            'trading_name.required'     => 'Trading Name is required',
+            'clinic_location.required'  => 'Location is required',
+            'clinic_email.required'     => 'Email is required',
+            'clinic_website.required'   => 'Retail Website is required'         
+        ]);
+        
+        $clinic = Clinic::create([
+            'clinic_name'                => request('clinic_name'),
+            'trading_name'               => request('trading_name'),
+            'clinic_location'            => request('clinic_location'),
+            'telephone_number'           => request('telephone_number'),
+            'clinic_email'               => request('clinic_email'),
+            'clinic_website'             => request('clinic_website'),
+            'clinic_status'               => 0,
+            'created_date'               => date('Y-m-d H:i:s'),
+            'created_by'                 => \Auth::user()->id,
+            'modified_by'                => \Auth::user()->id,
         ]);
 
+        setflashmsg('Retail Added Successfully','1');
 
-        
-            $clinic = Clinic::create([
-                'clinic_name'                => request('clinic_name'),
-                'trading_name'               => request('trading_name'),
-                'clinic_location'            => request('clinic_location'),
-                'telephone_number'           => request('telephone_number'),
-                'clinic_email'               => request('clinic_email'),
-                'clinic_website'             => request('clinic_website'),
-                'clinic_status'               => 0,
-                'created_date'               => date('Y-m-d H:i:s'),
-                'created_by'                 => \Auth::user()->id,
-                'modified_by'                => \Auth::user()->id,
-            ]);
-
-            setflashmsg('Record Inserted Successfully','1');
-
-            return redirect('/retail-site-list'); 
-
+        return redirect('/retail-site-list'); 
     }
 }

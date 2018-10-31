@@ -6,7 +6,6 @@
 }
 </style>
 <script type="text/javascript" src="{{ asset('assets/js/2jquery.dataTables.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/js/3dataTables.bootstrap.js') }}"></script>
 <form action="" method="" id="first">
 
     <div class="wizard spcust">

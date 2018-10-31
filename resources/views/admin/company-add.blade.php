@@ -1,18 +1,18 @@
 @extends('layouts.master')
 @section('content')
 
-<form action="{{ url('/supplierstep1store') }}" method="POST" id="first">
+<form action="{{ url('/companyinsert') }}" method="POST" id="first">
 	@csrf
 
 	<div class="wizard">
 		<div class="container">
 			<div class="row">
-				<h3 class="text-center">STEP 1: COMPANY DETAILS*</h3>
+				<h3 class="text-center">ADD COMPANY DETAILS</h3>
 			</div>
 		</div>
 	</div>
 
-	<div class="content-fix wow fadeIn" data-wow-duration="2s" >
+	<div class="content-fix wow" data-wow-duration="2s" >
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">&nbsp;</div>
@@ -69,34 +69,12 @@
 				<div class="col-md-3">&nbsp;</div>
 			</div>
 			<div class="clearfix">&nbsp;</div>
-			<div class="row">
-				<div class="col-md-2">&nbsp;</div>
-				<div class="col-md-8 text-center">
-					<hr>
-					<div class="row">
-						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 mt-15"></div>
-						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-							<ul class="pagination pagination-split">
-								<li class="page-item active"><span class="page-link">1</span></li>
-								<li class="page-item"><span class="page-link">2</span></li>
-								<li class="page-item"><span class="page-link">3</span></li>
-								<li class="page-item"><span class="page-link">4</span></li>
-							</ul>
-						</div>
-						<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  mt-15 text-right">
-							<a onclick="javascript:$('#first').submit();" class="next" id="nextBtn">
-								NEXT &nbsp;<i class="ti-arrow-right"></i>
-							</a>
-						</div>
-					</div>
-					<hr>
-				</div>
-				<div class="col-md-2">&nbsp;</div>
-			</div>
+			
 
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8 text-center mt-30 mb-20">
-					<button class="btn btn-dark btn-pad" type="button" onclick="javascript:$('#first').submit();"> SAVE STEP 1</button>
+					<button class="btn btn-dark btn-pad" type="button" onclick="javascript:$('#first').submit();"> SAVE CHANGES</button>
+
 				</div>
 				<div class="col-md-2">&nbsp;</div>
 			</div>
@@ -109,7 +87,7 @@
 	<div class="text-center">
 		<div class="col-md-1 col-sm-1 hidden-xs">&nbsp;</div>
 		<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-			<a href="{{ url('/supplier-company-add') }}" ><button type="button" class="btn btn-default ripple spbtn"> + ADD NEW SUPPLIER</button></a>
+			<a href="{{ url('/supplier-company-add') }}" ><button type="button" class="btn btn-default ripple spbtn active"> + ADD NEW SUPPLIER</button></a>
 
 			<a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default ripple spbtn m-l-20"> + ADD A NEW USER</button></a>
 

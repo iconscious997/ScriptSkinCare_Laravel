@@ -31,7 +31,9 @@ and (orientation : landscape) {
     .btn {
         font-size: 9px !important;
     }
-
+    .advance-filter {
+        bottom: -250px;
+    }
 }
 
 @media only screen 
@@ -47,6 +49,26 @@ and (orientation : portrait) {
     }
     .btn-pad {
         padding: 4px 45px !important;
+    }
+    .spfooter{
+        position: relative !important;
+        display: grid !important;
+    }
+    .btn .caret {
+        position: absolute;
+    }
+    #footer.width50 {
+        width: 100% !important;
+    }
+    .advance-filter {
+        position: relative;
+        border-top: none;
+        bottom: -260px;
+        padding: 0;
+    }
+    #advfilter.width50 {
+        width: 50% !important;
+        display: -webkit-inline-box;
     }
 }
 
@@ -232,7 +254,8 @@ and (orientation : portrait) {
     .footer {
         padding: 15px !important;
         position: relative !important;
-        display: -webkit-box;
+        /*display: -webkit-box;*/
+        display: grid;
     }
     .content-fix {
         overflow-y: hidden;
@@ -272,4 +295,17 @@ and (orientation : portrait) {
         position: relative;
         bottom: 0;
     }
+    #advfilter.width50 {
+        width: 100% !important;
+    }
+    .advance-filter {
+        position: relative;
+        border-top: none;
+        bottom: 0;
+        padding: 0;
+    }
+    .filter-advance{
+        background: #CDDDE0;
+    }
+
 }

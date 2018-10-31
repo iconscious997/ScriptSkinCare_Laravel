@@ -112,7 +112,10 @@
                     </div>
                 </a>
                 <ul class="nav collapse" id="submenu_1" role="menu" aria-labelledby="btn-1">
-                    <li><a href="" class="">Retailer List</a></li>
+                    <li><a href="{{ route('retail') }}" class="">Retailer List</a></li>
+                    <li><a href="{{ route('retailadd') }}" class="">Set-Up New Retail</a></li>
+                    <li><a href="{{ route('retail-site-list') }}" class="">Manage / Edit Retail</a></li>
+                    <li><a href="{{ route('retail-user-list') }}" class="">Manage Retail User Permission</a></li>
                 </ul>
             </li>
             <li>

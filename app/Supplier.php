@@ -17,6 +17,8 @@ class Supplier extends Model
 		// $t = $this->where('user_id', $id)->first()->companys();
 		// $t = Supplier::with('companys')->where('user_id', $id)->first();
 		$s = $this->where('user_id', $id)->first();
+		// dump($s);
+		// die();
 		$c = Company::find( $s->company_id )->first();
 		// echo $s->company_id;
 		// dd($c);

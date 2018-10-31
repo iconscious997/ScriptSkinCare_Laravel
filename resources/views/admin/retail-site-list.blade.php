@@ -17,7 +17,7 @@
      <div class="wizard">
         <div class="container">
             <div class="row">
-                <h3 class="text-center">MANAGE RETAIL SITE</h3>
+                <h3 class="text-center">MANAGE / EDIT RETAIL</h3>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
                         <th>Address</th>
                         <th>Business Telephone</th>
                         <th>Email</th>
-                        <th>clinic_website</th>
+                        <th>Website</th>
                         
                         <th>Actions</th>
                     </tr>

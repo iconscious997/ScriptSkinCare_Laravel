@@ -142,7 +142,7 @@
         <div class="">
             <div class="col-md-1 col-sm-1">&nbsp;</div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                <a href="{{ url('/user-supplier-add') }}" ><button type="button" class="btn btn-default spbtn active"> + ADD NEW SUPPLIER</button></a>
+                <a href="{{ url('/supplier-company-add') }}" ><button type="button" class="btn btn-default spbtn active"> + ADD NEW SUPPLIER</button></a>
                    
                <a href="{{ url('/add-new-user') }}" > <button type="button" class="btn btn-default spbtn m-l-20"> + ADD A NEW USER</button></a>
               

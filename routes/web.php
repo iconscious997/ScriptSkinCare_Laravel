@@ -97,7 +97,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'as'	=> 'supplierproductstep10'
 	]);
 
-	Route::get('/company', [
+	Route::get('/common', [
+		'uses'	=> 'SupplierHomeController@common',
+		'as'	=> 'suppliercompanydashborad'
+	]);
+
+	Route::match(['GET','POST'],'/company', [
 		'uses'	=> 'SupplierHomeController@company',
 		'as'	=> 'suppliercompany'
 	]);
@@ -105,6 +110,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 	Route::get('/companyadd', [
 		'uses'	=> 'SupplierHomeController@companyadd',
 		'as'	=> 'suppliercompanyadd'
+	]);
+
+	Route::match(['GET', 'POST'],'/companyedit/{id}', [
+		'uses'	=> 'SupplierHomeController@companyedit',
+		'as'	=> 'suppliercompanyedit'
 	]);
 
 	Route::match(['GET', 'POST'],'/brand', [
@@ -230,6 +240,12 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 	Route::post('/brandstore', 'BrandController@brandstore')->name('brandstore');
 
 	// Company manage
+	Route::get('/supplier-company-add', [
+		'uses' 	=> 'CompanyController@companyadd',
+		'as'	=> 'company-add'
+	]);
+
+	Route::post('/companyinsert','CompanyController@companyinsert');
 	Route::get('/supplier-companyedit/{id}', [
 		'uses' 	=> 'CompanyController@companyedit',
 		'as'	=> 'companyedit'
@@ -295,6 +311,10 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 		'as'	=> 'retail-user-list'
 	]);
 
+	Route::get('/clinicactivedeactive/{id}/{status}', [
+		'uses' => 'RetailController@clinicactivedeactive',
+		'as'   => 'clinicactivedeactive'
+	]);
 
 	Route::get('/new-retail-user', 'RetailController@newretailuser');
 	Route::post('/newretailuserstore', 'RetailController@newretailuserstore');
@@ -325,6 +345,7 @@ Route::group(['middleware' => 'auth', 'prefix' => '', 'namespace' => 'Admin'], f
 
 	Route::post('/addnewuserstore', 'SupplierController@addnewuserstore')->name('addnewuserstore');
 
+	Route::get('get_supplier_company/{id}','SupplierController@get_supplier_company');
 
 	// add new brand 
 
