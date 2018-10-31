@@ -11,25 +11,27 @@
 <script type="text/javascript" src="{{ asset('assets/plugins/charts/jquery.c3-chart.init.js') }}"></script>
 <form action="" method="" id="first">
 
-    <div class="wizard spcust">
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-            <h3 class="text-left mt-20">Customer & Guest Orders</h3>
-        </div>
-        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
-            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 hidden-xs">&nbsp;</div>
-            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-                <button type="button" class="btn btn-default m-l-5 btn-block"> SORT / ARRANGE BY</button>
+    <div class="wizard ">
+        <div class="col-md-12">
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
+                <h3 class="text-left mt-20">Customer & Guest Orders</h3>
             </div>
-            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-                <div class="dropdown export">
-                    <button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Export PDF</a></li>
-                        <li><a href="javascript:void(0)"  onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a>
-                        </li>
-                    </ul>
+            <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right p-0">
+                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 hidden-xs">&nbsp;</div>
+                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
+                    <button type="button" class="btn btn-default m-l-5 btn-block"> SORT / ARRANGE BY</button>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
+                    <div class="dropdown export">
+                        <button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Export PDF</a></li>
+                            <li><a href="javascript:void(0)"  onClick ="$('#customers').tableExport({type:'excel',escape:'false',tableName:'yourTableName'});">Export Excel</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
