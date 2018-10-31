@@ -47,9 +47,9 @@ class RetailController extends Controller
 
         //needs to do search query 
         if ($request->isMethod('post')) {
-         $query=[];
+           $query=[];
 
-         if (isset($request->business_name) && !empty($request->business_name)) {
+           if (isset($request->business_name) && !empty($request->business_name)) {
             $query[]=['clinic_details.clinic_name', 'like','%' . $request->business_name. '%'];
         }
 
@@ -58,26 +58,26 @@ class RetailController extends Controller
         }
 
         if (isset($request->website) && !empty($request->website)) {                
-         $query[]=['clinic_details.clinic_website', 'like','%'. $request->website.'%'];
+           $query[]=['clinic_details.clinic_website', 'like','%'. $request->website.'%'];
+       }
+
+       if (isset($request->first_name) && !empty($request->first_name)) {                
+         $query[]=['retail_details.first_name', 'like','%'. $request->first_name.'%'];
      }
 
-     if (isset($request->first_name) && !empty($request->first_name)) {                
-       $query[]=['retail_details.first_name', 'like','%'. $request->first_name.'%'];
+     if (isset($request->position) && !empty($request->position)) {                
+        $query[]=['retail_details.position', 'like','%'. $request->position.'%'];
+    }
+
+    if (isset($request->last_name) && !empty($request->last_name)) {
+        $query[]=['retail_details.last_name', 'like','%'. $request->last_name.'%'];
+    }
+
+    if (isset($request->email) && !empty($request->email)) {
+       $query[]=['retail_details.email', 'like','%'. $request->email.'%'];
    }
 
-   if (isset($request->position) && !empty($request->position)) {                
-    $query[]=['retail_details.position', 'like','%'. $request->position.'%'];
-}
-
-if (isset($request->last_name) && !empty($request->last_name)) {
-    $query[]=['retail_details.last_name', 'like','%'. $request->last_name.'%'];
-}
-
-if (isset($request->email) && !empty($request->email)) {
- $query[]=['retail_details.email', 'like','%'. $request->email.'%'];
-}
-
-if (isset($request->pstatus) && !empty($request->pstatus)) {                
+   if (isset($request->pstatus) && !empty($request->pstatus)) {                
     $query[]=['roles.id', '=',$request->pstatus];                
 }
 
@@ -123,6 +123,7 @@ public function retailadd()
 
 public function retailsitestore(Request $request)
 {        
+    
     $validatedData = $request->validate([
         'clinic_name'               => 'required',
         'trading_name'              => 'required',
@@ -174,28 +175,38 @@ public function retailsitestore(Request $request)
     if($clinic->exists) {
             // success
         Session::put('retail_site_id', $clinic->id);
-        return redirect('/retail-user');
+        if( $request->savestep == 0 ) {
+
+
+            return redirect('/retail-user');
+
+        } else {
+
+            return redirect('/retailadd');
+
+        }
+
     }
 
 }
 
 public function retail_user_add($id='')
 {
- if( !Session::has('retail_site_id') ) {
-     return redirect('/retailadd');
- }
+   if( !Session::has('retail_site_id') ) {
+       return redirect('/retailadd');
+   }
 
- if($id == NULL) $id = Session::get('retail_details_id');
+   if($id == NULL) $id = Session::get('retail_details_id');
 
- $retail_admin = Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
- ->join('roles','role_user.role_id','=','roles.id')
- ->where('retail_details.clinic_id', Session::get('retail_site_id'))
- ->where('roles.name', "retail_admin")
- ->select('retail_details.id','retail_details.first_name','retail_details.last_name')->get()->toArray();
+   $retail_admin = Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
+   ->join('roles','role_user.role_id','=','roles.id')
+   ->where('retail_details.clinic_id', Session::get('retail_site_id'))
+   ->where('roles.name', "retail_admin")
+   ->select('retail_details.id','retail_details.first_name','retail_details.last_name')->get()->toArray();
 
- $retailsite = Clinic::find(Session::get('retail_site_id'));
- $roles = Role::where('user_type', 2)->where('status', 0)->get();
- if( Session::has('retail_details_id') ) {
+   $retailsite = Clinic::find(Session::get('retail_site_id'));
+   $roles = Role::where('user_type', 2)->where('status', 0)->get();
+   if( Session::has('retail_details_id') ) {
     $retailuser = Retail::find($id);
     $user_selected_role = RoleUser::where('user_id', $retailuser->user_id)->first();
     $user = User::find($retailuser->user_id);
@@ -220,7 +231,7 @@ public function retailuserstore(Request $request)
     if( !empty( $request->id ) && $request->whattodo == 'update' ) {
 
             // check for validation
-     $validatedData = $request->validate([
+       $validatedData = $request->validate([
         'first_name'                => 'required',
         'last_name'                 => 'required',
         'telephone_number'          => 'required|numeric|digits_between:10,12',
@@ -239,7 +250,7 @@ public function retailuserstore(Request $request)
         'mobile_number.required'    => 'Mobile is required'                          
     ]);
 
-     if(isset($request->user_parent_id)){
+       if(isset($request->user_parent_id)){
 
         if ($request->user_role==6 && $request->user_selected_role==6) {                
 
@@ -257,25 +268,25 @@ public function retailuserstore(Request $request)
         }
 
     }else{
-       $user_parent_id=0;
-   }
+     $user_parent_id=0;
+ }
 
-   $retail = Retail::find($request->id);
-   $retail->first_name                = $request->first_name;
-   $retail->last_name                 = $request->last_name;
-   $retail->user_parent_id            = $user_parent_id;
-   $retail->business_tel_number       = $request->telephone_number;
-   $retail->address_line_1            = $request->clinic_location;
-   $retail->mobile_number             = $request->mobile_number;
-   $retail->address_line_2            = '';
-   $retail->city                      = '';
-   $retail->state                     = '';
-   $retail->country                   = '';
-   $retail->position                  = $request->position;
-   $retail->modified_by               = \Auth::user()->id;
-   $retail->save();
+ $retail = Retail::find($request->id);
+ $retail->first_name                = $request->first_name;
+ $retail->last_name                 = $request->last_name;
+ $retail->user_parent_id            = $user_parent_id;
+ $retail->business_tel_number       = $request->telephone_number;
+ $retail->address_line_1            = $request->clinic_location;
+ $retail->mobile_number             = $request->mobile_number;
+ $retail->address_line_2            = '';
+ $retail->city                      = '';
+ $retail->state                     = '';
+ $retail->country                   = '';
+ $retail->position                  = $request->position;
+ $retail->modified_by               = \Auth::user()->id;
+ $retail->save();
 
-   if( !Session::has('parent_id') && $request->user_role==6) {
+ if( !Session::has('parent_id') && $request->user_role==6) {
     Session::put('parent_id', $request->id);
 }
 
@@ -408,16 +419,16 @@ if( $request->savestep == 0 ) {
 
 public function get_list_of_retail_user($id='')
 {   
- $data=Retail::where('clinic_id', $id)->get();
+   $data=Retail::where('clinic_id', $id)->get();
 
- $send_data='';
- foreach ($data as $key => $value) {             
-     $send_data.="<tr>
-     <td>".$value->first_name." ".$value->last_name."</td>
-     <td> <a href='".url('/retail-user').'/'.$value->id."' ><button type='button' class='btn btn-default'> Edit</button></a> </td>
-     </tr>";
- }
- return $send_data;
+   $send_data='';
+   foreach ($data as $key => $value) {             
+       $send_data.="<tr>
+       <td>".$value->first_name." ".$value->last_name."</td>
+       <td> <a href='".url('/retail-user').'/'.$value->id."' ><button type='button' class='btn btn-default'> Edit</button></a> </td>
+       </tr>";
+   }
+   return $send_data;
 }
 
 public function retailuserlist(Request $request)
@@ -446,10 +457,10 @@ public function retailuserlist(Request $request)
         }
 
         if (isset($request->email) && !empty($request->email)) {
-         $query[]=['users.email', 'like','%'. $request->email.'%'];
-     }
+           $query[]=['users.email', 'like','%'. $request->email.'%'];
+       }
 
-     if (isset($request->position) && !empty($request->position)) {
+       if (isset($request->position) && !empty($request->position)) {
         $query[]=['retail_details.position', 'like','%'. $request->position.'%'];
     }
 
@@ -477,15 +488,15 @@ public function retailuserlist(Request $request)
 
     }else if (isset($request->create_date) && !empty($request->create_date)) {
 
-     $d = retail::join('clinic_details','retail_details.clinic_id','=','clinic_details.id')
-     ->join('role_user','retail_details.user_id','=','role_user.user_id')
-     ->join('roles','role_user.role_id','=','roles.id')
-     ->join('users','retail_details.user_id','=','users.id');
-     $d->whereDate('retail_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
+       $d = retail::join('clinic_details','retail_details.clinic_id','=','clinic_details.id')
+       ->join('role_user','retail_details.user_id','=','role_user.user_id')
+       ->join('roles','role_user.role_id','=','roles.id')
+       ->join('users','retail_details.user_id','=','users.id');
+       $d->whereDate('retail_details.created_date', '=', date("Y-m-d", strtotime($request->create_date)) );
 
-     $data = $d->select('retail_details.*','clinic_details.clinic_name','clinic_details.trading_name','clinic_details.clinic_website','roles.label','users.email','retail_details.status as sstatus','users.id as user_id')->get();
+       $data = $d->select('retail_details.*','clinic_details.clinic_name','clinic_details.trading_name','clinic_details.clinic_website','roles.label','users.email','retail_details.status as sstatus','users.id as user_id')->get();
 
- }else{
+   }else{
 
     $data=retail::join('clinic_details','retail_details.clinic_id','=','clinic_details.id')
     ->join('role_user','retail_details.user_id','=','role_user.user_id')
@@ -519,26 +530,26 @@ return view( 'admin.retail-user-list',compact('data','user_parent_name','request
 
 public function retailuseredit($id)
 {
- $retailuser = Retail::find($id);
- $retail_admin = Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
- ->join('roles','role_user.role_id','=','roles.id')
- ->where('retail_details.clinic_id', $retailuser->clinic_id)
- ->where('roles.name', "retail_admin")
- ->select('retail_details.id','retail_details.first_name','retail_details.last_name')->get()->toArray();
+   $retailuser = Retail::find($id);
+   $retail_admin = Retail::join('role_user','retail_details.user_id','=','role_user.user_id')
+   ->join('roles','role_user.role_id','=','roles.id')
+   ->where('retail_details.clinic_id', $retailuser->clinic_id)
+   ->where('roles.name', "retail_admin")
+   ->select('retail_details.id','retail_details.first_name','retail_details.last_name')->get()->toArray();
 
- $retailsite = Clinic::find($retailuser->clinic_id);
- $roles = Role::where('user_type', 2)->where('status', 0)->get();
+   $retailsite = Clinic::find($retailuser->clinic_id);
+   $roles = Role::where('user_type', 2)->where('status', 0)->get();
 
- $user_selected_role = RoleUser::where('user_id', $retailuser->user_id)->first();
- $user = User::find($retailuser->user_id);
+   $user_selected_role = RoleUser::where('user_id', $retailuser->user_id)->first();
+   $user = User::find($retailuser->user_id);
 
- return view('admin.retail-user-edit', compact('roles','retailsite','retail_admin','retailuser','user','user_selected_role'));
+   return view('admin.retail-user-edit', compact('roles','retailsite','retail_admin','retailuser','user','user_selected_role'));
 }
 
 public function retailuserupdate(Request $request)
 {
         // check for validation
- $validatedData = $request->validate([
+   $validatedData = $request->validate([
     'first_name'                => 'required',
     'last_name'                 => 'required',
     'telephone_number'          => 'required|numeric|digits_between:10,12',
@@ -558,7 +569,7 @@ public function retailuserupdate(Request $request)
 ]);
 
 
- if(isset($request->user_parent_id)){
+   if(isset($request->user_parent_id)){
 
     if ($request->user_role==6 && $request->user_selected_role==6) {                
                 # code...

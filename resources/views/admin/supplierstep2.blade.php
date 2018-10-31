@@ -87,13 +87,13 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="business_address_line_1" id="business_address_line_1" placeholder="Business Address:" value="{{ !empty($supplier->business_address_line_1) ? $supplier->business_address_line_1 : old('business_address_line_1') }}">
+                            <input type="text" class="form-control" name="business_address_line_1" id="business_address_line_1" placeholder="Business Address line 1:" value="{{ !empty($supplier->business_address_line_1) ? $supplier->business_address_line_1 : old('business_address_line_1') }}">
                             @if ($errors->has('business_address_line_1'))
                             <span class="inputError">{{ $errors->first('business_address_line_1') }}</span>
                             @endif
                         </div>
                         <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="business_address_line_2" id="business_address_line_2" placeholder="Business Address(field 2):" value="{{ !empty($supplier->business_address_line_2) ? $supplier->business_address_line_2 : old('business_address_line_2') }}">
+                            <input type="text" class="form-control" name="business_address_line_2" id="business_address_line_2" placeholder="Business Address line 2:" value="{{ !empty($supplier->business_address_line_2) ? $supplier->business_address_line_2 : old('business_address_line_2') }}">
                             @if ($errors->has('business_address_line_2'))
                             <span class="inputError">{{ $errors->first('business_address_line_2') }}</span>
                             @endif
