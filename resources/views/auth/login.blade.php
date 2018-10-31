@@ -30,7 +30,7 @@
                     <span class="focus-input100"></span>
                 </div>
 
-                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                <div class="flex-sb-m w-full p-t-30 p-b-24">
                     <div class="contact100-form-checkbox">
                         <input class="input-checkbox100" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="label-checkbox100" for="remember">

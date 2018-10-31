@@ -898,22 +898,37 @@ ul.sub-menu a:after {
 ul.sub-menu a:hover:after {
     transform: scaleX(1);
 }
+/*****table***/
+.table .thead-dark th {
+    color: #333;
+    background-color: #F9F3F0;
+    border-color: #F9F3F0;
+    font-size: 12px;
+    padding: 10px;
+    white-space: nowrap;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid #333;
+    font-size: 12px;
+    padding: 8px 20px;
+}
+.table-responsive {
+
+}
 
 /************Mixing*****************/
 .wizard {
-    padding: 22px 0;
-    /*overflow: hidden;*/
+    display: flex;
+    padding: 20px 0;
     background: #F1E3D9;
     vertical-align: middle;
-    margin-top: 0px;
-    display: flex;
 }
 .spcust{
     padding:20px;
 }
 .wizard h3 {
-    font-size: 17px;
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
 }
 hr {
     margin-top: 0;
@@ -974,33 +989,17 @@ hr {
 .company::-webkit-scrollbar-track {
     background-color: #eee;
 }
-.table .thead-dark th {
-    color: #333;
-    background-color: #F9F3F0;
-    border-color: #F9F3F0;
-    font-size: 12px;
-    padding: 10px;
+
+#accordion .panel{
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    margin-bottom: 0;
 }
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    border-top: 1px solid #333;
-    font-size: 12px;
-    padding: 8px 20px;
+.advance-filter .panel-group {
+ margin-bottom: 0; 
 }
-/*.table-responsive {
-    overflow: auto;
-    min-height: 0.1%;
-    width: 100%;
-    }*/
-    #accordion .panel{
-        border: none;
-        border-radius: 3px;
-        box-shadow: none;
-        margin-bottom: 0;
-    }
-    .advance-filter .panel-group {
-     margin-bottom: 0; 
- }
- #accordion .panel-heading{
+#accordion .panel-heading{
     padding: 0;
     border: none;
     border-radius: 3px;
@@ -1030,12 +1029,12 @@ hr {
     position: absolute;
     top: 8px;
     right: 15px;
-    transform: rotate(0deg);
+    transform: rotate(180deg);
     transition: all 0.3s ease 0s;
 }
 #accordion .panel-title a.collapsed:before{
     color: #676767;
-    transform: rotate(180deg);
+    transform: rotate(0deg);
 }
 #accordion .panel-title a:after{
     content: "";
@@ -1830,4 +1829,30 @@ li.services a::after {
 .advsearch{
     color: #333;
     margin-top: 5px;
+}
+
+.portlet-heading {
+    border-radius: 3px 3px 0 0;
+    color: #ffffff;
+    padding: 12px 20px;
+}
+.portlet-heading .portlet-title {
+    color: #333;
+    float: left;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+.portlet-heading .portlet-widgets {
+    display: inline-block;
+    float: right;
+    font-size: 15px;
+    line-height: 30px;
+    padding-left: 15px;
+    position: relative;
+    text-align: right;
+}
+.bg-custom {
+    background-color: #f1e3d9 !important;
 }
