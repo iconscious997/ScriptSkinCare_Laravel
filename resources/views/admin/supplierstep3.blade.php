@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <select class=""  title="Supplier" name="supplier_parent_id" id="supplier_parent_id">
                             @foreach($supplier as $item)
-                            <option value="{{$item['id']}}" {{ (Session::get('parent_id') == $item['id'] ? 'selected' : '') }} {{ (isset($brands_data->supplier_parent_id)?$brands_data->supplier_parent_id == $item['id'] ? 'selected' : '':'') }} >{{$item['first_name']}} {{$item['last_name']}}</option>
+                            <option value="{{$item['id']}}" {{old('supplier_parent_id')==$item['id']?'selected':''}} {{ (Session::get('parent_id') == $item['id'] ? 'selected' : '') }} {{ (isset($brands_data->supplier_parent_id)?$brands_data->supplier_parent_id == $item['id'] ? 'selected' : '':'') }} >{{$item['first_name']}} {{$item['last_name']}}</option>
                             @endforeach
                         </select>
 
@@ -37,7 +37,7 @@
                         <select title="Added By" class="" id="created_by" name="created_by">
                             <option value="" disabled selected>Added By</option>
                             @foreach($supplier as $item)
-                            <option value="{{$item['id']}}" {{ (isset($brands_data->user_added_by)?$brands_data->user_added_by == $item['id'] ? 'selected' : '':'') }}>{{$item['first_name']}} {{$item['last_name']}}</option>
+                            <option value="{{$item['id']}}" {{old('created_by')==$item['id']?'selected':''}} {{ (isset($brands_data->user_added_by)?$brands_data->user_added_by == $item['id'] ? 'selected' : '':'') }}>{{$item['first_name']}} {{$item['last_name']}}</option>
                             @endforeach 
                         </select>
                         @if ($errors->has('created_by'))
@@ -56,7 +56,7 @@
 
                             foreach ($sub_supplier as $item) {
 
-                                echo '<option value="'.$item->id.'" >'.$item->first_name.' '.$item->last_name.'</option>';
+                                echo '<option value="'.$item->id.'" '.(in_array($item->id,old('assign_to_user'))?'selected':'').' >'.$item->first_name.' '.$item->last_name.'</option>';
                             }
                         }  
                         ?>
@@ -79,10 +79,10 @@
                    </div>
                </div>
                <div class="form-group">
-                <select class="" title="Approved By" name="approved_by" id="approved_by">
+                   <select class="" title="Approved By" name="approved_by" id="approved_by">
                     <option value="" disabled selected>Approved By</option>
                     @foreach($supplier as $item)
-                    <option value="{{$item['id']}}" {{ (isset($brands_data->approved_by)?$brands_data->approved_by == $item['id'] ? 'selected' : '':'') }} >{{$item['first_name']}} {{$item['last_name']}}</option>
+                    <option value="{{$item['id']}}" {{old('approved_by')==$item['id']?'selected':''}}  {{ (isset($brands_data->approved_by)?$brands_data->approved_by == $item['id'] ? 'selected' : '':'') }} >{{$item['first_name']}} {{$item['last_name']}}</option>
                     @endforeach 
 
 
