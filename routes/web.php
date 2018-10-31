@@ -151,6 +151,26 @@ Route::group(['middleware' => 'auth', 'prefix' => 'supplier', 'namespace' => 'Su
 		'uses'	=> 'SupplierHomeController@productlineedit',
 		'as'	=> 'supplierproductlineedit'
 	]);
+
+
+	Route::match(['GET','POST'],'/user', [
+		'uses'	=> 'SupplierUserController@index',
+		'as'	=> 'supplieruser'
+	]);
+
+	Route::get('/useradd', [
+		'uses'	=> 'SupplierUserController@useradd',
+		'as'	=> 'supplieruseradd'
+	]);
+
+	Route::post('/userstore', 'SupplierUserController@userstore');
+	Route::post('/usereditstore', 'SupplierUserController@usereditstore');
+
+	Route::match(['GET', 'POST'],'/useredit/{id}', [
+		'uses'	=> 'SupplierUserController@useredit',
+		'as'	=> 'useredit'
+	]);
+
 });
 
 //admin menu route
