@@ -21,9 +21,10 @@
 					<h4 class="bold-700 font17 mb-5">Please Enter New Company Details:</h4>
 					<div class="clearfix">&nbsp;</div>
 					<div class="form-group">
-						@if ( !empty($company) )
-						<input type="hidden" name="id" value="{{ $company->id }}">
 						<input type="hidden" name="savestep" id="savestep" value="0">
+						
+						@if ( !empty($company) )
+						<input type="hidden" name="id" value="{{ $company->id }}">						
 						@endif
 						<input type="text" class="form-control" name="registered_business_name" id="registered_business_name" placeholder="Registered Business Name:" value="{{ !empty($company->business_name) ? $company->business_name : old('registered_business_name') }}">
 						@if ($errors->has('registered_business_name'))
@@ -123,9 +124,11 @@
 <script>
 	$(document).ready(function() {
 		$('#btnsavestep').on('click', function(e) {
+
         // set the savestep to 1 so we can track that we have to redirect to next or not
         $('#savestep').val(1);
         $('#first').submit();
     });
+	});
 </script>
 @endsection

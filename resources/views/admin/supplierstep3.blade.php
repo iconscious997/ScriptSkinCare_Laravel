@@ -92,7 +92,7 @@
                 @endif
             </div>
         </div>
-
+        <input type="hidden" name="savestep" id="savestep" value="0">   
         @if (isset($brand_id))
         <input type="hidden"   value="update" name="check_data">
         <input type="hidden" name="id" value="{{ $brands_data->id }}">
@@ -130,7 +130,7 @@
 
    <div class="row">
     <div class="col-md-offset-2 col-md-8 text-center mt-30 mb-40">
-        <button class="btn btn-dark btn-pad selected" type="submit"> SAVE STEP 3 & ACTIVATE</button>
+        <button class="btn btn-dark btn-pad selected" type="submit" id="btnsavestep"> SAVE STEP 3 & ACTIVATE</button>
     </div>
 </div>
 </div>
@@ -159,5 +159,14 @@
 </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#btnsavestep').on('click', function(e) {
 
+        // set the savestep to 1 so we can track that we have to redirect to next or not
+        $('#savestep').val(1);
+        $('#first').submit();
+    });
+    });
+</script>
 @endsection

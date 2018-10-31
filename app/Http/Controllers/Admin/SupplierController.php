@@ -402,142 +402,162 @@ return view( 'admin.supplierstep3', compact('supplier','roles','sub_supplier') )
 
 public function supplierstep3store(Request $request)
 {
-    if ($request->check_data == 'update' && $request->id) {                
-        $validatedData = $request->validate([
-            'brand_name'     => 'required',
-            'supplier_parent_id' => 'required',
-            'created_by'     => 'required',
-            'assign_to_user' => 'required',
-            'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'approved_by'    =>  'required',
-        ],[
-            'brand_name.required'           => 'Brand Name is required',
-            'supplier_parent_id.required'   => 'Supplier Name is required',
-            'created_by.required'           => 'Created By is required',
-            'assign_to_user.required'       => 'Assign to User is required',
-            'brand_logo.required'           => 'Brand Logo is required',
-            'approved_by.required'          => 'Approved By is required'                
-        ]);
-        if ($request->file('brand_logo')) {
-            $randomNumber = rand(1, 10000);
-            $imageName = 'brand'.$randomNumber.'.'.$request->file('brand_logo')->getClientOriginalExtension();
+                if ($request->check_data == 'update' && $request->id) {                
+                    $validatedData = $request->validate([
+                        'brand_name'     => 'required',
+                        'supplier_parent_id' => 'required',
+                        'created_by'     => 'required',
+                        'assign_to_user' => 'required',
+                        'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                        'approved_by'    =>  'required',
+                    ],[
+                        'brand_name.required'           => 'Brand Name is required',
+                        'supplier_parent_id.required'   => 'Supplier Name is required',
+                        'created_by.required'           => 'Created By is required',
+                        'assign_to_user.required'       => 'Assign to User is required',
+                        'brand_logo.required'           => 'Brand Logo is required',
+                        'approved_by.required'          => 'Approved By is required'                
+                    ]);
+                    if ($request->file('brand_logo')) {
+                        $randomNumber = rand(1, 10000);
+                        $imageName = 'brand'.$randomNumber.'.'.$request->file('brand_logo')->getClientOriginalExtension();
 
-            $request->file('brand_logo')->move(
-                base_path() . '/public/images/brand', $imageName
-            );
-        } else {
-            $imageName = $request->old_image_name;
-        }
+                        $request->file('brand_logo')->move(
+                            base_path() . '/public/images/brand', $imageName
+                        );
+                    } else {
+                        $imageName = $request->old_image_name;
+                    }
 
-        $brands = Brand::find($request->id);
-        $brands->brand_name = $request->brand_name;
-        $brands->supplier_parent_id = $request->supplier_parent_id;
-        $brands->brand_logo = $imageName;
-        $brands->user_added_by= $request->created_by;
-        $brands->approved_by= $request->approved_by;
-        $brands->modified_by= \Auth::user()->id;
-        $brands->save();
+                    $brands = Brand::find($request->id);
+                    $brands->brand_name = $request->brand_name;
+                    $brands->supplier_parent_id = $request->supplier_parent_id;
+                    $brands->brand_logo = $imageName;
+                    $brands->user_added_by= $request->created_by;
+                    $brands->approved_by= $request->approved_by;
+                    $brands->modified_by= \Auth::user()->id;
+                    $brands->save();
 
-        $sub_supplier = Supplier::where('company_id', Session::get('first'))->get();
+                    $sub_supplier = Supplier::where('company_id', Session::get('first'))->get();
 
-        foreach ($sub_supplier as $key => $value) {
-            $add_brand_tmp=array();
-            $tmp_remove = explode(',', $value->brand_ids);
+                    foreach ($sub_supplier as $key => $value) {
+                        $add_brand_tmp=array();
+                        $tmp_remove = explode(',', $value->brand_ids);
 
-            foreach ($tmp_remove as $sub) {                            
-                if( $sub!=$brands->id) {
-                 array_push($add_brand_tmp, $sub);
-             }                     
+                        foreach ($tmp_remove as $sub) {                            
+                            if( $sub!=$brands->id) {
+                             array_push($add_brand_tmp, $sub);
+                         }                     
+                     }
+
+                     $add_brand = implode(',', $add_brand_tmp);
+
+                     $supplier = Supplier::find($value->id);
+                     $supplier->brand_ids = $add_brand;
+                     $supplier->save();
+                 }         
+
+                 foreach ($request->assign_to_user as $key => $value) {              
+
+                    $supplier = Supplier::find($value);
+                    $tmp = explode(',', $supplier->brand_ids);
+
+                    if( !in_array($brands->id, $tmp) ) {
+                        array_push($tmp, $brands->id);
+                        $supplier->brand_ids   = implode(',', $tmp);
+                    }else if (in_array($brands->id, $tmp)) {
+                       $supplier->brand_ids  = implode(',', $tmp);
+                   }else{                    
+                    $supplier->brand_ids   = $brands->id;
+                }
+
+                $supplier->save();
+            }            
+
+            Session::put('brand_id', $request->id);
+            setflashmsg('Brand Updated Successfully','1');
+
+            if( $request->savestep == 0 ) {
+
+               return redirect('/supplierstep4'); 
+
+           } else {
+
+             return redirect('/supplierstep3'); 
+
          }
+            
 
-         $add_brand = implode(',', $add_brand_tmp);
+            } else {
 
-         $supplier = Supplier::find($value->id);
-         $supplier->brand_ids = $add_brand;
-         $supplier->save();
-     }         
+                        // check for validation
+                $validatedData = $request->validate([
+                    'brand_name'     => 'required',
+                    'supplier_parent_id'     => 'required',
+                    'created_by'     => 'required',
+                    'assign_to_user' => 'required',
+                    'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+                    'approved_by'    =>  'required',
+                ]);
 
-     foreach ($request->assign_to_user as $key => $value) {              
+                if ($request->file('brand_logo')) {
+                    $randomNumber = time()."_".rand(1000, 9999);
 
-        $supplier = Supplier::find($value);
-        $tmp = explode(',', $supplier->brand_ids);
+                    $imageName = 'brand'.$randomNumber.'.'.$request->file('brand_logo')->getClientOriginalExtension();
 
-        if( !in_array($brands->id, $tmp) ) {
-            array_push($tmp, $brands->id);
-            $supplier->brand_ids   = implode(',', $tmp);
-        }else if (in_array($brands->id, $tmp)) {
-           $supplier->brand_ids  = implode(',', $tmp);
-       }else{                    
-        $supplier->brand_ids   = $brands->id;
-    }
+                    $request->file('brand_logo')->move(
+                        base_path() . '/public/images/brand', $imageName
+                    );
 
-    $supplier->save();
-}            
+                } else {
+                    $imageName='img_avatar1.png';
+                }
 
-Session::put('brand_id', $request->id);
-setflashmsg('Brand Updated Successfully','1');
-return redirect('/supplierstep4'); 
+                        // now add data to supplier_details table
+                $brands = Brand::create([
+                    'brand_name'               => $request->brand_name,
+                    'brand_company_id'         => Session::get('first'),
+                    'supplier_parent_id'       => $request->supplier_parent_id,
+                    'brand_logo'               => $imageName,
+                    'user_added_by'            => $request->created_by,
+                    'approved_by'              => $request->approved_by,
+                    'status'                   => 0,
+                    'created_date'             => date('Y-m-d H:i:s'),
+                            // 'created_by'               => $request->created_by,
+                    'created_by'               => \Auth::user()->id,
+                    'modified_by'              => \Auth::user()->id,
+                ]);
 
-} else {
+                if( !empty($brands->exists) ) {
+                            // assign 
+                    foreach ($request->assign_to_user as $key => $value) {
+                        $supplier = Supplier::find($value);
+                        $tmp = explode(',', $supplier->brand_ids);
+                        if( !in_array($brands->id, $tmp) ) {
+                            array_push($tmp, $brands->id);
+                        }
+                        $supplier->brand_ids       = implode(',', $tmp);
+                        $supplier->save();
+                    }
+                            // success
+                    Session::put('brand_id', $brands->id);
+                    setflashmsg('Brand Added Successfully','1');
+                   
+                     if( $request->savestep == 0 ) {
 
-            // check for validation
-    $validatedData = $request->validate([
-        'brand_name'     => 'required',
-        'supplier_parent_id'     => 'required',
-        'created_by'     => 'required',
-        'assign_to_user' => 'required',
-        'brand_logo'     => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-        'approved_by'    =>  'required',
-    ]);
+                         return redirect('/supplierstep4'); 
 
-    if ($request->file('brand_logo')) {
-        $randomNumber = time()."_".rand(1000, 9999);
+                    } else {
 
-        $imageName = 'brand'.$randomNumber.'.'.$request->file('brand_logo')->getClientOriginalExtension();
+                       return redirect('/supplierstep3'); 
 
-        $request->file('brand_logo')->move(
-            base_path() . '/public/images/brand', $imageName
-        );
+                    }
 
-    } else {
-        $imageName='img_avatar1.png';
-    }
-
-            // now add data to supplier_details table
-    $brands = Brand::create([
-        'brand_name'               => $request->brand_name,
-        'brand_company_id'         => Session::get('first'),
-        'supplier_parent_id'       => $request->supplier_parent_id,
-        'brand_logo'               => $imageName,
-        'user_added_by'            => $request->created_by,
-        'approved_by'              => $request->approved_by,
-        'status'                   => 0,
-        'created_date'             => date('Y-m-d H:i:s'),
-                // 'created_by'               => $request->created_by,
-        'created_by'               => \Auth::user()->id,
-        'modified_by'              => \Auth::user()->id,
-    ]);
-
-    if( !empty($brands->exists) ) {
-                // assign 
-        foreach ($request->assign_to_user as $key => $value) {
-            $supplier = Supplier::find($value);
-            $tmp = explode(',', $supplier->brand_ids);
-            if( !in_array($brands->id, $tmp) ) {
-                array_push($tmp, $brands->id);
-            }
-            $supplier->brand_ids       = implode(',', $tmp);
-            $supplier->save();
-        }
-                // success
-        Session::put('brand_id', $brands->id);
-        setflashmsg('Brand Added Successfully','1');
-        return redirect('/supplierstep4'); 
-    } else {
-        setflashmsg('Some error occured. Please try again','0');
-        return redirect('/supplierstep3');                
-    }
-}        
+                } else {
+                    setflashmsg('Some error occured. Please try again','0');
+                    return redirect('/supplierstep3');                
+                }
+            }        
 }
 
 public function supplierstep4()

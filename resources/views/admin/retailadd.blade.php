@@ -21,6 +21,7 @@
 					<h4 class="bold-700 font17 mb-5">Please Enter Retail Site:</h4>
 					<div class="clearfix">&nbsp;</div>
 					<div class="form-group">
+						<input type="hidden" name="savestep" id="savestep" value="0">
 						@if ( !empty($retailsite) )
 						<input type="hidden" name="id" value="{{ $retailsite->id }}">
 						@endif
@@ -88,7 +89,7 @@
 
 			<div class="row">
 				<div class="col-md-offset-2 col-md-8 text-center mt-30 mb-20">
-					<button class="btn btn-dark btn-pad" type="button" onclick="javascript:$('#first').submit();">  Save Changes </button>
+					<button class="btn btn-dark btn-pad" type="button" id="btnsavestep">  Save Changes </button>
 				</div>
 				<div class="col-md-2">&nbsp;</div>
 			</div>
@@ -112,4 +113,15 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('#btnsavestep').on('click', function(e) {
+
+        // set the savestep to 1 so we can track that we have to redirect to next or not
+        $('#savestep').val(1);
+        $('#first').submit();
+    });
+	});
+</script>
 @endsection
