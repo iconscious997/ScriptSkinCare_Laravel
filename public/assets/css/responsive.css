@@ -26,13 +26,25 @@ and (orientation : landscape) {
     }
 
     #footer {
-        position: relative;
+        /*position: relative;*/
+        position: absolute;
     }
     .btn {
         font-size: 9px !important;
     }
     .advance-filter {
         bottom: -350px;
+    }
+    .btn .caret {
+        margin-left: 3px;
+        position: absolute;
+    }
+    .p-7 {
+        padding: 10px !important;
+        margin-top: 7px;
+    }
+    .gobtn {
+        padding: 10px 12px;
     }
 }
 
@@ -60,6 +72,9 @@ and (orientation : portrait) {
     #footer.width50 {
         width: 100% !important;
     }
+/*    #footer {
+        position: relative;
+        }*/
     .advance-filter {
         position: relative;
         border-top: none;
@@ -72,6 +87,9 @@ and (orientation : portrait) {
     }
     .dashboard h4 {
         font-size: 13px;
+    }
+    .wizard {
+        display: flow-root;
     }
 
 }

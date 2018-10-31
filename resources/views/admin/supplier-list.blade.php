@@ -7,12 +7,6 @@
 </style>
 <script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-
 <div class="wizard">
 	<div class="col-md-12">
 		<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left mt-10">
@@ -40,7 +34,7 @@
 	</div>
 	<div class="content-fix ">
 		<div class="table-responsive mb-30">
-			<table class="table display" id="customers">
+			<table class="table " id="customers">
 				<thead class="thead-dark">
 					<tr>
 						<th>Company</th>
@@ -57,7 +51,6 @@
 						<th>Status</th>
 						<th>Password Reset</th>
 						<th>Actions</th>
-						{{-- <th>&nbsp;</th> --}}
 					</tr>
 					<tbody>
 						
@@ -77,23 +70,16 @@
 							<td>{{$item->position}}</td>
 							<td>{{$item->label}}</td>
 							<td>{{($item->sstatus==0?'Active':'Deactive')}}</td>
-							<td><a class="btn btn-dark preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a></td>
-							<td >
-								
-								<button type="button" class="btn btn-default" onclick="viewexistinguser({{$item->id}},'{{$item->label}}')"  > EDIT</button>
-								
+							<td>
+								<a class="btn btn-dark preset" fname="{{$item->first_name}}" lname="{{$item->last_name}}" mid="{{$item->user_id}}"> RESET</a>
 							</td>
-							{{-- <td class="flex">
-								<button class="btn btn-green"> SAVE</button> 
-								<button class="btn btn-green m-l-5"> UNDO</button>
-							</td> --}}
+							<td>
+								<button type="button" class="btn btn-default" onclick="viewexistinguser({{$item->id}},'{{$item->label}}')"  > EDIT
+								</button>
+							</td>
 						</tr>
-						
 						@php $i++ @endphp
 						@endforeach    
-
-
-
 					</tbody>
 				</table>
 			</div>
@@ -236,17 +222,17 @@
 
 			function viewexistinguser(id,role) {
 
-					
-					var supplier_id = id;            
-					$.ajax({
-						type: "GET",
-						url: "<?php echo url('/get_supplier_all')?>/"+supplier_id,
-						success: function(data) {  
 
-							$('#supplier_detail').append(data);
-						},
+				var supplier_id = id;            
+				$.ajax({
+					type: "GET",
+					url: "<?php echo url('/get_supplier_all')?>/"+supplier_id,
+					success: function(data) {  
 
-						})
+						$('#supplier_detail').append(data);
+					},
+
+				})
 
 	                // get data and show in modal popup
 	                $('#modal-data').html(`<div class="modal-content">
@@ -266,23 +252,37 @@
 	                	</form>
 	                	</div>`);
 	                $('#myModal').modal();
-				}
+	            }
 
-			$(document).ready(function() {
+	            $(document).ready(function() {
 
-				$('.preset').on('click', function(e) {
-					$('#mfname').text($(this).attr('fname').toUpperCase());					 
-					$('#mlname').text($(this).attr('lname').toUpperCase());					 					
-					$('#hmid').val($(this).attr('mid'));					 
-					$('#myPModal').modal();
-				});
+	            	$('.preset').on('click', function(e) {
+	            		$('#mfname').text($(this).attr('fname').toUpperCase());					 
+	            		$('#mlname').text($(this).attr('lname').toUpperCase());					 					
+	            		$('#hmid').val($(this).attr('mid'));					 
+	            		$('#myPModal').modal();
+	            	});
 
-				var table = $('#customers').DataTable();
-				var buttons = new $.fn.dataTable.Buttons(table, {
-					extend: 'collection',
-					text: 'Export', 
-					buttons: [
-					$.extend( true, {}, {
+	            	var table = $('#customers').DataTable(
+	            	// {
+	            	// 	responsive: {
+	            	// 		details: {
+	            	// 			type: 'column',
+	            	// 			target: -1
+	            	// 		}
+	            	// 	},
+	            	// 	columnDefs: [ {
+	            	// 		className: 'control',
+	            	// 		orderable: false,
+	            	// 		targets:   -1
+	            	// 	} ]
+	            	// }
+	            	);
+	            	var buttons = new $.fn.dataTable.Buttons(table, {
+	            		extend: 'collection',
+	            		text: 'Export', 
+	            		buttons: [
+	            		$.extend( true, {}, {
                     // footer: true,
                     title: 'Suppliers',
                     extend: 'excelHtml5',
@@ -291,7 +291,7 @@
                     	columns: [0,1,2,3,4,5,6,7,8]
                     }
                 } ),   
-					$.extend( true, {}, {
+	            		$.extend( true, {}, {
                     // footer: true,
                     title: 'Suppliers',
                     extend: 'csvHtml5',
@@ -300,7 +300,7 @@
                     	columns: [0,1,2,3,4,5,6,7,8]
                     }
                 } ),
-					$.extend( true, {}, {
+	            		$.extend( true, {}, {
                     // footer: true,
                     title: 'Suppliers',
                     extend: 'pdfHtml5',
@@ -311,49 +311,49 @@
                     	columns: [0,1,2,3,4,5,6,7,8]
                     }
                 } )
-					]
-				}).container().appendTo($('#buttons'));  
+	            		]
+	            	}).container().appendTo($('#buttons'));  
 
-				
+
 				// $('.viewexistinguser').on('click', function(e) {
 					
 
 					
     //         });         
-			} );
-			
-			function validations_password() {
-				
-				var isvalid = true;
-				if($.trim($("#newpassword").val())=="" || $.trim($("#newpassword").val())==null)
-				{
-					$("#newpasserror").text("Please enter new password");
-					$("#newpassword").focus();
-					return false;
-				}
-				
-				if($.trim($("#confirmpassword").val())=="" || $.trim($("#confirmpassword").val())==null)
-				{
-					$("#confirmpasserror").text("Please enter confirm password");
-					$("#confirmpassword").focus();
-					return false;
-				}
+} );
 
-				if($("#newpassword").val()!=$("#confirmpassword").val())
-				{
-					$("#confirmpassword").val('');
-					$("#confirmpasserror").text("Please enter new password and confirm password must be same.");
-					$("#confirmpassword").focus();
-					return false;
-				}
+	            function validations_password() {
 
-				if(!isvalid){
-					
-					return false;
-				}
+	            	var isvalid = true;
+	            	if($.trim($("#newpassword").val())=="" || $.trim($("#newpassword").val())==null)
+	            	{
+	            		$("#newpasserror").text("Please enter new password");
+	            		$("#newpassword").focus();
+	            		return false;
+	            	}
 
-			}
-			function validations_id() {
+	            	if($.trim($("#confirmpassword").val())=="" || $.trim($("#confirmpassword").val())==null)
+	            	{
+	            		$("#confirmpasserror").text("Please enter confirm password");
+	            		$("#confirmpassword").focus();
+	            		return false;
+	            	}
+
+	            	if($("#newpassword").val()!=$("#confirmpassword").val())
+	            	{
+	            		$("#confirmpassword").val('');
+	            		$("#confirmpasserror").text("Please enter new password and confirm password must be same.");
+	            		$("#confirmpassword").focus();
+	            		return false;
+	            	}
+
+	            	if(!isvalid){
+
+	            		return false;
+	            	}
+
+	            }
+	            function validations_id() {
 				// body...
 				var isvalid = true;
 
@@ -451,3 +451,6 @@
 		</script>
 		@endsection
 
+		@section('scripts')
+		@include('layouts.datatablejs')
+		@endsection
