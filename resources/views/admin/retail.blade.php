@@ -6,28 +6,25 @@
 }
 </style>
 <script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 
 <div class="wizard spcust">
-    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
-        <h3 class="text-left mt-20">RETAIL LIST / RESULTS</h3>
-    </div>
-    <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right">
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 hidden-xs">&nbsp;</div>
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-            <a href="{{ url('/retailadd') }}" class="btn btn-default m-l-5 btn-block"> + ADD NEW RETAIL</a>
+    <div class="col-md-12">
+        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 pull-left">
+            <h3 class="text-left mt-20">RETAIL LIST / RESULTS</h3>
         </div>
-        <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
-           <div class="dropdown export">
-            <button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu"  id="buttons">
+        <div class="col-md-8 col-lg-8 col-sm-8 col-xs-12 mt-15 text-right p-0">
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6 hidden-xs">&nbsp;</div>
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
+                <a href="{{ url('/retailadd') }}" class="btn btn-default m-l-5 btn-block"> + ADD NEW RETAIL</a>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-6">
+               <div class="dropdown export">
+                <button class="btn btn-default m-l-5 btn-block dropdown-toggle" type="button" data-toggle="dropdown">EXPORT DATA OPTIONS
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu"  id="buttons">
 
-                </ul>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -257,3 +254,6 @@
 </script>
 @endsection
 
+@section('scripts')
+@include('layouts.datatablejs')
+@endsection
