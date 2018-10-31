@@ -11,26 +11,26 @@
                 <div class="items">
                     <h4 class="mb-30">Products that require approval</h4>
                     <div class="row mb-20">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                             <p>Product 1</p> 
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                             <button class="btn btn-default pull-right"> View </button>
                         </div>
                     </div>
                     <div class="row mb-20">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                             <p>Product 2</p>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                             <button class="btn btn-default pull-right"> View </button>
                         </div>
                     </div>
                     <div class="row mb-20">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                           <p>  Product 3</p>
                       </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                      <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                         <button class="btn btn-default pull-right"> View </button>
                     </div>
                 </div>
@@ -39,32 +39,32 @@
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 dashblock bg1 bdright">
         <div class="">
-            <div>
+            <div class="blank">
                 <h4>&nbsp;</h4>
             </div>
             <div class="items">
                 <h4>Products that are about to expire</h4>
                 <div class="row mb-20">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                         <p>Product 1</p> 
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                         <button class="btn btn-default pull-right"> View </button>
                     </div>
                 </div>
                 <div class="row mb-20">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                         <p>Product 2</p>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                         <button class="btn btn-default pull-right"> View </button>
                     </div>
                 </div>
                 <div class="row mb-20">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                       <p>  Product 3</p>
                   </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                     <button class="btn btn-default pull-right"> View </button>
                 </div>
             </div>
@@ -73,32 +73,32 @@
 </div>
 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 dashblock bg1 bdright">
     <div class="">
-        <div>
+        <div class="blank">
             <h4>&nbsp;</h4>
         </div>
         <div class="items">
-            <h4>Products that have lowinventory warning</h4>
+            <h4>Products that have low inventory warning</h4>
             <div class="row mb-20">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                     <p>Product 1</p> 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                     <button class="btn btn-default pull-right"> View </button>
                 </div>
             </div>
             <div class="row mb-20">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                     <p>Product 2</p>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                     <button class="btn btn-default pull-right"> View </button>
                 </div>
             </div>
             <div class="row mb-20">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
                   <p>  Product 3</p>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <div class="col-lg-6 col-md-6 col-sm-5 col-xs-6">
                 <button class="btn btn-default pull-right"> View </button>
             </div>
         </div>
@@ -107,7 +107,7 @@
 </div>
 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 dashblock bg2">
     <div class="">
-        <div>
+        <div class="blank">
             <h4>&nbsp;</h4>
         </div>
         <div class="items">

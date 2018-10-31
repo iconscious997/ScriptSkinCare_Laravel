@@ -32,7 +32,7 @@ and (orientation : landscape) {
         font-size: 9px !important;
     }
     .advance-filter {
-        bottom: -250px;
+        bottom: -350px;
     }
 }
 
@@ -70,6 +70,10 @@ and (orientation : portrait) {
         width: 50% !important;
         display: -webkit-inline-box;
     }
+    .dashboard h4 {
+        font-size: 13px;
+    }
+
 }
 
 
@@ -164,6 +168,7 @@ and (orientation : portrait) {
         overflow-y: scroll;
     }
 }
+
 @media only screen 
 and (min-device-width : 320px) 
 and (orientation : portrait) { 
@@ -307,5 +312,14 @@ and (orientation : portrait) {
     .filter-advance{
         background: #CDDDE0;
     }
-
+    .dashblock {
+        padding: 0px 25px;
+        height: auto;
+    }
+    .dashboard .bdright {
+        border-bottom: 1px solid #fff;
+    }
+    .blank h4 {
+        margin-bottom: 0;
+    }
 }
